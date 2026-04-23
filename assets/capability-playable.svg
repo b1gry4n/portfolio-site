@@ -1,0 +1,39 @@
+<svg width="1280" height="800" viewBox="0 0 1280 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1280" height="800" rx="36" fill="#0C1628"/>
+  <rect x="34" y="34" width="1212" height="732" rx="28" fill="url(#bg)"/>
+  <rect x="82" y="94" width="756" height="560" rx="24" fill="#12223A" stroke="#304867"/>
+  <rect x="118" y="132" width="684" height="320" rx="20" fill="#182A45"/>
+  <rect x="152" y="168" width="250" height="248" rx="18" fill="#22385B"/>
+  <rect x="434" y="182" width="138" height="104" rx="16" fill="#2D476D"/>
+  <rect x="606" y="172" width="146" height="114" rx="16" fill="#2A4266"/>
+  <rect x="488" y="314" width="208" height="84" rx="18" fill="#96E2B0"/>
+  <circle cx="592" cy="356" r="22" fill="#0C1628"/>
+  <path d="M584 344L606 356L584 368V344Z" fill="#96E2B0"/>
+  <rect x="118" y="482" width="684" height="132" rx="18" fill="#142640"/>
+  <rect x="152" y="516" width="178" height="18" rx="9" fill="#96E2B0"/>
+  <rect x="152" y="548" width="254" height="14" rx="7" fill="#486A92"/>
+  <rect x="152" y="578" width="190" height="14" rx="7" fill="#36557D"/>
+  <rect x="878" y="94" width="320" height="560" rx="24" fill="#101D31" stroke="#304867"/>
+  <rect x="912" y="132" width="252" height="44" rx="14" fill="#172944"/>
+  <text x="942" y="160" fill="#96E2B0" font-family="Manrope, Arial, sans-serif" font-size="24" font-weight="800">runtime.log</text>
+  <rect x="912" y="204" width="252" height="66" rx="16" fill="#132238"/>
+  <rect x="936" y="228" width="160" height="12" rx="6" fill="#96E2B0"/>
+  <rect x="936" y="248" width="128" height="10" rx="5" fill="#45668F"/>
+  <rect x="912" y="290" width="252" height="66" rx="16" fill="#132238"/>
+  <rect x="936" y="314" width="176" height="12" rx="6" fill="#96E2B0"/>
+  <rect x="936" y="334" width="154" height="10" rx="5" fill="#45668F"/>
+  <rect x="912" y="376" width="252" height="66" rx="16" fill="#132238"/>
+  <rect x="936" y="400" width="144" height="12" rx="6" fill="#96E2B0"/>
+  <rect x="936" y="420" width="182" height="10" rx="5" fill="#45668F"/>
+  <rect x="912" y="482" width="252" height="132" rx="18" fill="#142640"/>
+  <rect x="940" y="516" width="116" height="18" rx="9" fill="#96E2B0"/>
+  <rect x="940" y="548" width="194" height="12" rx="6" fill="#486A92"/>
+  <rect x="940" y="572" width="166" height="12" rx="6" fill="#36557D"/>
+  <text x="82" y="720" fill="#DDE8F7" font-family="Manrope, Arial, sans-serif" font-size="34" font-weight="700">Playable interactions with logs you can actually read</text>
+  <defs>
+    <linearGradient id="bg" x1="640" y1="34" x2="640" y2="766" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#12233D"/>
+      <stop offset="1" stop-color="#0D1829"/>
+    </linearGradient>
+  </defs>
+</svg>

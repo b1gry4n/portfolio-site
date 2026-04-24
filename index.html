@@ -43,7 +43,7 @@
 
       <section class="hero" id="top">
         <p class="eyebrow">AI-Assisted System Building</p>
-        <h1>I Build AI Systems That Turn Prompts Into Working Software</h1>
+        <h1>I Build AI Systems That Turn Prompts Into Playable Runtime</h1>
         <p class="hero-copy">
           A working Unity pipeline that turns prompt-driven ideas into structured data, generated scenes,
           inspectable systems, and playable runtime output.
@@ -68,7 +68,7 @@
           <p class="eyebrow">Demo</p>
           <h2 id="demo-title">Prompt &rarr; System &rarr; Playable Runtime</h2>
           <p class="section-subheading">Structured AI output becomes generated Unity content with state, behavior, and runtime proof.</p>
-          <p class="demo-note">Most AI demos generate text. This generates working systems.</p>
+          <p class="demo-note">Most AI demos generate text. This generates systems.</p>
         </div>
         <div class="video-card">
           <div class="demo-video-frame">
@@ -81,6 +81,86 @@
               referrerpolicy="strict-origin-when-cross-origin"
               allowfullscreen
             ></iframe>
+          </div>
+          <div class="video-selector" aria-label="More system videos">
+            <p class="video-selector-label">Related system proofs</p>
+            <div class="video-selector-row">
+              <button
+                class="video-option video-option-active"
+                type="button"
+                data-video-id="qXLxx9rvCNY"
+                data-video-src="https://www.youtube.com/embed/qXLxx9rvCNY?enablejsapi=1&playsinline=1&rel=0&modestbranding=1"
+              >
+                <span class="video-option-tag">Primary demo</span>
+                <span class="video-option-title">AI &rarr; Playable Runtime</span>
+                <span class="video-option-proof">Structured prompt data becomes generated Unity content with state and behavior.</span>
+              </button>
+              <button
+                class="video-option"
+                type="button"
+                data-video-id="_LjI2h1WYdo"
+                data-video-src="https://www.youtube.com/embed/_LjI2h1WYdo?enablejsapi=1&playsinline=1&rel=0&modestbranding=1"
+              >
+                <span class="video-option-tag">Runtime systems</span>
+                <span class="video-option-title">Complex Shooter Systems</span>
+                <span class="video-option-proof">Runtime stats, buffs, conditions, and gameplay systems running together.</span>
+              </button>
+              <button
+                class="video-option"
+                type="button"
+                data-video-id="adct53AwKoM"
+                data-video-src="https://www.youtube.com/embed/adct53AwKoM?enablejsapi=1&playsinline=1&rel=0&modestbranding=1"
+              >
+                <span class="video-option-tag">Spatial AI</span>
+                <span class="video-option-title">3D Pathfinding Prototype</span>
+                <span class="video-option-proof">AI-managed room generation with volumetric node navigation for wall and ceiling traversal.</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="runtime-control" aria-labelledby="runtime-control-title">
+        <div class="video-card runtime-control-card">
+          <div class="runtime-control-copy">
+            <p class="eyebrow">Runtime Control</p>
+            <h2 id="runtime-control-title">Inspectable systems, not black-box output</h2>
+            <p class="section-subheading runtime-control-subheading">
+              The same systems shown in the demo are backed by runtime tooling for control, debugging, and validation.
+              This is not static generation - it is a controllable simulation.
+            </p>
+            <ul class="runtime-control-points">
+              <li>Live runtime state editing (stats, conditions, resources)</li>
+              <li>Cross-system sync tooling (AI, items, economy, definitions)</li>
+              <li>Integrated debugging and validation surfaces</li>
+            </ul>
+            <div class="runtime-control-domains">
+              <p class="runtime-control-domains-title">What this controls</p>
+              <div class="runtime-control-grid">
+                <article class="runtime-control-item">
+                  <h3>Runtime Stats</h3>
+                  <p>Health, stamina, oxygen, hydration, stress, pain</p>
+                </article>
+                <article class="runtime-control-item">
+                  <h3>Conditions</h3>
+                  <p>Damage, healing, buffs, armor, camera, internal state</p>
+                </article>
+                <article class="runtime-control-item">
+                  <h3>Physiology</h3>
+                  <p>Blood, perfusion, oxygenation, metabolism, sweat output</p>
+                </article>
+                <article class="runtime-control-item">
+                  <h3>Sync Workflows</h3>
+                  <p>AI, items, economy, armor, buffs, shop catalogs</p>
+                </article>
+              </div>
+            </div>
+          </div>
+          <div class="demo-video-frame runtime-control-frame">
+            <img
+              src="./assets/player-dev-tools.svg"
+              alt="Unity editor tooling for runtime control, debugging, and validation"
+            >
           </div>
         </div>
       </section>
@@ -153,12 +233,8 @@
           <p class="eyebrow">Additional Systems</p>
           <h2 id="system-depth-title">Built as systems, not scenes</h2>
           <p class="section-subheading">
-            Across multiple Unity projects, I built complete runtime architectures where structured input becomes
+            Across multiple Unity projects, I built runtime architectures where structured input becomes
             authoritative simulation, system behavior, and observable output.
-          </p>
-          <p class="section-subheading section-pattern">
-            Structured Input &rarr; Controlled Runtime Authority &rarr; System Execution &rarr; Inspectable Output
-            <span class="hero-chain-sub">Systems are designed to be extended, validated, and reused.</span>
           </p>
         </div>
         <div class="system-depth-grid">
@@ -214,7 +290,6 @@
         <div class="runtime-proof">
           <div class="runtime-proof-header">
             <p class="runtime-proof-label">Runtime Proof</p>
-            <p class="runtime-proof-lead">Runtime behavior is captured as structured, inspectable artifacts.</p>
           </div>
           <div class="runtime-proof-grid">
             <article class="proof-chip">
@@ -255,12 +330,14 @@
 
   <script src="https://www.youtube.com/iframe_api"></script>
   <script>
-    (function () {
-      const watchDemoButton = document.getElementById("watchDemoButton");
-      const demoSection = document.getElementById("demo");
-      const toggle = document.getElementById("contactToggle");
-      const triggers = document.querySelectorAll(".contact-trigger");
-      const popover = document.getElementById("contactPopover");
+      (function () {
+        const watchDemoButton = document.getElementById("watchDemoButton");
+        const demoSection = document.getElementById("demo");
+        const demoVideo = document.getElementById("demoVideo");
+        const videoOptions = document.querySelectorAll(".video-option");
+        const toggle = document.getElementById("contactToggle");
+        const triggers = document.querySelectorAll(".contact-trigger");
+        const popover = document.getElementById("contactPopover");
       const dialog = popover ? popover.querySelector(".contact-dialog") : null;
       const closeButton = document.getElementById("contactClose");
       const copyButton = document.getElementById("contactCopy");
@@ -284,6 +361,35 @@
           }
         });
       }
+
+      videoOptions.forEach(function (option) {
+        option.addEventListener("click", function () {
+          const nextVideoId = option.getAttribute("data-video-id");
+          const nextSrc = option.getAttribute("data-video-src");
+          if (!demoVideo || (!nextSrc && !nextVideoId)) {
+            return;
+          }
+
+          videoOptions.forEach(function (item) {
+            item.classList.remove("video-option-active");
+          });
+
+          option.classList.add("video-option-active");
+
+          if (demoPlayer && typeof demoPlayer.loadVideoById === "function" && nextVideoId) {
+            demoPlayer.loadVideoById(nextVideoId);
+            return;
+          }
+
+          if (nextSrc) {
+            demoVideo.src = nextSrc;
+          }
+
+          if (!demoPlayer && window.YT && typeof window.YT.Player === "function") {
+            demoPlayer = new YT.Player("demoVideo");
+          }
+        });
+      });
 
       function closePopover() {
         popover.hidden = true;

@@ -1063,11 +1063,17 @@ h2 {
   }
 
   .runtime-control-frame {
-    justify-self: start;
+    width: 100%;
+    justify-self: stretch;
+  }
+
+  .runtime-control-frame img {
+    width: 100%;
+    max-height: none;
   }
 
   .runtime-control-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .flow {
@@ -1146,7 +1152,12 @@ h2 {
     padding: 0.85rem;
   }
 
+  .runtime-control-grid {
+    grid-template-columns: 1fr;
+  }
+
   .runtime-control-frame img {
+    width: 100%;
     max-height: none;
   }
 
@@ -1307,7 +1318,7 @@ h2 {
   }
 }
 
-@media (max-width: 900px) {
+@media (min-width: 641px) and (max-width: 900px) {
   .topbar {
     align-items: center;
     flex-direction: row;
@@ -1324,5 +1335,18 @@ h2 {
   .hero {
     padding-top: 2.2rem;
     padding-bottom: 2.2rem;
+  }
+}
+
+
+@media (max-width: 900px) {
+  .runtime-control-frame {
+    aspect-ratio: auto;
+    overflow: hidden;
+  }
+
+  .runtime-control-frame img {
+    display: block;
+    border-radius: 12px;
   }
 }

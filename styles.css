@@ -710,12 +710,14 @@ h2 {
   }
 
   .flow-step {
+    flex: 0 0 auto;
     min-height: 2.9rem;
     padding: 0.7rem 0.9rem;
     font-size: 0.94rem;
   }
 
   .flow-arrow {
+    flex: 0 0 auto;
     transform: rotate(90deg);
     animation: none;
     font-size: 1.1rem;

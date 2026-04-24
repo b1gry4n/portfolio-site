@@ -346,6 +346,14 @@ h1 {
   color: var(--soft);
 }
 
+.hero-chain {
+  margin-top: 0.8rem;
+  color: rgba(157, 224, 184, 0.95);
+  font-size: 0.98rem;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
 .hero-actions {
   display: flex;
   gap: 0.9rem;
@@ -716,6 +724,10 @@ h2 {
   .card p,
   .section-subheading {
     font-size: 1rem;
+  }
+
+  .hero-chain {
+    font-size: 0.92rem;
   }
 
   .button {

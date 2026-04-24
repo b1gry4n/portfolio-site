@@ -33,16 +33,34 @@
       <header class="topbar" aria-label="Primary">
         <nav class="nav">
           <a class="nav-link nav-link-active" href="#top" aria-current="page">AI Systems</a>
-          <button class="nav-link nav-link-button contact-trigger" type="button" id="contactToggle" aria-expanded="false" aria-controls="contactPopover">
+          <button class="nav-link nav-link-button modal-trigger" type="button" id="resumeToggle" aria-expanded="false" aria-controls="resumePopover" data-modal-target="resumePopover">
+            Resume
+          </button>
+          <button class="nav-link nav-link-button modal-trigger" type="button" id="contactToggle" aria-expanded="false" aria-controls="contactPopover" data-modal-target="contactPopover">
             Contact
           </button>
         </nav>
       </header>
 
+      <div class="contact-modal" id="resumePopover" hidden>
+        <div class="contact-backdrop" data-modal-close="true"></div>
+        <div class="contact-dialog" role="dialog" aria-modal="true" aria-labelledby="resumeTitle">
+          <button class="contact-close" type="button" data-modal-close-button="resumePopover" aria-label="Close resume dialog">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <p class="contact-popover-label" id="resumeTitle">Resume</p>
+          <p class="contact-helper">View the web version or download the PDF.</p>
+          <div class="contact-actions">
+            <a class="contact-copy" href="./resume.html" target="_blank" rel="noreferrer">View Resume</a>
+            <a class="contact-send" href="./assets/Ryan_Sharr_Resume.pdf" target="_blank" rel="noreferrer">Download PDF</a>
+          </div>
+        </div>
+      </div>
+
       <div class="contact-modal" id="contactPopover" hidden>
-        <div class="contact-backdrop" data-close="true"></div>
+        <div class="contact-backdrop" data-modal-close="true"></div>
         <div class="contact-dialog" role="dialog" aria-modal="true" aria-labelledby="contactTitle">
-          <button class="contact-close" type="button" id="contactClose" aria-label="Close contact dialog">
+          <button class="contact-close" type="button" id="contactClose" data-modal-close-button="contactPopover" aria-label="Close contact dialog">
             <span aria-hidden="true">×</span>
           </button>
           <p class="contact-popover-label" id="contactTitle">Email</p>
@@ -72,7 +90,7 @@
         </div>
         <div class="hero-actions">
           <button class="button button-primary" type="button" id="watchDemoButton">See the System &rarr;</button>
-          <button class="button button-secondary contact-trigger" type="button">Work With Me &rarr;</button>
+          <button class="button button-secondary modal-trigger" type="button" data-modal-target="contactPopover">Work With Me &rarr;</button>
         </div>
       </section>
 
@@ -180,6 +198,17 @@
         </div>
       </section>
 
+      <section class="section" id="value" aria-labelledby="value-title">
+        <div class="section-heading">
+          <p class="eyebrow">Core Value</p>
+          <h2 id="value-title">Fast prototypes that become real, usable systems</h2>
+        </div>
+        <p class="body-copy">
+          Structured AI output is imported, validated, and built into real Unity systems. The result is faster
+          iteration with visible proof: real scenes, real objects, and real state changes.
+        </p>
+      </section>
+
       <section class="section" id="flow" aria-labelledby="flow-title">
         <div class="section-heading">
           <p class="eyebrow">How It Works</p>
@@ -230,17 +259,6 @@
             <p>Interactions change object state, with logs and validation proving system behavior.</p>
           </article>
         </div>
-      </section>
-
-      <section class="section" id="value" aria-labelledby="value-title">
-        <div class="section-heading">
-          <p class="eyebrow">Core Value</p>
-          <h2 id="value-title">Fast prototypes that become real, usable systems</h2>
-        </div>
-        <p class="body-copy">
-          Structured AI output is imported, validated, and built into real Unity systems. The result is faster
-          iteration with visible proof: real scenes, real objects, and real state changes.
-        </p>
       </section>
 
       <section class="section" id="system-depth" aria-labelledby="system-depth-title">
@@ -338,7 +356,7 @@
       <section class="closing" id="contact" aria-labelledby="closing-title">
         <p class="eyebrow">Closing</p>
         <h2 id="closing-title">I build AI systems that turn prompts into working software.</h2>
-        <button class="contact-link contact-trigger" type="button">Let’s talk &rarr; hello@ryansharr.com</button>
+        <button class="contact-link modal-trigger" type="button" data-modal-target="contactPopover">Let’s talk &rarr; hello@ryansharr.com</button>
       </section>
     </main>
   </div>
@@ -350,18 +368,17 @@
         const demoSection = document.getElementById("demo");
         const demoVideo = document.getElementById("demoVideo");
         const videoOptions = document.querySelectorAll(".video-option");
-        const toggle = document.getElementById("contactToggle");
-        const triggers = document.querySelectorAll(".contact-trigger");
+        const modalTriggers = document.querySelectorAll(".modal-trigger");
+        const modals = document.querySelectorAll(".contact-modal");
         const popover = document.getElementById("contactPopover");
-      const dialog = popover ? popover.querySelector(".contact-dialog") : null;
-      const closeButton = document.getElementById("contactClose");
-      const copyButton = document.getElementById("contactCopy");
-      const email = "hello@ryansharr.com";
-      let demoPlayer = null;
+        const closeButton = document.getElementById("contactClose");
+        const copyButton = document.getElementById("contactCopy");
+        const email = "hello@ryansharr.com";
+        let demoPlayer = null;
 
-      if (!toggle || !triggers.length || !popover || !dialog || !closeButton || !copyButton) {
-        return;
-      }
+        if (!popover || !closeButton || !copyButton) {
+          return;
+        }
 
       window.onYouTubeIframeAPIReady = function () {
         demoPlayer = new YT.Player("demoVideo");
@@ -406,28 +423,58 @@
         });
       });
 
-      function closePopover() {
-        popover.hidden = true;
-        toggle.setAttribute("aria-expanded", "false");
+      function setTriggerExpanded(modalId, expanded) {
+        modalTriggers.forEach(function (trigger) {
+          if (trigger.getAttribute("data-modal-target") === modalId) {
+            trigger.setAttribute("aria-expanded", expanded ? "true" : "false");
+          }
+        });
       }
 
-      function openPopover() {
-        popover.hidden = false;
-        toggle.setAttribute("aria-expanded", "true");
+      function closeModal(modalId) {
+        const modal = document.getElementById(modalId);
+        if (!modal) {
+          return;
+        }
+
+        modal.hidden = true;
+        setTriggerExpanded(modalId, false);
       }
 
-      triggers.forEach(function (trigger) {
+      function openModal(modalId) {
+        modals.forEach(function (modal) {
+          modal.hidden = modal.id !== modalId;
+          setTriggerExpanded(modal.id, modal.id === modalId);
+        });
+      }
+
+      modalTriggers.forEach(function (trigger) {
         trigger.addEventListener("click", function () {
-          if (popover.hidden) {
-            openPopover();
+          const modalId = trigger.getAttribute("data-modal-target");
+          const modal = modalId ? document.getElementById(modalId) : null;
+          if (!modal || !modalId) {
+            return;
+          }
+
+          if (modal.hidden) {
+            openModal(modalId);
           } else {
-            closePopover();
+            closeModal(modalId);
           }
         });
       });
 
       closeButton.addEventListener("click", function () {
-        closePopover();
+        closeModal("contactPopover");
+      });
+
+      document.querySelectorAll("[data-modal-close-button]").forEach(function (button) {
+        button.addEventListener("click", function () {
+          const modalId = button.getAttribute("data-modal-close-button");
+          if (modalId) {
+            closeModal(modalId);
+          }
+        });
       });
 
       copyButton.addEventListener("click", async function () {
@@ -446,24 +493,30 @@
       });
 
       document.addEventListener("click", function (event) {
-        if (!popover.hidden && event.target instanceof Element && event.target.closest("[data-close='true']")) {
-          closePopover();
+        if (!(event.target instanceof Element)) {
           return;
         }
 
-        if (!popover.hidden
-          && !dialog.contains(event.target)
-          && !Array.from(triggers).some(function (trigger) { return trigger.contains(event.target); })) {
-          closePopover();
+        const closeBackdrop = event.target.closest("[data-modal-close='true']");
+        if (closeBackdrop) {
+          const modal = closeBackdrop.closest(".contact-modal");
+          if (modal && modal.id) {
+            closeModal(modal.id);
+          }
         }
       });
 
       document.addEventListener("keydown", function (event) {
         if (event.key === "Escape") {
-          closePopover();
+          modals.forEach(function (modal) {
+            if (!modal.hidden) {
+              closeModal(modal.id);
+            }
+          });
         }
       });
     })();
   </script>
 </body>
 </html>
+

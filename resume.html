@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Ryan Sharr Resume</title>
+
+<style>
+  * { box-sizing: border-box; }
+
+  @page {
+    size: Letter;
+    margin: 0;
+  }
+
+  body {
+    margin: 0;
+    background: #e8ebef;
+    font-family: "Aptos", "Segoe UI", "Inter", Arial, sans-serif;
+    color: #111827;
+  }
+
+  .page {
+    width: 8.5in;
+    height: 11in;
+    margin: 0 auto;
+    background: #fffefa;
+    padding: 0.26in 0.28in 0.20in;
+    overflow: hidden;
+  }
+
+  .top {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: end;
+    border-bottom: 1.5px solid #111827;
+    padding-bottom: 8px;
+    margin-bottom: 14px;
+  }
+
+  .name {
+    font-size: 40px;
+    line-height: 0.9;
+    font-weight: 900;
+    letter-spacing: -0.06em;
+  }
+
+  .title {
+    margin-top: 12px;
+    font-size: 12.5px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-weight: 850;
+    color: #075e70;
+  }
+
+  .contact {
+    font-size: 10px;
+    line-height: 1.5;
+    text-align: right;
+    color: #111827;
+  }
+
+  .contact a {
+    color: #111827;
+    text-decoration: none;
+  }
+
+  .layout {
+    display: grid;
+    grid-template-columns: 2.12in 1fr;
+    gap: 18px;
+  }
+
+  .side,
+  .main {
+    display: grid;
+    align-content: start;
+  }
+
+  .side {
+    gap: 18px;
+    margin-top: 0;
+  }
+
+  .main {
+    gap: 9px;
+  }
+
+  .main-section {
+    border: 1px solid #dfe3dc;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.42);
+    padding: 7px;
+  }
+
+  .block,
+  .card {
+    border: 1px solid #d7d9d4;
+    border-radius: 14px;
+    background: #ffffff;
+  }
+
+  .block {
+    padding: 9px 12px;
+  }
+
+  .summary {
+    background: linear-gradient(135deg, #ffffff 0%, #f0faf8 100%);
+    border-color: #c9dddd;
+  }
+
+  h2 {
+    margin: 0 0 7px;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #075e70;
+    font-weight: 900;
+  }
+
+  .summary p {
+    margin: 0;
+    font-size: 10.25px;
+    line-height: 1.35;
+  }
+
+  .summary .summary-break {
+    display: block;
+    height: 7px;
+  }
+
+  .skill-list {
+    display: grid;
+    gap: 0;
+  }
+
+  .skill {
+    display: grid;
+    grid-template-columns: 10px 1fr;
+    gap: 7px;
+    padding: 3.8px 0;
+    border-bottom: 1px solid #ecedea;
+    font-size: 9px;
+    line-height: 1.16;
+  }
+
+  .skill:last-child {
+    border-bottom: none;
+  }
+
+  .dot {
+    width: 5px;
+    height: 5px;
+    background: #075e70;
+    border-radius: 99px;
+    margin-top: 4px;
+  }
+
+  .stack-row {
+    display: grid;
+    grid-template-columns: 21px 1fr;
+    gap: 7px;
+    margin-bottom: 5.5px;
+    font-size: 9.25px;
+    line-height: 1.2;
+  }
+
+  .stack-row:last-child {
+    margin-bottom: 0;
+  }
+
+  .ico {
+    font-size: 15px;
+    line-height: 1;
+    color: #075e70;
+  }
+
+  .stack-row strong {
+    font-weight: 850;
+  }
+
+  .edu {
+    font-size: 9.7px;
+    line-height: 1.3;
+  }
+
+  .section-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 7px;
+  }
+
+  .section-title::after {
+    content: "";
+    height: 1px;
+    flex: 1;
+    background: #d7d9d4;
+  }
+
+  .work-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 9px;
+  }
+
+  .card {
+    padding: 11px 14px;
+  }
+
+  .feature {
+    grid-column: span 2;
+    display: grid;
+    grid-template-columns: 48px 1fr;
+    gap: 12px;
+    background: linear-gradient(135deg, #ffffff 0%, #f3fbfa 100%);
+    border-color: #c9dddd;
+  }
+
+  .iconbox {
+    width: 38px;
+    height: 38px;
+    border: 2px solid #075e70;
+    border-radius: 10px;
+    display: grid;
+    place-items: center;
+    font-size: 20px;
+    color: #075e70;
+    margin-top: 3px;
+  }
+
+  h3 {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    color: #101827;
+  }
+
+  .meta {
+    margin-top: 3px;
+    font-size: 10px;
+    font-weight: 850;
+    color: #075e70;
+  }
+
+  .pill {
+    display: inline-block;
+    margin-top: 7px;
+    padding: 4px 8px;
+    border-radius: 999px;
+    background: #dff0ee;
+    color: #075e70;
+    font-size: 8.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-weight: 900;
+  }
+
+  .desc {
+    margin: 6px 0 0;
+    font-size: 10.15px;
+    line-height: 1.32;
+  }
+
+  ul {
+    margin: 6px 0 0;
+    padding-left: 15px;
+  }
+
+  li {
+    font-size: 9.25px;
+    line-height: 1.26;
+    margin-bottom: 2.4px;
+  }
+
+  .feature ul {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4px 18px;
+    padding-left: 15px;
+  }
+
+  .feature ul li:first-child {
+    grid-column: 1 / -1;
+    white-space: nowrap;
+  }
+
+  .mini-card {
+    display: grid;
+    grid-template-columns: 38px 1fr;
+    gap: 12px;
+    min-height: 1.38in;
+    align-content: start;
+  }
+
+  .mini-card ul {
+    margin-top: 6px;
+  }
+
+  .mini-card li {
+    margin-bottom: 2px;
+  }
+
+  .mini-icon {
+    width: 34px;
+    height: 34px;
+    border: 2px solid #075e70;
+    border-radius: 999px;
+    display: grid;
+    place-items: center;
+    color: #075e70;
+  }
+
+  .mini-icon svg {
+    width: 23px;
+    height: 23px;
+    display: block;
+    stroke: currentColor;
+    stroke-width: 2.15;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    fill: none;
+  }
+
+  .cube {
+    border-radius: 8px;
+  }
+
+  .experience {
+    display: grid;
+    gap: 8px;
+  }
+
+  .experience .card {
+    padding: 11px 14px;
+  }
+
+  @media print {
+    body { background: white; }
+    .page { margin: 0; }
+  }
+</style>
+</head>
+
+<body>
+  <div class="page">
+
+    <header class="top">
+      <div>
+        <div class="name">Ryan Sharr</div>
+        <div class="title">AI Systems Engineer / Applied AI Engineer</div>
+      </div>
+
+      <div class="contact">
+        Remote (US)<br>
+        <a href="mailto:hello@ryansharr.com">hello@ryansharr.com</a><br>
+        <a href="https://ryansharr.com">ryansharr.com</a>
+      </div>
+    </header>
+
+    <div class="layout">
+
+      <aside class="side">
+
+        <section class="block summary">
+          <h2>Summary</h2>
+          <p>
+            AI systems engineer building pipelines that convert prompt-driven input into controllable, stateful runtime systems. Focused on simulation architecture, state ownership, and making AI output inspectable, debuggable, and verifiable as real software.
+            <span class="summary-break"></span>
+            Background in game-engine systems, with transferable architecture across simulations, tooling, and applied AI products.
+          </p>
+        </section>
+
+        <section class="block">
+          <h2>Core Skills</h2>
+          <div class="skill-list">
+            <div class="skill"><span class="dot"></span><span>AI systems design<br>(LLM → structured systems → runtime)</span></div>
+            <div class="skill"><span class="dot"></span><span>Applied AI / product engineering</span></div>
+            <div class="skill"><span class="dot"></span><span>Simulation architecture and state ownership</span></div>
+            <div class="skill"><span class="dot"></span><span>Command-driven systems and runtime control</span></div>
+            <div class="skill"><span class="dot"></span><span>Tooling pipelines<br>(import → validate → build)</span></div>
+            <div class="skill"><span class="dot"></span><span>Runtime systems<br>(stats, conditions, behaviors)</span></div>
+            <div class="skill"><span class="dot"></span><span>Unity / C# architecture</span></div>
+            <div class="skill"><span class="dot"></span><span>Observability, logging, and validation systems</span></div>
+          </div>
+        </section>
+
+        <section class="block">
+          <h2>Secondary Skills</h2>
+          <div class="skill-list">
+            <div class="skill"><span class="dot"></span><span>3D modeling and environment art</span></div>
+            <div class="skill"><span class="dot"></span><span>3D animation and asset integration</span></div>
+            <div class="skill"><span class="dot"></span><span>Concept art interpretation and production</span></div>
+            <div class="skill"><span class="dot"></span><span>UI/UX and gameplay readability</span></div>
+            <div class="skill"><span class="dot"></span><span>Game design docs and data structures</span></div>
+            <div class="skill"><span class="dot"></span><span>Content pipelines and asset workflows</span></div>
+          </div>
+        </section>
+
+        <section class="block">
+          <h2>Technical Stack</h2>
+
+          <div class="stack-row">
+            <div class="ico">&lt;/&gt;</div>
+            <div><strong>Languages:</strong> C#, JavaScript</div>
+          </div>
+
+          <div class="stack-row">
+            <div class="ico">⬡</div>
+            <div><strong>Engines / Tools:</strong> Unity, Unreal Engine, Godot, UEFN (Verse), Custom Tooling</div>
+          </div>
+
+          <div class="stack-row">
+            <div class="ico">⚙</div>
+            <div><strong>Systems:</strong> Runtime simulation, state machines, AI pipelines, editor tooling</div>
+          </div>
+
+          <div class="stack-row">
+            <div class="ico">◎</div>
+            <div><strong>Art / Web:</strong> 3ds Max, Maya, ZBrush, Photoshop, Git, HTML/CSS</div>
+          </div>
+        </section>
+
+        <section class="block">
+          <h2>Education</h2>
+          <div class="edu">
+            <strong>BFA – Media Arts & Animation</strong><br>
+            Art Institute of Seattle
+          </div>
+        </section>
+
+      </aside>
+
+      <main class="main">
+
+        <section class="main-section">
+          <h2 class="section-title">Selected Work</h2>
+
+          <div class="work-grid">
+
+            <article class="card feature">
+              <div class="iconbox">🤖</div>
+              <div>
+                <h3>AI → Playable Runtime System</h3>
+                <div class="meta">ryansharr.com</div>
+                <div class="pill">Prompt to runtime pipeline</div>
+                <p class="desc">
+                  End-to-end pipeline converting prompt-driven input into structured systems, generated content, and controllable runtime behavior.
+                </p>
+                <ul>
+                  <li>Prompt → structured data → generated systems → runtime simulation</li>
+                  <li>Inspectable runtime state with debugging and validation tooling</li>
+                  <li>Demonstrates AI output as controllable, stateful software</li>
+                  <li>Designed around verifiable system behavior, not static generation</li>
+                </ul>
+              </div>
+            </article>
+
+            <article class="card mini-card">
+              <div class="mini-icon">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <circle cx="12" cy="12" r="4.2"></circle>
+                  <path d="M12 3.2v5.1"></path>
+                  <path d="M12 15.7v5.1"></path>
+                  <path d="M3.2 12h5.1"></path>
+                  <path d="M15.7 12h5.1"></path>
+                  <circle cx="12" cy="12" r="1.15" fill="currentColor" stroke="none"></circle>
+                </svg>
+              </div>
+              <div>
+                <h3>Complex Shooter Systems</h3>
+                <ul>
+                  <li>Runtime stats, buffs, conditions, and gameplay behavior.</li>
+                  <li>Live editing for resources, conditions, and internal state.</li>
+                  <li>Cross-system sync across AI, items, economy, and definitions.</li>
+                  <li>State-driven architecture for coordinated runtime systems.</li>
+                </ul>
+              </div>
+            </article>
+
+            <article class="card mini-card">
+              <div class="mini-icon cube">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M12 3.4 20 7.8v8.4L12 20.6 4 16.2V7.8L12 3.4Z"></path>
+                  <path d="M4 7.8 12 12.2 20 7.8"></path>
+                  <path d="M12 12.2v8.4"></path>
+                </svg>
+              </div>
+              <div>
+                <h3>3D Pathfinding Prototype</h3>
+                <ul>
+                  <li>AI-managed room generation with volumetric node navigation.</li>
+                  <li>Spatial traversal across walls and ceilings.</li>
+                  <li>Geometry-derived traversal graph baking.</li>
+                  <li>AI-driven environment generation and navigation.</li>
+                </ul>
+              </div>
+            </article>
+
+          </div>
+        </section>
+
+        <section class="main-section">
+          <h2 class="section-title">Experience</h2>
+
+          <div class="experience">
+
+            <article class="card">
+              <h3>Engineering Lead / Creative Director</h3>
+              <div class="meta">Loot Foundry Ltd</div>
+              <p class="desc">
+                Led engineering and creative direction for system-driven gameplay development in UEFN (Verse),
+                bridging design, art, and implementation to deliver structured, reusable runtime systems.
+              </p>
+              <ul>
+                <li>Built core gameplay systems in Verse including stats, conditions, buffs/debuffs, and state-driven behavior.</li>
+                <li>Designed runtime architecture with centralized logic decoupled from scene objects.</li>
+                <li>Directed system design across gameplay, UX, and technical implementation.</li>
+                <li>Partnered across disciplines to translate concepts into structured systems.</li>
+                <li>Served as primary technical point of contact, debugging and unblocking workflows.</li>
+                <li>Developed reusable systems for gameplay state and cross-system interaction.</li>
+              </ul>
+            </article>
+
+            <article class="card">
+              <h3>Independent Systems Development</h3>
+              <div class="meta">Self-directed</div>
+              <p class="desc">
+                Transitioned from 3D character art into full-stack systems, simulation architecture, and game development.
+              </p>
+              <ul>
+                <li>Self-taught programming and system architecture from the ground up.</li>
+                <li>Built end-to-end gameplay systems including state management and runtime behavior.</li>
+                <li>Designed complete systems spanning engineering, design, content, and tooling.</li>
+                <li>Built pipelines that connect structured input to runtime behavior and observable output.</li>
+                <li>Developed deep understanding of system interaction, tooling, and runtime pipelines.</li>
+              </ul>
+            </article>
+
+            <article class="card">
+              <h3>3D Character Artist</h3>
+              <div class="meta">Gas Powered Games</div>
+              <p class="desc">Worked on Age of Empires Online.</p>
+              <ul>
+                <li>Modeled and textured production-ready character assets from concept art.</li>
+                <li>Collaborated with animation, VFX, and design for gameplay integration.</li>
+                <li>Worked within production pipelines under technical and performance constraints.</li>
+                <li>Produced UI-supporting visual assets.</li>
+              </ul>
+            </article>
+
+          </div>
+        </section>
+
+      </main>
+
+    </div>
+  </div>
+</body>
+</html>

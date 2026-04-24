@@ -741,8 +741,8 @@ h2 {
   .hero-chain {
     font-size: 0.92rem;
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0.5rem;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 0.35rem 0.45rem;
     align-items: stretch;
   }
 
@@ -761,7 +761,48 @@ h2 {
   }
 
   .hero-chain-separator {
-    display: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(157, 224, 184, 0.82);
+    font-size: 0.95rem;
+    line-height: 1;
+  }
+
+  .hero-chain > :nth-child(1) {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .hero-chain > :nth-child(2) {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .hero-chain > :nth-child(3) {
+    grid-column: 3;
+    grid-row: 1;
+  }
+
+  .hero-chain > :nth-child(4) {
+    grid-column: 2;
+    grid-row: 2;
+    transform: rotate(90deg);
+  }
+
+  .hero-chain > :nth-child(5) {
+    grid-column: 1;
+    grid-row: 3;
+  }
+
+  .hero-chain > :nth-child(6) {
+    grid-column: 2;
+    grid-row: 3;
+  }
+
+  .hero-chain > :nth-child(7) {
+    grid-column: 3;
+    grid-row: 3;
   }
 
   .button {

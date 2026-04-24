@@ -19,41 +19,71 @@
       <header class="topbar" aria-label="Primary">
         <a class="brand" href="#top">Ryan / Systems</a>
         <nav class="nav">
-          <a class="nav-link nav-link-active" href="#top" aria-current="page">Narrative Systems</a>
-          <a class="nav-link" href="#">Shooter Systems</a>
-          <a class="nav-link" href="#contact">Contact</a>
+          <a class="nav-link nav-link-active" href="#top" aria-current="page">AI Prototyping Systems</a>
+          <button class="nav-link nav-link-button contact-trigger" type="button" id="contactToggle" aria-expanded="false" aria-controls="contactPopover">
+            Contact
+          </button>
         </nav>
       </header>
 
+      <div class="contact-modal" id="contactPopover" hidden>
+        <div class="contact-backdrop" data-close="true"></div>
+        <div class="contact-dialog" role="dialog" aria-modal="true" aria-labelledby="contactTitle">
+          <button class="contact-close" type="button" id="contactClose" aria-label="Close contact dialog">
+            <span aria-hidden="true">×</span>
+          </button>
+          <p class="contact-popover-label" id="contactTitle">Email</p>
+          <a class="contact-popover-email" href="mailto:hello@ryansharr.com">hello@ryansharr.com</a>
+          <p class="contact-helper">For AI prototyping, tooling, or systems work.</p>
+          <div class="contact-actions">
+            <button class="contact-copy" type="button" id="contactCopy">Copy</button>
+            <a class="contact-send" href="mailto:hello@ryansharr.com">Open Email</a>
+          </div>
+        </div>
+      </div>
+
       <section class="hero" id="top">
         <p class="eyebrow">AI-Assisted Prototype Work</p>
-        <h1>I Build AI-Assisted Prototypes That Go From Prompt to Playable</h1>
+        <h1>I Build AI Systems That Turn Prompts Into Playable Prototypes</h1>
         <p class="hero-copy">
           This project shows a working Unity pipeline where AI-generated structured content becomes real
           scenes, interactable objects, validated data, and a playable prototype.
         </p>
         <div class="hero-actions">
-          <a class="button button-primary" href="#demo">Watch Demo</a>
-          <a class="button button-secondary" href="mailto:hello@example.com">Contact</a>
+          <button class="button button-primary" type="button" id="watchDemoButton">Watch Demo</button>
+          <button class="button button-secondary contact-trigger" type="button">Contact</button>
         </div>
       </section>
 
       <section class="section" id="demo" aria-labelledby="demo-title">
         <div class="section-heading">
           <p class="eyebrow">Demo</p>
-          <h2 id="demo-title">Prompt &rarr; Playable System</h2>
+          <h2 id="demo-title">Prompt &rarr; Playable</h2>
+          <p class="section-subheading">Structured data becomes a playable Unity system.</p>
+          <p class="demo-note">Most AI demos generate text. This generates working systems.</p>
         </div>
-        <div class="video-card" role="img" aria-label="Video placeholder for portfolio demo">
-          <div class="video-play">
-            <span class="play-icon"></span>
-          </div>
-          <div class="video-copy">
-            <strong>Demo Video Placeholder</strong>
-            <span>Replace this block with your final reel or embedded video.</span>
-          </div>
+        <div class="video-card">
+          <video class="demo-video" id="demoVideo" controls autoplay muted loop preload="metadata" playsinline>
+            <source src="./assets/ai-prototyping-systems.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
         </div>
-        <p class="demo-note">Most AI demos generate text. This generates working systems.</p>
-        <p class="caption">Prompt &rarr; Playable System</p>
+      </section>
+
+      <section class="section" id="flow" aria-labelledby="flow-title">
+        <div class="section-heading">
+          <p class="eyebrow">How It Works</p>
+          <h2 id="flow-title">What's actually happening</h2>
+        </div>
+        <div class="flow">
+          <div class="flow-step">Prompt</div>
+          <div class="flow-arrow" aria-hidden="true">&rarr;</div>
+          <div class="flow-step">Structured Data</div>
+          <div class="flow-arrow" aria-hidden="true">&rarr;</div>
+          <div class="flow-step">Unity</div>
+          <div class="flow-arrow" aria-hidden="true">&rarr;</div>
+          <div class="flow-step">Playable System</div>
+        </div>
       </section>
 
       <section class="section" id="capabilities" aria-labelledby="capabilities-title">
@@ -92,22 +122,6 @@
         </div>
       </section>
 
-      <section class="section" id="flow" aria-labelledby="flow-title">
-        <div class="section-heading">
-          <p class="eyebrow">How It Works</p>
-          <h2 id="flow-title">What’s actually happening</h2>
-        </div>
-        <div class="flow">
-          <div class="flow-step">Prompt</div>
-          <div class="flow-arrow" aria-hidden="true">&rarr;</div>
-          <div class="flow-step">Structured Data</div>
-          <div class="flow-arrow" aria-hidden="true">&rarr;</div>
-          <div class="flow-step">Unity</div>
-          <div class="flow-arrow" aria-hidden="true">&rarr;</div>
-          <div class="flow-step">Playable System</div>
-        </div>
-      </section>
-
       <section class="section" id="value" aria-labelledby="value-title">
         <div class="section-heading">
           <p class="eyebrow">Core Value</p>
@@ -123,9 +137,95 @@
       <section class="closing" id="contact" aria-labelledby="closing-title">
         <p class="eyebrow">Closing</p>
         <h2 id="closing-title">Looking to build AI-driven systems for teams that move fast.</h2>
-        <a class="contact-link" href="mailto:hello@example.com">hello@example.com</a>
       </section>
     </main>
   </div>
+  <script>
+    (function () {
+      const watchDemoButton = document.getElementById("watchDemoButton");
+      const demoSection = document.getElementById("demo");
+      const demoVideo = document.getElementById("demoVideo");
+      const toggle = document.getElementById("contactToggle");
+      const triggers = document.querySelectorAll(".contact-trigger");
+      const popover = document.getElementById("contactPopover");
+      const dialog = popover ? popover.querySelector(".contact-dialog") : null;
+      const closeButton = document.getElementById("contactClose");
+      const copyButton = document.getElementById("contactCopy");
+      const email = "hello@ryansharr.com";
+
+      if (!toggle || !triggers.length || !popover || !dialog || !closeButton || !copyButton) {
+        return;
+      }
+
+      if (watchDemoButton && demoSection && demoVideo) {
+        watchDemoButton.addEventListener("click", function () {
+          demoSection.scrollIntoView({ behavior: "smooth", block: "start" });
+          demoVideo.currentTime = 0;
+          const playAttempt = demoVideo.play();
+          if (playAttempt && typeof playAttempt.catch === "function") {
+            playAttempt.catch(function () {});
+          }
+        });
+      }
+
+      function closePopover() {
+        popover.hidden = true;
+        toggle.setAttribute("aria-expanded", "false");
+      }
+
+      function openPopover() {
+        popover.hidden = false;
+        toggle.setAttribute("aria-expanded", "true");
+      }
+
+      triggers.forEach(function (trigger) {
+        trigger.addEventListener("click", function () {
+          if (popover.hidden) {
+            openPopover();
+          } else {
+            closePopover();
+          }
+        });
+      });
+
+      closeButton.addEventListener("click", function () {
+        closePopover();
+      });
+
+      copyButton.addEventListener("click", async function () {
+        try {
+          await navigator.clipboard.writeText(email);
+          copyButton.textContent = "Copied";
+          window.setTimeout(function () {
+            copyButton.textContent = "Copy";
+          }, 1200);
+        } catch (error) {
+          copyButton.textContent = "Copy failed";
+          window.setTimeout(function () {
+            copyButton.textContent = "Copy";
+          }, 1400);
+        }
+      });
+
+      document.addEventListener("click", function (event) {
+        if (!popover.hidden && event.target instanceof Element && event.target.closest("[data-close='true']")) {
+          closePopover();
+          return;
+        }
+
+        if (!popover.hidden
+          && !dialog.contains(event.target)
+          && !Array.from(triggers).some(function (trigger) { return trigger.contains(event.target); })) {
+          closePopover();
+        }
+      });
+
+      document.addEventListener("keydown", function (event) {
+        if (event.key === "Escape") {
+          closePopover();
+        }
+      });
+    })();
+  </script>
 </body>
 </html>

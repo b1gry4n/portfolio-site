@@ -13,7 +13,7 @@
   --radius-lg: 28px;
   --radius-md: 18px;
   --radius-sm: 12px;
-  --container: 1120px;
+  --container: 96vw;
 }
 
 * {
@@ -23,6 +23,7 @@
 html {
   scroll-behavior: smooth;
   background: #07101d;
+  font-size: 16px;
 }
 
 body {
@@ -111,7 +112,7 @@ a {
 .container {
   position: relative;
   z-index: 1;
-  width: min(calc(100% - 2rem), var(--container));
+  width: min(calc(100% - 2rem), 1680px);
   margin: 0 auto;
   padding: 1.25rem 0 2.25rem;
 }

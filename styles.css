@@ -461,6 +461,18 @@ h2 {
   letter-spacing: -0.04em;
 }
 
+.demo-title {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  column-gap: 0.38rem;
+  row-gap: 0.1rem;
+}
+
+.demo-title-line {
+  white-space: nowrap;
+}
+
 .video-card {
   position: relative;
   min-height: 17rem;
@@ -1276,6 +1288,20 @@ h2 {
     font-size: clamp(1.8rem, 8vw, 2.7rem);
   }
 
+  #demo-title {
+    display: block;
+    font-size: clamp(1.75rem, 7.2vw, 2.35rem);
+    line-height: 1.14;
+    letter-spacing: -0.045em;
+    overflow-wrap: normal;
+    word-break: normal;
+  }
+
+  #demo-title .demo-title-line {
+    display: block;
+    white-space: nowrap;
+  }
+
   .section,
   .hero,
   .closing,
@@ -1348,5 +1374,12 @@ h2 {
   .runtime-control-frame img {
     display: block;
     border-radius: 12px;
+  }
+}
+
+
+@media (max-width: 390px) {
+  #demo-title {
+    font-size: clamp(1.55rem, 6.8vw, 2.05rem);
   }
 }

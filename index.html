@@ -50,7 +50,7 @@
           scenes, interactable objects, validated data, and a playable prototype.
         </p>
         <div class="hero-actions">
-          <button class="button button-primary" type="button" id="watchDemoButton">Watch Demo</button>
+          <a class="button button-primary" id="watchDemoButton" href="https://www.youtube.com/watch?v=qXLxx9rvCNY" target="_blank" rel="noreferrer">Watch Demo</a>
           <button class="button button-secondary contact-trigger" type="button">Contact</button>
         </div>
       </section>
@@ -63,10 +63,16 @@
           <p class="demo-note">Most AI demos generate text. This generates working systems.</p>
         </div>
         <div class="video-card">
-          <video class="demo-video" id="demoVideo" controls autoplay muted loop preload="metadata" playsinline>
-            <source src="./assets/ai-prototyping-systems.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-          </video>
+          <a class="demo-video-frame demo-video-link" href="https://www.youtube.com/watch?v=qXLxx9rvCNY" target="_blank" rel="noreferrer" aria-label="Watch demo video on YouTube">
+            <img class="demo-video-poster" src="https://i.ytimg.com/vi/qXLxx9rvCNY/hqdefault.jpg" alt="Demo video preview for AI prototyping systems">
+            <span class="demo-video-overlay">
+              <span class="demo-video-play-button" aria-hidden="true">▶</span>
+              <span class="demo-video-meta">
+                <strong>Watch demo on YouTube</strong>
+                <span>Open the full walkthrough in a new tab.</span>
+              </span>
+            </span>
+          </a>
         </div>
       </section>
 
@@ -142,9 +148,6 @@
   </div>
   <script>
     (function () {
-      const watchDemoButton = document.getElementById("watchDemoButton");
-      const demoSection = document.getElementById("demo");
-      const demoVideo = document.getElementById("demoVideo");
       const toggle = document.getElementById("contactToggle");
       const triggers = document.querySelectorAll(".contact-trigger");
       const popover = document.getElementById("contactPopover");
@@ -155,17 +158,6 @@
 
       if (!toggle || !triggers.length || !popover || !dialog || !closeButton || !copyButton) {
         return;
-      }
-
-      if (watchDemoButton && demoSection && demoVideo) {
-        watchDemoButton.addEventListener("click", function () {
-          demoSection.scrollIntoView({ behavior: "smooth", block: "start" });
-          demoVideo.currentTime = 0;
-          const playAttempt = demoVideo.play();
-          if (playAttempt && typeof playAttempt.catch === "function") {
-            playAttempt.catch(function () {});
-          }
-        });
       }
 
       function closePopover() {

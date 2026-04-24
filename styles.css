@@ -658,14 +658,33 @@ h2 {
   }
 
   .topbar {
-    align-items: flex-start;
-    flex-direction: column;
-    gap: 0.45rem;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 0.6rem;
+    padding-bottom: 0.6rem;
+  }
+
+  .brand {
+    font-size: 0.9rem;
+    flex: 0 0 auto;
   }
 
   .nav {
-    width: 100%;
-    justify-content: flex-start;
+    width: auto;
+    justify-content: flex-end;
+    gap: 0.3rem;
+    flex-wrap: nowrap;
+    flex: 0 0 auto;
+  }
+
+  .nav-link {
+    padding: 0.3rem 0.55rem;
+    font-size: 0.82rem;
+  }
+
+  .nav-link-active {
+    background: rgba(255, 255, 255, 0.05);
   }
 
   .hero {
@@ -738,14 +757,16 @@ h2 {
 
 @media (max-width: 900px) {
   .topbar {
-    align-items: flex-start;
-    flex-direction: column;
-    gap: 0.45rem;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 0.6rem;
   }
 
   .nav {
-    width: 100%;
-    justify-content: flex-start;
+    width: auto;
+    justify-content: flex-end;
+    flex-wrap: nowrap;
   }
 
   .hero {

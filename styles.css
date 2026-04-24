@@ -22,12 +22,14 @@
 
 html {
   scroll-behavior: smooth;
+  background: #07101d;
 }
 
 body {
   margin: 0;
   min-width: 320px;
   font-family: "Manrope", sans-serif;
+  background-color: #07101d;
   background:
     radial-gradient(circle at 20% 0%, rgba(95, 142, 214, 0.16), transparent 24%),
     radial-gradient(circle at 82% 14%, rgba(78, 118, 190, 0.14), transparent 26%),

@@ -672,6 +672,14 @@ h2 {
     padding-bottom: 2.5rem;
   }
 
+  .video-card {
+    padding: 0.85rem;
+  }
+
+  .demo-video-frame {
+    border-radius: 14px;
+  }
+
   .contact-dialog {
     width: min(100%, 24rem);
     padding: 1.15rem;

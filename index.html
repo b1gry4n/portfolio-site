@@ -50,7 +50,7 @@
           scenes, interactable objects, validated data, and a playable prototype.
         </p>
         <div class="hero-actions">
-          <a class="button button-primary" id="watchDemoButton" href="https://www.youtube.com/watch?v=qXLxx9rvCNY" target="_blank" rel="noreferrer">Watch Demo</a>
+          <button class="button button-primary" type="button" id="watchDemoButton">Watch Demo</button>
           <button class="button button-secondary contact-trigger" type="button">Contact</button>
         </div>
       </section>
@@ -63,16 +63,17 @@
           <p class="demo-note">Most AI demos generate text. This generates working systems.</p>
         </div>
         <div class="video-card">
-          <a class="demo-video-frame demo-video-link" href="https://www.youtube.com/watch?v=qXLxx9rvCNY" target="_blank" rel="noreferrer" aria-label="Watch demo video on YouTube">
-            <img class="demo-video-poster" src="https://i.ytimg.com/vi/qXLxx9rvCNY/hqdefault.jpg" alt="Demo video preview for AI prototyping systems">
-            <span class="demo-video-overlay">
-              <span class="demo-video-play-button" aria-hidden="true">▶</span>
-              <span class="demo-video-meta">
-                <strong>Watch demo on YouTube</strong>
-                <span>Open the full walkthrough in a new tab.</span>
-              </span>
-            </span>
-          </a>
+          <div class="demo-video-frame">
+            <iframe
+              id="demoVideo"
+              src="https://www.youtube.com/embed/qXLxx9rvCNY?enablejsapi=1&playsinline=1&rel=0&modestbranding=1"
+              title="AI Prototyping Systems Demo"
+              loading="lazy"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerpolicy="strict-origin-when-cross-origin"
+              allowfullscreen
+            ></iframe>
+          </div>
         </div>
       </section>
 
@@ -146,8 +147,11 @@
       </section>
     </main>
   </div>
+  <script src="https://www.youtube.com/iframe_api"></script>
   <script>
     (function () {
+      const watchDemoButton = document.getElementById("watchDemoButton");
+      const demoSection = document.getElementById("demo");
       const toggle = document.getElementById("contactToggle");
       const triggers = document.querySelectorAll(".contact-trigger");
       const popover = document.getElementById("contactPopover");
@@ -155,9 +159,24 @@
       const closeButton = document.getElementById("contactClose");
       const copyButton = document.getElementById("contactCopy");
       const email = "hello@ryansharr.com";
+      let demoPlayer = null;
 
       if (!toggle || !triggers.length || !popover || !dialog || !closeButton || !copyButton) {
         return;
+      }
+
+      window.onYouTubeIframeAPIReady = function () {
+        demoPlayer = new YT.Player("demoVideo");
+      };
+
+      if (watchDemoButton && demoSection) {
+        watchDemoButton.addEventListener("click", function () {
+          demoSection.scrollIntoView({ behavior: "smooth", block: "start" });
+          if (demoPlayer && typeof demoPlayer.seekTo === "function") {
+            demoPlayer.seekTo(0, true);
+            demoPlayer.playVideo();
+          }
+        });
       }
 
       function closePopover() {

@@ -663,8 +663,8 @@ h2 {
   }
 
   .nav {
-    width: auto;
-    justify-content: flex-end;
+    width: 100%;
+    justify-content: space-between;
     gap: 0.3rem;
     flex-wrap: nowrap;
     flex: 0 0 auto;
@@ -756,8 +756,8 @@ h2 {
   }
 
   .nav {
-    width: auto;
-    justify-content: flex-end;
+    width: 100%;
+    justify-content: space-between;
     flex-wrap: nowrap;
   }
 

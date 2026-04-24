@@ -1088,25 +1088,32 @@ h2 {
     max-height: none;
   }
 
-  .video-selector-row {
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    padding-bottom: 0.2rem;
-    -ms-overflow-style: none;
-    scrollbar-width: none;
+  .video-card {
+    overflow: hidden;
   }
 
-  .video-selector-row::-webkit-scrollbar {
-    display: none;
+  .video-selector {
+    min-width: 0;
+  }
+
+  .video-selector-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.6rem;
+    overflow: visible;
+    padding-bottom: 0;
   }
 
   .video-option {
-    flex: 0 0 auto;
-    width: min(18rem, 82vw);
+    width: 100%;
+    min-width: 0;
+    min-height: auto;
+    padding: 0.85rem;
   }
 
   .demo-video-frame {
     border-radius: 14px;
+    min-width: 0;
   }
 
   .contact-dialog {
@@ -1198,12 +1205,29 @@ h2 {
     font-size: 0.94rem;
   }
 
-  .flow-arrow {
-    flex: 0 0 auto;
-    transform: rotate(90deg);
-    animation: none;
-    font-size: 1.1rem;
-    line-height: 1;
+  .section,
+  .hero,
+  .closing,
+  .video-card,
+  .runtime-control-card,
+  .card,
+  .depth-card,
+  .proof-chip {
+    max-width: 100%;
+  }
+
+  #demo,
+  #demo .video-card,
+  #demo .demo-video-frame,
+  #demo iframe {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .video-option-title,
+  .video-option-proof,
+  .video-option-tag {
+    overflow-wrap: anywhere;
   }
 }
 

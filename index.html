@@ -53,9 +53,9 @@
           <span class="hero-chain-separator" aria-hidden="true">&rarr;</span>
           <span class="hero-chain-step">Structured System</span>
           <span class="hero-chain-separator" aria-hidden="true">&rarr;</span>
-          <span class="hero-chain-step">Unity Scene</span>
+          <span class="hero-chain-step">Runtime Simulation</span>
           <span class="hero-chain-separator" aria-hidden="true">&rarr;</span>
-          <span class="hero-chain-step">Working Runtime</span>
+          <span class="hero-chain-step">Observable Output</span>
         </div>
         <div class="hero-actions">
           <button class="button button-primary" type="button" id="watchDemoButton">See It Generate &rarr;</button>
@@ -146,6 +146,103 @@
           Structured AI output is imported, validated, and built into real Unity systems. The result is faster
           iteration with visible proof: real scenes, real objects, and real state changes.
         </p>
+      </section>
+
+      <section class="section" id="system-depth" aria-labelledby="system-depth-title">
+        <div class="section-heading">
+          <p class="eyebrow">Additional Systems</p>
+          <h2 id="system-depth-title">Built as systems, not scenes</h2>
+          <p class="section-subheading">
+            Across multiple Unity projects, I built complete runtime architectures where structured input becomes
+            authoritative simulation, system behavior, and observable output.
+          </p>
+          <p class="section-subheading section-pattern">
+            Structured Input &rarr; Controlled Runtime Authority &rarr; System Execution &rarr; Inspectable Output
+            <span class="hero-chain-sub">Systems are designed to be extended, validated, and reused.</span>
+          </p>
+        </div>
+        <div class="system-depth-grid">
+          <article class="depth-card">
+            <p class="depth-label">Runtime Architecture</p>
+            <h3>Command-Driven Simulation Engine</h3>
+            <p class="depth-summary">
+              A gameplay architecture where Unity is not the source of truth and all runtime state is owned by a
+              central simulation. Scene objects submit commands into an authoritative plain C# simulation that owns all
+              runtime state.
+            </p>
+            <ul class="depth-points">
+              <li>Central GameState owns runtime truth</li>
+              <li>Unity objects act as input, scene, and presentation bridges</li>
+              <li>Commands are validated before mutating state</li>
+              <li>Ordered tick systems advance simulation over time</li>
+              <li>Logging and validation capture commands, ticks, and state changes</li>
+            </ul>
+            <p class="depth-footer">This is a simulation engine, not a Unity scene.</p>
+          </article>
+          <article class="depth-card">
+            <p class="depth-label">World Simulation</p>
+            <h3>Persistent World Systems</h3>
+            <p class="depth-summary">
+              A shared-world simulation architecture where agents, schedules, identity, law, security, economy, body
+              state, buffs, combat AI, and observability operate as coordinated subsystems.
+            </p>
+            <ul class="depth-points">
+              <li>Identity-driven agents connect schedule, access, law, economy, and inspection</li>
+              <li>World time drives behavior instead of one-off scripted sequences</li>
+              <li>Separate AI systems handle civilian scheduling and combat behavior</li>
+              <li>Player actions can propagate into crime, escalation, and security response</li>
+            </ul>
+            <p class="depth-footer">This is a simulated world, not a scripted experience.</p>
+          </article>
+          <article class="depth-card">
+            <p class="depth-label">Generation Pipeline</p>
+            <h3>Authoring, Bootstrap, and Runtime Bridge</h3>
+            <p class="depth-summary">
+              A full pipeline where structured inputs generate scenes, systems, data, and runtime behavior through
+              editor tooling, runtime bridges, and validation layers.
+            </p>
+            <ul class="depth-points">
+              <li>JSON-driven scene reconstruction and repair</li>
+              <li>Automated prefab, room, catalog, and equipment generation</li>
+              <li>Geometry-derived traversal graph baking for dragon navigation</li>
+              <li>Runtime bridges register authored Unity objects into simulation state</li>
+              <li>Session logs and validation artifacts make behavior inspectable</li>
+            </ul>
+            <p class="depth-footer">This is a system pipeline, not a content workflow.</p>
+          </article>
+        </div>
+        <div class="runtime-proof">
+          <div class="runtime-proof-header">
+            <p class="runtime-proof-label">Runtime Proof</p>
+            <p class="runtime-proof-lead">Runtime behavior is captured as structured, inspectable artifacts.</p>
+          </div>
+          <div class="runtime-proof-grid">
+            <article class="proof-chip">
+              <h3>Structured Runtime Logs</h3>
+              <p>Session logs capture scene identity projection, runtime state, warnings, and trace events.</p>
+              <div class="proof-snippets">
+                <code>NarrativePrototype/BridgeIdentityProjected</code>
+                <code>RuntimeSessionLog</code>
+              </div>
+            </article>
+            <article class="proof-chip">
+              <h3>Inspectable State Changes</h3>
+              <p>Systems emit machine-readable events for validation, debugging, and post-run review.</p>
+              <div class="proof-snippets">
+                <code>IdentitySnapshotCaptured</code>
+                <code>CommandResult / SimulationTick</code>
+              </div>
+            </article>
+            <article class="proof-chip">
+              <h3>Editor + Runtime Pipeline Evidence</h3>
+              <p>Unity import, domain reload, scene sync, and runtime traces are captured as artifacts.</p>
+              <div class="proof-snippets">
+                <code>AssetImportWorker / DomainReload</code>
+                <code>Import Request</code>
+              </div>
+            </article>
+          </div>
+        </div>
       </section>
 
       <section class="closing" id="contact" aria-labelledby="closing-title">

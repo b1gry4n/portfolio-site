@@ -24,11 +24,15 @@ html {
   scroll-behavior: smooth;
   background: #07101d;
   font-size: 16px;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 body {
   margin: 0;
   min-width: 320px;
+  max-width: 100%;
+  overflow-x: hidden;
   font-family: "Manrope", sans-serif;
   background-color: #07101d;
   background:
@@ -73,6 +77,35 @@ a {
   text-decoration: none;
 }
 
+img,
+iframe,
+video,
+svg,
+canvas {
+  max-width: 100%;
+}
+
+.hero,
+.section,
+.closing,
+.video-card,
+.demo-video-frame,
+.runtime-control-card,
+.runtime-control-frame,
+.card,
+.depth-card,
+.proof-chip,
+.flow,
+.capability-list,
+.system-depth-grid,
+.runtime-proof-grid,
+.runtime-control-grid,
+.video-selector,
+.video-selector-row {
+  min-width: 0;
+}
+
+
 .page-shell {
   position: relative;
   min-height: 100vh;
@@ -112,14 +145,17 @@ a {
 .container {
   position: relative;
   z-index: 1;
-  width: min(calc(100% - 2rem), var(--container));
+  width: 100%;
+  max-width: var(--container);
   margin: 0 auto;
-  padding: 1.25rem 0 2.25rem;
+  padding: 1.25rem 1rem 2.25rem;
 }
 
 .hero,
 .section,
 .closing {
+  width: 100%;
+  max-width: 100%;
   background: var(--panel);
   border: 1px solid var(--border);
   backdrop-filter: blur(14px);
@@ -1061,8 +1097,9 @@ h2 {
 
 @media (max-width: 640px) {
   .container {
-    width: min(calc(100% - 1rem), var(--container));
-    padding: 0.5rem 0 1.6rem;
+    width: 100%;
+    max-width: var(--container);
+    padding: 0.5rem 0.75rem 1.6rem;
   }
 
   .topbar {
@@ -1079,10 +1116,11 @@ h2 {
 
   .nav {
     width: 100%;
+    min-width: 0;
     justify-content: space-between;
     gap: 0.3rem;
     flex-wrap: nowrap;
-    flex: 0 0 auto;
+    flex: 0 1 auto;
   }
 
   .nav-link {
@@ -1095,8 +1133,8 @@ h2 {
   }
 
   .hero {
-    padding-top: 2.5rem;
-    padding-bottom: 2.5rem;
+    padding: 2.25rem 1.4rem;
+    border-radius: 22px;
   }
 
   .video-card {
@@ -1155,8 +1193,10 @@ h2 {
   }
 
   h1 {
-    max-width: none;
-    font-size: clamp(2.3rem, 11vw, 3.7rem);
+    max-width: 100%;
+    font-size: clamp(2.15rem, 10.3vw, 3.45rem);
+    overflow-wrap: anywhere;
+    word-break: normal;
   }
 
   .hero-copy,
@@ -1248,6 +1288,22 @@ h2 {
   .video-option-proof,
   .video-option-tag {
     overflow-wrap: anywhere;
+  }
+
+  .page-shell {
+    overflow-x: hidden;
+  }
+
+  .hero,
+  .section,
+  .closing {
+    overflow: hidden;
+  }
+
+  .hero-copy,
+  .section-subheading,
+  .body-copy {
+    max-width: 100%;
   }
 }
 

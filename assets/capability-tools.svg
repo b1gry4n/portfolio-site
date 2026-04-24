@@ -1,41 +1,57 @@
 <svg width="1280" height="800" viewBox="0 0 1280 800" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect width="1280" height="800" rx="36" fill="#0C1628"/>
-  <rect x="34" y="34" width="1212" height="732" rx="28" fill="url(#bg)"/>
-  <rect x="82" y="92" width="1116" height="578" rx="24" fill="#101D31" stroke="#304867"/>
-  <rect x="82" y="92" width="1116" height="68" rx="24" fill="#142640"/>
-  <circle cx="126" cy="126" r="9" fill="#96E2B0"/>
-  <circle cx="156" cy="126" r="9" fill="#4A6A92"/>
-  <circle cx="186" cy="126" r="9" fill="#4A6A92"/>
-  <rect x="234" y="113" width="206" height="26" rx="13" fill="#36557D"/>
-  <rect x="124" y="198" width="242" height="422" rx="18" fill="#142640"/>
-  <rect x="154" y="234" width="136" height="18" rx="9" fill="#96E2B0"/>
-  <rect x="154" y="274" width="168" height="14" rx="7" fill="#44658D"/>
-  <rect x="154" y="304" width="132" height="14" rx="7" fill="#44658D"/>
-  <rect x="154" y="334" width="182" height="14" rx="7" fill="#44658D"/>
-  <rect x="154" y="394" width="160" height="18" rx="9" fill="#96E2B0"/>
-  <rect x="154" y="434" width="144" height="14" rx="7" fill="#44658D"/>
-  <rect x="154" y="464" width="128" height="14" rx="7" fill="#44658D"/>
-  <rect x="154" y="494" width="174" height="14" rx="7" fill="#44658D"/>
-  <rect x="404" y="198" width="756" height="422" rx="18" fill="#132238"/>
-  <rect x="442" y="236" width="232" height="34" rx="17" fill="#1C304F"/>
-  <rect x="442" y="294" width="680" height="172" rx="18" fill="#182A45"/>
-  <rect x="476" y="330" width="198" height="18" rx="9" fill="#486A92"/>
-  <rect x="476" y="362" width="356" height="14" rx="7" fill="#36557D"/>
-  <rect x="476" y="392" width="284" height="14" rx="7" fill="#36557D"/>
-  <rect x="442" y="500" width="680" height="82" rx="16" fill="#16263F"/>
-  <rect x="476" y="528" width="184" height="14" rx="7" fill="#486A92"/>
-  <rect x="476" y="556" width="144" height="14" rx="7" fill="#36557D"/>
-  <rect x="744" y="236" width="128" height="48" rx="16" fill="#96E2B0"/>
-  <text x="773" y="267" fill="#08111F" font-family="Manrope, Arial, sans-serif" font-size="22" font-weight="800">IMPORT</text>
-  <rect x="890" y="236" width="110" height="48" rx="16" fill="#203654"/>
-  <text x="926" y="267" fill="#DDE8F7" font-family="Manrope, Arial, sans-serif" font-size="22" font-weight="800">BUILD</text>
-  <rect x="1018" y="236" width="104" height="48" rx="16" fill="#203654"/>
-  <text x="1042" y="267" fill="#DDE8F7" font-family="Manrope, Arial, sans-serif" font-size="22" font-weight="800">VALIDATE</text>
-  <text x="82" y="720" fill="#DDE8F7" font-family="Manrope, Arial, sans-serif" font-size="34" font-weight="700">Import, build, validate, ship the next iteration</text>
+  <rect width="1280" height="800" rx="36" fill="#0B1423"/>
+  <rect x="34" y="34" width="1212" height="732" rx="28" fill="url(#panel)" stroke="rgba(157,194,239,0.18)"/>
+
+  <rect x="86" y="106" width="1108" height="548" rx="26" fill="#101C30" stroke="#2B486E"/>
+  <rect x="86" y="106" width="1108" height="66" rx="26" fill="#132540"/>
+  <circle cx="128" cy="139" r="9" fill="#9DE0B8"/>
+  <circle cx="158" cy="139" r="9" fill="#4D6D97"/>
+  <circle cx="188" cy="139" r="9" fill="#4D6D97"/>
+  <text x="236" y="147" fill="#DCE7F6" font-family="Arial, sans-serif" font-size="26" font-weight="700">Pack Import Tool</text>
+
+  <rect x="118" y="204" width="280" height="400" rx="20" fill="#14263E" stroke="#29476B"/>
+  <text x="148" y="242" fill="#9DE0B8" font-family="Arial, sans-serif" font-size="24" font-weight="700">Structured Data</text>
+  <rect x="148" y="278" width="170" height="16" rx="8" fill="#48688F"/>
+  <rect x="148" y="308" width="196" height="12" rx="6" fill="#36557D"/>
+  <rect x="148" y="334" width="154" height="12" rx="6" fill="#36557D"/>
+  <rect x="148" y="360" width="210" height="12" rx="6" fill="#36557D"/>
+  <rect x="148" y="404" width="142" height="16" rx="8" fill="#48688F"/>
+  <rect x="148" y="434" width="168" height="12" rx="6" fill="#36557D"/>
+  <rect x="148" y="460" width="138" height="12" rx="6" fill="#36557D"/>
+  <rect x="148" y="486" width="186" height="12" rx="6" fill="#36557D"/>
+
+  <rect x="438" y="204" width="420" height="400" rx="20" fill="#132238" stroke="#29476B"/>
+  <text x="472" y="242" fill="#DCE7F6" font-family="Arial, sans-serif" font-size="24" font-weight="700">Import Pipeline</text>
+  <rect x="472" y="286" width="352" height="120" rx="18" fill="#182B46"/>
+  <rect x="500" y="318" width="136" height="18" rx="9" fill="#9DE0B8"/>
+  <rect x="500" y="350" width="194" height="14" rx="7" fill="#48688F"/>
+  <rect x="500" y="378" width="154" height="14" rx="7" fill="#36557D"/>
+
+  <rect x="472" y="458" width="108" height="52" rx="18" fill="#9DE0B8"/>
+  <text x="495" y="492" fill="#07111F" font-family="Arial, sans-serif" font-size="22" font-weight="800">IMPORT</text>
+  <rect x="602" y="458" width="124" height="52" rx="18" fill="#1C304E" stroke="#355781"/>
+  <text x="618" y="492" fill="#F1F6FC" font-family="Arial, sans-serif" font-size="22" font-weight="800">VALIDATE</text>
+  <rect x="748" y="458" width="92" height="52" rx="18" fill="#1C304E" stroke="#355781"/>
+  <text x="772" y="492" fill="#F1F6FC" font-family="Arial, sans-serif" font-size="22" font-weight="800">BUILD</text>
+
+  <rect x="896" y="204" width="264" height="400" rx="20" fill="#14263E" stroke="#29476B"/>
+  <text x="928" y="242" fill="#9DE0B8" font-family="Arial, sans-serif" font-size="24" font-weight="700">Status</text>
+  <rect x="928" y="284" width="200" height="72" rx="18" fill="#172944"/>
+  <circle cx="964" cy="320" r="10" fill="#9DE0B8"/>
+  <text x="992" y="328" fill="#EAF1FA" font-family="Arial, sans-serif" font-size="30" font-weight="700">Valid</text>
+  <rect x="928" y="382" width="200" height="72" rx="18" fill="#172944"/>
+  <circle cx="964" cy="418" r="10" fill="#9DE0B8"/>
+  <text x="992" y="426" fill="#EAF1FA" font-family="Arial, sans-serif" font-size="30" font-weight="700">Built</text>
+  <rect x="928" y="480" width="200" height="72" rx="18" fill="#1E3553" stroke="#3A618D"/>
+  <circle cx="964" cy="516" r="10" fill="#9DE0B8"/>
+  <text x="992" y="524" fill="#F4F8FD" font-family="Arial, sans-serif" font-size="30" font-weight="700">Scene Ready</text>
+
+  <text x="86" y="706" fill="#DCE7F6" font-family="Arial, sans-serif" font-size="30" font-weight="700">Import, validate, build, ship the next iteration</text>
+
   <defs>
-    <linearGradient id="bg" x1="640" y1="34" x2="640" y2="766" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#12233D"/>
-      <stop offset="1" stop-color="#0D1829"/>
+    <linearGradient id="panel" x1="640" y1="34" x2="640" y2="766" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#102039"/>
+      <stop offset="1" stop-color="#0C1628"/>
     </linearGradient>
   </defs>
 </svg>

@@ -478,8 +478,8 @@ h2 {
 .card {
   padding: 1rem;
   border-radius: var(--radius-sm);
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.11);
   transition: all 0.2s ease;
 }
 
@@ -490,8 +490,9 @@ h2 {
   object-fit: cover;
   margin-bottom: 0.9rem;
   border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
+  filter: brightness(1.03) contrast(1.05);
   transition: all 0.2s ease;
 }
 
@@ -512,17 +513,18 @@ h2 {
 
 .card:hover {
   transform: translateY(-5px) scale(1.02);
-  border-color: rgba(157, 224, 184, 0.2);
+  border-color: rgba(157, 224, 184, 0.24);
   box-shadow:
     0 18px 40px rgba(0, 0, 0, 0.28),
     0 0 0 1px rgba(157, 224, 184, 0.04) inset,
-    0 0 24px rgba(157, 224, 184, 0.07);
+    0 0 24px rgba(157, 224, 184, 0.08);
 }
 
 .card:hover .card-image {
-  transform: scale(1.03);
-  filter: brightness(1.04) contrast(1.04);
-  border-color: rgba(157, 224, 184, 0.16);
+  transform: scale(1.02);
+  filter: brightness(1.07) contrast(1.08) saturate(1.03);
+  border-color: rgba(157, 224, 184, 0.18);
+  box-shadow: 0 0 18px rgba(157, 224, 184, 0.06);
 }
 
 .card:hover h3 {
@@ -575,6 +577,14 @@ h2 {
     0 14px 28px rgba(0, 0, 0, 0.22),
     0 0 0 1px rgba(157, 224, 184, 0.04) inset,
     0 0 18px rgba(157, 224, 184, 0.06);
+}
+
+#value.section {
+  margin-top: 1.2rem;
+}
+
+.closing {
+  margin-top: 1.2rem;
 }
 
 .closing h2 {

@@ -1,39 +1,47 @@
 <svg width="1280" height="800" viewBox="0 0 1280 800" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect width="1280" height="800" rx="36" fill="#0C1628"/>
-  <rect x="34" y="34" width="1212" height="732" rx="28" fill="url(#bg)"/>
-  <rect x="82" y="94" width="756" height="560" rx="24" fill="#12223A" stroke="#304867"/>
-  <rect x="118" y="132" width="684" height="320" rx="20" fill="#182A45"/>
-  <rect x="152" y="168" width="250" height="248" rx="18" fill="#22385B"/>
-  <rect x="434" y="182" width="138" height="104" rx="16" fill="#2D476D"/>
-  <rect x="606" y="172" width="146" height="114" rx="16" fill="#2A4266"/>
-  <rect x="488" y="314" width="208" height="84" rx="18" fill="#96E2B0"/>
-  <circle cx="592" cy="356" r="22" fill="#0C1628"/>
-  <path d="M584 344L606 356L584 368V344Z" fill="#96E2B0"/>
-  <rect x="118" y="482" width="684" height="132" rx="18" fill="#142640"/>
-  <rect x="152" y="516" width="178" height="18" rx="9" fill="#96E2B0"/>
-  <rect x="152" y="548" width="254" height="14" rx="7" fill="#486A92"/>
-  <rect x="152" y="578" width="190" height="14" rx="7" fill="#36557D"/>
-  <rect x="878" y="94" width="320" height="560" rx="24" fill="#101D31" stroke="#304867"/>
-  <rect x="912" y="132" width="252" height="44" rx="14" fill="#172944"/>
-  <text x="942" y="160" fill="#96E2B0" font-family="Manrope, Arial, sans-serif" font-size="24" font-weight="800">runtime.log</text>
-  <rect x="912" y="204" width="252" height="66" rx="16" fill="#132238"/>
-  <rect x="936" y="228" width="160" height="12" rx="6" fill="#96E2B0"/>
-  <rect x="936" y="248" width="128" height="10" rx="5" fill="#45668F"/>
-  <rect x="912" y="290" width="252" height="66" rx="16" fill="#132238"/>
-  <rect x="936" y="314" width="176" height="12" rx="6" fill="#96E2B0"/>
-  <rect x="936" y="334" width="154" height="10" rx="5" fill="#45668F"/>
-  <rect x="912" y="376" width="252" height="66" rx="16" fill="#132238"/>
-  <rect x="936" y="400" width="144" height="12" rx="6" fill="#96E2B0"/>
-  <rect x="936" y="420" width="182" height="10" rx="5" fill="#45668F"/>
-  <rect x="912" y="482" width="252" height="132" rx="18" fill="#142640"/>
-  <rect x="940" y="516" width="116" height="18" rx="9" fill="#96E2B0"/>
-  <rect x="940" y="548" width="194" height="12" rx="6" fill="#486A92"/>
-  <rect x="940" y="572" width="166" height="12" rx="6" fill="#36557D"/>
-  <text x="82" y="720" fill="#DDE8F7" font-family="Manrope, Arial, sans-serif" font-size="34" font-weight="700">Playable interactions with logs you can actually read</text>
+  <rect width="1280" height="800" rx="36" fill="#0B1423"/>
+  <rect x="34" y="34" width="1212" height="732" rx="28" fill="url(#panel)" stroke="rgba(157,194,239,0.18)"/>
+
+  <rect x="86" y="114" width="706" height="520" rx="24" fill="#101D32" stroke="#2C496D"/>
+  <text x="120" y="152" fill="#9DE0B8" font-family="Arial, sans-serif" font-size="24" font-weight="700">Runtime Panel</text>
+
+  <rect x="120" y="196" width="638" height="188" rx="22" fill="#16263E" stroke="#284564"/>
+  <text x="156" y="242" fill="#F1F6FC" font-family="Arial, sans-serif" font-size="34" font-weight="800">Laundry_unit</text>
+  <rect x="156" y="274" width="170" height="16" rx="8" fill="#48688F"/>
+
+  <rect x="156" y="316" width="94" height="40" rx="20" fill="#162D49" stroke="#2D4B71"/>
+  <text x="182" y="342" fill="#D8E5F6" font-family="Arial, sans-serif" font-size="20" font-weight="700">empty</text>
+  <path d="M264 336H318" stroke="#9DE0B8" stroke-width="6" stroke-linecap="round"/>
+  <rect x="334" y="316" width="110" height="40" rx="20" fill="#1C3350" stroke="#355781"/>
+  <text x="365" y="342" fill="#D8E5F6" font-family="Arial, sans-serif" font-size="20" font-weight="700">loaded</text>
+  <path d="M456 336H510" stroke="#9DE0B8" stroke-width="6" stroke-linecap="round"/>
+  <rect x="526" y="316" width="184" height="40" rx="20" fill="#1E3553" stroke="#4A78AA"/>
+  <text x="552" y="342" fill="#F4F8FD" font-family="Arial, sans-serif" font-size="20" font-weight="700">clean_cycle_done</text>
+
+  <rect x="156" y="418" width="152" height="56" rx="20" fill="#9DE0B8"/>
+  <text x="188" y="454" fill="#07111F" font-family="Arial, sans-serif" font-size="24" font-weight="800">Run Cycle</text>
+
+  <rect x="840" y="114" width="354" height="520" rx="24" fill="#101C30" stroke="#2C496D"/>
+  <text x="874" y="152" fill="#9DE0B8" font-family="Arial, sans-serif" font-size="24" font-weight="700">Log</text>
+
+  <rect x="874" y="204" width="286" height="96" rx="18" fill="#14263E" stroke="#284564"/>
+  <text x="904" y="242" fill="#48688F" font-family="Arial, sans-serif" font-size="20" font-weight="700">trigger</text>
+  <text x="904" y="274" fill="#F1F6FC" font-family="Arial, sans-serif" font-size="28" font-weight="800">run_cycle</text>
+
+  <rect x="874" y="326" width="286" height="96" rx="18" fill="#14263E" stroke="#284564"/>
+  <text x="904" y="364" fill="#48688F" font-family="Arial, sans-serif" font-size="20" font-weight="700">state</text>
+  <text x="904" y="396" fill="#F1F6FC" font-family="Arial, sans-serif" font-size="28" font-weight="800">clean_cycle_done</text>
+
+  <rect x="874" y="448" width="286" height="96" rx="18" fill="#1E3553" stroke="#3A618D"/>
+  <text x="904" y="486" fill="#7BB5C8" font-family="Arial, sans-serif" font-size="20" font-weight="700">event</text>
+  <text x="904" y="518" fill="#F4F8FD" font-family="Arial, sans-serif" font-size="28" font-weight="800">identity_changed</text>
+
+  <text x="86" y="706" fill="#DCE7F6" font-family="Arial, sans-serif" font-size="30" font-weight="700">Playable interactions with logs you can inspect</text>
+
   <defs>
-    <linearGradient id="bg" x1="640" y1="34" x2="640" y2="766" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#12233D"/>
-      <stop offset="1" stop-color="#0D1829"/>
+    <linearGradient id="panel" x1="640" y1="34" x2="640" y2="766" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#102039"/>
+      <stop offset="1" stop-color="#0C1628"/>
     </linearGradient>
   </defs>
 </svg>

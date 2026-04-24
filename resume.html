@@ -79,7 +79,7 @@
   }
 
   .side {
-    gap: 18px;
+    gap: 11px;
     margin-top: 0;
   }
 
@@ -219,16 +219,27 @@
   }
 
   .iconbox {
-    width: 38px;
-    height: 38px;
-    border: 2px solid #075e70;
-    border-radius: 10px;
-    display: grid;
-    place-items: center;
-    font-size: 20px;
-    color: #075e70;
-    margin-top: 3px;
-  }
+      width: 38px;
+      height: 38px;
+      border: 2px solid #075e70;
+      border-radius: 10px;
+      display: grid;
+      place-items: center;
+      font-size: 20px;
+      color: #075e70;
+      margin-top: 3px;
+    }
+
+  .iconbox svg {
+      width: 24px;
+      height: 24px;
+      display: block;
+      stroke: currentColor;
+      stroke-width: 2.1;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      fill: none;
+    }
 
   h3 {
     margin: 0;
@@ -375,16 +386,39 @@
 
         <section class="block">
           <h2>Core Skills</h2>
-          <div class="skill-list">
-            <div class="skill"><span class="dot"></span><span>AI systems design<br>(LLM → structured systems → runtime)</span></div>
-            <div class="skill"><span class="dot"></span><span>Applied AI / product engineering</span></div>
-            <div class="skill"><span class="dot"></span><span>Simulation architecture and state ownership</span></div>
-            <div class="skill"><span class="dot"></span><span>Command-driven systems and runtime control</span></div>
-            <div class="skill"><span class="dot"></span><span>Tooling pipelines<br>(import → validate → build)</span></div>
-            <div class="skill"><span class="dot"></span><span>Runtime systems<br>(stats, conditions, behaviors)</span></div>
-            <div class="skill"><span class="dot"></span><span>Unity / C# architecture</span></div>
-            <div class="skill"><span class="dot"></span><span>Observability, logging, and validation systems</span></div>
-          </div>
+<div class="skill-list">
+
+  <div class="skill">
+    <span class="dot"></span>
+    <span><strong>AI Systems:</strong> LLM pipelines (structured systems → runtime), structured prompting, rapid prototyping</span>
+  </div>
+
+  <div class="skill">
+    <span class="dot"></span>
+    <span><strong>Architecture:</strong> simulation systems, state ownership, command-driven runtime control</span>
+  </div>
+
+  <div class="skill">
+    <span class="dot"></span>
+    <span><strong>Runtime Systems:</strong> stats, conditions, behaviors, state machines</span>
+  </div>
+
+  <div class="skill">
+    <span class="dot"></span>
+    <span><strong>Pipelines:</strong> import → validate → build, data-driven systems</span>
+  </div>
+
+  <div class="skill">
+    <span class="dot"></span>
+    <span><strong>Engineering:</strong> Unity / C# architecture, applied AI, product systems</span>
+  </div>
+
+  <div class="skill">
+    <span class="dot"></span>
+    <span><strong>Observability:</strong> logging, validation, inspectable runtime state</span>
+  </div>
+
+</div>
         </section>
 
         <section class="block">
@@ -403,18 +437,18 @@
           <h2>Technical Stack</h2>
 
           <div class="stack-row">
-            <div class="ico">&lt;/&gt;</div>
+            <div class="ico">{ }</div>
             <div><strong>Languages:</strong> C#, JavaScript</div>
           </div>
 
           <div class="stack-row">
             <div class="ico">⬡</div>
-            <div><strong>Engines / Tools:</strong> Unity, Unreal Engine, Godot, UEFN (Verse), Custom Tooling</div>
+            <div><strong>Engines / Tools:</strong> Codex, Unity, Unreal Engine, Godot, UEFN (Verse), Custom Tooling</div>
           </div>
 
           <div class="stack-row">
             <div class="ico">⚙</div>
-            <div><strong>Systems:</strong> Runtime simulation, state machines, AI pipelines, editor tooling</div>
+<div><strong>Systems:</strong> Runtime simulation, gameplay systems (stats, conditions, buffs), state machines, character controllers, navigation & pathfinding, AI behavior systems, data-driven architectures, databases, tooling & editor systems</div>
           </div>
 
           <div class="stack-row">
@@ -441,7 +475,17 @@
           <div class="work-grid">
 
             <article class="card feature">
-              <div class="iconbox">🤖</div>
+              <div class="iconbox">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <rect x="4.5" y="4.5" width="15" height="6.2" rx="2.2"></rect>
+                  <path d="M7.8 15.4h8.4"></path>
+                  <path d="M5.2 19.3h13.6"></path>
+                  <path d="M8.2 10.9v4.4"></path>
+                  <path d="M15.8 10.9v4.4"></path>
+                  <circle cx="8.2" cy="17.3" r="0.9" fill="currentColor" stroke="none"></circle>
+                  <circle cx="15.8" cy="17.3" r="0.9" fill="currentColor" stroke="none"></circle>
+                </svg>
+              </div>
               <div>
                 <h3>AI → Playable Runtime System</h3>
                 <div class="meta">ryansharr.com</div>
@@ -453,6 +497,7 @@
                   <li>Prompt → structured data → generated systems → runtime simulation</li>
                   <li>Inspectable runtime state with debugging and validation tooling</li>
                   <li>Demonstrates AI output as controllable, stateful software</li>
+                  <li>Built around structured runtime authority, not one-off generation</li>
                   <li>Designed around verifiable system behavior, not static generation</li>
                 </ul>
               </div>
@@ -560,3 +605,4 @@
   </div>
 </body>
 </html>
+

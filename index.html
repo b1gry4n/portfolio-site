@@ -402,6 +402,10 @@
             return;
           }
 
+          if (demoSection) {
+            demoSection.scrollIntoView({ behavior: "smooth", block: "start" });
+          }
+
           videoOptions.forEach(function (item) {
             item.classList.remove("video-option-active");
           });

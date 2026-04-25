@@ -532,15 +532,11 @@ h1 {
 
 .hero-chain-step {
   white-space: nowrap;
-}
-
-.hero-chain-step:nth-child(3),
-.hero-chain-step:nth-child(5) {
-  color: rgba(157, 224, 184, 0.72);
+  color: rgba(157, 224, 184, 0.88);
 }
 
 .hero-chain-separator {
-  color: rgba(157, 224, 184, 0.78);
+  color: rgba(157, 224, 184, 0.58);
 }
 
 .hero-actions {
@@ -811,6 +807,14 @@ h2 {
 
 .runtime-control-subheading {
   max-width: none;
+}
+
+.runtime-control-note {
+  margin: -0.35rem 0 0.15rem;
+  color: rgba(220, 231, 246, 0.82);
+  font-size: 0.9rem;
+  line-height: 1.5;
+  max-width: 100%;
 }
 
 .runtime-control-points {

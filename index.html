@@ -80,11 +80,11 @@
             <span aria-hidden="true">&times;</span>
           </button>
           <p class="contact-popover-label">System Breakdown</p>
-          <h2 class="breakdown-title" id="systemBreakdownTitle">AI output is input. The system is the runtime.</h2>
+          <h2 class="breakdown-title" id="systemBreakdownTitle">AI authors structure. The system owns execution.</h2>
           <div class="breakdown-copy">
-            <p>Prompt-driven AI output is not reliable enough to execute directly.</p>
-            <p>This system converts AI output into structured data, validates it, builds Unity-side systems, and registers them into a stateful runtime.</p>
-            <p>The result is controllable, inspectable software, not fragile generated content.</p>
+            <p>This is not just “AI generates content.” It is a Codex-assisted development loop and a compiler-like pipeline for turning generated structure into runtime systems.</p>
+            <p>Codex helps build the tooling, schemas, validation rules, editor scripts, and workflow doctrine. Structured AI output then flows through those tools into validated engine artifacts and stateful runtime behavior.</p>
+            <p>The result is AI-assisted system authoring without giving AI runtime authority.</p>
           </div>
           <div class="contact-actions">
             <button class="contact-send modal-trigger" type="button" data-modal-target="fullBreakdownPopover">Read Full Breakdown &rarr;</button>
@@ -100,60 +100,93 @@
           </button>
           <p class="contact-popover-label">System Breakdown</p>
           <h2 class="breakdown-title" id="fullBreakdownTitle">How This System Works</h2>
-          <p class="breakdown-intro">This system treats AI as a structured authoring layer, not an execution layer. Prompts generate candidate structure, which is validated, built into engine systems, and executed through a controlled runtime.</p>
+          <div class="breakdown-modal-body">
+          <p class="breakdown-intro">This system uses AI at two levels: Codex helps build the tooling and rules that operate the pipeline, while prompt-driven generation produces structured candidate content. That generated structure is validated, compiled into engine-side artifacts, and registered into a runtime layer that owns behavior, state, and authority.</p>
           <div class="breakdown-sections">
             <section class="breakdown-section">
-              <h3>1. Problem</h3>
-              <p>Prompt-driven AI output is not a reliable runtime surface. It is inconsistent, underspecified, and cannot be executed safely without additional structure.</p>
-              <p>In systems like Unity, this breaks immediately. Runtime behavior requires explicit state, ownership, and validation. Freeform output cannot provide determinism, inspectability, or control.</p>
-              <p>A model can describe a system, but a running engine needs explicit identities, states, transitions, and authority boundaries. Without that, generated output becomes fragile glue: hard to validate, hard to debug, and unsafe to trust.</p>
+              <h3>1. Architectural Framing</h3>
+              <p>This is a compiler-like content-to-runtime pipeline wrapped around a simulation architecture. It is not a simple “AI generates game content” flow. It is a controlled authoring system where generated structure is compiled into engine-owned representations and executed by a stateful runtime.</p>
+              <p>There are two connected systems:</p>
+              <p>an authoring pipeline that transforms generated structure into validated engine artifacts</p>
+              <p>a runtime execution layer that owns behavior, state, and authority</p>
+              <p>That split is the defining architectural move.</p>
             </section>
             <section class="breakdown-section">
-              <h3>2. Approach</h3>
-              <p>The system treats AI output as structured input into runtime systems, not as final code and not as directly executable behavior.</p>
-              <p>That changes the role of the model. The model generates candidate structure: scenes, identities, actions, conditions, and authored relationships. The pipeline then validates that structure, builds engine-side representations, and registers them into runtime ownership.</p>
+              <h3>2. AI-Assisted Development Loop</h3>
+              <p>The system is AI-assisted at two levels.</p>
+              <p>First, Codex is used throughout development to help generate and revise editor tooling, schemas, validation rules, runtime bridges, workflow scripts, and doctrine. It accelerates the construction of the machinery that processes structured content.</p>
+              <p>Second, prompt-driven generation produces candidate scenes, identities, actions, conditions, and authored relationships. Those outputs are not executed directly. They pass through the pipeline built around schemas, validation, tooling, and runtime ownership.</p>
+              <p>This creates a compounding loop: AI helps build the tools, then structured AI output flows through those tools into runtime behavior.</p>
             </section>
             <section class="breakdown-section">
-              <h3>3. System Architecture</h3>
-              <h4>Prompt layer</h4>
+              <h3>3. Core Design Principles</h3>
+              <p>The first principle is separation of generation from authority. AI can propose structure, but it never owns execution. Execution belongs to the runtime.</p>
+              <p>The second is structure before behavior. Nothing enters runtime as prose or loose intent. It has to become explicit data first.</p>
+              <p>The third is validation as a control boundary. Validation is not decoration. It is the gate that prevents malformed generated output from becoming executable state.</p>
+              <p>The fourth is observability as part of the system contract. Generated systems are only useful if they can be inspected, debugged, and verified after generation.</p>
+              <p>The fifth is authoring/runtime asymmetry. The authoring side can be flexible and AI-assisted. The runtime side remains explicit, constrained, and deterministic.</p>
+            </section>
+            <section class="breakdown-section">
+              <h3>4. System Architecture</h3>
+              <h4 class="breakdown-subhead">Prompt layer</h4>
               <p>The entry point is prompt-driven generation. The model produces authored content shaped toward defined schemas instead of prose. The important output is not description, but structured declarations the rest of the pipeline can evaluate.</p>
-              <h4>Structured data layer</h4>
-              <p>The generated output is normalized into structured data with explicit fields, allowed shapes, and validation boundaries. This is where ambiguity is removed. Identities, conditions, actions, and dependencies become machine-checkable rather than interpretive.</p>
-              <p>Invalid data can be rejected here before it reaches assets or runtime.</p>
-              <h4>Build/tooling layer</h4>
-              <p>Validated data moves into Unity-side import and generation tooling. This layer handles import, schema checks, asset generation, registration, and build-time validation. Scenes, prefabs, and supporting runtime definitions are produced from structured input, not manually assembled ad hoc.</p>
-              <p>This is where prompt output becomes executable system content.</p>
-              <h4>Runtime layer</h4>
-              <p>At runtime, generated content resolves into stateful systems. Objects, actors, and simulation components operate over runtime-owned data. The prompt is no longer part of execution; the runtime only knows validated state, registered systems, and executable behavior.</p>
+              <h4 class="breakdown-subhead">Structured data layer</h4>
+              <p>Generated output is normalized into structured data with explicit fields, allowed shapes, and validation boundaries. This is where ambiguity is removed. Identities, conditions, actions, and dependencies become machine-checkable rather than interpretive.</p>
+              <h4 class="breakdown-subhead">Build/tooling layer</h4>
+              <p>Validated data moves into Unity-side import and generation tooling. This layer handles import, schema checks, asset generation, registration, and build-time validation. Scenes, prefabs, and supporting runtime definitions are produced from structured input rather than manually assembled one-offs.</p>
+              <h4 class="breakdown-subhead">Runtime layer</h4>
+              <p>At runtime, generated content resolves into stateful systems. Objects, actors, and simulation components operate over runtime-owned data. The prompt is no longer part of execution. The runtime only knows validated state, registered systems, and executable behavior.</p>
               <p class="breakdown-flow">Prompt -&gt; structured data -&gt; validation/import -&gt; Unity generation -&gt; runtime registration -&gt; playable behavior</p>
             </section>
             <section class="breakdown-section">
-              <h3>4. Runtime Behavior</h3>
+              <h3>5. Runtime Behavior</h3>
               <p>The runtime is stateful and system-driven. Once content is generated and registered, behavior is owned by the runtime layer, not by the original prompt and not by loose scene metadata.</p>
               <p>State ownership is explicit. Stats, conditions, resources, and behavior-driving values exist as runtime data and are updated through controlled pathways. Systems interact over time through commands, ticks, or both.</p>
-              <p>For example, a generated health system does not exist as text or metadata. It resolves into runtime-owned state such as Health and MaxHealth, updated through validated commands and system ticks. Effects like damage or healing are applied through controlled pathways, not direct mutation.</p>
+              <p>For example, a generated health system does not exist as text or metadata. It resolves into runtime-owned state such as <code>Health</code> and <code>MaxHealth</code>, updated through validated commands and system ticks. Effects like damage or healing are applied through controlled pathways, not direct mutation.</p>
               <p>That is what makes the output playable. The runtime is executing system logic over owned state, not replaying authored text.</p>
             </section>
             <section class="breakdown-section">
-              <h3>5. Tooling &amp; Control</h3>
-              <p>The goal is not just to generate systems, but to operate them.</p>
-              <p>The pipeline includes import validation, runtime inspection, and debugging surfaces that expose how generated systems behave once they are live. Live state editing, runtime inspection, and validation allow systems to be exercised under real conditions. Stats, conditions, and cross-system data can be modified and observed without regeneration.</p>
-              <p>Observability is part of the architecture. Logs, validation artifacts, and inspectable runtime state make behavior explainable after the fact, not just visible in the moment. That matters because generated systems are only useful if they can be verified, debugged, and controlled.</p>
+              <h3>6. Boundaries and Control Points</h3>
+              <p>Authority lives in four places:</p>
+              <p>schemas define the allowed shape of authored output</p>
+              <p>validation enforces admissibility before build/runtime</p>
+              <p>tooling converts structured inputs into engine-side artifacts</p>
+              <p>runtime systems own actual execution and state mutation</p>
+              <p>The critical boundary is between structured data and executable runtime content. That is where generated output stops being suggestion and starts being admitted into the system.</p>
+              <p>Another boundary exists between authored structure and live state. Authored inputs define what can exist. Runtime defines what is currently true.</p>
+              <p>AI can influence the system upstream, but it cannot bypass downstream authority.</p>
             </section>
             <section class="breakdown-section">
-              <h3>6. Why This Works</h3>
+              <h3>7. Tooling, Control, and Observability</h3>
+              <p>The goal is not just to generate systems, but to operate them.</p>
+              <p>The pipeline includes import validation, runtime inspection, and debugging surfaces that expose how generated systems behave once they are live. Live state editing, runtime inspection, and validation allow systems to be exercised under real conditions. Stats, conditions, and cross-system data can be modified and observed without regeneration.</p>
+              <p>Observability is part of the architecture. Logs, validation artifacts, and inspectable runtime state make behavior explainable after the fact, not just visible in the moment.</p>
+            </section>
+            <section class="breakdown-section">
+              <h3>8. Failure Modes This Avoids</h3>
+              <p>This architecture is designed to avoid:</p>
+              <p>direct execution of underspecified generated output</p>
+              <p>hidden state mutation through content-layer artifacts</p>
+              <p>runtime behavior that cannot be traced back to validated inputs</p>
+              <p>brittle one-off glue code between prompts and engine behavior</p>
+              <p>pipelines where debugging requires re-reading prompt text instead of inspecting runtime state</p>
+              <p>toolchains where AI output contaminates authority boundaries</p>
+              <p>In short, it avoids treating generated text as if it were already a system.</p>
+            </section>
+            <section class="breakdown-section">
+              <h3>9. Why This Works</h3>
               <p>This works because it separates generation from authority.</p>
-              <p>The model is useful at generating structured candidates quickly. The system is responsible for validation, generation, registration, and runtime behavior. That split avoids the standard failure mode where AI output is trusted too early and becomes opaque runtime glue.</p>
+              <p>Codex can accelerate the creation of tooling, rules, scripts, and workflows. Prompt-driven generation can accelerate content and system authoring. But the system is responsible for validation, generation, registration, and runtime behavior.</p>
               <p>This shifts AI from execution to authoring.</p>
-              <p>By forcing generated output through structure, rules, and runtime ownership, the result becomes deterministic enough to debug and flexible enough to iterate. The output is no longer “whatever the model said.” It becomes a controlled input into a system with known constraints.</p>
               <p>The model proposes structure. The system enforces rules.</p>
             </section>
             <section class="breakdown-section">
-              <h3>7. What This Enables</h3>
+              <h3>10. What This Enables</h3>
               <p>This architecture enables fast prototyping without sacrificing runtime control. New scenes, systems, and behaviors can be generated quickly, but they still move through the same validation, build, and registration path each time.</p>
               <p>It also enables repeatability. Because the pipeline is structured, it can scale across prompts, content sets, and prototypes without collapsing into manual cleanup and one-off fixes.</p>
-              <p>This turns AI from an unreliable generator into a structured front end for system authoring. The result is not generated content, but controllable, stateful software with defined behavior, ownership, and validation.</p>
+              <p>The result is not generated content. It is controllable, stateful software with defined behavior, ownership, validation, and runtime authority.</p>
             </section>
+          </div>
           </div>
         </div>
       </div>

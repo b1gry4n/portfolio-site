@@ -1906,8 +1906,12 @@ h2 {
   min-width: 0;
 }
 
+.portfolio-modal-layout > .portfolio-modal-column:first-child {
+  max-width: 32.5rem;
+}
+
 .portfolio-modal-panel {
-  padding: 1rem;
+  padding: 0.95rem;
   border-radius: 16px;
   border: 1px solid rgba(255, 255, 255, 0.08);
   background: rgba(255, 255, 255, 0.03);
@@ -1924,6 +1928,33 @@ h2 {
   color: var(--muted);
   font-size: 0.95rem;
   line-height: 1.6;
+}
+
+.portfolio-modal-panel-body {
+  display: grid;
+  gap: 0.85rem;
+  max-width: 100%;
+}
+
+.portfolio-modal-panel-body p {
+  margin: 0;
+}
+
+.portfolio-modal-list {
+  margin: 0;
+  padding-left: 1.15rem;
+  display: grid;
+  gap: 0.45rem;
+}
+
+.portfolio-modal-list li {
+  color: var(--muted);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.portfolio-modal-list li::marker {
+  color: rgba(157, 224, 184, 0.82);
 }
 
 .portfolio-video-viewer {
@@ -2042,14 +2073,6 @@ h2 {
     gap: 0.95rem;
   }
 
-  .portfolio-modal-layout > .portfolio-modal-column:first-child {
-    order: 2;
-  }
-
-  .portfolio-modal-layout > .portfolio-modal-column:last-child {
-    order: 1;
-  }
-
   .portfolio-dialog {
     width: calc(100vw - 1rem);
     max-height: 90vh;
@@ -2060,6 +2083,10 @@ h2 {
     max-height: calc(90vh - 7.8rem);
     padding-right: 0.4rem;
     overflow-x: hidden;
+  }
+
+  .portfolio-modal-layout > .portfolio-modal-column:first-child {
+    max-width: none;
   }
 }
 

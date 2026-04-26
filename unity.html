@@ -96,11 +96,11 @@
               <div class="portfolio-modal-column">
                 <section class="portfolio-modal-panel">
                   <h3>My Role</h3>
-                  <p id="portfolioProjectRole"></p>
+                  <div class="portfolio-modal-panel-body" id="portfolioProjectRole"></div>
                 </section>
                 <section class="portfolio-modal-panel">
                   <h3>Project Description</h3>
-                  <p id="portfolioProjectDescription"></p>
+                  <div class="portfolio-modal-panel-body" id="portfolioProjectDescription"></div>
                 </section>
               </div>
               <div class="portfolio-modal-column">
@@ -155,8 +155,13 @@
           id: "physics-traversal",
           title: "Physics-Based Traversal System",
           subtitle: "Grapple + Glider",
-          role: "Designed and implemented traversal mechanics, movement handling, and system integration inside Unity.",
-          description: "A traversal prototype focused on momentum, grapple state, and glide transitions. The work centers on how traversal inputs resolve into controllable movement states, usable transitions, and readable player feedback instead of one-off movement tricks.",
+          role: "I built the traversal system from scratch, including the grappling hook, glider, and how movement flows between them. The focus was making the system feel smooth, predictable, and responsive.",
+          description: [
+            "A traversal prototype inspired by Worlds Adrift, built around momentum and player control.",
+            "The grappling hook uses a rope that can wrap around objects in the world, creating real swing paths instead of fixed arcs. Movement changes depending on the environment, so each swing can play out differently.",
+            "The player is fully kinematic. There is no rigidbody driving the character. All motion is calculated and controlled directly, which keeps the system stable and consistent while still feeling dynamic.",
+            "Grapple, glide, and base movement are separate systems that switch based on player input and game state. This keeps transitions clean, readable, and controllable."
+          ],
           preview: "Physics-driven traversal states with controllable movement transitions and reusable traversal logic.",
           thumbnail: "./assets/1.jpg",
           videos: [
@@ -168,8 +173,21 @@
           id: "modular-combat-stats",
           title: "Modular Combat & Stat System",
           subtitle: "Scalable Gameplay Framework",
-          role: "Built modular gameplay architecture for combat, stats, modifiers, and runtime system interaction.",
-          description: "A gameplay framework organized around reusable combat and stat domains rather than hardcoded character scripts. The emphasis is on shared runtime ownership, extendable stats, condition handling, and a structure that can scale across different gameplay contexts.",
+          role: "I built a modular combat and stat system that drives gameplay, including combat logic, stats, modifiers, and how everything connects at runtime.",
+          description: [
+            "A full 3D FPS built around a reusable gameplay framework.",
+            "Enemies, weapons, and hands are 2D sprites placed in 3D space. The focus is on the systems driving gameplay, not rendering.",
+            "The project is structured around separate domains for combat and stats instead of hardcoded character behavior. Systems handle damage, modifiers, buffs and debuffs, and state changes in a consistent way.",
+            "Everything runs through shared runtime systems. Stats are extensible, conditions are handled centrally, and behavior is data-driven."
+          ],
+          descriptionBullets: [
+            "State machines and gameplay flow",
+            "Complex stat calculations and modifiers",
+            "Buff and debuff handling",
+            "Logging and debugging tools",
+            "Data-driven configuration",
+            "Editor tooling"
+          ],
           preview: "Composable runtime stats, conditions, and combat rules built as extendable gameplay systems.",
           thumbnail: "./assets/2.jpg",
           videos: [
@@ -180,8 +198,14 @@
           id: "physics-combat",
           title: "Physics-Driven Combat System",
           subtitle: "Active Ragdoll",
-          role: "Implemented physics-driven combat behaviors, active ragdoll integration, and runtime combat interactions.",
-          description: "A combat prototype centered on physical response, active ragdoll behavior, and runtime interaction between animation, force, and combat state. The project focuses on making physically reactive combat feel controllable while remaining system-driven.",
+          role: "I built a physics-driven combat prototype using active ragdolls, including the player controller, enemy behavior, and move system.",
+          description: [
+            "A combat prototype focused on active ragdoll movement and physical response.",
+            "The player and enemies use the same underlying controller. The only difference is input. The player drives it directly, while enemies use a simple AI that detects the player and moves toward them.",
+            "Combat is driven by a small set of moves mapped to input. Light and heavy punches and kicks are triggered based on clicks and holds, creating a simple but responsive control scheme.",
+            "Because everything runs through the same system, interactions stay consistent. Hits, movement, and reactions all come from shared physical logic rather than separate scripted behaviors.",
+            "The goal was to explore how far a shared, physics-driven controller could go while still feeling controllable."
+          ],
           preview: "Active ragdoll combat with physical response, runtime state interaction, and controllable feedback loops.",
           thumbnail: "./assets/3.jpg",
           videos: [
@@ -192,8 +216,14 @@
           id: "procedural-growth",
           title: "Screen-Space Procedural Growth System",
           subtitle: "Realtime VFX Mechanic",
-          role: "Built procedural visual growth behavior and screen-space effect logic inside Unity.",
-          description: "A real-time screen-space growth system designed as a controllable visual mechanic rather than a static effect. The work explores how procedural expansion, timing, and visual feedback can be authored as a reusable runtime effect surface.",
+          role: "I built a screen-space growth system, including the shader, rendering pass, and the logic that controls how it spreads and evolves over time.",
+          description: [
+            "A real-time growth effect inspired by Natural Selection 2 and StarCraft.",
+            "The effect is rendered as a full-screen pass using a custom shader, allowing it to spread across surfaces without relying on geometry or decals.",
+            "Cyst placement is procedural. Growth is driven by controllable areas that expand and contract over time, creating a dynamic system rather than a fixed effect.",
+            "The infestation pulses, spreads, and evolves with visible feedback. Because it is driven by radius-based growth zones, it can be shaped and controlled instead of manually placed.",
+            "The goal was to build something reusable and reactive that could be driven by gameplay or timing."
+          ],
           preview: "Procedural screen-space growth used as an interactive runtime effect instead of a one-shot VFX pass.",
           thumbnail: "./assets/4.jpg",
           videos: [
@@ -205,8 +235,17 @@
           id: "hybrid-rendering",
           title: "2D/3D Hybrid Rendering Pipeline",
           subtitle: "Modular Characters",
-          role: "Developed a rendering pipeline for hybrid character presentation and modular assembly.",
-          description: "A hybrid rendering pipeline for combining 2D and 3D character presentation with modular parts. The project focuses on rendering consistency, modular character composition, and building a presentation pipeline that supports systemic variation instead of bespoke assets.",
+          role: "I built a hybrid 2D and 3D pipeline, including rendering, movement, pathfinding, and the systems that drive characters and their data.",
+          description: [
+            "An isometric 2D-style game built on a 3D foundation.",
+            "The camera is orthographic, so the game presents like a traditional 2D isometric title, while still using full 3D systems underneath. This allows real collision, projectiles, and spatial interaction.",
+            "Movement is grid-based using Unity tilemaps, with A* pathfinding. Units use local avoidance and dynamic obstacle handling so groups can move naturally.",
+            "Each character has its own inventory and can equip any combination of gear. Visuals update based on equipped items, allowing fully modular characters.",
+            "Sprites are generated from 3D models using custom editor tooling, allowing consistent output and scalable content creation.",
+            "Rendering uses a custom shader with a splatmap and tilemap setup to reduce visible tiling and improve terrain visuals.",
+            "Includes a fog of war system that masks enemies based on visibility.",
+            "The goal was to combine the readability of 2D with the flexibility of 3D systems, while supporting modular characters and scalable content."
+          ],
           preview: "Hybrid character rendering for modular assembly, layered presentation, and reusable art/runtime structure.",
           thumbnail: "./assets/5.jpg",
           videos: [
@@ -221,8 +260,14 @@
           id: "volumetric-rendering",
           title: "Real-Time Volumetric Rendering Tool",
           subtitle: "SDF Raymarching",
-          role: "Built a real-time rendering tool for volumetric forms and signed-distance-field raymarching workflows.",
-          description: "A rendering-side tool focused on real-time volumetric output and SDF raymarching. The work emphasizes controllable rendering parameters, iterative authoring, and turning advanced rendering behavior into a usable tool surface inside Unity.",
+          role: "I built a real-time volumetric rendering tool, including the raymarching shader, shaping controls, and custom editor tooling.",
+          description: [
+            "A real-time cloud rendering tool using SDF raymarching, inspired by Sky: Children of the Light.",
+            "Clouds are generated from signed distance fields, allowing shapes to be created, combined, and adjusted in real time.",
+            "The system supports building complex volumetric forms through layered shapes instead of relying on textures or billboards.",
+            "Includes custom editor tooling that allows shader code to be written and compiled directly in the inspector, enabling fast iteration on rendering behavior.",
+            "The goal was to turn a complex rendering technique into something usable and interactive."
+          ],
           preview: "Realtime volumetric rendering and SDF raymarching exposed as an authorable tool workflow.",
           thumbnail: "./assets/6.jpg",
           videos: [
@@ -334,10 +379,23 @@
           return;
         }
 
+        const roleParagraphs = Array.isArray(project.role) ? project.role : [project.role];
+        const descriptionParagraphs = Array.isArray(project.description) ? project.description : [project.description];
+
         projectTitle.textContent = project.title;
         projectSubtitle.textContent = project.subtitle;
-        projectRole.textContent = project.role;
-        projectDescription.textContent = project.description;
+        projectRole.innerHTML = roleParagraphs.map(function (paragraph) {
+          return "<p>" + paragraph + "</p>";
+        }).join("");
+        projectDescription.innerHTML = descriptionParagraphs.map(function (paragraph) {
+          return "<p>" + paragraph + "</p>";
+        }).join("") + (
+          Array.isArray(project.descriptionBullets) && project.descriptionBullets.length
+            ? '<ul class="portfolio-modal-list">' + project.descriptionBullets.map(function (item) {
+                return "<li>" + item + "</li>";
+              }).join("") + "</ul>"
+            : ""
+        );
         activeProjectVideos = project.videos.slice(0, 6);
         activeProjectVideoIndex = 0;
         renderActiveProjectVideo();

@@ -2014,12 +2014,23 @@ h2 {
 @media (max-width: 900px) {
   .nav {
     gap: 0.5rem;
+    align-items: start;
   }
 
   .nav-mode,
   .nav-actions {
-    width: 100%;
-    justify-content: space-between;
+    width: auto;
+    display: grid;
+    gap: 0.3rem;
+    align-items: start;
+  }
+
+  .nav-mode {
+    justify-items: start;
+  }
+
+  .nav-actions {
+    justify-items: end;
   }
 
   .portfolio-grid {

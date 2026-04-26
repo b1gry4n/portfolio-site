@@ -1932,7 +1932,7 @@ h2 {
   min-width: 0;
 }
 
-.portfolio-modal-layout > .portfolio-modal-column:first-child {
+.portfolio-modal-layout > .portfolio-modal-column:last-child {
   max-width: 32.5rem;
 }
 
@@ -2109,7 +2109,7 @@ h2 {
     overflow-x: hidden;
   }
 
-  .portfolio-modal-layout > .portfolio-modal-column:first-child {
+  .portfolio-modal-layout > .portfolio-modal-column:last-child {
     max-width: none;
   }
 }

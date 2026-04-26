@@ -1749,8 +1749,8 @@ h2 {
 }
 
 .portfolio-card {
-  display: grid;
-  align-content: start;
+  display: flex;
+  flex-direction: column;
   gap: 0.75rem;
   padding: 0.95rem;
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -1835,6 +1835,7 @@ h2 {
 .portfolio-card-copy {
   display: grid;
   gap: 0.4rem;
+  flex: 1 1 auto;
 }
 
 .portfolio-card-title {
@@ -1869,7 +1870,7 @@ h2 {
   display: inline-flex;
   align-items: center;
   gap: 0.45rem;
-  margin-top: 0.15rem;
+  margin-top: auto;
   color: rgba(244, 247, 251, 0.98);
   font-size: 0.86rem;
   font-weight: 700;

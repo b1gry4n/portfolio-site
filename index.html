@@ -701,6 +701,18 @@
         }
 
         backToTopButton.classList.toggle("is-visible", window.scrollY > 420);
+
+        if (window.matchMedia("(max-width: 640px)").matches) {
+          const viewportOffsetTop = window.visualViewport ? window.visualViewport.offsetTop : 0;
+          backToTopButton.style.top = Math.max(12, viewportOffsetTop + 12) + "px";
+          backToTopButton.style.bottom = "auto";
+          backToTopButton.style.right = "0.7rem";
+          return;
+        }
+
+        backToTopButton.style.top = "";
+        backToTopButton.style.bottom = "";
+        backToTopButton.style.right = "";
       }
 
       if (backToTopButton) {
@@ -708,6 +720,11 @@
           window.scrollTo({ top: 0, behavior: "smooth" });
         });
         window.addEventListener("scroll", syncBackToTop, { passive: true });
+        window.addEventListener("resize", syncBackToTop, { passive: true });
+        if (window.visualViewport) {
+          window.visualViewport.addEventListener("resize", syncBackToTop, { passive: true });
+          window.visualViewport.addEventListener("scroll", syncBackToTop, { passive: true });
+        }
         syncBackToTop();
       }
     })();

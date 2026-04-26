@@ -2031,6 +2031,14 @@ h2 {
     gap: 0.95rem;
   }
 
+  .portfolio-modal-layout > .portfolio-modal-column:first-child {
+    order: 2;
+  }
+
+  .portfolio-modal-layout > .portfolio-modal-column:last-child {
+    order: 1;
+  }
+
   .portfolio-dialog {
     width: calc(100vw - 1rem);
     max-height: 90vh;

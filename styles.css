@@ -1320,7 +1320,7 @@ h2 {
 .back-to-top {
   position: fixed;
   right: clamp(0.75rem, 1.8vw, 1.2rem);
-  top: 4.9rem;
+  top: 1rem;
   z-index: 12;
   display: inline-flex;
   align-items: center;

@@ -42,6 +42,11 @@ body {
   color: var(--text);
 }
 
+html.modal-open,
+body.modal-open {
+  overflow: hidden;
+}
+
 body::before,
 body::after {
   content: "";

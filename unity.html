@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Unity Portfolio | Ryan Sharr</title>
+  <meta
+    name="description"
+    content="Unity gameplay, simulation, combat, traversal, rendering, and tooling systems by Ryan Sharr."
+  >
+
+  <meta property="og:title" content="Unity Portfolio | Ryan Sharr">
+  <meta property="og:description" content="Unity gameplay, simulation, combat, traversal, rendering, and tooling systems by Ryan Sharr.">
+  <meta property="og:url" content="https://ryansharr.com/unity.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Ryan Sharr">
+  <meta property="og:image" content="https://ryansharr.com/preview.png">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Unity Portfolio | Ryan Sharr">
+  <meta name="twitter:description" content="Unity gameplay, simulation, combat, traversal, rendering, and tooling systems by Ryan Sharr.">
+  <meta name="twitter:image" content="https://ryansharr.com/preview.png">
+
+  <link rel="canonical" href="https://ryansharr.com/unity.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <div class="page-shell">
+    <main class="container">
+      <header class="topbar" aria-label="Primary">
+        <nav class="nav">
+          <div class="nav-mode">
+            <a class="nav-link" href="./index.html">AI Systems</a>
+            <a class="nav-link nav-link-active" href="./unity.html" aria-current="page">Unity Portfolio</a>
+          </div>
+          <div class="nav-actions">
+            <button class="nav-link nav-link-button modal-trigger" type="button" id="resumeToggle" aria-expanded="false" aria-controls="resumePopover" data-modal-target="resumePopover">
+              Resume
+            </button>
+            <button class="nav-link nav-link-button modal-trigger" type="button" id="contactToggle" aria-expanded="false" aria-controls="contactPopover" data-modal-target="contactPopover">
+              Contact
+            </button>
+          </div>
+        </nav>
+      </header>
+
+      <div class="contact-modal" id="resumePopover" hidden>
+        <div class="contact-backdrop" data-modal-close="true"></div>
+        <div class="contact-dialog" role="dialog" aria-modal="true" aria-labelledby="resumeTitle">
+          <button class="contact-close" type="button" data-modal-close-button="resumePopover" aria-label="Close resume dialog">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <p class="contact-popover-label" id="resumeTitle">Resume</p>
+          <p class="contact-helper">View the web version or download the PDF.</p>
+          <div class="contact-actions">
+            <a class="contact-copy" href="./resume.html" target="_blank" rel="noreferrer">View Resume</a>
+            <a class="contact-send" href="./assets/Ryan_Sharr_Resume.pdf" target="_blank" rel="noreferrer">Download PDF</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-modal" id="contactPopover" hidden>
+        <div class="contact-backdrop" data-modal-close="true"></div>
+        <div class="contact-dialog" role="dialog" aria-modal="true" aria-labelledby="contactTitle">
+          <button class="contact-close" type="button" id="contactClose" data-modal-close-button="contactPopover" aria-label="Close contact dialog">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <p class="contact-popover-label" id="contactTitle">Email</p>
+          <a class="contact-popover-email" href="mailto:hello@ryansharr.com">hello@ryansharr.com</a>
+          <p class="contact-helper">For AI prototyping, tooling, or systems work.</p>
+          <div class="contact-actions">
+            <button class="contact-copy" type="button" id="contactCopy">Copy</button>
+            <a class="contact-send" href="mailto:hello@ryansharr.com">Open Email</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-modal" id="portfolioProjectModal" hidden>
+        <div class="contact-backdrop" data-modal-close="true"></div>
+        <div class="contact-dialog portfolio-dialog" role="dialog" aria-modal="true" aria-labelledby="portfolioProjectTitle">
+          <div class="portfolio-modal-titlebar">
+            <div class="portfolio-modal-heading">
+              <p class="portfolio-modal-label">Unity Portfolio</p>
+              <h2 id="portfolioProjectTitle">Project</h2>
+              <p class="portfolio-modal-subtitle" id="portfolioProjectSubtitle"></p>
+            </div>
+            <button class="contact-close" type="button" data-modal-close-button="portfolioProjectModal" aria-label="Close project dialog">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="portfolio-modal-body">
+            <div class="portfolio-modal-layout">
+              <div class="portfolio-modal-column">
+                <section class="portfolio-modal-panel">
+                  <h3>My Role</h3>
+                  <p id="portfolioProjectRole"></p>
+                </section>
+                <section class="portfolio-modal-panel">
+                  <h3>Project Description</h3>
+                  <p id="portfolioProjectDescription"></p>
+                </section>
+              </div>
+              <div class="portfolio-modal-column">
+                <div class="portfolio-video-grid video-count-1" id="portfolioProjectVideos"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <section class="section" id="unity-projects" aria-labelledby="unity-projects-title">
+        <div class="section-heading">
+          <p class="eyebrow">Selected Unity Work</p>
+          <h2 id="unity-projects-title">System-focused projects across gameplay, simulation, and rendering.</h2>
+        </div>
+        <div class="portfolio-grid" id="portfolioGrid" aria-live="polite"></div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    (function () {
+      const modalTriggers = document.querySelectorAll(".modal-trigger");
+      const modals = document.querySelectorAll(".contact-modal");
+      const copyButton = document.getElementById("contactCopy");
+      const email = "hello@ryansharr.com";
+      const portfolioGrid = document.getElementById("portfolioGrid");
+      const projectModalId = "portfolioProjectModal";
+      const projectTitle = document.getElementById("portfolioProjectTitle");
+      const projectSubtitle = document.getElementById("portfolioProjectSubtitle");
+      const projectRole = document.getElementById("portfolioProjectRole");
+      const projectDescription = document.getElementById("portfolioProjectDescription");
+      const projectVideos = document.getElementById("portfolioProjectVideos");
+
+      const placeholderVideoId = "_LjI2h1WYdo";
+      const placeholderEmbed = "https://www.youtube.com/embed/_LjI2h1WYdo?playsinline=1&rel=0&modestbranding=1";
+
+      const portfolioProjects = [
+        {
+          id: "physics-traversal",
+          title: "Physics-Based Traversal System",
+          subtitle: "Grapple + Glider",
+          role: "Designed and implemented traversal mechanics, movement handling, and system integration inside Unity.",
+          description: "A traversal prototype focused on momentum, grapple state, and glide transitions. The work centers on how traversal inputs resolve into controllable movement states, usable transitions, and readable player feedback instead of one-off movement tricks.",
+          preview: "Physics-driven traversal states with controllable movement transitions and reusable traversal logic.",
+          thumbnail: "./assets/1.jpg",
+          videos: [
+            "https://www.youtube.com/embed/DUI5IytHNBY?playsinline=1&rel=0&modestbranding=1",
+            "https://www.youtube.com/embed/Hs0fOGxB4Ts?playsinline=1&rel=0&modestbranding=1"
+          ]
+        },
+        {
+          id: "modular-combat-stats",
+          title: "Modular Combat & Stat System",
+          subtitle: "Scalable Gameplay Framework",
+          role: "Built modular gameplay architecture for combat, stats, modifiers, and runtime system interaction.",
+          description: "A gameplay framework organized around reusable combat and stat domains rather than hardcoded character scripts. The emphasis is on shared runtime ownership, extendable stats, condition handling, and a structure that can scale across different gameplay contexts.",
+          preview: "Composable runtime stats, conditions, and combat rules built as extendable gameplay systems.",
+          thumbnail: "./assets/2.jpg",
+          videos: [
+            "https://www.youtube.com/embed/_LjI2h1WYdo?playsinline=1&rel=0&modestbranding=1"
+          ]
+        },
+        {
+          id: "physics-combat",
+          title: "Physics-Driven Combat System",
+          subtitle: "Active Ragdoll",
+          role: "Implemented physics-driven combat behaviors, active ragdoll integration, and runtime combat interactions.",
+          description: "A combat prototype centered on physical response, active ragdoll behavior, and runtime interaction between animation, force, and combat state. The project focuses on making physically reactive combat feel controllable while remaining system-driven.",
+          preview: "Active ragdoll combat with physical response, runtime state interaction, and controllable feedback loops.",
+          thumbnail: "./assets/3.jpg",
+          videos: [
+            "https://www.youtube.com/embed/Da3oMZn-lp4?playsinline=1&rel=0&modestbranding=1"
+          ]
+        },
+        {
+          id: "procedural-growth",
+          title: "Screen-Space Procedural Growth System",
+          subtitle: "Realtime VFX Mechanic",
+          role: "Built procedural visual growth behavior and screen-space effect logic inside Unity.",
+          description: "A real-time screen-space growth system designed as a controllable visual mechanic rather than a static effect. The work explores how procedural expansion, timing, and visual feedback can be authored as a reusable runtime effect surface.",
+          preview: "Procedural screen-space growth used as an interactive runtime effect instead of a one-shot VFX pass.",
+          thumbnail: "./assets/4.jpg",
+          videos: [
+            "https://www.youtube.com/embed/Dpm3-aXqO_U?playsinline=1&rel=0&modestbranding=1",
+            "https://www.youtube.com/embed/EKQ_Pp8lIHw?playsinline=1&rel=0&modestbranding=1"
+          ]
+        },
+        {
+          id: "hybrid-rendering",
+          title: "2D/3D Hybrid Rendering Pipeline",
+          subtitle: "Modular Characters",
+          role: "Developed a rendering pipeline for hybrid character presentation and modular assembly.",
+          description: "A hybrid rendering pipeline for combining 2D and 3D character presentation with modular parts. The project focuses on rendering consistency, modular character composition, and building a presentation pipeline that supports systemic variation instead of bespoke assets.",
+          preview: "Hybrid character rendering for modular assembly, layered presentation, and reusable art/runtime structure.",
+          thumbnail: "./assets/5.jpg",
+          videos: [
+            "https://www.youtube.com/embed/HYIwX2J2lcQ?playsinline=1&rel=0&modestbranding=1",
+            "https://www.youtube.com/embed/3IzJObUGXYQ?playsinline=1&rel=0&modestbranding=1",
+            "https://www.youtube.com/embed/0nWsofLiATQ?playsinline=1&rel=0&modestbranding=1",
+            "https://www.youtube.com/embed/LNuzSev2md0?playsinline=1&rel=0&modestbranding=1",
+            "https://www.youtube.com/embed/7625_3fR9X0?playsinline=1&rel=0&modestbranding=1"
+          ]
+        },
+        {
+          id: "volumetric-rendering",
+          title: "Real-Time Volumetric Rendering Tool",
+          subtitle: "SDF Raymarching",
+          role: "Built a real-time rendering tool for volumetric forms and signed-distance-field raymarching workflows.",
+          description: "A rendering-side tool focused on real-time volumetric output and SDF raymarching. The work emphasizes controllable rendering parameters, iterative authoring, and turning advanced rendering behavior into a usable tool surface inside Unity.",
+          preview: "Realtime volumetric rendering and SDF raymarching exposed as an authorable tool workflow.",
+          thumbnail: "./assets/6.jpg",
+          videos: [
+            "https://www.youtube.com/embed/luA8LoUxVso?playsinline=1&rel=0&modestbranding=1",
+            "https://www.youtube.com/embed/D95mqTjHRY0?playsinline=1&rel=0&modestbranding=1"
+          ]
+        }
+      ];
+
+      function setTriggerExpanded(modalId, expanded) {
+        modalTriggers.forEach(function (trigger) {
+          if (trigger.getAttribute("data-modal-target") === modalId) {
+            trigger.setAttribute("aria-expanded", expanded ? "true" : "false");
+          }
+        });
+      }
+
+      function syncModalScrollLock() {
+        const hasOpenModal = Array.from(modals).some(function (modal) {
+          return !modal.hidden;
+        });
+
+        document.documentElement.classList.toggle("modal-open", hasOpenModal);
+        document.body.classList.toggle("modal-open", hasOpenModal);
+      }
+
+      function closeModal(modalId) {
+        const modal = document.getElementById(modalId);
+        if (!modal) {
+          return;
+        }
+
+        modal.hidden = true;
+        setTriggerExpanded(modalId, false);
+        syncModalScrollLock();
+      }
+
+      function openModal(modalId) {
+        modals.forEach(function (modal) {
+          modal.hidden = modal.id !== modalId;
+          setTriggerExpanded(modal.id, modal.id === modalId);
+        });
+
+        syncModalScrollLock();
+      }
+
+      function createThumbnail(project, index) {
+        if (project.thumbnail) {
+          return '<img class="portfolio-thumb-media" src="' + project.thumbnail + '" alt="' + project.title + ' thumbnail">';
+        }
+
+        const marks = ["01", "02", "03", "04", "05", "06"];
+        return '<span class="portfolio-thumb-mark" aria-hidden="true">' + marks[index] + '</span>';
+      }
+
+      function renderPortfolioCards() {
+        portfolioGrid.innerHTML = portfolioProjects.map(function (project, index) {
+          return '' +
+            '<button class="portfolio-card" type="button" data-project-id="' + project.id + '">' +
+              '<div class="portfolio-thumb">' +
+                '<p class="portfolio-thumb-label">' + project.subtitle + '</p>' +
+                createThumbnail(project, index) +
+              '</div>' +
+              '<div class="portfolio-card-copy">' +
+                '<h3 class="portfolio-card-title">' + project.title + '</h3>' +
+                '<div class="portfolio-card-subtitle">' + project.subtitle + '</div>' +
+                '<p class="portfolio-card-preview">' + project.preview + '</p>' +
+              '</div>' +
+              '<span class="portfolio-card-cta">View Project &rarr;</span>' +
+            '</button>';
+        }).join("");
+      }
+
+      function renderProjectVideos(videos) {
+        const count = Math.max(1, Math.min(videos.length, 6));
+        projectVideos.className = "portfolio-video-grid video-count-" + count;
+        projectVideos.innerHTML = videos.slice(0, 6).map(function (videoSrc, index) {
+          const title = "Project proof video " + (index + 1);
+          return '' +
+            '<div class="portfolio-video-frame">' +
+              '<iframe src="' + videoSrc + '" title="' + title + '" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>' +
+            '</div>';
+        }).join("");
+      }
+
+      function openProject(projectId) {
+        const project = portfolioProjects.find(function (item) {
+          return item.id === projectId;
+        });
+
+        if (!project) {
+          return;
+        }
+
+        projectTitle.textContent = project.title;
+        projectSubtitle.textContent = project.subtitle;
+        projectRole.textContent = project.role;
+        projectDescription.textContent = project.description;
+        renderProjectVideos(project.videos);
+        openModal(projectModalId);
+      }
+
+      renderPortfolioCards();
+
+      portfolioGrid.addEventListener("click", function (event) {
+        const trigger = event.target instanceof Element ? event.target.closest("[data-project-id]") : null;
+        if (!trigger) {
+          return;
+        }
+
+        openProject(trigger.getAttribute("data-project-id"));
+      });
+
+      modalTriggers.forEach(function (trigger) {
+        trigger.addEventListener("click", function () {
+          const modalId = trigger.getAttribute("data-modal-target");
+          const modal = modalId ? document.getElementById(modalId) : null;
+          if (!modal || !modalId) {
+            return;
+          }
+
+          if (modal.hidden) {
+            openModal(modalId);
+          } else {
+            closeModal(modalId);
+          }
+        });
+      });
+
+      document.querySelectorAll("[data-modal-close-button]").forEach(function (button) {
+        button.addEventListener("click", function () {
+          const modalId = button.getAttribute("data-modal-close-button");
+          if (modalId) {
+            closeModal(modalId);
+          }
+        });
+      });
+
+      if (copyButton) {
+        copyButton.addEventListener("click", async function () {
+          try {
+            await navigator.clipboard.writeText(email);
+            copyButton.textContent = "Copied";
+            window.setTimeout(function () {
+              copyButton.textContent = "Copy";
+            }, 1200);
+          } catch (error) {
+            copyButton.textContent = "Copy failed";
+            window.setTimeout(function () {
+              copyButton.textContent = "Copy";
+            }, 1400);
+          }
+        });
+      }
+
+      document.addEventListener("click", function (event) {
+        if (!(event.target instanceof Element)) {
+          return;
+        }
+
+        const closeBackdrop = event.target.closest("[data-modal-close='true']");
+        if (closeBackdrop) {
+          const modal = closeBackdrop.closest(".contact-modal");
+          if (modal && modal.id) {
+            closeModal(modal.id);
+          }
+        }
+      });
+
+      document.addEventListener("keydown", function (event) {
+        if (event.key === "Escape") {
+          modals.forEach(function (modal) {
+            if (!modal.hidden) {
+              closeModal(modal.id);
+            }
+          });
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

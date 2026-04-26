@@ -32,13 +32,18 @@
     <main class="container">
       <header class="topbar" aria-label="Primary">
         <nav class="nav">
-          <a class="nav-link nav-link-active" href="#top" aria-current="page">AI Systems</a>
-          <button class="nav-link nav-link-button modal-trigger" type="button" id="resumeToggle" aria-expanded="false" aria-controls="resumePopover" data-modal-target="resumePopover">
-            Resume
-          </button>
-          <button class="nav-link nav-link-button modal-trigger" type="button" id="contactToggle" aria-expanded="false" aria-controls="contactPopover" data-modal-target="contactPopover">
-            Contact
-          </button>
+          <div class="nav-mode">
+            <a class="nav-link nav-link-active" href="./index.html" aria-current="page">AI Systems</a>
+            <a class="nav-link" href="./unity.html">Unity Portfolio</a>
+          </div>
+          <div class="nav-actions">
+            <button class="nav-link nav-link-button modal-trigger" type="button" id="resumeToggle" aria-expanded="false" aria-controls="resumePopover" data-modal-target="resumePopover">
+              Resume
+            </button>
+            <button class="nav-link nav-link-button modal-trigger" type="button" id="contactToggle" aria-expanded="false" aria-controls="contactPopover" data-modal-target="contactPopover">
+              Contact
+            </button>
+          </div>
         </nav>
       </header>
 
@@ -116,8 +121,10 @@
             <section class="breakdown-section">
               <h3>2. AI-Assisted Development Loop</h3>
               <p>The system is AI-assisted at two levels.</p>
-              <p>First, Codex is used throughout development to help generate and revise editor tooling, schemas, validation rules, runtime bridges, workflow scripts, and doctrine. It accelerates the construction of the machinery that processes structured content.</p>
-              <p>Second, prompt-driven generation produces candidate scenes, identities, actions, conditions, and authored relationships. Those outputs are not executed directly. They pass through the pipeline built around schemas, validation, tooling, and runtime ownership.</p>
+              <ul class="breakdown-list">
+                <li>First, Codex is used throughout development to help generate and revise editor tooling, schemas, validation rules, runtime bridges, workflow scripts, and doctrine. It accelerates the construction of the machinery that processes structured content.</li>
+                <li>Second, prompt-driven generation produces candidate scenes, identities, actions, conditions, and authored relationships. Those outputs are not executed directly. They pass through the pipeline built around schemas, validation, tooling, and runtime ownership.</li>
+              </ul>
               <p>This creates a compounding loop: AI helps build the tools, then structured AI output flows through those tools into runtime behavior.</p>
             </section>
             <section class="breakdown-section">

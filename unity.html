@@ -127,6 +127,11 @@
     </main>
   </div>
 
+  <button class="back-to-top" type="button" id="backToTopButton" aria-label="Back to top">
+    <span class="back-to-top-icon" aria-hidden="true">↑</span>
+    Back to top
+  </button>
+
   <script>
     (function () {
       const modalTriggers = document.querySelectorAll(".modal-trigger");
@@ -144,6 +149,7 @@
       const portfolioVideoPrev = document.getElementById("portfolioVideoPrev");
       const portfolioVideoNext = document.getElementById("portfolioVideoNext");
       const portfolioVideoPageList = document.getElementById("portfolioVideoPageList");
+      const backToTopButton = document.getElementById("backToTopButton");
 
       const placeholderVideoId = "_LjI2h1WYdo";
       const placeholderEmbed = "https://www.youtube.com/embed/_LjI2h1WYdo?playsinline=1&rel=0&modestbranding=1";
@@ -468,6 +474,19 @@
             closeModal(modal.id);
           }
         });
+
+        modal.addEventListener(
+          "wheel",
+          function (event) {
+            if (modal.hidden) {
+              return;
+            }
+
+            event.preventDefault();
+            modal.scrollTop += event.deltaY;
+          },
+          { passive: false, capture: true }
+        );
       });
 
       if (copyButton) {
@@ -510,6 +529,22 @@
           });
         }
       });
+
+      function syncBackToTop() {
+        if (!backToTopButton) {
+          return;
+        }
+
+        backToTopButton.classList.toggle("is-visible", window.scrollY > 420);
+      }
+
+      if (backToTopButton) {
+        backToTopButton.addEventListener("click", function () {
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+        window.addEventListener("scroll", syncBackToTop, { passive: true });
+        syncBackToTop();
+      }
     })();
   </script>
 </body>

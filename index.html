@@ -498,6 +498,11 @@
     </main>
   </div>
 
+  <button class="back-to-top" type="button" id="backToTopButton" aria-label="Back to top">
+    <span class="back-to-top-icon" aria-hidden="true">↑</span>
+    Back to top
+  </button>
+
   <script src="https://www.youtube.com/iframe_api"></script>
   <script>
       (function () {
@@ -510,6 +515,7 @@
         const popover = document.getElementById("contactPopover");
         const closeButton = document.getElementById("contactClose");
         const copyButton = document.getElementById("contactCopy");
+        const backToTopButton = document.getElementById("backToTopButton");
         const email = "hello@ryansharr.com";
         let demoPlayer = null;
 
@@ -635,6 +641,19 @@
             closeModal(modal.id);
           }
         });
+
+        modal.addEventListener(
+          "wheel",
+          function (event) {
+            if (modal.hidden) {
+              return;
+            }
+
+            event.preventDefault();
+            modal.scrollTop += event.deltaY;
+          },
+          { passive: false, capture: true }
+        );
       });
 
       copyButton.addEventListener("click", async function () {
@@ -675,6 +694,22 @@
           });
         }
       });
+
+      function syncBackToTop() {
+        if (!backToTopButton) {
+          return;
+        }
+
+        backToTopButton.classList.toggle("is-visible", window.scrollY > 420);
+      }
+
+      if (backToTopButton) {
+        backToTopButton.addEventListener("click", function () {
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+        window.addEventListener("scroll", syncBackToTop, { passive: true });
+        syncBackToTop();
+      }
     })();
   </script>
 </body>

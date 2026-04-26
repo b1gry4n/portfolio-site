@@ -462,6 +462,14 @@
         });
       });
 
+      modals.forEach(function (modal) {
+        modal.addEventListener("click", function (event) {
+          if (event.target === modal && modal.id) {
+            closeModal(modal.id);
+          }
+        });
+      });
+
       if (copyButton) {
         copyButton.addEventListener("click", async function () {
           try {

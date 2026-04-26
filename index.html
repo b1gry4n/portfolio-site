@@ -629,6 +629,14 @@
         });
       });
 
+      modals.forEach(function (modal) {
+        modal.addEventListener("click", function (event) {
+          if (event.target === modal && modal.id) {
+            closeModal(modal.id);
+          }
+        });
+      });
+
       copyButton.addEventListener("click", async function () {
         try {
           await navigator.clipboard.writeText(email);

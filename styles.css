@@ -372,6 +372,23 @@ canvas {
   margin: 0.55rem 0;
 }
 
+.breakdown-list {
+  margin: 0.35rem 0 0.7rem;
+  padding-left: 1.2rem;
+  display: grid;
+  gap: 0.5rem;
+}
+
+.breakdown-list li {
+  color: var(--muted);
+  font-size: 0.94rem;
+  line-height: 1.65;
+}
+
+.breakdown-list li::marker {
+  color: rgba(157, 224, 184, 0.82);
+}
+
 .breakdown-intro {
   font-size: 1rem;
   line-height: 1.65;

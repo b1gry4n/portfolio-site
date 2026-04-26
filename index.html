@@ -107,8 +107,10 @@
               <h3>1. Architectural Framing</h3>
               <p>This is a compiler-like content-to-runtime pipeline wrapped around a simulation architecture. It is not a simple “AI generates game content” flow. It is a controlled authoring system where generated structure is compiled into engine-owned representations and executed by a stateful runtime.</p>
               <p>There are two connected systems:</p>
-              <p>an authoring pipeline that transforms generated structure into validated engine artifacts</p>
-              <p>a runtime execution layer that owns behavior, state, and authority</p>
+              <ul class="breakdown-list">
+                <li>an authoring pipeline that transforms generated structure into validated engine artifacts</li>
+                <li>a runtime execution layer that owns behavior, state, and authority</li>
+              </ul>
               <p>That split is the defining architectural move.</p>
             </section>
             <section class="breakdown-section">
@@ -120,11 +122,13 @@
             </section>
             <section class="breakdown-section">
               <h3>3. Core Design Principles</h3>
-              <p>The first principle is separation of generation from authority. AI can propose structure, but it never owns execution. Execution belongs to the runtime.</p>
-              <p>The second is structure before behavior. Nothing enters runtime as prose or loose intent. It has to become explicit data first.</p>
-              <p>The third is validation as a control boundary. Validation is not decoration. It is the gate that prevents malformed generated output from becoming executable state.</p>
-              <p>The fourth is observability as part of the system contract. Generated systems are only useful if they can be inspected, debugged, and verified after generation.</p>
-              <p>The fifth is authoring/runtime asymmetry. The authoring side can be flexible and AI-assisted. The runtime side remains explicit, constrained, and deterministic.</p>
+              <ul class="breakdown-list">
+                <li>The first principle is separation of generation from authority. AI can propose structure, but it never owns execution. Execution belongs to the runtime.</li>
+                <li>The second is structure before behavior. Nothing enters runtime as prose or loose intent. It has to become explicit data first.</li>
+                <li>The third is validation as a control boundary. Validation is not decoration. It is the gate that prevents malformed generated output from becoming executable state.</li>
+                <li>The fourth is observability as part of the system contract. Generated systems are only useful if they can be inspected, debugged, and verified after generation.</li>
+                <li>The fifth is authoring/runtime asymmetry. The authoring side can be flexible and AI-assisted. The runtime side remains explicit, constrained, and deterministic.</li>
+              </ul>
             </section>
             <section class="breakdown-section">
               <h3>4. System Architecture</h3>
@@ -148,10 +152,12 @@
             <section class="breakdown-section">
               <h3>6. Boundaries and Control Points</h3>
               <p>Authority lives in four places:</p>
-              <p>schemas define the allowed shape of authored output</p>
-              <p>validation enforces admissibility before build/runtime</p>
-              <p>tooling converts structured inputs into engine-side artifacts</p>
-              <p>runtime systems own actual execution and state mutation</p>
+              <ul class="breakdown-list">
+                <li>schemas define the allowed shape of authored output</li>
+                <li>validation enforces admissibility before build/runtime</li>
+                <li>tooling converts structured inputs into engine-side artifacts</li>
+                <li>runtime systems own actual execution and state mutation</li>
+              </ul>
               <p>The critical boundary is between structured data and executable runtime content. That is where generated output stops being suggestion and starts being admitted into the system.</p>
               <p>Another boundary exists between authored structure and live state. Authored inputs define what can exist. Runtime defines what is currently true.</p>
               <p>AI can influence the system upstream, but it cannot bypass downstream authority.</p>
@@ -165,12 +171,14 @@
             <section class="breakdown-section">
               <h3>8. Failure Modes This Avoids</h3>
               <p>This architecture is designed to avoid:</p>
-              <p>direct execution of underspecified generated output</p>
-              <p>hidden state mutation through content-layer artifacts</p>
-              <p>runtime behavior that cannot be traced back to validated inputs</p>
-              <p>brittle one-off glue code between prompts and engine behavior</p>
-              <p>pipelines where debugging requires re-reading prompt text instead of inspecting runtime state</p>
-              <p>toolchains where AI output contaminates authority boundaries</p>
+              <ul class="breakdown-list">
+                <li>direct execution of underspecified generated output</li>
+                <li>hidden state mutation through content-layer artifacts</li>
+                <li>runtime behavior that cannot be traced back to validated inputs</li>
+                <li>brittle one-off glue code between prompts and engine behavior</li>
+                <li>pipelines where debugging requires re-reading prompt text instead of inspecting runtime state</li>
+                <li>toolchains where AI output contaminates authority boundaries</li>
+              </ul>
               <p>In short, it avoids treating generated text as if it were already a system.</p>
             </section>
             <section class="breakdown-section">

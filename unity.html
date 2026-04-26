@@ -104,7 +104,14 @@
                 </section>
               </div>
               <div class="portfolio-modal-column">
-                <div class="portfolio-video-grid video-count-1" id="portfolioProjectVideos"></div>
+                <div class="portfolio-video-viewer">
+                  <div class="portfolio-video-frame portfolio-video-frame-large" id="portfolioProjectVideoFrame"></div>
+                  <div class="portfolio-video-nav" id="portfolioProjectVideoNav" hidden>
+                    <button class="portfolio-video-nav-button" type="button" id="portfolioVideoPrev" aria-label="Previous video">&lt;</button>
+                    <div class="portfolio-video-page-list" id="portfolioVideoPageList"></div>
+                    <button class="portfolio-video-nav-button" type="button" id="portfolioVideoNext" aria-label="Next video">&gt;</button>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -114,7 +121,6 @@
       <section class="section" id="unity-projects" aria-labelledby="unity-projects-title">
         <div class="section-heading">
           <p class="eyebrow">Selected Unity Work</p>
-          <h2 id="unity-projects-title">System-focused projects across gameplay, simulation, and rendering.</h2>
         </div>
         <div class="portfolio-grid" id="portfolioGrid" aria-live="polite"></div>
       </section>
@@ -133,10 +139,16 @@
       const projectSubtitle = document.getElementById("portfolioProjectSubtitle");
       const projectRole = document.getElementById("portfolioProjectRole");
       const projectDescription = document.getElementById("portfolioProjectDescription");
-      const projectVideos = document.getElementById("portfolioProjectVideos");
+      const projectVideoFrame = document.getElementById("portfolioProjectVideoFrame");
+      const projectVideoNav = document.getElementById("portfolioProjectVideoNav");
+      const portfolioVideoPrev = document.getElementById("portfolioVideoPrev");
+      const portfolioVideoNext = document.getElementById("portfolioVideoNext");
+      const portfolioVideoPageList = document.getElementById("portfolioVideoPageList");
 
       const placeholderVideoId = "_LjI2h1WYdo";
       const placeholderEmbed = "https://www.youtube.com/embed/_LjI2h1WYdo?playsinline=1&rel=0&modestbranding=1";
+      let activeProjectVideos = [];
+      let activeProjectVideoIndex = 0;
 
       const portfolioProjects = [
         {
@@ -284,16 +296,34 @@
         }).join("");
       }
 
-      function renderProjectVideos(videos) {
-        const count = Math.max(1, Math.min(videos.length, 6));
-        projectVideos.className = "portfolio-video-grid video-count-" + count;
-        projectVideos.innerHTML = videos.slice(0, 6).map(function (videoSrc, index) {
-          const title = "Project proof video " + (index + 1);
+      function renderActiveProjectVideo() {
+        if (!activeProjectVideos.length) {
+          projectVideoFrame.innerHTML = "";
+          projectVideoNav.hidden = true;
+          return;
+        }
+
+        const safeIndex = Math.max(0, Math.min(activeProjectVideoIndex, activeProjectVideos.length - 1));
+        activeProjectVideoIndex = safeIndex;
+
+        projectVideoFrame.innerHTML = '' +
+          '<iframe src="' + activeProjectVideos[safeIndex] + '" title="Project proof video ' + (safeIndex + 1) + '" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>';
+
+        if (activeProjectVideos.length <= 1) {
+          projectVideoNav.hidden = true;
+          portfolioVideoPageList.innerHTML = "";
+          return;
+        }
+
+        projectVideoNav.hidden = false;
+        portfolioVideoPageList.innerHTML = activeProjectVideos.map(function (_, index) {
+          const isActive = index === activeProjectVideoIndex;
           return '' +
-            '<div class="portfolio-video-frame">' +
-              '<iframe src="' + videoSrc + '" title="' + title + '" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>' +
-            '</div>';
+            '<button class="portfolio-video-page' + (isActive ? ' portfolio-video-page-active' : '') + '" type="button" data-video-index="' + index + '" aria-label="Show video ' + (index + 1) + '" aria-pressed="' + (isActive ? 'true' : 'false') + '">' + (index + 1) + '</button>';
         }).join("");
+
+        portfolioVideoPrev.disabled = activeProjectVideoIndex === 0;
+        portfolioVideoNext.disabled = activeProjectVideoIndex === activeProjectVideos.length - 1;
       }
 
       function openProject(projectId) {
@@ -309,7 +339,9 @@
         projectSubtitle.textContent = project.subtitle;
         projectRole.textContent = project.role;
         projectDescription.textContent = project.description;
-        renderProjectVideos(project.videos);
+        activeProjectVideos = project.videos.slice(0, 6);
+        activeProjectVideoIndex = 0;
+        renderActiveProjectVideo();
         openModal(projectModalId);
       }
 
@@ -322,6 +354,30 @@
         }
 
         openProject(trigger.getAttribute("data-project-id"));
+      });
+
+      portfolioVideoPageList.addEventListener("click", function (event) {
+        const button = event.target instanceof Element ? event.target.closest("[data-video-index]") : null;
+        if (!button) {
+          return;
+        }
+
+        activeProjectVideoIndex = Number(button.getAttribute("data-video-index")) || 0;
+        renderActiveProjectVideo();
+      });
+
+      portfolioVideoPrev.addEventListener("click", function () {
+        if (activeProjectVideoIndex > 0) {
+          activeProjectVideoIndex -= 1;
+          renderActiveProjectVideo();
+        }
+      });
+
+      portfolioVideoNext.addEventListener("click", function () {
+        if (activeProjectVideoIndex < activeProjectVideos.length - 1) {
+          activeProjectVideoIndex += 1;
+          renderActiveProjectVideo();
+        }
       });
 
       modalTriggers.forEach(function (trigger) {

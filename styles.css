@@ -1903,6 +1903,7 @@ h2 {
 .portfolio-modal-column {
   display: grid;
   gap: 0.95rem;
+  min-width: 0;
 }
 
 .portfolio-modal-panel {
@@ -1925,25 +1926,11 @@ h2 {
   line-height: 1.6;
 }
 
-.portfolio-video-grid {
+.portfolio-video-viewer {
   display: grid;
-  gap: 0.75rem;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-}
-
-.portfolio-video-grid.video-count-1 {
-  grid-template-columns: minmax(0, 1fr);
-}
-
-.portfolio-video-grid.video-count-2 {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-}
-
-.portfolio-video-grid.video-count-3,
-.portfolio-video-grid.video-count-4,
-.portfolio-video-grid.video-count-5,
-.portfolio-video-grid.video-count-6 {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.85rem;
+  min-width: 0;
+  padding-right: 0.2rem;
 }
 
 .portfolio-video-frame {
@@ -1955,8 +1942,9 @@ h2 {
   aspect-ratio: 16 / 9;
 }
 
-.portfolio-video-grid.video-count-1 .portfolio-video-frame {
-  aspect-ratio: 16 / 9;
+.portfolio-video-frame-large {
+  width: 100%;
+  max-width: 100%;
 }
 
 .portfolio-video-frame iframe {
@@ -1964,6 +1952,63 @@ h2 {
   width: 100%;
   height: 100%;
   border: 0;
+}
+
+.portfolio-video-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+}
+
+.portfolio-video-nav[hidden] {
+  display: none !important;
+}
+
+.portfolio-video-page-list {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.portfolio-video-nav-button,
+.portfolio-video-page {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2.3rem;
+  height: 2.3rem;
+  padding: 0 0.7rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.03);
+  color: rgba(244, 247, 251, 0.92);
+  font: inherit;
+  font-size: 0.92rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.portfolio-video-nav-button:hover,
+.portfolio-video-page:hover {
+  border-color: rgba(157, 224, 184, 0.22);
+  background: rgba(157, 224, 184, 0.08);
+  color: rgba(244, 247, 251, 0.98);
+}
+
+.portfolio-video-page-active {
+  border-color: rgba(244, 247, 251, 0.9);
+  background: rgba(255, 255, 255, 0.06);
+  color: rgba(244, 247, 251, 1);
+}
+
+.portfolio-video-nav-button:disabled {
+  opacity: 0.35;
+  cursor: default;
+  pointer-events: none;
 }
 
 @media (max-width: 900px) {
@@ -1983,6 +2028,7 @@ h2 {
 
   .portfolio-modal-layout {
     grid-template-columns: 1fr;
+    gap: 0.95rem;
   }
 
   .portfolio-dialog {
@@ -1994,15 +2040,12 @@ h2 {
   .portfolio-modal-body {
     max-height: calc(90vh - 7.8rem);
     padding-right: 0.4rem;
+    overflow-x: hidden;
   }
 }
 
 @media (max-width: 640px) {
   .portfolio-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .portfolio-video-grid {
     grid-template-columns: 1fr;
   }
 

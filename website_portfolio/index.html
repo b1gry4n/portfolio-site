@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Doctor Note Extraction</title>
+    <meta
+      name="description"
+      content="Professional doctor note extraction interface with input, normalized fields, and structured output."
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app">
+      <header class="topbar">
+        <div class="topbar-main">
+          <h1><span class="title-icon" aria-hidden="true">&#128737;</span>Doctor Note Extraction</h1>
+          <p>
+            Convert free-text clinical notes into normalized fields and structured categories using a conservative
+            rule-based pipeline.
+          </p>
+        </div>
+        <div class="topbar-side">
+          <div class="theme-toggle" role="group" aria-label="Theme">
+            <button class="theme-btn" id="theme-light" type="button">Light</button>
+            <button class="theme-btn is-active" id="theme-dark" type="button">Dark</button>
+          </div>
+        </div>
+      </header>
+
+      <main class="content">
+        <section class="top-notifications pre-demo-notices" aria-label="Demo notices">
+          <section class="privacy-note privacy-info">
+            Demo uses anonymized notes only. No data is stored or shared.
+          </section>
+          <section class="privacy-note v1-warning">
+            V1 prototype: extraction is conservative but not perfect, and some notes may produce inaccurate results.
+          </section>
+        </section>
+
+        <section class="main-grid pipeline-grid" id="demo">
+          <section class="column">
+            <div class="section-head"><span class="step-badge">1</span>Input</div>
+            <div class="section-body panel-card">
+              <div class="panel-header">
+                <h2>Doctor Note</h2>
+                <div class="panel-actions">
+                  <button class="button button-primary" id="run-extraction" type="button">Run Extraction</button>
+                  <button class="button button-ghost" id="clear-note" type="button">Clear</button>
+                </div>
+              </div>
+              <div class="quick-start">
+                <div class="quick-start-row">
+                  <div class="quick-start-label">Quick Start</div>
+                </div>
+                <div class="start-here-hint is-active" id="start-here-hint">
+                  Select a sample note to begin <span class="start-here-arrow">&darr;</span>
+                </div>
+                <div class="sample-buttons" id="sample-buttons"></div>
+                <div class="quick-start-hint">Select a sample note to populate the input</div>
+              </div>
+              <label class="sr-only" for="note-input">Doctor note</label>
+              <textarea id="note-input" class="editable-input" rows="12" spellcheck="false"></textarea>
+            </div>
+          </section>
+
+          <section class="column">
+            <div class="section-head"><span class="step-badge">2</span>Normalized Fields</div>
+            <div class="section-body panel-card">
+              <div class="panel-header">
+                <h2>Normalized Note</h2>
+                <div id="note-style-badge" class="note-style"></div>
+              </div>
+              <div id="normalized-output" class="normalized-output"></div>
+            </div>
+          </section>
+
+          <section class="column">
+            <div class="section-head"><span class="step-badge">3</span>Structured Output</div>
+            <div class="section-body panel-card">
+              <div class="panel-header">
+                <h2>Extracted Categories</h2>
+                <button class="button button-ghost" id="toggle-json" type="button">Show JSON</button>
+              </div>
+              <div id="structured-output" class="structured-output"></div>
+              <pre id="json-output" class="code-block hidden"></pre>
+            </div>
+          </section>
+        </section>
+
+        <section class="request-line" id="request">
+          <span class="label">Original Request</span>
+          <span class="request-text">"Build a system that takes a doctor's note and classifies it into structured categories."</span>
+        </section>
+
+        <section class="explanation-section fit-section">
+          <div class="section-body panel-card explanation-card">
+            <div class="panel-header">
+              <h2>Why This Project Fits the Associate Agentic Engineer Role</h2>
+            </div>
+            <div id="system-explanation" class="explanation-output summary-grid">
+              <article class="summary-item">
+                <h3><span class="summary-marker" aria-hidden="true"></span>Scoped Execution</h3>
+                <p>
+                  This project starts with a loosely defined request and turns it into a clearly scoped, testable
+                  system with predictable structured output.
+                </p>
+              </article>
+              <article class="summary-item">
+                <h3><span class="summary-marker" aria-hidden="true"></span>Agent-Oriented Development</h3>
+                <p>
+                  The build focuses on directing and constraining AI-assisted output through precise instructions, then
+                  refining behavior based on review results.
+                </p>
+              </article>
+              <article class="summary-item">
+                <h3><span class="summary-marker" aria-hidden="true"></span>Edge Case Thinking</h3>
+                <p>
+                  It explicitly handles messy note realities: negations, historical vs current context, resolved
+                  symptoms, contradictions, vague medication mentions, and rule-out wording.
+                </p>
+              </article>
+              <article class="summary-item">
+                <h3><span class="summary-marker" aria-hidden="true"></span>Output Quality &amp; Validation</h3>
+                <p>
+                  The system is conservative by design, favoring reliable reviewable output and routing uncertain
+                  details to <em>unclear</em> instead of guessing.
+                </p>
+              </article>
+              <article class="summary-item">
+                <h3><span class="summary-marker" aria-hidden="true"></span>System Understanding</h3>
+                <p>
+                  Logic is separated into clear stages from raw input to normalized fields to final extraction, so
+                  behavior can be traced, tested, and improved without rewriting the whole flow.
+                </p>
+              </article>
+              <article class="summary-item">
+                <h3><span class="summary-marker" aria-hidden="true"></span>Communication &amp; Documentation</h3>
+                <p>
+                  Assumptions, limits, and expected behavior are made explicit, making the system easier for others to
+                  review, extend, and operate in an async environment.
+                </p>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <section class="explanation-section">
+          <div class="section-body panel-card explanation-card build-card">
+            <div class="panel-header">
+              <h2>How This System Is Built</h2>
+            </div>
+            <div class="build-subhead">Build Workflow</div>
+            <article class="build-workflow-card">
+              <div class="arch-eyebrow">Build Workflow</div>
+              <h3>AI-Assisted Development</h3>
+              <p>
+                This project treats AI as an execution layer rather than a shortcut. System behavior is defined through
+                structured instructions, then iteratively refined based on failure points in the output.
+              </p>
+              <p>
+                The work centers on directing behavior, identifying edge cases, and tightening constraints until
+                results are consistent, testable, and reliable.
+              </p>
+            </article>
+
+            <div class="build-subhead architecture-subhead">System Architecture</div>
+            <div class="architecture-diagram">
+              <div class="arch-main-row">
+                <article class="arch-block">
+                  <div class="arch-eyebrow">Input</div>
+                  <h3>Raw Note</h3>
+                  <p>Doctor note text is entered or loaded from a sample.</p>
+                </article>
+                <div class="arch-arrow" aria-hidden="true">&rarr;</div>
+                <article class="arch-block">
+                  <div class="arch-eyebrow">Engine</div>
+                  <h3>Python Extraction Engine</h3>
+                  <p>Core rules convert notes into normalized structured fields.</p>
+                </article>
+                <div class="arch-arrow" aria-hidden="true">&rarr;</div>
+                <article class="arch-block">
+                  <div class="arch-eyebrow">Demo</div>
+                  <h3>Browser Demo Layer</h3>
+                  <p>JavaScript mirrors extraction behavior so the demo runs locally.</p>
+                </article>
+                <div class="arch-arrow" aria-hidden="true">&rarr;</div>
+                <article class="arch-block">
+                  <div class="arch-eyebrow">Output</div>
+                  <h3>Structured Output</h3>
+                  <p>Symptoms, conditions, medications, timing, and unclear details are returned.</p>
+                </article>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

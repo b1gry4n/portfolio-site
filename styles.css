@@ -244,7 +244,7 @@ canvas {
 .contact-modal::before {
   content: "";
   position: fixed;
-  inset: 0 0.75rem 0 0;
+  inset: 0 var(--scrollbar-width, 0px) 0 0;
   z-index: 0;
   background:
     radial-gradient(circle at 50% 20%, rgba(120, 172, 255, 0.08), transparent 28%),

@@ -338,6 +338,9 @@
         modals.forEach(function (modal) {
           modal.hidden = modal.id !== modalId;
           setTriggerExpanded(modal.id, modal.id === modalId);
+          if (modal.id === modalId) {
+            modal.scrollTop = 0;
+          }
         });
 
         syncModalScrollLock();
@@ -582,16 +585,23 @@
         backToTopButton.style.right = "";
       }
 
+      function syncScrollbarWidth() {
+        const scrollbarWidth = Math.max(0, window.innerWidth - document.documentElement.clientWidth);
+        document.documentElement.style.setProperty("--scrollbar-width", scrollbarWidth + "px");
+      }
+
       if (backToTopButton) {
         backToTopButton.addEventListener("click", function () {
           window.scrollTo({ top: 0, behavior: "smooth" });
         });
         window.addEventListener("scroll", syncBackToTop, { passive: true });
         window.addEventListener("resize", syncBackToTop, { passive: true });
+        window.addEventListener("resize", syncScrollbarWidth, { passive: true });
         if (window.visualViewport) {
           window.visualViewport.addEventListener("resize", syncBackToTop, { passive: true });
           window.visualViewport.addEventListener("scroll", syncBackToTop, { passive: true });
         }
+        syncScrollbarWidth();
         syncBackToTop();
       }
     })();

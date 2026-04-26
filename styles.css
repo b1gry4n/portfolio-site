@@ -2151,7 +2151,7 @@ h2 {
   }
 
   .back-to-top {
-    top: max(1rem, calc(env(safe-area-inset-top, 0px) + 0.75rem));
+    top: 1rem;
     bottom: auto;
     right: 0.7rem;
   }

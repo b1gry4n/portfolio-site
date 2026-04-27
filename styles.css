@@ -648,6 +648,24 @@ h1 {
   border-radius: var(--radius-md);
 }
 
+.site-footer {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  padding: 1rem 0 0.25rem;
+}
+
+.site-footer-link {
+  color: var(--muted);
+  font-size: 0.88rem;
+  font-weight: 600;
+  transition: color 160ms ease;
+}
+
+.site-footer-link:hover {
+  color: var(--text);
+}
+
 .section-heading {
   display: grid;
   width: 100%;

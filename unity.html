@@ -348,6 +348,14 @@
           return;
         }
 
+        if (modalId === projectModalId) {
+          projectVideoFrame.innerHTML = "";
+          portfolioVideoPageList.innerHTML = "";
+          projectVideoNav.hidden = true;
+          activeProjectVideos = [];
+          activeProjectVideoIndex = 0;
+        }
+
         modal.hidden = true;
         setTriggerExpanded(modalId, false);
         syncModalScrollLock();

@@ -207,6 +207,7 @@
     { label: "34. Multiple Timelines Overlapping", note: "Back pain x1 month, worsened significantly over past 2 days. Taking OTC meds with little relief." },
     { label: "35. Casual Language / Non-Clinical Wording", note: "Says he’s been “feeling off” for a few days, kinda tired, maybe a headache. Not sure." },
   ];
+  const DEFAULT_SAMPLE_INDEX = 4;
 
   function normalizeNote(noteText) {
     const rawText = noteText || "";
@@ -772,7 +773,7 @@
 
     const select = document.getElementById("sample-select");
     const startHint = document.getElementById("start-here-hint");
-    select.value = "0";
+    select.value = String(DEFAULT_SAMPLE_INDEX);
 
     select.classList.add("sample-select-guided");
     if (startHint) startHint.classList.add("is-active");
@@ -894,7 +895,7 @@
     initTheme();
     renderSamples();
     wireEvents();
-    document.getElementById("note-input").value = SAMPLE_CASES[0].note;
+    document.getElementById("note-input").value = SAMPLE_CASES[DEFAULT_SAMPLE_INDEX].note;
     runDemo();
   }
 

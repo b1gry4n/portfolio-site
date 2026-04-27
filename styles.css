@@ -585,6 +585,7 @@ h1 {
   padding: 0.8rem 1.2rem;
   border-radius: 999px;
   font-weight: 700;
+  cursor: pointer;
   transition: transform 160ms ease, background-color 160ms ease, border-color 160ms ease;
 }
 

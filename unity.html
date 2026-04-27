@@ -136,9 +136,6 @@
       </section>
 
       <section class="section" id="unity-projects" aria-labelledby="unity-projects-title">
-        <div class="section-heading">
-          <p class="eyebrow">Selected Unity Work</p>
-        </div>
         <div class="portfolio-grid" id="portfolioGrid" aria-live="polite"></div>
       </section>
     </main>
@@ -378,10 +375,15 @@
 
       function renderPortfolioCards() {
         portfolioGrid.innerHTML = portfolioProjects.map(function (project, index) {
+          const guide = index === 0
+            ? '<span class="portfolio-card-guide" aria-hidden="true">Click to open <span class="portfolio-card-guide-arrow">↓</span></span>'
+            : '';
           return '' +
             '<button class="portfolio-card" type="button" data-project-id="' + project.id + '">' +
+              guide +
               '<div class="portfolio-thumb">' +
                 createThumbnail(project, index) +
+                '<span class="portfolio-thumb-play" aria-hidden="true">▶</span>' +
               '</div>' +
               '<div class="portfolio-card-copy">' +
                 '<h3 class="portfolio-card-title">' + project.title + '</h3>' +

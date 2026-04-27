@@ -652,7 +652,7 @@ h1 {
   display: flex;
   justify-content: center;
   gap: 1rem;
-  padding: 1rem 0 0.25rem;
+  padding: 0rem 0 4rem;
 }
 
 .site-footer-link {

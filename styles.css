@@ -1915,8 +1915,8 @@ h2 {
 .portfolio-card-guide-arrow {
   display: inline-block;
   color: rgba(157, 224, 184, 1);
-  font-size: 5rem;
-  line-height: 0.7;
+  font-size: 8rem;
+  line-height: 0.5;
   transform: translateY(0.18rem);
   animation: portfolioGuideNudge 1.45s ease-in-out infinite;
 }

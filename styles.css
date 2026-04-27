@@ -648,6 +648,11 @@ h1 {
   border-radius: var(--radius-md);
 }
 
+.about-section {
+  padding-top: 0.85rem;
+  padding-bottom: 0.85rem;
+}
+
 .site-footer {
   display: flex;
   justify-content: center;
@@ -672,6 +677,67 @@ h1 {
   min-width: 0;
   gap: 0.35rem;
   margin-bottom: 0.85rem;
+}
+
+.about-avatar-wrap {
+  position: relative;
+  float: left;
+  width: 7rem;
+  height: 7rem;
+  margin: 0.1rem 1rem 0.45rem 0;
+  border-radius: 50%;
+  padding: 0.22rem;
+  background:
+    linear-gradient(rgba(11, 22, 39, 0.96), rgba(11, 22, 39, 0.96)) padding-box,
+    linear-gradient(135deg, rgba(92, 212, 160, 0.42), rgba(120, 172, 255, 0.28), rgba(255, 255, 255, 0.08)) border-box;
+  border: 1px solid transparent;
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.04) inset,
+    0 14px 28px rgba(3, 8, 16, 0.14);
+}
+
+.about-avatar {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.about-copy {
+  min-width: 0;
+  width: min(100%, 58rem);
+  margin: 0 auto;
+}
+
+.about-copy h2 {
+  margin: 0 0 0.75rem;
+}
+
+.about-body {
+  display: block;
+  max-width: 100%;
+}
+
+.about-body p {
+  margin: 0 0 0.45rem;
+  color: var(--muted);
+  font-size: 0.92rem;
+  line-height: 1.45;
+}
+
+.about-body p:last-child {
+  margin-bottom: 0;
+}
+
+.about-body-accent,
+.about-body-challenge {
+  color: rgba(220, 231, 246, 0.78);
+  font-weight: 600;
+}
+
+.about-body-challenge {
+  color: rgba(157, 224, 184, 0.78);
 }
 
 .section-subheading {
@@ -1485,6 +1551,12 @@ h2 {
     gap: 0.3rem;
     flex-wrap: nowrap;
     flex: 0 1 auto;
+  }
+
+  .about-avatar-wrap {
+    width: 7rem;
+    height: 7rem;
+    margin: 0.1rem 0.85rem 0.4rem 0;
   }
 
   .nav-link {

@@ -737,6 +737,13 @@ h1 {
   font-weight: 700;
 }
 
+.about-process-line {
+  margin-left: 1rem !important;
+  color: rgba(244, 247, 251, 0.88) !important;
+  font-style: italic;
+  font-weight: 700;
+}
+
 .about-body-accent {
   margin-top: 0.45rem !important;
 }

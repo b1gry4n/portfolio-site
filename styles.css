@@ -1864,6 +1864,79 @@ h2 {
   gap: 0.95rem;
 }
 
+.featured-system-banner {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto auto;
+  align-items: center;
+  gap: 1.4rem;
+  width: fit-content;
+  max-width: 100%;
+  margin: 1.75rem auto 1.25rem;
+  padding: 0.48rem 0.68rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.028), rgba(255, 255, 255, 0.014)),
+    var(--surface-raised);
+  color: inherit;
+  box-shadow: var(--shadow-soft);
+  transition: transform 170ms ease-out, border-color 170ms ease-out, background-color 170ms ease-out, box-shadow 170ms ease-out;
+}
+
+.featured-system-banner:hover {
+  transform: translateY(-1px);
+  border-color: rgba(131, 201, 159, 0.26);
+  box-shadow: var(--shadow-hover);
+}
+
+.featured-system-banner::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  right: auto;
+  width: calc(100vw - 4rem);
+  max-width: calc(var(--container) - 2rem);
+  transform: translateX(-50%);
+  bottom: -0.75rem;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.featured-system-label {
+  position: absolute;
+  left: 0.68rem;
+  top: -1.25rem;
+  margin: 0;
+  color: var(--accent);
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.featured-system-title {
+  grid-column: 1;
+  min-width: 0;
+  color: var(--text);
+  font-size: 0.95rem;
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  text-align: left;
+}
+
+.featured-system-cta {
+  grid-column: 2;
+  justify-self: end;
+  color: var(--text);
+  font-size: 0.82rem;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
 .portfolio-grid:has(.portfolio-card:hover) .portfolio-card:not(:hover) {
   filter: brightness(0.94);
 }
@@ -2315,6 +2388,24 @@ h2 {
   .portfolio-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     padding-top: 1.75rem;
+  }
+
+  .featured-system-banner {
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 0.32rem 0.65rem;
+    padding: 0.46rem 0.6rem;
+  }
+
+  .featured-system-title {
+    grid-column: 1;
+    grid-row: 1;
+    text-align: left;
+  }
+
+  .featured-system-cta {
+    grid-column: 2;
+    grid-row: 1;
+    justify-self: end;
   }
 
   .portfolio-modal-layout {

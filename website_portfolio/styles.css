@@ -799,7 +799,7 @@ textarea:focus-visible {
   font-size: 12px;
   line-height: 1.3;
   color: var(--text-secondary);
-  max-width: 28ch;
+  max-width: none;
 }
 
 .arch-arrow {

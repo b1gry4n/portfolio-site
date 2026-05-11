@@ -6,17 +6,17 @@
   <title>Controlled Codex Development Workflow | Ryan Sharr</title>
   <meta
     name="description"
-    content="Ryan Sharr explains a controlled Codex development workflow: written project rules, tracked tasks, correct file changes, checks, logs, and concrete debugging examples."
+    content="Ryan Sharr explains what Codex is and how he uses a controlled development workflow: repo rules, tracked tasks, correct file changes, checks, logs, and concrete debugging examples."
   >
   <meta property="og:title" content="Controlled Codex Development Workflow | Ryan Sharr">
-  <meta property="og:description" content="A practical AI-assisted development workflow where Codex follows repo rules, works one tracked task at a time, changes the right files, runs checks, and records the result.">
+  <meta property="og:description" content="What Codex is, how it compares to Claude-style AI coding tools, and how Ryan Sharr uses repo rules, task state, checks, logs, and reviewable changes to control AI-assisted development.">
   <meta property="og:url" content="https://ryansharr.com/">
   <meta property="og:type" content="article">
   <meta property="og:site_name" content="Ryan Sharr">
   <meta property="og:image" content="https://ryansharr.com/preview.png">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Controlled Codex Development Workflow | Ryan Sharr">
-  <meta name="twitter:description" content="How I turn Codex from prompt-response into a controlled software development workflow.">
+  <meta name="twitter:description" content="What Codex is and how I turn it from prompt-response into a controlled software development workflow.">
   <meta name="twitter:image" content="https://ryansharr.com/preview.png">
   <link rel="canonical" href="https://ryansharr.com/">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -86,6 +86,42 @@
           </div>
         </div>
       </header>
+
+      <section class="codex-explainer" aria-labelledby="codex-title">
+        <div class="codex-explainer-copy">
+          <h2 id="codex-title">What Codex is</h2>
+          <p>
+            Codex is OpenAI's coding agent. It can read a repository, inspect files, edit code,
+            run commands, fix bugs, and return changes for review. If you already know Claude,
+            the easiest comparison is Claude Code: both are AI coding agents that can work across
+            a real codebase instead of only answering questions in a chat window.
+          </p>
+          <p>
+            The important difference for my workflow is not brand rivalry. A coding agent becomes
+            useful only when the project gives it structure. Codex needs to know what to read first,
+            what rules govern the repo, which files it may change, how work gets checked, and how
+            decisions are recorded for the next session.
+          </p>
+        </div>
+
+        <div class="codex-comparison" aria-label="Codex and Claude comparison">
+          <section class="codex-comparison-card" aria-labelledby="claude-comparison-title">
+            <h3 id="claude-comparison-title">Claude / chat assistant</h3>
+            <p>
+              Often used conversationally: paste context, ask for code, review the answer,
+              then manually apply or adapt the result.
+            </p>
+          </section>
+
+          <section class="codex-comparison-card" aria-labelledby="codex-comparison-title">
+            <h3 id="codex-comparison-title">Codex</h3>
+            <p>
+              Used as a coding agent: connect it to the repo, give it a task, let it inspect files,
+              edit code, run checks, and return a reviewable result.
+            </p>
+          </section>
+        </div>
+      </section>
 
       <section class="brief-summary" aria-labelledby="problem-title">
         <h2 id="problem-title">The problem I solved</h2>

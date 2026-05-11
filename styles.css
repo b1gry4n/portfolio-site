@@ -3181,7 +3181,103 @@ h2 {
 .article-table td {
   color: #333840;
 }
+.workflow-problem-list {
+  display: grid;
+  gap: 0.85rem;
+  margin-top: 1rem;
+}
 
+.workflow-problem {
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1fr) minmax(0, 1.08fr);
+  overflow: hidden;
+  border: 1px solid rgba(12, 107, 111, 0.16);
+  border-radius: 10px;
+  background: rgba(255, 253, 248, 0.74);
+}
+
+.workflow-problem-pattern,
+.workflow-problem-detail {
+  min-width: 0;
+  padding: 1rem;
+}
+
+.workflow-problem-pattern,
+.workflow-problem-detail:not(:last-child) {
+  border-right: 1px solid rgba(12, 107, 111, 0.12);
+}
+
+.workflow-problem-pattern {
+  background: rgba(12, 107, 111, 0.055);
+}
+
+.workflow-problem-solution {
+  background: rgba(12, 107, 111, 0.035);
+}
+
+.workflow-problem span {
+  display: block;
+  margin-bottom: 0.45rem;
+  color: var(--article-accent);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  line-height: 1.25;
+  text-transform: uppercase;
+}
+
+.workflow-problem h3 {
+  margin: 0;
+  color: var(--article-ink);
+  font-family: "Manrope", sans-serif;
+  font-size: 1rem;
+  font-weight: 800;
+  line-height: 1.42;
+  letter-spacing: -0.01em;
+}
+
+.workflow-problem p {
+  margin: 0;
+  color: #333840;
+  font-size: 0.94rem;
+  line-height: 1.55;
+}
+
+.workflow-problem code {
+  display: inline;
+  padding: 0.08rem 0.25rem;
+  border-radius: 4px;
+  background: rgba(12, 107, 111, 0.08);
+  color: var(--article-accent);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.86em;
+}
+
+@media (max-width: 720px) {
+  .workflow-problem {
+    grid-template-columns: 1fr;
+  }
+
+  .workflow-problem-pattern,
+  .workflow-problem-detail {
+    padding: 0.95rem 1rem;
+  }
+
+  .workflow-problem-pattern,
+  .workflow-problem-detail:not(:last-child) {
+    border-right: 0;
+    border-bottom: 1px solid rgba(12, 107, 111, 0.12);
+  }
+
+  .workflow-problem-pattern {
+    background: rgba(12, 107, 111, 0.075);
+  }
+
+  .workflow-problem-pattern h3 {
+    font-size: 1.05rem;
+  }
+}
 .article-footer {
   margin-top: 2rem;
   padding-top: 1.2rem;

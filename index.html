@@ -196,48 +196,113 @@
           breaks down when the codebase has generated files, long-running decisions, runtime behavior, editor tooling, and
           systems that need to stay consistent over multiple sessions.
         </p>
-        <table class="article-table workflow-table">
-          <thead>
-            <tr>
-              <th>Common pattern</th>
-              <th>Why it breaks</th>
-              <th>My workflow</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Prompt to code to quick fix to repeat.</td>
-              <td>The same problems come back because nothing records what was learned or what rule should change.</td>
-              <td>The prompt becomes a written task. Codex changes the right files, runs checks, and records the result for the next session.</td>
-            </tr>
-            <tr>
-              <td>Cram every Codex instruction into <code>AGENTS.md</code>.</td>
-              <td>The file turns into a giant manual. It gets hard to scan, easy to contradict, and painful to keep current.</td>
-              <td><code>AGENTS.md</code> stays a startup map. It tells Codex what to read first and where the real project rules, tasks, decisions, and architecture notes live.</td>
-            </tr>
-            <tr>
-              <td>Let chat history be the project memory.</td>
-              <td>The next session loses important context or has to rediscover it from scratch.</td>
-              <td>Important context lives in repo files: rules, decisions, architecture notes, task history, logs, and check results.</td>
-            </tr>
-            <tr>
-              <td>Ask for a whole feature in one loose prompt.</td>
-              <td>Codex may touch too much code, create duplicate systems, or solve the visible symptom instead of the real problem.</td>
-              <td>The work is broken into clear tasks. Codex checks the existing system first, then changes the part of the code responsible for the behavior.</td>
-            </tr>
-            <tr>
-              <td>Patch generated Unity files by hand.</td>
-              <td>The next generation pass can overwrite the fix, or the generated output stops matching the source data.</td>
-              <td>Codex changes the generator, factory, authored data, or sync tool that creates the output.</td>
-            </tr>
-            <tr>
-              <td>Treat a clean-looking patch as done.</td>
-              <td>Code can look reasonable while runtime behavior is still broken.</td>
-              <td>The check has to match the risk: build checks for code, parser checks for data, runtime logs for behavior, and screenshots or manual verification for visual work.</td>
-            </tr>
-          </tbody>
-        </table>
-      </section>
+		<div class="workflow-problem-list">
+  <article class="workflow-problem">
+    <div class="workflow-problem-pattern">
+      <span>Common pattern</span>
+      <h3>Prompt to code to quick fix to repeat.</h3>
+    </div>
+
+    <div class="workflow-problem-detail">
+      <span>Why it breaks</span>
+      <p>The same problems come back because nothing records what was learned or what rule should change.</p>
+    </div>
+
+    <div class="workflow-problem-detail workflow-problem-solution">
+      <span>My workflow</span>
+      <p>The prompt becomes a written task. Codex changes the right files, runs checks, and records the result for the next session.</p>
+    </div>
+  </article>
+
+  <article class="workflow-problem">
+    <div class="workflow-problem-pattern">
+      <span>Common pattern</span>
+      <h3>Cram every Codex instruction into <code>AGENTS.md</code>.</h3>
+    </div>
+
+    <div class="workflow-problem-detail">
+      <span>Why it breaks</span>
+      <p>The file turns into a giant manual. It gets hard to scan, easy to contradict, and painful to keep current.</p>
+    </div>
+
+    <div class="workflow-problem-detail workflow-problem-solution">
+      <span>My workflow</span>
+      <p><code>AGENTS.md</code> stays a startup map. It tells Codex what to read first and where the real project rules, tasks, decisions, and architecture notes live.</p>
+    </div>
+  </article>
+
+  <article class="workflow-problem">
+    <div class="workflow-problem-pattern">
+      <span>Common pattern</span>
+      <h3>Let chat history be the project memory.</h3>
+    </div>
+
+    <div class="workflow-problem-detail">
+      <span>Why it breaks</span>
+      <p>The next session loses important context or has to rediscover it from scratch.</p>
+    </div>
+
+    <div class="workflow-problem-detail workflow-problem-solution">
+      <span>My workflow</span>
+      <p>Important context lives in repo files: rules, decisions, architecture notes, task history, logs, and check results.</p>
+    </div>
+  </article>
+
+  <article class="workflow-problem">
+    <div class="workflow-problem-pattern">
+      <span>Common pattern</span>
+      <h3>Ask for a whole feature in one loose prompt.</h3>
+    </div>
+
+    <div class="workflow-problem-detail">
+      <span>Why it breaks</span>
+      <p>Codex may touch too much code, create duplicate systems, or solve the visible symptom instead of the real problem.</p>
+    </div>
+
+    <div class="workflow-problem-detail workflow-problem-solution">
+      <span>My workflow</span>
+      <p>The work is broken into clear tasks. Codex checks the existing system first, then changes the part of the code responsible for the behavior.</p>
+    </div>
+  </article>
+
+  <article class="workflow-problem">
+    <div class="workflow-problem-pattern">
+      <span>Common pattern</span>
+      <h3>Patch generated Unity files by hand.</h3>
+    </div>
+
+    <div class="workflow-problem-detail">
+      <span>Why it breaks</span>
+      <p>The next generation pass can overwrite the fix, or the generated output stops matching the source data.</p>
+    </div>
+
+    <div class="workflow-problem-detail workflow-problem-solution">
+      <span>My workflow</span>
+      <p>Codex changes the generator, factory, authored data, or sync tool that creates the output.</p>
+    </div>
+  </article>
+
+  <article class="workflow-problem">
+    <div class="workflow-problem-pattern">
+      <span>Common pattern</span>
+      <h3>Treat a clean-looking patch as done.</h3>
+    </div>
+
+    <div class="workflow-problem-detail">
+      <span>Why it breaks</span>
+      <p>Code can look reasonable while runtime behavior is still broken.</p>
+    </div>
+
+    <div class="workflow-problem-detail workflow-problem-solution">
+      <span>My workflow</span>
+      <p>The check has to match the risk: build checks for code, parser checks for data, runtime logs for behavior, and screenshots or manual verification for visual work.</p>
+    </div>
+  </article>
+</div>
+
+      
+	  
+	  </section>
 
       <section aria-labelledby="workflow-title">
         <h2 id="workflow-title">How a request becomes working code</h2>

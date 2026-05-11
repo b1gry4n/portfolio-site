@@ -3212,6 +3212,57 @@ h2 {
   color: var(--article-accent);
 }
 
+
+.hiring-signal {
+  margin-top: 1.45rem;
+  padding: 1rem;
+  border: 1px solid rgba(12, 107, 111, 0.22);
+  background:
+    linear-gradient(135deg, rgba(12, 107, 111, 0.075), rgba(255, 253, 248, 0.64)),
+    var(--article-accent-soft);
+}
+
+.hiring-kicker {
+  margin: 0 0 0.75rem;
+  color: var(--article-accent);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.hiring-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+.hiring-card {
+  padding: 0.85rem;
+  border: 1px solid rgba(12, 107, 111, 0.16);
+  background: rgba(255, 253, 248, 0.76);
+}
+
+.article .hiring-card h2 {
+  margin: 0 0 0.35rem;
+  padding-top: 0;
+  border-top: 0;
+  color: var(--article-ink);
+  font-family: "Manrope", sans-serif;
+  font-size: 0.98rem;
+  line-height: 1.24;
+  letter-spacing: 0;
+}
+
+.article .hiring-card p {
+  margin: 0;
+  color: #333840;
+  font-family: "Literata", Georgia, serif;
+  font-size: 0.92rem;
+  line-height: 1.52;
+}
+
 @media (max-width: 720px) {
   .article-nav {
     align-items: flex-start;
@@ -3228,6 +3279,21 @@ h2 {
 
   .article h1 {
     max-width: none;
+  }
+
+
+
+  .hiring-signal {
+    padding: 0.85rem;
+  }
+
+  .hiring-grid {
+    grid-template-columns: 1fr;
+    gap: 0.65rem;
+  }
+
+  .hiring-card {
+    padding: 0.78rem;
   }
 
   .terms-block dl div {

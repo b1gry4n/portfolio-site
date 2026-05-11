@@ -87,41 +87,58 @@
         </div>
       </header>
 
-      <section class="codex-explainer" aria-labelledby="codex-title">
-        <div class="codex-explainer-copy">
-          <h2 id="codex-title">What is Codex?</h2>
-          <p>
-            Codex is OpenAI's coding agent. It can read a repository, inspect files, edit code,
-            run commands, fix bugs, and return changes for review. If you already know Claude,
-            the easiest comparison is Claude Code: both are AI coding agents that can work across
-            a real codebase instead of only answering questions in a chat window.
-          </p>
-          <p>
-            The important difference for my workflow is not brand rivalry. A coding agent becomes
-            useful only when the project gives it structure. Codex needs to know what to read first,
-            what rules govern the repo, which files it may change, how work gets checked, and how
-            decisions are recorded for the next session.
-          </p>
-        </div>
+<section class="codex-explainer" aria-labelledby="codex-title">
+  <div class="codex-explainer-copy">
+    <h2 id="codex-title">What is Codex?</h2>
+    <p>
+      Codex is OpenAI's software engineering agent. It can read a repository,
+      inspect files, edit code, run commands, fix bugs, explain unfamiliar systems,
+      and return changes for review. If you already know Claude, the closest
+      comparison is not ordinary Claude chat, but Claude Code: both are coding
+      agents that can work across a real codebase instead of only answering
+      questions in a chat window.
+    </p>
+    <p>
+      The reason I focus on Codex is the way it fits into a repo-connected
+      engineering loop: local work, cloud tasks, GitHub-connected review, pull
+      request workflows, project instructions, and repeatable task execution.
+      My workflow is built around making that agent behave like part of a
+      controlled development system instead of a loose code generator.
+    </p>
+    <p>
+      The important difference is not brand rivalry. A coding agent becomes useful
+      only when the project gives it structure. Codex needs to know what to read
+      first, what rules govern the repo, which files it may change, how work gets
+      checked, and how decisions are recorded for the next session.
+    </p>
+  </div>
 
-        <div class="codex-comparison" aria-label="Codex and Claude comparison">
-          <section class="codex-comparison-card" aria-labelledby="claude-comparison-title">
-            <h3 id="claude-comparison-title">Claude / chat assistant</h3>
-            <p>
-              Often used conversationally: paste context, ask for code, review the answer,
-              then manually apply or adapt the result.
-            </p>
-          </section>
+  <div class="codex-comparison" aria-label="Coding assistant comparison">
+    <section class="codex-comparison-card" aria-labelledby="assistant-comparison-title">
+      <h3 id="assistant-comparison-title">General AI chat</h3>
+      <p>
+        Useful for explanation, brainstorming, pasted snippets, and isolated code help.
+        The user usually supplies the context and manually applies the result.
+      </p>
+    </section>
 
-          <section class="codex-comparison-card" aria-labelledby="codex-comparison-title">
-            <h3 id="codex-comparison-title">Codex</h3>
-            <p>
-              Used as a coding agent: connect it to the repo, give it a task, let it inspect files,
-              edit code, run checks, and return a reviewable result.
-            </p>
-          </section>
-        </div>
-      </section>
+    <section class="codex-comparison-card" aria-labelledby="agent-comparison-title">
+      <h3 id="agent-comparison-title">Coding agent</h3>
+      <p>
+        Works inside the project: reads files, edits code, runs commands, checks the
+        result, and returns changes that can be reviewed instead of copied by hand.
+      </p>
+    </section>
+
+    <section class="codex-comparison-card" aria-labelledby="codex-comparison-title">
+      <h3 id="codex-comparison-title">My Codex workflow</h3>
+      <p>
+        Adds the control layer around the agent: doctrine, task queues, system maps,
+        validation rules, runtime logs, generated-file boundaries, and recorded decisions.
+      </p>
+    </section>
+  </div>
+</section>
 
       <section class="brief-summary" aria-labelledby="problem-title">
         <h2 id="problem-title">The problem I solved</h2>

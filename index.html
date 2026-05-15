@@ -24,11 +24,11 @@
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Literata:opsz,wght@7..72,400;7..72,600;7..72,700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./styles.css">
 </head>
-<body class="article-page">
+<body class="article-page ai-archive-page">
   <header class="article-nav" aria-label="Primary">
     <a href="./index.html" aria-current="page">Ryan Sharr</a>
     <nav>
-      <a href="./ai-systems.html">AI Systems Archive</a>
+      <a href="#ai-systems">AI Systems Archive</a>
       <a href="./unity.html">Unity Portfolio</a>
       <a href="./resume.html">Resume</a>
       <a href="mailto:hello@ryansharr.com">Contact</a>
@@ -37,6 +37,89 @@
 
   <main class="article-shell">
     <article class="article article-brief">
+      <section class="meta-layer-intro" aria-labelledby="meta-layer-title">
+        <div class="meta-layer-copy">
+          <p class="article-label">Meta layer</p>
+          <h1 id="meta-layer-title">Foundation -> Plant concept</h1>
+          <p>
+            Project growth is triggered by human interaction based in the foundation seed as a reusable operating layer.
+          </p>
+        </div>
+
+        <div class="meta-layer-visual" aria-label="Foundation Seed to Plant mental model">
+          <div class="meta-plant">
+            <div class="meta-plant-canopy">
+              <span>Project growth</span>
+              <small>systems · tools · reports · outputs</small>
+            </div>
+
+            <div class="meta-plant-feedback" aria-hidden="true">
+              <span></span>
+              <small>reusable patterns return to foundation</small>
+            </div>
+
+            <div class="meta-plant-water">
+              <span>Water</span>
+              <small>human interaction</small>
+              <b>intent</b>
+              <b>review</b>
+            </div>
+
+            <div class="meta-plant-growth" aria-hidden="true">
+              <span class="meta-plant-leaf meta-plant-leaf-left"></span>
+              <span class="meta-plant-stem"></span>
+              <span class="meta-plant-leaf meta-plant-leaf-right"></span>
+              <span class="meta-plant-arrow"></span>
+              <ol class="meta-plant-build-steps">
+                <li>map</li>
+                <li>plan</li>
+                <li>build</li>
+                <li>verify</li>
+                <li>remember</li>
+              </ol>
+            </div>
+
+            <div class="meta-plant-drops" aria-hidden="true">
+              <span></span>
+              <span></span>
+            </div>
+            <div class="meta-plant-foundation">
+              <div class="meta-plant-seed-bed" aria-hidden="true">
+                <i class="meta-plant-seed"></i>
+                <span class="meta-plant-seed-label">Seed</span>
+              </div>
+              <span>Foundation Seed</span>
+              <small>reusable operating layer</small>
+              <ul class="meta-plant-foundation-parts" aria-label="Foundation Seed components">
+                <li>rules</li>
+                <li>maps</li>
+                <li>validation</li>
+                <li>queue doctrine</li>
+                <li>script contracts</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="index-ai-separator index-ai-separator-before-workflow" aria-hidden="true"></div>
+
+      <section class="ai-workflow-stage index-ai-workflow" id="ai-systems" aria-labelledby="workflow-map-title">
+        <div class="ai-workflow-titlebar">
+          <p class="article-label">Interactive workflow map</p>
+          <h1 id="workflow-map-title">Controlled AI Development Workflow</h1>
+          <p class="ai-workflow-deck">
+            This archive shows how I structure AI-assisted development so Codex operates through scoped tasks, project rules,
+            system maps, validation, logs, and reusable architecture instead of loose prompt-to-code guessing.
+          </p>
+          <p class="ai-workflow-hint">Select any stage to see the system behind that step.</p>
+        </div>
+
+        <div class="ai-workflow-map" id="aiWorkflowMap" aria-label="Controlled AI development workflow"></div>
+      </section>
+
+      <div class="index-ai-separator index-ai-separator-after-workflow" aria-hidden="true"></div>
+
       <header class="article-header">
         <p class="article-label">AI-Assisted Engineering</p>
         <h1>I make the repository control Codex, not the other way around</h1>
@@ -514,5 +597,51 @@
       </footer>
     </article>
   </main>
+
+  <div class="ai-system-modal" id="aiSystemModal" hidden>
+    <div class="ai-modal-backdrop" data-ai-modal-close="true"></div>
+    <section class="ai-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="aiSystemModalTitle">
+      <button class="ai-modal-close" type="button" id="aiSystemModalClose" aria-label="Close system details">Close</button>
+      <div class="ai-modal-titlebar">
+        <p class="article-label" id="aiSystemModalLabel">System</p>
+        <div class="ai-modal-title-row">
+          <h2 id="aiSystemModalTitle">System</h2>
+          <span class="ai-modal-badge" id="aiSystemModalBadge">Artifact</span>
+        </div>
+        <p id="aiSystemModalSubtitle"></p>
+      </div>
+
+      <div class="ai-modal-layout">
+        <section class="ai-modal-proof-panel" aria-labelledby="aiSystemArtifactLabel">
+          <p class="ai-modal-artifact-label" id="aiSystemArtifactLabel">Primary artifact</p>
+          <div class="ai-artifact" id="aiSystemArtifact"></div>
+        </section>
+
+        <div class="ai-modal-content">
+          <section>
+            <h3>Solves</h3>
+            <div id="aiSystemSolves"></div>
+          </section>
+
+          <section>
+            <h3>How it works</h3>
+            <div id="aiSystemWorks"></div>
+          </section>
+
+          <section>
+            <h3>Matters</h3>
+            <div id="aiSystemMatters"></div>
+          </section>
+        </div>
+      </div>
+
+      <section class="ai-modal-files" aria-labelledby="aiSystemFilesLabel">
+        <h3 id="aiSystemFilesLabel">Artifacts involved</h3>
+        <ul id="aiSystemFiles"></ul>
+      </section>
+    </section>
+  </div>
+
+  <script src="./ai-systems.js"></script>
 </body>
 </html>

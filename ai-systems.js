@@ -523,7 +523,6 @@
   const label = document.getElementById("aiSystemModalLabel");
   const title = document.getElementById("aiSystemModalTitle");
   const badge = document.getElementById("aiSystemModalBadge");
-  const subtitle = document.getElementById("aiSystemModalSubtitle");
   const takeaway = document.getElementById("aiSystemModalTakeaway");
   const artifactLabel = document.getElementById("aiSystemArtifactLabel");
   const artifact = document.getElementById("aiSystemArtifact");
@@ -696,7 +695,6 @@
     const details = workflowDetails[system.id];
     label.textContent = details.stepLabel;
     title.textContent = system.title;
-    subtitle.textContent = system.subtitle;
     badge.textContent = details.badge;
     takeaway.textContent = details.takeaway || "";
     renderArtifact(details);

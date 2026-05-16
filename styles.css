@@ -4238,6 +4238,7 @@ h2 {
   width: min(100%, 1120px);
   margin: auto 0;
   padding: clamp(1rem, 2vw, 1.35rem);
+  box-sizing: border-box;
   border: 1px solid rgba(12, 107, 111, 0.2);
   background: var(--article-paper);
   box-shadow: 0 24px 70px rgba(43, 38, 29, 0.22);
@@ -4344,6 +4345,7 @@ h2 {
 }
 
 .ai-artifact {
+  min-width: 0;
   padding: clamp(1rem, 2vw, 1.25rem);
   border: 1px solid rgba(12, 107, 111, 0.2);
   background:
@@ -4410,6 +4412,7 @@ h2 {
   font-family: "Manrope", sans-serif;
   font-size: 0.9rem;
   line-height: 1.35;
+  overflow-wrap: anywhere;
 }
 
 .ai-artifact-proof-summary > div:first-child,
@@ -4531,6 +4534,7 @@ h2 {
 .ai-modal-content {
   display: grid;
   gap: 0.75rem;
+  min-width: 0;
 }
 
 .ai-modal-content section {
@@ -4598,6 +4602,7 @@ h2 {
 }
 
 .ai-modal-files li {
+  max-width: 100%;
   padding: 0.26rem 0.44rem;
   border: 1px solid rgba(12, 107, 111, 0.18);
   background: rgba(12, 107, 111, 0.055);
@@ -4605,6 +4610,7 @@ h2 {
   font-family: "IBM Plex Mono", monospace;
   font-size: 0.7rem;
   font-weight: 700;
+  overflow-wrap: anywhere;
 }
 
 .ai-modal-nav {
@@ -4706,11 +4712,15 @@ h2 {
   }
 
   .ai-system-modal {
-    padding: 0.7rem;
+    overflow-x: hidden;
+    padding: 0.55rem;
   }
 
   .ai-modal-dialog {
+    width: 100%;
+    max-width: calc(100vw - 1.1rem);
     margin: 0;
+    overflow-x: hidden;
   }
 
   .ai-modal-title-row {
@@ -4725,5 +4735,31 @@ h2 {
 
   .ai-artifact-columns {
     grid-template-columns: 1fr;
+  }
+
+  .ai-artifact,
+  .ai-modal-content,
+  .ai-modal-files,
+  .ai-modal-nav {
+    max-width: 100%;
+  }
+
+  .ai-modal-files ul {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .ai-modal-files li {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .ai-modal-nav {
+    flex-direction: column;
+  }
+
+  .ai-modal-nav-button {
+    width: 100%;
+    text-align: left;
   }
 }

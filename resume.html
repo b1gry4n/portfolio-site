@@ -1,608 +1,361 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Ryan Sharr Resume</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ryan Sharr Resume</title>
+  <meta
+    name="description"
+    content="Ryan Sharr resume for AI orchestration, Codex workflow architecture, repository-controlled AI development, Unity systems, C# engineering, and validation-driven automation."
+  >
+  <style>
+    :root {
+      --ink: #111418;
+      --muted: #4f5863;
+      --line: #c9d1d9;
+      --accent: #0b6f78;
+      --paper: #ffffff;
+    }
 
-<style>
-  * { box-sizing: border-box; }
+    * {
+      box-sizing: border-box;
+    }
 
-  @page {
-    size: Letter;
-    margin: 0;
-  }
+    html,
+    body {
+      margin: 0;
+      min-height: 100%;
+      background: #e9edf1;
+      color: var(--ink);
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 12px;
+      line-height: 1.32;
+    }
 
-  body {
-    margin: 0;
-    background: #e8ebef;
-    font-family: "Aptos", "Segoe UI", "Inter", Arial, sans-serif;
-    color: #111827;
-  }
+    body {
+      padding: 24px;
+    }
 
-  .page {
-    width: 8.5in;
-    height: 11in;
-    margin: 0 auto;
-    background: #fffefa;
-    padding: 0.26in 0.28in 0.20in;
-    overflow: hidden;
-  }
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
 
-  .top {
-    display: grid;
-    grid-template-columns: 1fr auto;
-    align-items: end;
-    border-bottom: 1.5px solid #111827;
-    padding-bottom: 8px;
-    margin-bottom: 14px;
-  }
+    .resume-page {
+      width: 8.5in;
+      min-height: 11in;
+      margin: 0 auto;
+      padding: 0.42in 0.48in;
+      background: var(--paper);
+      box-shadow: 0 10px 32px rgba(0, 0, 0, 0.16);
+    }
 
-  .name {
-    font-size: 40px;
-    line-height: 0.9;
-    font-weight: 900;
-    letter-spacing: -0.06em;
-  }
-
-  .title {
-    margin-top: 12px;
-    font-size: 12.5px;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    font-weight: 850;
-    color: #075e70;
-  }
-
-  .contact {
-    font-size: 10px;
-    line-height: 1.5;
-    text-align: right;
-    color: #111827;
-  }
-
-  .contact a {
-    color: #111827;
-    text-decoration: none;
-  }
-
-  .layout {
-    display: grid;
-    grid-template-columns: 2.12in 1fr;
-    gap: 18px;
-  }
-
-  .side,
-  .main {
-    display: grid;
-    align-content: start;
-  }
-
-  .side {
-    gap: 11px;
-    margin-top: 0;
-  }
-
-  .main {
-    gap: 9px;
-  }
-
-  .main-section {
-    border: 1px solid #dfe3dc;
-    border-radius: 16px;
-    background: rgba(255, 255, 255, 0.42);
-    padding: 7px;
-  }
-
-  .block,
-  .card {
-    border: 1px solid #d7d9d4;
-    border-radius: 14px;
-    background: #ffffff;
-  }
-
-  .block {
-    padding: 9px 12px;
-  }
-
-  .summary {
-    background: linear-gradient(135deg, #ffffff 0%, #f0faf8 100%);
-    border-color: #c9dddd;
-  }
-
-  h2 {
-    margin: 0 0 7px;
-    font-size: 10px;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: #075e70;
-    font-weight: 900;
-  }
-
-  .summary p {
-    margin: 0;
-    font-size: 10.25px;
-    line-height: 1.35;
-  }
-
-  .summary .summary-break {
-    display: block;
-    height: 7px;
-  }
-
-  .skill-list {
-    display: grid;
-    gap: 0;
-  }
-
-  .skill {
-    display: grid;
-    grid-template-columns: 10px 1fr;
-    gap: 7px;
-    padding: 3.8px 0;
-    border-bottom: 1px solid #ecedea;
-    font-size: 9px;
-    line-height: 1.16;
-  }
-
-  .skill:last-child {
-    border-bottom: none;
-  }
-
-  .dot {
-    width: 5px;
-    height: 5px;
-    background: #075e70;
-    border-radius: 99px;
-    margin-top: 4px;
-  }
-
-  .stack-row {
-    display: grid;
-    grid-template-columns: 21px 1fr;
-    gap: 7px;
-    margin-bottom: 5.5px;
-    font-size: 9.25px;
-    line-height: 1.2;
-  }
-
-  .stack-row:last-child {
-    margin-bottom: 0;
-  }
-
-  .ico {
-    font-size: 15px;
-    line-height: 1;
-    color: #075e70;
-  }
-
-  .stack-row strong {
-    font-weight: 850;
-  }
-
-  .edu {
-    font-size: 9.7px;
-    line-height: 1.3;
-  }
-
-  .section-title {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 7px;
-  }
-
-  .section-title::after {
-    content: "";
-    height: 1px;
-    flex: 1;
-    background: #d7d9d4;
-  }
-
-  .work-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 9px;
-  }
-
-  .card {
-    padding: 11px 14px;
-  }
-
-  .feature {
-    grid-column: span 2;
-    display: grid;
-    grid-template-columns: 48px 1fr;
-    gap: 12px;
-    background: linear-gradient(135deg, #ffffff 0%, #f3fbfa 100%);
-    border-color: #c9dddd;
-  }
-
-  .iconbox {
-      width: 38px;
-      height: 38px;
-      border: 2px solid #075e70;
-      border-radius: 10px;
+    .resume-header {
       display: grid;
-      place-items: center;
-      font-size: 20px;
-      color: #075e70;
-      margin-top: 3px;
+      grid-template-columns: 1fr auto;
+      gap: 20px;
+      align-items: end;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--ink);
     }
 
-  .iconbox svg {
-      width: 24px;
-      height: 24px;
-      display: block;
-      stroke: currentColor;
-      stroke-width: 2.1;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-      fill: none;
+    h1,
+    h2,
+    h3,
+    p {
+      margin: 0;
     }
 
-  h3 {
-    margin: 0;
-    font-size: 14px;
-    line-height: 1.1;
-    letter-spacing: -0.03em;
-    color: #101827;
-  }
+    h1 {
+      font-size: 30px;
+      line-height: 0.95;
+      letter-spacing: 0;
+    }
 
-  .meta {
-    margin-top: 3px;
-    font-size: 10px;
-    font-weight: 850;
-    color: #075e70;
-  }
+    .headline {
+      margin-top: 5px;
+      color: var(--accent);
+      font-size: 13px;
+      font-weight: 700;
+    }
 
-  .pill {
-    display: inline-block;
-    margin-top: 7px;
-    padding: 4px 8px;
-    border-radius: 999px;
-    background: #dff0ee;
-    color: #075e70;
-    font-size: 8.5px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    font-weight: 900;
-  }
+    .contact {
+      display: grid;
+      gap: 3px;
+      color: var(--muted);
+      font-size: 10.5px;
+      text-align: right;
+      white-space: nowrap;
+    }
 
-  .desc {
-    margin: 6px 0 0;
-    font-size: 10.15px;
-    line-height: 1.32;
-  }
+    .resume-main {
+      display: grid;
+      grid-template-columns: 1.06fr 1.78fr;
+      gap: 18px;
+      padding-top: 12px;
+    }
 
-  ul {
-    margin: 6px 0 0;
-    padding-left: 15px;
-  }
+    section {
+      break-inside: avoid;
+      margin-bottom: 12px;
+    }
 
-  li {
-    font-size: 9.25px;
-    line-height: 1.26;
-    margin-bottom: 2.4px;
-  }
+    h2 {
+      margin-bottom: 5px;
+      padding-bottom: 3px;
+      border-bottom: 1px solid var(--line);
+      color: var(--accent);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
 
-  .feature ul {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4px 18px;
-    padding-left: 15px;
-  }
+    h3 {
+      font-size: 12px;
+      line-height: 1.2;
+    }
 
-  .feature ul li:first-child {
-    grid-column: 1 / -1;
-    white-space: nowrap;
-  }
+    .role-line {
+      color: var(--muted);
+      font-size: 10.5px;
+      font-weight: 700;
+      margin-top: 1px;
+    }
 
-  .mini-card {
-    display: grid;
-    grid-template-columns: 38px 1fr;
-    gap: 12px;
-    min-height: 1.38in;
-    align-content: start;
-  }
+    .summary {
+      font-size: 11.2px;
+    }
 
-  .mini-card ul {
-    margin-top: 6px;
-  }
+    ul {
+      margin: 5px 0 0;
+      padding-left: 15px;
+    }
 
-  .mini-card li {
-    margin-bottom: 2px;
-  }
+    li {
+      margin: 0 0 3px;
+    }
 
-  .mini-icon {
-    width: 34px;
-    height: 34px;
-    border: 2px solid #075e70;
-    border-radius: 999px;
-    display: grid;
-    place-items: center;
-    color: #075e70;
-  }
+    .keyword-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      margin-top: 6px;
+      padding: 0;
+      list-style: none;
+    }
 
-  .mini-icon svg {
-    width: 23px;
-    height: 23px;
-    display: block;
-    stroke: currentColor;
-    stroke-width: 2.15;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    fill: none;
-  }
+    .keyword-list li {
+      margin: 0;
+      padding: 2px 5px;
+      border: 1px solid var(--line);
+      border-radius: 2px;
+      color: #20262d;
+      font-size: 9.5px;
+    }
 
-  .cube {
-    border-radius: 8px;
-  }
+    .project {
+      margin-bottom: 10px;
+    }
 
-  .experience {
-    display: grid;
-    gap: 8px;
-  }
+    .project:last-child {
+      margin-bottom: 0;
+    }
 
-  .experience .card {
-    padding: 11px 14px;
-  }
+    .compact-list li {
+      margin-bottom: 2px;
+    }
 
-  @media print {
-    body { background: white; }
-    .page { margin: 0; }
-  }
-</style>
+    .print-note {
+      max-width: 8.5in;
+      margin: 12px auto 0;
+      color: #47515c;
+      font-size: 12px;
+      text-align: center;
+    }
+
+    @page {
+      size: Letter;
+      margin: 0;
+    }
+
+    @media print {
+      html,
+      body {
+        width: 8.5in;
+        height: 11in;
+        background: #ffffff;
+      }
+
+      body {
+        padding: 0;
+      }
+
+      .resume-page {
+        width: 8.5in;
+        height: 11in;
+        min-height: 11in;
+        margin: 0;
+        padding: 0.4in 0.46in;
+        box-shadow: none;
+        overflow: hidden;
+      }
+
+      .print-note {
+        display: none;
+      }
+
+      a {
+        color: inherit;
+      }
+    }
+  </style>
 </head>
-
 <body>
-  <div class="page">
-
-    <header class="top">
+  <main class="resume-page" aria-label="Ryan Sharr resume">
+    <header class="resume-header">
       <div>
-        <div class="name">Ryan Sharr</div>
-        <div class="title">AI Systems Engineer / Applied AI Engineer</div>
+        <h1>Ryan Sharr</h1>
+        <p class="headline">AI Orchestration Specialist | Codex Workflow Architect | Systems-Focused Technical Developer</p>
       </div>
-
-      <div class="contact">
-        Remote (US)<br>
-        <a href="mailto:hello@ryansharr.com">hello@ryansharr.com</a><br>
+      <address class="contact">
+        <a href="mailto:hello@ryansharr.com">hello@ryansharr.com</a>
         <a href="https://ryansharr.com">ryansharr.com</a>
-      </div>
+        <a href="https://www.linkedin.com/in/ryan-sharr/">linkedin.com/in/ryan-sharr</a>
+      </address>
     </header>
 
-    <div class="layout">
-
-      <aside class="side">
-
-        <section class="block summary">
-          <h2>Summary</h2>
-          <p>
-            AI systems engineer building pipelines that convert prompt-driven input into controllable, stateful runtime systems. Focused on simulation architecture, state ownership, and making AI output inspectable, debuggable, and verifiable as real software.
-            <span class="summary-break"></span>
-            Background in game-engine systems, with transferable architecture across simulations, tooling, and applied AI products.
+    <div class="resume-main">
+      <aside>
+        <section>
+          <h2>Profile</h2>
+          <p class="summary">
+            AI orchestration and systems developer focused on turning Codex and AI coding agents into controlled, reviewable engineering workflows. I design repository rules, task queues, validation loops, evidence logs, system maps, and reusable operating layers so AI work is scoped, auditable, and safe to extend. My Unity/C# background gives me practical depth in complex runtime systems, tooling, debugging, and generated asset pipelines.
           </p>
         </section>
 
-        <section class="block">
+        <section>
           <h2>Core Skills</h2>
-<div class="skill-list">
-
-  <div class="skill">
-    <span class="dot"></span>
-    <span><strong>AI Systems:</strong> LLM pipelines (structured systems → runtime), structured prompting, rapid prototyping</span>
-  </div>
-
-  <div class="skill">
-    <span class="dot"></span>
-    <span><strong>Architecture:</strong> simulation systems, state ownership, command-driven runtime control</span>
-  </div>
-
-  <div class="skill">
-    <span class="dot"></span>
-    <span><strong>Runtime Systems:</strong> stats, conditions, behaviors, state machines</span>
-  </div>
-
-  <div class="skill">
-    <span class="dot"></span>
-    <span><strong>Pipelines:</strong> import → validate → build, data-driven systems</span>
-  </div>
-
-  <div class="skill">
-    <span class="dot"></span>
-    <span><strong>Engineering:</strong> Unity / C# architecture, applied AI, product systems</span>
-  </div>
-
-  <div class="skill">
-    <span class="dot"></span>
-    <span><strong>Observability:</strong> logging, validation, inspectable runtime state</span>
-  </div>
-
-</div>
+          <ul class="compact-list">
+            <li>AI orchestration, Codex workflows, agent operating rules</li>
+            <li>Prompt-to-task decomposition, scoped queues, acceptance criteria</li>
+            <li>Repository doctrine, system maps, decision records, task memory</li>
+            <li>Validation design, evidence logs, stale-code sweeps, review gates</li>
+            <li>Generated asset safety, sync tools, source-of-truth enforcement</li>
+            <li>Unity, C#, gameplay architecture, runtime/editor tooling</li>
+            <li>Complex debugging across interacting systems and pipelines</li>
+            <li>Technical documentation for human and AI-assisted execution</li>
+          </ul>
         </section>
 
-        <section class="block">
-          <h2>Secondary Skills</h2>
-          <div class="skill-list">
-            <div class="skill"><span class="dot"></span><span>3D modeling and environment art</span></div>
-            <div class="skill"><span class="dot"></span><span>3D animation and asset integration</span></div>
-            <div class="skill"><span class="dot"></span><span>Concept art interpretation and production</span></div>
-            <div class="skill"><span class="dot"></span><span>UI/UX and gameplay readability</span></div>
-            <div class="skill"><span class="dot"></span><span>Game design docs and data structures</span></div>
-            <div class="skill"><span class="dot"></span><span>Content pipelines and asset workflows</span></div>
-          </div>
+        <section>
+          <h2>Keywords</h2>
+          <ul class="keyword-list" aria-label="Resume keywords">
+            <li>Unity</li>
+            <li>C#</li>
+            <li>AI-Assisted Development</li>
+            <li>AI Orchestration</li>
+            <li>AI Workflow Architecture</li>
+            <li>OpenAI Codex</li>
+            <li>Prompt Engineering</li>
+            <li>Agentic Workflows</li>
+            <li>Human-in-the-Loop AI</li>
+            <li>AI Governance</li>
+            <li>Repository Automation</li>
+            <li>Workflow Automation</li>
+            <li>Validation Pipelines</li>
+            <li>Technical Documentation</li>
+            <li>Tools Programming</li>
+            <li>Editor Tooling</li>
+            <li>Gameplay Systems</li>
+            <li>Game Architecture</li>
+            <li>Debugging</li>
+          </ul>
         </section>
 
-        <section class="block">
+        <section>
           <h2>Technical Stack</h2>
-
-          <div class="stack-row">
-            <div class="ico">{ }</div>
-            <div><strong>Languages:</strong> C#, JavaScript</div>
-          </div>
-
-          <div class="stack-row">
-            <div class="ico">⬡</div>
-            <div><strong>Engines / Tools:</strong> Codex, Unity, Unreal Engine, Godot, UEFN (Verse), Custom Tooling</div>
-          </div>
-
-          <div class="stack-row">
-            <div class="ico">⚙</div>
-<div><strong>Systems:</strong> Runtime simulation, gameplay systems (stats, conditions, buffs), state machines, character controllers, navigation & pathfinding, AI behavior systems, data-driven architectures, databases, tooling & editor systems</div>
-          </div>
-
-          <div class="stack-row">
-            <div class="ico">◎</div>
-            <div><strong>Art / Web:</strong> 3ds Max, Maya, ZBrush, Photoshop, Git, HTML/CSS</div>
-          </div>
+          <ul class="compact-list">
+            <li>OpenAI Codex, AI-assisted coding workflows, prompt/task systems</li>
+            <li>Git repositories, project rules, queue files, logs, validation reports</li>
+            <li>Unity Engine, C#, ScriptableObjects, custom inspectors, sync tooling</li>
+            <li>HTML, CSS, JavaScript for portfolio, documentation, and tool interfaces</li>
+          </ul>
         </section>
-
-        <section class="block">
-          <h2>Education</h2>
-          <div class="edu">
-            <strong>BFA – Media Arts & Animation</strong><br>
-            Art Institute of Seattle
-          </div>
-        </section>
-
       </aside>
 
-      <main class="main">
+      <div>
+        <section>
+          <h2>Selected Project Work</h2>
 
-        <section class="main-section">
-          <h2 class="section-title">Selected Work</h2>
+          <article class="project">
+            <h3>Controlled AI Development Workflow</h3>
+            <p class="role-line">AI orchestration, Codex operating layer, repo doctrine, validation systems, task evidence</p>
+            <ul>
+              <li>Designed a repeatable AI orchestration workflow where human requests become scoped queue items with acceptance criteria, validation evidence, system-map updates, and stop conditions.</li>
+              <li>Built repository doctrine around generated asset safety, stale-code sweeps, runtime/editor ownership, single-owner reuse, prompt memory, and evidence-backed completion.</li>
+              <li>Structured Codex so it reads project rules before editing, changes source owners instead of generated outputs, records proof, and stops after the assigned task.</li>
+              <li>Created portfolio documentation showing how AI-assisted development can be controlled by repository architecture instead of loose prompt-to-code guessing.</li>
+            </ul>
+          </article>
 
-          <div class="work-grid">
+          <article class="project">
+            <h3>Foundation Seed to Plant Operating Layer</h3>
+            <p class="role-line">Reusable AI workflow framework, human-in-the-loop execution, project memory</p>
+            <ul>
+              <li>Separated reusable AI operating rules from project-specific implementation maps so proven workflow patterns can move between projects.</li>
+              <li>Defined a human-in-the-loop model where human interaction triggers project growth, while the foundation layer governs task routing, validation, documentation, and recovery.</li>
+            </ul>
+          </article>
 
-            <article class="card feature">
-              <div class="iconbox">
-                <svg viewBox="0 0 24 24" aria-hidden="true">
-                  <rect x="4.5" y="4.5" width="15" height="6.2" rx="2.2"></rect>
-                  <path d="M7.8 15.4h8.4"></path>
-                  <path d="M5.2 19.3h13.6"></path>
-                  <path d="M8.2 10.9v4.4"></path>
-                  <path d="M15.8 10.9v4.4"></path>
-                  <circle cx="8.2" cy="17.3" r="0.9" fill="currentColor" stroke="none"></circle>
-                  <circle cx="15.8" cy="17.3" r="0.9" fill="currentColor" stroke="none"></circle>
-                </svg>
-              </div>
-              <div>
-                <h3>AI → Playable Runtime System</h3>
-                <div class="meta">ryansharr.com</div>
-                <div class="pill">Prompt to runtime pipeline</div>
-                <p class="desc">
-                  End-to-end pipeline converting prompt-driven input into structured systems, generated content, and controllable runtime behavior.
-                </p>
-                <ul>
-                  <li>Prompt → structured data → generated systems → runtime simulation</li>
-                  <li>Inspectable runtime state with debugging and validation tooling</li>
-                  <li>Demonstrates AI output as controllable, stateful software</li>
-                  <li>Built around structured runtime authority, not one-off generation</li>
-                  <li>Designed around verifiable system behavior, not static generation</li>
-                </ul>
-              </div>
-            </article>
+          <article class="project">
+            <h3>Physics-Based Traversal System</h3>
+            <p class="role-line">Unity C# systems depth, gameplay controller, grapple, glider, movement state transitions</p>
+            <ul>
+              <li>Built a kinematic traversal prototype with grappling, gliding, momentum control, rope wrapping, and clean movement state switching.</li>
+              <li>Separated grapple, glide, and base movement logic so input, game state, and transitions remain predictable and debuggable.</li>
+            </ul>
+          </article>
 
-            <article class="card mini-card">
-              <div class="mini-icon">
-                <svg viewBox="0 0 24 24" aria-hidden="true">
-                  <circle cx="12" cy="12" r="4.2"></circle>
-                  <path d="M12 3.2v5.1"></path>
-                  <path d="M12 15.7v5.1"></path>
-                  <path d="M3.2 12h5.1"></path>
-                  <path d="M15.7 12h5.1"></path>
-                  <circle cx="12" cy="12" r="1.15" fill="currentColor" stroke="none"></circle>
-                </svg>
-              </div>
-              <div>
-                <h3>Complex Shooter Systems</h3>
-                <ul>
-                  <li>Runtime stats, buffs, conditions, and gameplay behavior.</li>
-                  <li>Live editing for resources, conditions, and internal state.</li>
-                  <li>Cross-system sync across AI, items, economy, and definitions.</li>
-                  <li>State-driven architecture for coordinated runtime systems.</li>
-                </ul>
-              </div>
-            </article>
+          <article class="project">
+            <h3>Modular Combat and Stat Framework</h3>
+            <p class="role-line">Combat systems, extensible stats, modifiers, conditions, debugging tools</p>
+            <ul>
+              <li>Implemented reusable combat/stat domains for damage, runtime modifiers, buffs, debuffs, conditions, and data-driven configuration.</li>
+              <li>Structured gameplay around shared systems instead of hardcoded character behavior, improving extensibility and testability.</li>
+            </ul>
+          </article>
 
-            <article class="card mini-card">
-              <div class="mini-icon cube">
-                <svg viewBox="0 0 24 24" aria-hidden="true">
-                  <path d="M12 3.4 20 7.8v8.4L12 20.6 4 16.2V7.8L12 3.4Z"></path>
-                  <path d="M4 7.8 12 12.2 20 7.8"></path>
-                  <path d="M12 12.2v8.4"></path>
-                </svg>
-              </div>
-              <div>
-                <h3>3D Pathfinding Prototype</h3>
-                <ul>
-                  <li>AI-managed room generation with volumetric node navigation.</li>
-                  <li>Spatial traversal across walls and ceilings.</li>
-                  <li>Geometry-derived traversal graph baking.</li>
-                  <li>AI-driven environment generation and navigation.</li>
-                </ul>
-              </div>
-            </article>
+          <article class="project">
+            <h3>Physics-Driven Combat Prototype</h3>
+            <p class="role-line">Active ragdoll combat, shared controller, enemy behavior, move system</p>
+            <ul>
+              <li>Built a physical combat prototype where player and enemy actors share the same controller and differ primarily by input source.</li>
+              <li>Implemented click/hold punch and kick moves with consistent hit, movement, and reaction behavior through shared physical logic.</li>
+            </ul>
+          </article>
 
-          </div>
+          <article class="project">
+            <h3>2D/3D Hybrid Rendering Pipeline</h3>
+            <p class="role-line">Modular characters, tilemaps, A* pathfinding, sprite generation, visibility systems</p>
+            <ul>
+              <li>Built an isometric 2D-style game foundation on 3D systems, combining tilemap movement, projectiles, collision, modular equipment, and generated sprites.</li>
+              <li>Implemented pathfinding, local avoidance, dynamic obstacle handling, terrain shaders, and fog-of-war style visibility masking.</li>
+            </ul>
+          </article>
+
+          <article class="project">
+            <h3>Realtime Rendering and Procedural VFX Tools</h3>
+            <p class="role-line">Shaders, SDF raymarching, screen-space growth, editor tooling</p>
+            <ul>
+              <li>Built screen-space procedural growth driven by radius-based gameplay zones and custom shader passes.</li>
+              <li>Created realtime volumetric cloud tooling using signed distance fields, raymarching, layered shape controls, and custom inspector workflows.</li>
+            </ul>
+          </article>
         </section>
-
-        <section class="main-section">
-          <h2 class="section-title">Experience</h2>
-
-          <div class="experience">
-
-            <article class="card">
-              <h3>Engineering Lead / Creative Director</h3>
-              <div class="meta">Loot Foundry Ltd</div>
-              <p class="desc">
-                Led engineering and creative direction for system-driven gameplay development in UEFN (Verse),
-                bridging design, art, and implementation to deliver structured, reusable runtime systems.
-              </p>
-              <ul>
-                <li>Built core gameplay systems in Verse including stats, conditions, buffs/debuffs, and state-driven behavior.</li>
-                <li>Designed runtime architecture with centralized logic decoupled from scene objects.</li>
-                <li>Directed system design across gameplay, UX, and technical implementation.</li>
-                <li>Partnered across disciplines to translate concepts into structured systems.</li>
-                <li>Served as primary technical point of contact, debugging and unblocking workflows.</li>
-                <li>Developed reusable systems for gameplay state and cross-system interaction.</li>
-              </ul>
-            </article>
-
-            <article class="card">
-              <h3>Independent Systems Development</h3>
-              <div class="meta">Self-directed</div>
-              <p class="desc">
-                Transitioned from 3D character art into full-stack systems, simulation architecture, and game development.
-              </p>
-              <ul>
-                <li>Self-taught programming and system architecture from the ground up.</li>
-                <li>Built end-to-end gameplay systems including state management and runtime behavior.</li>
-                <li>Designed complete systems spanning engineering, design, content, and tooling.</li>
-                <li>Built pipelines that connect structured input to runtime behavior and observable output.</li>
-                <li>Developed deep understanding of system interaction, tooling, and runtime pipelines.</li>
-              </ul>
-            </article>
-
-            <article class="card">
-              <h3>3D Character Artist</h3>
-              <div class="meta">Gas Powered Games</div>
-              <p class="desc">Worked on Age of Empires Online.</p>
-              <ul>
-                <li>Modeled and textured production-ready character assets from concept art.</li>
-                <li>Collaborated with animation, VFX, and design for gameplay integration.</li>
-                <li>Worked within production pipelines under technical and performance constraints.</li>
-                <li>Produced UI-supporting visual assets.</li>
-              </ul>
-            </article>
-
-          </div>
-        </section>
-
-      </main>
-
+      </div>
     </div>
-  </div>
+  </main>
+
+  <p class="print-note">Print this page to Letter size with default scale. The layout is designed to fit one page.</p>
 </body>
 </html>
-

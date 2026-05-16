@@ -6,14 +6,16 @@
   <title>Ryan Sharr Resume</title>
   <meta
     name="description"
-    content="Ryan Sharr resume for AI orchestration, Codex workflow architecture, repository-controlled AI development, Unity systems, C# engineering, and validation-driven automation."
+    content="Ryan Sharr resume for AI assisted development engineering, AI workflow systems, coding-agent workflows, Codex, Claude Code, Cursor, validation, tooling, Unity, C#, and software delivery automation."
   >
   <style>
     :root {
       --ink: #111418;
-      --muted: #4f5863;
-      --line: #c9d1d9;
+      --muted: #4d5661;
+      --line: #c8d0d8;
       --accent: #0b6f78;
+      --accent-soft: #e9f5f6;
+      --panel: #f7fafb;
       --paper: #ffffff;
     }
 
@@ -28,8 +30,8 @@
       background: #e9edf1;
       color: var(--ink);
       font-family: Arial, Helvetica, sans-serif;
-      font-size: 12px;
-      line-height: 1.32;
+      font-size: 11.6px;
+      line-height: 1.34;
     }
 
     body {
@@ -45,17 +47,13 @@
       width: 8.5in;
       min-height: 11in;
       margin: 0 auto;
-      padding: 0.42in 0.48in;
+      padding: 0.38in 0.5in;
       background: var(--paper);
       box-shadow: 0 10px 32px rgba(0, 0, 0, 0.16);
     }
 
     .resume-header {
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 20px;
-      align-items: end;
-      padding-bottom: 10px;
+      padding-bottom: 11px;
       border-bottom: 2px solid var(--ink);
     }
 
@@ -67,63 +65,109 @@
     }
 
     h1 {
-      font-size: 30px;
+      font-size: 34px;
       line-height: 0.95;
       letter-spacing: 0;
     }
 
     .headline {
-      margin-top: 5px;
+      margin-top: 6px;
       color: var(--accent);
-      font-size: 13px;
+      font-size: 14px;
       font-weight: 700;
     }
 
     .contact {
-      display: grid;
-      gap: 3px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px 13px;
+      margin-top: 7px;
       color: var(--muted);
-      font-size: 10.5px;
-      text-align: right;
-      white-space: nowrap;
+      font-size: 10.8px;
+      font-style: normal;
+    }
+
+    .contact a {
+      padding-bottom: 1px;
+      border-bottom: 1px solid transparent;
+    }
+
+    .contact a.primary-link {
+      color: var(--accent);
+      font-weight: 700;
+      border-bottom-color: rgba(11, 111, 120, 0.35);
     }
 
     .resume-main {
-      display: grid;
-      grid-template-columns: 1.06fr 1.78fr;
-      gap: 18px;
-      padding-top: 12px;
+      padding-top: 13px;
     }
 
     section {
       break-inside: avoid;
-      margin-bottom: 12px;
+      margin-bottom: 13px;
     }
 
     h2 {
-      margin-bottom: 5px;
+      margin-bottom: 7px;
       padding-bottom: 3px;
       border-bottom: 1px solid var(--line);
       color: var(--accent);
-      font-size: 11px;
-      letter-spacing: 0.08em;
+      font-size: 10.8px;
+      letter-spacing: 0.09em;
       text-transform: uppercase;
     }
 
     h3 {
-      font-size: 12px;
-      line-height: 1.2;
+      font-size: 12.4px;
+      line-height: 1.18;
     }
 
     .role-line {
+      margin-top: 2px;
       color: var(--muted);
       font-size: 10.5px;
-      font-weight: 700;
-      margin-top: 1px;
+      font-style: italic;
+      font-weight: 400;
+    }
+
+    .summary-block {
+      padding: 10px 12px 10px 13px;
+      border-left: 4px solid var(--accent);
+      background: var(--panel);
+    }
+
+    .summary-block .summary + .summary {
+      margin-top: 6px;
     }
 
     .summary {
-      font-size: 11.2px;
+      font-size: 11.5px;
+      line-height: 1.42;
+    }
+
+    .skills {
+      display: grid;
+      gap: 5px;
+    }
+
+    .skill-group {
+      display: grid;
+      grid-template-columns: 1.35fr 3.45fr;
+      gap: 12px;
+      align-items: baseline;
+      margin: 0;
+      padding: 3px 0 5px;
+      border-bottom: 1px solid rgba(200, 208, 216, 0.72);
+    }
+
+    .skill-group strong {
+      color: var(--accent);
+      font-size: 10.6px;
+    }
+
+    .skill-group span {
+      color: #2d3540;
+      font-weight: 400;
     }
 
     ul {
@@ -135,34 +179,63 @@
       margin: 0 0 3px;
     }
 
-    .keyword-list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 4px;
-      margin-top: 6px;
-      padding: 0;
-      list-style: none;
-    }
-
-    .keyword-list li {
-      margin: 0;
-      padding: 2px 5px;
-      border: 1px solid var(--line);
-      border-radius: 2px;
-      color: #20262d;
-      font-size: 9.5px;
-    }
-
     .project {
-      margin-bottom: 10px;
+      margin-bottom: 12px;
+      padding-left: 10px;
+      border-left: 2px solid var(--line);
     }
 
     .project:last-child {
       margin-bottom: 0;
     }
 
-    .compact-list li {
-      margin-bottom: 2px;
+    .project-primary {
+      padding: 8px 10px 7px 12px;
+      border-left: 4px solid var(--accent);
+      background: var(--accent-soft);
+    }
+
+    .project-primary h3 {
+      font-size: 13.2px;
+    }
+
+    .secondary-section {
+      color: #20262d;
+    }
+
+    .secondary-section h3 {
+      font-size: 12px;
+    }
+
+    .secondary-section .project {
+      margin-bottom: 9px;
+    }
+
+    .experience-list {
+      display: grid;
+      gap: 5px;
+    }
+
+    .experience-item {
+      display: grid;
+      grid-template-columns: 2fr 2.6fr;
+      gap: 12px;
+      padding: 4px 0;
+      border-bottom: 1px solid rgba(200, 208, 216, 0.7);
+    }
+
+    .experience-item:last-child {
+      border-bottom: 0;
+    }
+
+    .experience-item strong {
+      color: var(--ink);
+      font-size: 11.1px;
+    }
+
+    .experience-item span {
+      color: var(--muted);
+      font-size: 10.7px;
     }
 
     .print-note {
@@ -175,37 +248,145 @@
 
     @page {
       size: Letter;
-      margin: 0;
+      margin: 0.18in;
     }
 
     @media print {
       html,
       body {
-        width: 8.5in;
-        height: 11in;
+        width: auto;
+        height: auto;
         background: #ffffff;
       }
 
       body {
         padding: 0;
+        font-size: 10.65px;
+        line-height: 1.29;
       }
 
       .resume-page {
-        width: 8.5in;
-        height: 11in;
-        min-height: 11in;
+        width: auto;
+        height: auto;
+        min-height: 10.64in;
         margin: 0;
-        padding: 0.4in 0.46in;
+        padding: 0;
         box-shadow: none;
-        overflow: hidden;
+        overflow: visible;
+      }
+
+      h1 {
+        font-size: 32px;
+      }
+
+      .headline {
+        margin-top: 5px;
+        font-size: 13px;
+      }
+
+      .contact {
+        gap: 4px 11px;
+        margin-top: 5px;
+        font-size: 9.7px;
+      }
+
+      .resume-main {
+        padding-top: 10px;
+      }
+
+      section {
+        margin-bottom: 10px;
+      }
+
+      h2 {
+        margin-bottom: 5px;
+        padding-bottom: 2px;
+        font-size: 10px;
+      }
+
+      .summary-block {
+        padding: 8px 10px 8px 12px;
+        border-left-width: 3px;
+      }
+
+      .summary-block .summary + .summary {
+        margin-top: 5px;
+      }
+
+      .summary {
+        font-size: 10.25px;
+        line-height: 1.35;
+      }
+
+      .skills {
+        gap: 4px;
+      }
+
+      .skill-group {
+        grid-template-columns: 1.32fr 3.5fr;
+        gap: 10px;
+        padding: 2px 0 4px;
+      }
+
+      .skill-group strong {
+        font-size: 9.8px;
+      }
+
+      h3 {
+        font-size: 11.2px;
+      }
+
+      .role-line {
+        margin-top: 1px;
+        font-size: 9.5px;
+      }
+
+      ul {
+        margin-top: 4px;
+        padding-left: 13px;
+      }
+
+      li {
+        margin-bottom: 2px;
+      }
+
+      .project {
+        margin-bottom: 9px;
+        padding-left: 9px;
+      }
+
+      .project-primary {
+        padding: 7px 9px 6px 10px;
+      }
+
+      .project-primary h3 {
+        font-size: 12px;
+      }
+
+      .secondary-section h3 {
+        font-size: 10.6px;
+      }
+
+      .secondary-section .project {
+        margin-bottom: 7px;
+      }
+
+      .experience-item {
+        grid-template-columns: 2fr 2.6fr;
+        gap: 10px;
+        padding: 3px 0;
+      }
+
+      .experience-item strong {
+        font-size: 10px;
+      }
+
+      .experience-item span {
+        font-size: 9.7px;
       }
 
       .print-note {
         display: none;
-      }
-
-      a {
-        color: inherit;
       }
     }
   </style>
@@ -213,146 +394,103 @@
 <body>
   <main class="resume-page" aria-label="Ryan Sharr resume">
     <header class="resume-header">
-      <div>
-        <h1>Ryan Sharr</h1>
-        <p class="headline">AI Orchestration Specialist | Codex Workflow Architect | Systems-Focused Technical Developer</p>
-      </div>
+      <h1>Ryan Sharr</h1>
+      <p class="headline">AI Assisted Development Engineer / AI Workflow Systems Engineer</p>
       <address class="contact">
         <a href="mailto:hello@ryansharr.com">hello@ryansharr.com</a>
-        <a href="https://ryansharr.com">ryansharr.com</a>
-        <a href="https://www.linkedin.com/in/ryan-sharr/">linkedin.com/in/ryan-sharr</a>
+        <span>Remote, US</span>
+        <a class="primary-link" href="https://ryansharr.com">Workflow archive: ryansharr.com</a>
+        <a href="https://www.linkedin.com/in/ryan-sharr/">LinkedIn: linkedin.com/in/ryan-sharr</a>
       </address>
     </header>
 
     <div class="resume-main">
-      <aside>
-        <section>
-          <h2>Profile</h2>
+      <section>
+        <h2>Summary</h2>
+        <div class="summary-block">
           <p class="summary">
-            AI orchestration and systems developer focused on turning Codex and AI coding agents into controlled, reviewable engineering workflows. I design repository rules, task queues, validation loops, evidence logs, system maps, and reusable operating layers so AI work is scoped, auditable, and safe to extend. My Unity/C# background gives me practical depth in complex runtime systems, tooling, debugging, and generated asset pipelines.
+            AI assisted development engineer building structured workflows for coding agents like Codex, Claude Code, and Cursor. I design project environments where AI works through scoped tasks, project rules, system maps, validation checks, evidence logs, and documentation updates instead of loose prompt-to-code guessing.
           </p>
-        </section>
+          <p class="summary">
+            Background in Unity/C#, UEFN/Verse, gameplay systems, simulation tooling, and runtime architecture. Current focus is moving quickly from vague idea to working prototype while keeping output reviewable, testable, and maintainable.
+          </p>
+        </div>
+      </section>
 
-        <section>
-          <h2>Core Skills</h2>
-          <ul class="compact-list">
-            <li>AI orchestration, Codex workflows, agent operating rules</li>
-            <li>Prompt-to-task decomposition, scoped queues, acceptance criteria</li>
-            <li>Repository doctrine, system maps, decision records, task memory</li>
-            <li>Validation design, evidence logs, stale-code sweeps, review gates</li>
-            <li>Generated asset safety, sync tools, source-of-truth enforcement</li>
-            <li>Unity, C#, gameplay architecture, runtime/editor tooling</li>
-            <li>Complex debugging across interacting systems and pipelines</li>
-            <li>Technical documentation for human and AI-assisted execution</li>
+      <section>
+        <h2>Core Skills</h2>
+        <div class="skills">
+          <p class="skill-group"><strong>AI Assisted Development</strong><span>Codex, Claude Code, Cursor, ChatGPT, Gemini, coding-agent workflows.</span></p>
+          <p class="skill-group"><strong>Workflow Engineering</strong><span>Task queues, scoped execution, project rules, system maps, doctrine files, evidence logs.</span></p>
+          <p class="skill-group"><strong>Validation</strong><span>Compile checks, parser checks, runtime logs, screenshot evidence, implementation reports.</span></p>
+          <p class="skill-group"><strong>Automation and Tooling</strong><span>Unity editor tools, generated asset workflows, JSON, scripting, source-of-truth enforcement.</span></p>
+          <p class="skill-group"><strong>Software Systems</strong><span>C#, JavaScript, Python scripting, Unity, UEFN/Verse, Git, runtime architecture.</span></p>
+        </div>
+      </section>
+
+      <section>
+        <h2>Selected AI Workflow Work</h2>
+        <article class="project project-primary">
+          <h3>Controlled AI Development Workflow</h3>
+          <p class="role-line">Repo-structured workflow for Codex-assisted software development</p>
+          <ul>
+            <li>Converted vague human requests into scoped queue items with owners, acceptance criteria, and evidence requirements.</li>
+            <li>Used project rules, system maps, doctrine files, and script contracts to control what Codex reads and changes.</li>
+            <li>Recorded validation, implementation reports, evidence logs, and documentation updates so future sessions inherit context.</li>
           </ul>
-        </section>
+        </article>
 
-        <section>
-          <h2>Keywords</h2>
-          <ul class="keyword-list" aria-label="Resume keywords">
-            <li>Unity</li>
-            <li>C#</li>
-            <li>AI-Assisted Development</li>
-            <li>AI Orchestration</li>
-            <li>AI Workflow Architecture</li>
-            <li>OpenAI Codex</li>
-            <li>Prompt Engineering</li>
-            <li>Agentic Workflows</li>
-            <li>Human-in-the-Loop AI</li>
-            <li>AI Governance</li>
-            <li>Repository Automation</li>
-            <li>Workflow Automation</li>
-            <li>Validation Pipelines</li>
-            <li>Technical Documentation</li>
-            <li>Tools Programming</li>
-            <li>Editor Tooling</li>
-            <li>Gameplay Systems</li>
-            <li>Game Architecture</li>
-            <li>Debugging</li>
+        <article class="project">
+          <h3>Foundation Seed / Plant Workflow</h3>
+          <p class="role-line">Reusable project structure for AI assisted development across complex projects</p>
+          <ul>
+            <li>Separated reusable workflow structure from project-specific implementation state.</li>
+            <li>Used queues, doctrine, system maps, logs, generated-file boundaries, and validation expectations to guide AI assisted work.</li>
+            <li>Built the system around the principle that the prompt starts the work, but the project controls the work.</li>
           </ul>
-        </section>
+        </article>
 
-        <section>
-          <h2>Technical Stack</h2>
-          <ul class="compact-list">
-            <li>OpenAI Codex, AI-assisted coding workflows, prompt/task systems</li>
-            <li>Git repositories, project rules, queue files, logs, validation reports</li>
-            <li>Unity Engine, C#, ScriptableObjects, custom inspectors, sync tooling</li>
-            <li>HTML, CSS, JavaScript for portfolio, documentation, and tool interfaces</li>
+        <article class="project">
+          <h3>Rapid AI Prototype Development</h3>
+          <p class="role-line">Vague idea to working software through AI-assisted implementation and review</p>
+          <ul>
+            <li>Converted ambiguous requests into working software demos, structured workflows, and reviewable outputs.</li>
+            <li>Built browser and Unity prototypes with documentation, validation notes, and visible system behavior.</li>
+            <li>Used AI tools to accelerate implementation while preserving human review, system ownership, and debugging visibility.</li>
           </ul>
-        </section>
-      </aside>
+        </article>
+      </section>
 
-      <div>
-        <section>
-          <h2>Selected Project Work</h2>
+      <section class="secondary-section">
+        <h2>Systems Engineering Background</h2>
+        <article class="project">
+          <h3>Unity, UEFN, Gameplay, Tools, and Runtime Systems</h3>
+          <p class="role-line">Supporting engineering depth for complex runtime systems and AI assisted implementation.</p>
+          <ul>
+            <li>Built gameplay and simulation systems across Unity/C#, UEFN/Verse, and interactive prototypes.</li>
+            <li>Designed runtime systems for stats, conditions, buffs/debuffs, AI behavior, traversal, input, UI, physics, rendering, and generated assets.</li>
+            <li>Led UEFN gameplay systems work at Loot Foundry, translating design and art goals into structured runtime systems under production constraints.</li>
+          </ul>
+        </article>
 
-          <article class="project">
-            <h3>Controlled AI Development Workflow</h3>
-            <p class="role-line">AI orchestration, Codex operating layer, repo doctrine, validation systems, task evidence</p>
-            <ul>
-              <li>Designed a repeatable AI orchestration workflow where human requests become scoped queue items with acceptance criteria, validation evidence, system-map updates, and stop conditions.</li>
-              <li>Built repository doctrine around generated asset safety, stale-code sweeps, runtime/editor ownership, single-owner reuse, prompt memory, and evidence-backed completion.</li>
-              <li>Structured Codex so it reads project rules before editing, changes source owners instead of generated outputs, records proof, and stops after the assigned task.</li>
-              <li>Created portfolio documentation showing how AI-assisted development can be controlled by repository architecture instead of loose prompt-to-code guessing.</li>
-            </ul>
-          </article>
+        <article class="project">
+          <h3>Production Art and Pipeline Background</h3>
+          <p class="role-line">Production background that informs tools, rendering, content pipelines, and gameplay systems.</p>
+          <ul>
+            <li>Worked as a 3D Character Artist at Gas Powered Games on Age of Empires Online.</li>
+            <li>Built production-ready character assets within technical constraints.</li>
+          </ul>
+        </article>
+      </section>
 
-          <article class="project">
-            <h3>Foundation Seed to Plant Operating Layer</h3>
-            <p class="role-line">Reusable AI workflow framework, human-in-the-loop execution, project memory</p>
-            <ul>
-              <li>Separated reusable AI operating rules from project-specific implementation maps so proven workflow patterns can move between projects.</li>
-              <li>Defined a human-in-the-loop model where human interaction triggers project growth, while the foundation layer governs task routing, validation, documentation, and recovery.</li>
-            </ul>
-          </article>
-
-          <article class="project">
-            <h3>Physics-Based Traversal System</h3>
-            <p class="role-line">Unity C# systems depth, gameplay controller, grapple, glider, movement state transitions</p>
-            <ul>
-              <li>Built a kinematic traversal prototype with grappling, gliding, momentum control, rope wrapping, and clean movement state switching.</li>
-              <li>Separated grapple, glide, and base movement logic so input, game state, and transitions remain predictable and debuggable.</li>
-            </ul>
-          </article>
-
-          <article class="project">
-            <h3>Modular Combat and Stat Framework</h3>
-            <p class="role-line">Combat systems, extensible stats, modifiers, conditions, debugging tools</p>
-            <ul>
-              <li>Implemented reusable combat/stat domains for damage, runtime modifiers, buffs, debuffs, conditions, and data-driven configuration.</li>
-              <li>Structured gameplay around shared systems instead of hardcoded character behavior, improving extensibility and testability.</li>
-            </ul>
-          </article>
-
-          <article class="project">
-            <h3>Physics-Driven Combat Prototype</h3>
-            <p class="role-line">Active ragdoll combat, shared controller, enemy behavior, move system</p>
-            <ul>
-              <li>Built a physical combat prototype where player and enemy actors share the same controller and differ primarily by input source.</li>
-              <li>Implemented click/hold punch and kick moves with consistent hit, movement, and reaction behavior through shared physical logic.</li>
-            </ul>
-          </article>
-
-          <article class="project">
-            <h3>2D/3D Hybrid Rendering Pipeline</h3>
-            <p class="role-line">Modular characters, tilemaps, A* pathfinding, sprite generation, visibility systems</p>
-            <ul>
-              <li>Built an isometric 2D-style game foundation on 3D systems, combining tilemap movement, projectiles, collision, modular equipment, and generated sprites.</li>
-              <li>Implemented pathfinding, local avoidance, dynamic obstacle handling, terrain shaders, and fog-of-war style visibility masking.</li>
-            </ul>
-          </article>
-
-          <article class="project">
-            <h3>Realtime Rendering and Procedural VFX Tools</h3>
-            <p class="role-line">Shaders, SDF raymarching, screen-space growth, editor tooling</p>
-            <ul>
-              <li>Built screen-space procedural growth driven by radius-based gameplay zones and custom shader passes.</li>
-              <li>Created realtime volumetric cloud tooling using signed distance fields, raymarching, layered shape controls, and custom inspector workflows.</li>
-            </ul>
-          </article>
-        </section>
-      </div>
+      <section class="secondary-section">
+        <h2>Experience</h2>
+        <div class="experience-list">
+          <p class="experience-item"><strong>Self Directed AI Workflow and Systems Development</strong><span>Built AI assisted development workflows, Unity/C# systems, prototypes, validation processes, and documentation.</span></p>
+          <p class="experience-item"><strong>Engineering Lead / Creative Director, Loot Foundry</strong><span>Technical direction, systems design, creative production, team and project leadership.</span></p>
+          <p class="experience-item"><strong>3D Character Artist, Gas Powered Games</strong><span>Production art background that informs later tools, rendering, pipeline, and gameplay systems work.</span></p>
+        </div>
+      </section>
     </div>
   </main>
 

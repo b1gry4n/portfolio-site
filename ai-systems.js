@@ -59,7 +59,7 @@
     },
     {
       id: "doctrine-maps",
-      title: "Codex reads doctrine/maps",
+      title: "Codex reads doctrine",
       subtitle: "Rules and ownership load first",
       preview: "Codex reads startup instructions, doctrine, system maps, decisions, and current queue state before editing.",
       thumbnail: "./assets/player-dev-tools.svg",
@@ -231,6 +231,7 @@
     "human-request": {
       stepLabel: "01 Workflow step",
       badge: "Input",
+      takeaway: "Vague input becomes controlled intent.",
       artifact: {
         type: "quote",
         label: "Raw input",
@@ -261,10 +262,17 @@
     "queue-item": {
       stepLabel: "02 Workflow step",
       badge: "Task",
+      takeaway: "The request becomes one assigned task.",
       artifact: {
         type: "task",
         label: "Tracked task",
-        text: "Q-20260515-320\nStatus: active\nOwner: Plant.Runtime\nScope: runtime capability refactor\nEvidence: compile checks, focused tests, implementation report\nCompletion: validate, log evidence, close item"
+        fields: [
+          { label: "Queue ID", value: "Q-20260515-320" },
+          { label: "Owner", value: "Plant.Runtime" },
+          { label: "Scope", value: "runtime capability refactor" },
+          { label: "Evidence required", value: "compile checks, focused tests, implementation report" },
+          { label: "Completion rule", value: "validate, log evidence, close item" }
+        ]
       },
       solves: [
         "Prevents prompt drift by converting the request into one assigned work item.",
@@ -288,6 +296,7 @@
     "doctrine-maps": {
       stepLabel: "03 Workflow step",
       badge: "Context",
+      takeaway: "Codex reads rules before touching files.",
       artifact: {
         type: "stack",
         label: "Context load order",
@@ -324,6 +333,7 @@
     "scoped-code-changes": {
       stepLabel: "04 Workflow step",
       badge: "Change",
+      takeaway: "Only owned files move.",
       artifact: {
         type: "diff",
         label: "Bounded file change",
@@ -362,6 +372,7 @@
     "validation": {
       stepLabel: "05 Workflow step",
       badge: "Check",
+      takeaway: "Done means checked.",
       artifact: {
         type: "checklist",
         label: "Validation result",
@@ -397,10 +408,16 @@
     "evidence-log": {
       stepLabel: "06 Workflow step",
       badge: "Record",
+      takeaway: "Proof survives the session.",
       artifact: {
         type: "log",
         label: "Recorded proof",
-        text: "{\n  \"queueItem\": \"Q-20260515-320\",\n  \"status\": \"validated\",\n  \"owner\": \"Plant.Runtime\",\n  \"changedArtifacts\": [\n    \"CapabilityOwner.cs\",\n    \"CapabilityTypes.cs\",\n    \"CapabilityValidationTests.cs\"\n  ],\n  \"validation\": [\n    \"runtime compile passed\",\n    \"editor tests passed\",\n    \"stale scan clean\"\n  ],\n  \"report\": \"_Plant/SystemMap/CapabilityRefactorReport.md\"\n}"
+        fields: [
+          { label: "queueItem", value: "Q-20260515-320" },
+          { label: "changedArtifacts", value: "CapabilityOwner.cs, CapabilityTypes.cs, CapabilityValidationTests.cs" },
+          { label: "validation", value: "runtime compile passed, editor tests passed, stale scan clean" },
+          { label: "report", value: "_Plant/SystemMap/CapabilityRefactorReport.md" }
+        ]
       },
       solves: [
         "Prevents completed work from disappearing into chat history.",
@@ -424,6 +441,7 @@
     "docs-updated": {
       stepLabel: "07 Workflow step",
       badge: "Memory",
+      takeaway: "The repo remembers.",
       artifact: {
         type: "compare",
         label: "Project memory update",
@@ -462,6 +480,7 @@
     "next-queue-item": {
       stepLabel: "08 Workflow step",
       badge: "Handoff",
+      takeaway: "AI stops; the human decides what runs next.",
       artifact: {
         type: "handoff",
         label: "Controlled handoff",
@@ -473,7 +492,8 @@
           { text: "Logged", status: "done" },
           { text: "Closed", status: "done" },
           { text: "Next item awaits explicit assignment", status: "next" }
-        ]
+        ],
+        note: "Next item awaits explicit assignment"
       },
       solves: [
         "Prevents Codex from automatically drifting into unrelated work.",
@@ -504,12 +524,15 @@
   const title = document.getElementById("aiSystemModalTitle");
   const badge = document.getElementById("aiSystemModalBadge");
   const subtitle = document.getElementById("aiSystemModalSubtitle");
+  const takeaway = document.getElementById("aiSystemModalTakeaway");
   const artifactLabel = document.getElementById("aiSystemArtifactLabel");
   const artifact = document.getElementById("aiSystemArtifact");
   const solves = document.getElementById("aiSystemSolves");
   const works = document.getElementById("aiSystemWorks");
   const matters = document.getElementById("aiSystemMatters");
   const files = document.getElementById("aiSystemFiles");
+  const previousButton = document.getElementById("aiSystemModalPrev");
+  const nextButton = document.getElementById("aiSystemModalNext");
   let activeSystem = null;
   let lockedScrollY = 0;
 
@@ -575,6 +598,23 @@
     }
 
     if (details.artifact.type === "task" || details.artifact.type === "log") {
+      if (details.artifact.fields) {
+        const grid = document.createElement("div");
+        grid.className = details.artifact.type === "task" ? "ai-artifact-field-grid" : "ai-artifact-proof-summary";
+        details.artifact.fields.forEach(function (field) {
+          const item = document.createElement("div");
+          const fieldLabel = document.createElement("span");
+          const fieldValue = document.createElement("strong");
+          fieldLabel.textContent = field.label;
+          fieldValue.textContent = field.value;
+          item.appendChild(fieldLabel);
+          item.appendChild(fieldValue);
+          grid.appendChild(item);
+        });
+        artifact.appendChild(grid);
+        return;
+      }
+
       const code = document.createElement("pre");
       code.textContent = details.artifact.text;
       artifact.appendChild(code);
@@ -597,6 +637,12 @@
         list.appendChild(li);
       });
       artifact.appendChild(list);
+      if (details.artifact.note) {
+        const note = document.createElement("p");
+        note.className = "ai-artifact-handoff-note";
+        note.textContent = details.artifact.note;
+        artifact.appendChild(note);
+      }
       return;
     }
 
@@ -645,20 +691,40 @@
       return;
     }
 
+    const shouldLockScroll = modal.hidden;
     activeSystem = system;
     const details = workflowDetails[system.id];
     label.textContent = details.stepLabel;
     title.textContent = system.title;
     subtitle.textContent = system.subtitle;
     badge.textContent = details.badge;
+    takeaway.textContent = details.takeaway || "";
     renderArtifact(details);
     setParagraphs(solves, details.solves);
     setParagraphs(works, details.works);
     setParagraphs(matters, details.matters);
     setFiles(details.files);
+    updateModalNavigation(system.id);
     modal.hidden = false;
     modal.scrollTop = 0;
-    setScrollLock(true);
+    if (shouldLockScroll) {
+      setScrollLock(true);
+    }
+  }
+
+  function updateModalNavigation(systemId) {
+    const currentIndex = workflowSteps.findIndex(function (item) {
+      return item.id === systemId;
+    });
+    const previous = workflowSteps[currentIndex - 1];
+    const next = workflowSteps[currentIndex + 1];
+
+    previousButton.disabled = !previous;
+    nextButton.disabled = !next;
+    previousButton.textContent = previous ? "Previous: " + previous.title : "Previous step";
+    nextButton.textContent = next ? "Next: " + next.title : "Next step";
+    previousButton.dataset.target = previous ? previous.id : "";
+    nextButton.dataset.target = next ? next.id : "";
   }
 
   function closeModal() {
@@ -721,6 +787,14 @@
   });
 
   closeButton.addEventListener("click", closeModal);
+
+  [previousButton, nextButton].forEach(function (button) {
+    button.addEventListener("click", function () {
+      if (button.dataset.target) {
+        openSystem(button.dataset.target);
+      }
+    });
+  });
 
   modal.addEventListener("click", function (event) {
     const closeTarget = event.target instanceof Element ? event.target.closest("[data-ai-modal-close='true']") : null;

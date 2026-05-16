@@ -2982,6 +2982,10 @@ h2 {
   line-height: 1.55;
 }
 
+.ai-archive-page .article-header .article-deck {
+  max-width: none;
+}
+
 .article p {
   margin: 0.8rem 0;
   color: #2e3339;
@@ -4304,6 +4308,19 @@ h2 {
   line-height: 1.5;
 }
 
+.ai-modal-takeaway {
+  display: inline-block;
+  margin-top: 0.7rem;
+  padding: 0.45rem 0.65rem;
+  border-left: 3px solid var(--article-accent);
+  background: rgba(12, 107, 111, 0.07);
+  color: var(--article-ink);
+  font-family: "Manrope", sans-serif;
+  font-size: 0.92rem;
+  font-weight: 800;
+  line-height: 1.35;
+}
+
 .ai-modal-layout {
   display: grid;
   grid-template-columns: minmax(0, 1.15fr) minmax(18rem, 0.85fr);
@@ -4320,9 +4337,9 @@ h2 {
   margin: 0 0 0.45rem;
   color: var(--article-accent);
   font-family: "IBM Plex Mono", monospace;
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
 }
 
@@ -4359,6 +4376,46 @@ h2 {
   font-family: "IBM Plex Mono", monospace;
   font-size: 0.82rem;
   line-height: 1.55;
+}
+
+.ai-artifact-field-grid,
+.ai-artifact-proof-summary {
+  display: grid;
+  gap: 0.65rem;
+}
+
+.ai-artifact-field-grid > div,
+.ai-artifact-proof-summary > div {
+  padding: 0.75rem 0.85rem;
+  border: 1px solid rgba(12, 107, 111, 0.16);
+  background: rgba(255, 253, 248, 0.72);
+}
+
+.ai-artifact-field-grid span,
+.ai-artifact-proof-summary span {
+  display: block;
+  margin-bottom: 0.24rem;
+  color: var(--article-accent);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.ai-artifact-field-grid strong,
+.ai-artifact-proof-summary strong {
+  display: block;
+  color: #172024;
+  font-family: "Manrope", sans-serif;
+  font-size: 0.9rem;
+  line-height: 1.35;
+}
+
+.ai-artifact-proof-summary > div:first-child,
+.ai-artifact-proof-summary > div:last-child {
+  border-color: rgba(12, 107, 111, 0.28);
+  background: rgba(12, 107, 111, 0.075);
 }
 
 .ai-artifact-normalized {
@@ -4437,6 +4494,18 @@ h2 {
   border: 2px solid var(--article-accent);
 }
 
+.ai-artifact-handoff-note {
+  margin: 0.85rem 0 0;
+  padding: 0.7rem 0.8rem;
+  border: 1px solid rgba(12, 107, 111, 0.22);
+  background: rgba(12, 107, 111, 0.075);
+  color: var(--article-accent);
+  font-family: "Manrope", sans-serif;
+  font-size: 0.88rem;
+  font-weight: 800;
+  line-height: 1.35;
+}
+
 .ai-artifact-columns {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -4505,17 +4574,18 @@ h2 {
 }
 
 .ai-modal-files {
-  margin-top: 1rem;
-  padding-top: 0.9rem;
+  margin-top: 0.9rem;
+  padding-top: 0.75rem;
   border-top: 1px solid var(--article-faint);
 }
 
 .ai-modal-files h3 {
   margin: 0 0 0.55rem;
-  color: var(--article-ink);
+  color: var(--article-muted);
   font-family: "Manrope", sans-serif;
-  font-size: 0.84rem;
+  font-size: 0.76rem;
   font-weight: 800;
+  text-transform: uppercase;
 }
 
 .ai-modal-files ul {
@@ -4528,13 +4598,44 @@ h2 {
 }
 
 .ai-modal-files li {
-  padding: 0.32rem 0.52rem;
+  padding: 0.26rem 0.44rem;
   border: 1px solid rgba(12, 107, 111, 0.18);
   background: rgba(12, 107, 111, 0.055);
-  color: #273038;
+  color: var(--article-muted);
   font-family: "IBM Plex Mono", monospace;
-  font-size: 0.72rem;
+  font-size: 0.7rem;
   font-weight: 700;
+}
+
+.ai-modal-nav {
+  margin-top: 1rem;
+  padding-top: 0.9rem;
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+  border-top: 1px solid var(--article-faint);
+}
+
+.ai-modal-nav-button {
+  min-height: 2.35rem;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid rgba(12, 107, 111, 0.24);
+  background: rgba(255, 253, 248, 0.82);
+  color: var(--article-accent);
+  font-family: "Manrope", sans-serif;
+  font-size: 0.84rem;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.ai-modal-nav-button:hover:not(:disabled) {
+  border-color: rgba(12, 107, 111, 0.42);
+  background: var(--article-accent-soft);
+}
+
+.ai-modal-nav-button:disabled {
+  cursor: default;
+  opacity: 0.45;
 }
 
 @media (max-width: 980px) {

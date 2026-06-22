@@ -3,650 +3,250 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Controlled Codex Development Workflow | Ryan Sharr</title>
-  <meta
-    name="description"
-    content="Ryan Sharr explains what Codex is and how he uses a controlled development workflow: repo rules, tracked tasks, correct file changes, checks, logs, and concrete debugging examples."
-  >
-  <meta property="og:title" content="Controlled Codex Development Workflow | Ryan Sharr">
-  <meta property="og:description" content="What Codex is, how it compares to Claude-style AI coding tools, and how Ryan Sharr uses repo rules, task state, checks, logs, and reviewable changes to control AI-assisted development.">
-  <meta property="og:url" content="https://ryansharr.com/">
-  <meta property="og:type" content="article">
-  <meta property="og:site_name" content="Ryan Sharr">
-  <meta property="og:image" content="https://ryansharr.com/preview.png">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Controlled Codex Development Workflow | Ryan Sharr">
-  <meta name="twitter:description" content="What Codex is and how I turn it from prompt-response into a controlled software development workflow.">
-  <meta name="twitter:image" content="https://ryansharr.com/preview.png">
+  <title>Ryan Sharr | Unity, Technical Art, AI-Assisted Game Production</title>
+  <meta name="description" content="Ryan Sharr builds Unity/C# gameplay systems, technical art pipelines, editor tools, and controlled AI-assisted game production workflows.">
   <link rel="canonical" href="https://ryansharr.com/">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Literata:opsz,wght@7..72,400;7..72,600;7..72,700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./styles.css">
 </head>
-<body class="article-page ai-archive-page">
-  <header class="article-nav" aria-label="Primary">
-    <a href="./index.html" aria-current="page">Ryan Sharr</a>
-    <nav>
-      <a href="#ai-systems">AI Systems Archive</a>
-      <a href="./unity.html">Unity Portfolio</a>
-      <a href="./resume.html">Resume</a>
-      <a href="mailto:hello@ryansharr.com">Contact</a>
-    </nav>
+<body>
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a class="brand" href="./index.html" aria-current="page">Ryan Sharr</a>
+      <nav class="site-nav" aria-label="Primary navigation">
+        <a href="./unity.html">Game Work</a>
+        <a href="./ai-systems.html">AI Workflow</a>
+        <a href="./resume.html">Resume</a>
+        <a href="mailto:hello@ryansharr.com">Contact</a>
+      </nav>
+    </div>
   </header>
 
-  <main class="article-shell">
-    <article class="article article-brief">
-      <section class="meta-layer-intro" aria-labelledby="meta-layer-title">
-        <div class="meta-layer-copy">
-          <p class="article-label">Meta layer</p>
-          <h1 id="meta-layer-title">Foundation -> Plant concept</h1>
-          <p>
-            Project growth is triggered by human interaction based in the foundation seed as a reusable operating layer.
-          </p>
-        </div>
-
-        <div class="meta-layer-visual" aria-label="Foundation Seed to Plant mental model">
-          <div class="meta-plant">
-            <div class="meta-plant-canopy">
-              <span>Project growth</span>
-              <small>systems · tools · reports · outputs</small>
-            </div>
-
-            <div class="meta-plant-feedback" aria-hidden="true">
-              <span></span>
-              <small>reusable patterns return to foundation</small>
-            </div>
-
-            <div class="meta-plant-water">
-              <span>Water</span>
-              <small>human interaction</small>
-              <b>intent</b>
-              <b>review</b>
-            </div>
-
-            <div class="meta-plant-growth" aria-hidden="true">
-              <span class="meta-plant-leaf meta-plant-leaf-left"></span>
-              <span class="meta-plant-stem"></span>
-              <span class="meta-plant-leaf meta-plant-leaf-right"></span>
-              <span class="meta-plant-arrow"></span>
-              <ol class="meta-plant-build-steps">
-                <li>map</li>
-                <li>plan</li>
-                <li>build</li>
-                <li>verify</li>
-                <li>remember</li>
-              </ol>
-            </div>
-
-            <div class="meta-plant-drops" aria-hidden="true">
-              <span></span>
-              <span></span>
-            </div>
-            <div class="meta-plant-foundation">
-              <div class="meta-plant-seed-bed" aria-hidden="true">
-                <i class="meta-plant-seed"></i>
-                <span class="meta-plant-seed-label">Seed</span>
-              </div>
-              <span>Foundation Seed</span>
-              <small>reusable operating layer</small>
-              <ul class="meta-plant-foundation-parts" aria-label="Foundation Seed components">
-                <li>rules</li>
-                <li>maps</li>
-                <li>validation</li>
-                <li>queue doctrine</li>
-                <li>script contracts</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <div class="index-ai-separator index-ai-separator-before-workflow" aria-hidden="true"></div>
-
-      <section class="ai-workflow-stage index-ai-workflow" id="ai-systems" aria-labelledby="workflow-map-title">
-        <div class="ai-workflow-titlebar">
-          <p class="article-label">Interactive workflow map</p>
-          <h1 id="workflow-map-title">Controlled AI Development Workflow</h1>
-          <p class="ai-workflow-deck">
-            This archive shows how I structure AI-assisted development so Codex operates through scoped tasks, project rules,
-            system maps, validation, logs, and reusable architecture instead of loose prompt-to-code guessing.
-          </p>
-          <p class="ai-workflow-hint">Select any stage to see the system behind that step.</p>
-        </div>
-
-        <div class="ai-workflow-map" id="aiWorkflowMap" aria-label="Controlled AI development workflow"></div>
-      </section>
-
-      <div class="index-ai-separator index-ai-separator-after-workflow" aria-hidden="true"></div>
-
-      <header class="article-header">
-        <p class="article-label">AI-Assisted Engineering</p>
-        <h1>I make the repository control Codex, not the other way around</h1>
-        <p class="article-deck">
-          Most people use Codex like a chat window: ask for code, accept a patch, hope it works. I built a repo workflow
-          where Codex has to read project rules, take one written task, change the correct files, run checks, and record
-          what happened before moving on. That is the difference between using AI as a code generator and using AI inside
-          an actual engineering process.
+  <main>
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">Unity / C# gameplay systems - technical art - guarded AI workflow</p>
+        <h1>Art direction. Engine execution. Production workflow.</h1>
+        <p class="hero-deck">
+          I worked on character art production for Age of Empires Online under brutal real-time asset budgets, led engineering
+          direction on a branded He-Man UEFN project, and now build Unity/C# systems with controlled AI-assisted workflows.
+          That mix is the point.
         </p>
-        <div class="hiring-signal" aria-label="Hiring signal">
-          <p class="hiring-kicker">What this demonstrates</p>
-
-          <div class="hiring-grid">
-            <section class="hiring-card" aria-labelledby="hiring-ai-workflow">
-              <h2 id="hiring-ai-workflow">AI workflow architecture</h2>
-              <p>
-                I design the operating layer around Codex: startup instructions, project rules,
-                task state, validation paths, logs, and repo memory.
-              </p>
-            </section>
-
-            <section class="hiring-card" aria-labelledby="hiring-agent-execution">
-              <h2 id="hiring-agent-execution">Controlled agent execution</h2>
-              <p>
-                Codex does not freely wander the codebase. It enters through a defined path,
-                works one written task at a time, checks the responsible files, and records
-                what changed.
-              </p>
-            </section>
-
-            <section class="hiring-card" aria-labelledby="hiring-validation">
-              <h2 id="hiring-validation">Validation-driven development</h2>
-              <p>
-                I use build checks, parser checks, runtime logs, screenshots, and manual
-                verification notes to prove whether AI-assisted work actually solved the problem.
-              </p>
-            </section>
-
-            <section class="hiring-card" aria-labelledby="hiring-systems-background">
-              <h2 id="hiring-systems-background">Systems engineering background</h2>
-              <p>
-                My game development background gives me practical experience with state,
-                runtime behavior, generated assets, tooling pipelines, debugging, and complex
-                interacting systems.
-              </p>
-            </section>
-          </div>
+        <p class="hero-deck secondary">
+          I can talk to artists about shape language and deformation, talk to engineers about runtime ownership and validation,
+          and talk to producers about what actually moved the build closer to playable.
+        </p>
+        <div class="hero-actions">
+          <a class="button primary" href="./unity.html">View game work</a>
+          <a class="button" href="./ai-systems.html">See the AI workflow</a>
+          <a class="button quiet" href="./assets/Ryan_Sharr_Resume.pdf">Download resume</a>
         </div>
-      </header>
-
-<section class="codex-explainer" aria-labelledby="codex-title">
-  <div class="codex-explainer-copy">
-    <h2 id="codex-title">What is Codex?</h2>
-    <p>
-      Codex is OpenAI's software engineering agent. It can read a repository,
-      inspect files, edit code, run commands, fix bugs, explain unfamiliar systems,
-      and return changes for review. If you already know Claude, the closest
-      comparison is not ordinary Claude chat, but Claude Code: both are coding
-      agents that can work across a real codebase instead of only answering
-      questions in a chat window.
-    </p>
-    <p>
-      The reason I focus on Codex is the way it fits into a repo-connected
-      engineering loop: local work, cloud tasks, GitHub-connected review, pull
-      request workflows, project instructions, and repeatable task execution.
-      My workflow is built around making that agent behave like part of a
-      controlled development system instead of a loose code generator.
-    </p>
-    <p>
-      The important difference is not brand rivalry. A coding agent becomes useful
-      only when the project gives it structure. Codex needs to know what to read
-      first, what rules govern the repo, which files it may change, how work gets
-      checked, and how decisions are recorded for the next session.
-    </p>
-  </div>
-
-  <div class="codex-comparison" aria-label="Coding assistant comparison">
-    <section class="codex-comparison-card" aria-labelledby="assistant-comparison-title">
-      <h3 id="assistant-comparison-title">General AI chat</h3>
-      <p>
-        Useful for explanation, brainstorming, pasted snippets, and isolated code help.
-        The user usually supplies the context and manually applies the result.
-      </p>
+      </div>
+      <div class="hero-proof" aria-label="Selected proof">
+        <img src="./assets/runtime-operator-room-route-clean.png" alt="Runtime operator playing the current Unity prototype">
+        <img src="./assets/judge-courtroom-prototype.png" alt="Judge prototype courtroom interface built through AI-assisted Unity workflow">
+        <img src="./assets/aoeo-roster.jpg" alt="Age of Empires Online character roster work">
+      </div>
     </section>
 
-    <section class="codex-comparison-card" aria-labelledby="agent-comparison-title">
-      <h3 id="agent-comparison-title">Coding agent</h3>
-      <p>
-        Works inside the project: reads files, edits code, runs commands, checks the
-        result, and returns changes that can be reviewed instead of copied by hand.
-      </p>
+    <section class="signal-grid" aria-label="Positioning summary">
+      <article>
+        <span>01</span>
+        <h2>Gameplay Systems</h2>
+        <p>Traversal, combat, stats, inventory, UI surfaces, input, progression gates, physics prototypes, and runtime state.</p>
+      </article>
+      <article>
+        <span>02</span>
+        <h2>Tools And Validation</h2>
+        <p>Unity editor tooling, sync pipelines, generated evidence, validation scans, runtime logs, and reviewable reports.</p>
+      </article>
+      <article>
+        <span>03</span>
+        <h2>Technical Art Roots</h2>
+        <p>Low-poly production, silhouette readability, topology, UV discipline, hand-painted textures, and engine constraints.</p>
+      </article>
+      <article>
+        <span>04</span>
+        <h2>AI With Guardrails</h2>
+        <p>Agent instruction files, system maps, prompt queues, source ownership rules, and checks that keep AI work bounded.</p>
+      </article>
     </section>
 
-    <section class="codex-comparison-card" aria-labelledby="codex-comparison-title">
-      <h3 id="codex-comparison-title">My Codex workflow</h3>
-      <p>
-        Adds the control layer around the agent: doctrine, task queues, system maps,
-        validation rules, runtime logs, generated-file boundaries, and recorded decisions.
-      </p>
+    <section class="split-section">
+      <div>
+        <h2>Cut pipeline friction without giving up control.</h2>
+      </div>
+      <div class="prose">
+        <p>
+          The useful part of AI in game development is not that it can write code. The useful part is what happens when a project
+          is structured so an agent can find the right owner, make a bounded change, validate it, and leave evidence for the next pass.
+        </p>
+        <p>
+          That is the lane I care about: faster iteration without turning the codebase into a junk pile. Clear owners. Small contracts.
+          Runtime proof. Tools that help humans and agents both understand the project.
+        </p>
+      </div>
     </section>
-  </div>
-</section>
 
-      <section class="brief-summary" aria-labelledby="problem-title">
-        <h2 id="problem-title">The problem I solved</h2>
-        <p>
-          AI coding gets messy when the prompt is the only thing controlling the work. The model may edit the wrong file,
-          forget earlier decisions, create a duplicate system, or produce code that looks right but breaks the project later.
-        </p>
-        <p>
-          My solution is to make the repository control the AI. A prompt starts the request, but the repo tells Codex how to
-          work: what rules to read, where the responsible code lives, what files are off limits, what checks count as done,
-          and what notes must be updated for the next session.
-        </p>
-      </section>
-
-      <section class="terms-block" aria-label="Plain-language definitions">
-        <dl>
-          <div>
-            <dt>Project rules</dt>
-            <dd>I call these doctrine in my repos. Plain meaning: written rules Codex must follow before changing code.</dd>
-          </div>
-          <div>
-            <dt>Startup file</dt>
-            <dd><code>AGENTS.md</code> is the first file Codex reads. It points Codex to the project rules, task list, architecture notes, and decisions.</dd>
-          </div>
-          <div>
-            <dt>Task list</dt>
-            <dd>A prompt becomes a written task. The task says what problem is being solved, what part of the project to inspect, and what must be shown before the task is complete.</dd>
-          </div>
-          <div>
-            <dt>Architecture notes</dt>
-            <dd>These are files inside the repo that explain what systems exist, what they do, and how they connect.</dd>
-          </div>
-        </dl>
-      </section>
-
-      <section aria-labelledby="built-title">
-        <h2 id="built-title">The system I built around Codex</h2>
-        <p>
-          I split the workflow into reusable engineering infrastructure and project-specific work. The reusable part defines
-          how Codex starts, how tasks are tracked, how generated files are protected, how checks run, how failures are logged,
-          and how old or unused code gets cleaned up. The project-specific part contains the actual product code, design notes,
-          generated asset sources, runtime logs, and current task state.
-        </p>
-        <p>
-          That structure matters because Codex no longer has to infer the whole codebase from a chat. It enters through the
-          same path every time, reads the current rules, uses the current architecture notes, works on one task, and leaves
-          the repo in a state the next Codex run can understand.
-        </p>
-      </section>
-
-      <section aria-labelledby="wrong-title">
-        <h2 id="wrong-title">Where most AI coding workflows go wrong</h2>
-        <p>
-          A lot of teams are still treating Codex like a faster autocomplete loop. That can work for small fixes, but it
-          breaks down when the codebase has generated files, long-running decisions, runtime behavior, editor tooling, and
-          systems that need to stay consistent over multiple sessions.
-        </p>
-		<div class="workflow-problem-list">
-  <article class="workflow-problem">
-    <div class="workflow-problem-pattern">
-      <span>Common pattern</span>
-      <h3>Prompt to code to quick fix to repeat.</h3>
-    </div>
-
-    <div class="workflow-problem-detail">
-      <span>Why it breaks</span>
-      <p>The same problems come back because nothing records what was learned or what rule should change.</p>
-    </div>
-
-    <div class="workflow-problem-detail workflow-problem-solution">
-      <span>My workflow</span>
-      <p>The prompt becomes a written task. Codex changes the right files, runs checks, and records the result for the next session.</p>
-    </div>
-  </article>
-
-  <article class="workflow-problem">
-    <div class="workflow-problem-pattern">
-      <span>Common pattern</span>
-      <h3>Cram every Codex instruction into <code>AGENTS.md</code>.</h3>
-    </div>
-
-    <div class="workflow-problem-detail">
-      <span>Why it breaks</span>
-      <p>The file turns into a giant manual. It gets hard to scan, easy to contradict, and painful to keep current.</p>
-    </div>
-
-    <div class="workflow-problem-detail workflow-problem-solution">
-      <span>My workflow</span>
-      <p><code>AGENTS.md</code> stays a startup map. It tells Codex what to read first and where the real project rules, tasks, decisions, and architecture notes live.</p>
-    </div>
-  </article>
-
-  <article class="workflow-problem">
-    <div class="workflow-problem-pattern">
-      <span>Common pattern</span>
-      <h3>Let chat history be the project memory.</h3>
-    </div>
-
-    <div class="workflow-problem-detail">
-      <span>Why it breaks</span>
-      <p>The next session loses important context or has to rediscover it from scratch.</p>
-    </div>
-
-    <div class="workflow-problem-detail workflow-problem-solution">
-      <span>My workflow</span>
-      <p>Important context lives in repo files: rules, decisions, architecture notes, task history, logs, and check results.</p>
-    </div>
-  </article>
-
-  <article class="workflow-problem">
-    <div class="workflow-problem-pattern">
-      <span>Common pattern</span>
-      <h3>Ask for a whole feature in one loose prompt.</h3>
-    </div>
-
-    <div class="workflow-problem-detail">
-      <span>Why it breaks</span>
-      <p>Codex may touch too much code, create duplicate systems, or solve the visible symptom instead of the real problem.</p>
-    </div>
-
-    <div class="workflow-problem-detail workflow-problem-solution">
-      <span>My workflow</span>
-      <p>The work is broken into clear tasks. Codex checks the existing system first, then changes the part of the code responsible for the behavior.</p>
-    </div>
-  </article>
-
-  <article class="workflow-problem">
-    <div class="workflow-problem-pattern">
-      <span>Common pattern</span>
-      <h3>Patch generated files by hand.</h3>
-    </div>
-
-    <div class="workflow-problem-detail">
-      <span>Why it breaks</span>
-      <p>The next generation pass can overwrite the fix, or the generated output stops matching the source data.</p>
-    </div>
-
-    <div class="workflow-problem-detail workflow-problem-solution">
-      <span>My workflow</span>
-      <p>Codex changes the generator, factory, authored data, or sync tool that creates the output.</p>
-    </div>
-  </article>
-
-  <article class="workflow-problem">
-    <div class="workflow-problem-pattern">
-      <span>Common pattern</span>
-      <h3>Treat a clean-looking patch as done.</h3>
-    </div>
-
-    <div class="workflow-problem-detail">
-      <span>Why it breaks</span>
-      <p>Code can look reasonable while runtime behavior is still broken.</p>
-    </div>
-
-    <div class="workflow-problem-detail workflow-problem-solution">
-      <span>My workflow</span>
-      <p>The check has to match the risk: build checks for code, parser checks for data, runtime logs for behavior, and screenshots or manual verification for visual work.</p>
-    </div>
-  </article>
-</div>
-
-      
-	  
-	  </section>
-
-      <section aria-labelledby="workflow-title">
-        <h2 id="workflow-title">How a request becomes working code</h2>
-        <figure class="article-flow" aria-label="Prompt to recorded result workflow">
-          <div>Prompt</div>
-          <span>to</span>
-          <div>Written task</div>
-          <span>to</span>
-          <div>Correct files</div>
-          <span>to</span>
-          <div>Checks</div>
-          <span>to</span>
-          <div>Notes + logs</div>
-        </figure>
-
-        <ol class="workflow-steps">
-          <li>
-            <strong>Write the request down as a task.</strong>
-            Codex does not just start editing. The request is captured as a task with a goal, relevant files or systems, and a definition of done.
-          </li>
-          <li>
-            <strong>Read the project instructions.</strong>
-            Codex loads the startup file, project rules, architecture notes, current task list, and recent decisions before it touches code.
-          </li>
-          <li>
-            <strong>Find the code that should handle the problem.</strong>
-            Before adding something new, Codex checks whether an existing system already owns that behavior.
-          </li>
-          <li>
-            <strong>Change the files that create the behavior.</strong>
-            If a scene, prefab, material, or data file is generated, Codex changes the source that creates it instead of hand-editing the generated copy.
-          </li>
-          <li>
-            <strong>Run the checks that match the risk.</strong>
-            Code changes need build checks. Data changes need parser checks. Runtime bugs need logs. Web changes need link and render checks.
-          </li>
-          <li>
-            <strong>Record what changed.</strong>
-            Codex updates the task history and architecture notes so the next session knows what happened and why.
-          </li>
-        </ol>
-      </section>
-
-      <section aria-labelledby="prevents-title">
-        <h2 id="prevents-title">What the workflow prevents</h2>
-        <table class="article-table">
-          <tbody>
-            <tr>
-              <th>Wrong-file fixes</th>
-              <td>Codex is directed to the source files that create the behavior, not generated output that will be overwritten later.</td>
-            </tr>
-            <tr>
-              <th>Duplicate systems</th>
-              <td>Codex has to check existing systems and extension points before inventing another way to solve the same problem.</td>
-            </tr>
-            <tr>
-              <th>Lost context</th>
-              <td>Important decisions live in repo files Codex can read, not only in one chat transcript.</td>
-            </tr>
-            <tr>
-              <th>Unverified changes</th>
-              <td>Work is not treated as done until the relevant check, log, screenshot, or human verification is recorded.</td>
-            </tr>
-          </tbody>
-        </table>
-      </section>
-
-      <section aria-labelledby="examples-title">
-        <h2 id="examples-title">Examples from real development work</h2>
-        <p>
-          These examples show the difference between asking an AI for code and making an AI operate inside an engineering
-          workflow. Codex had project rules, runtime logs, existing systems to respect, and checks it had to complete.
-        </p>
-
-        <div class="case-study-list">
-          <article class="case-study">
-            <h3>Fixing first-person object throwing</h3>
-            <dl>
-              <div>
-                <dt>Context</dt>
-                <dd>A first-person controller let the player pick up small physical objects, hold them in front of the camera, drop them, or charge and throw them.</dd>
-              </div>
-              <div>
-                <dt>Problem</dt>
-                <dd>Thrown objects looked like they disappeared or broke immediately instead of flying forward.</dd>
-              </div>
-              <div>
-                <dt>How Codex diagnosed it</dt>
-                <dd>Runtime logs showed the object was being released from the player root near the floor, not from the held position in front of the camera.</dd>
-              </div>
-              <div>
-                <dt>What Codex changed</dt>
-                <dd>Codex fixed the existing interaction and pickup-object code so the object releases from the carried pose, wakes up as a real physics body, restores gravity and collisions, and briefly ignores the player so it does not collide instantly.</dd>
-              </div>
-              <div>
-                <dt>How the work was checked</dt>
-                <dd>Codex ran build checks, verified project data files still parsed, scanned for unused code, checked input-system rules, and updated the architecture notes.</dd>
-              </div>
-              <div>
-                <dt>Why it matters</dt>
-                <dd>The fix solved the actual physics problem without creating a second inventory, throwing, or item system.</dd>
-              </div>
-            </dl>
-          </article>
-
-          <article class="case-study">
-            <h3>Stabilizing procedural creature movement</h3>
-            <dl>
-              <div>
-                <dt>Context</dt>
-                <dd>The project used small modular creatures with procedural legs. Their feet were placed at runtime instead of using fixed animation clips.</dd>
-              </div>
-              <div>
-                <dt>Problem</dt>
-                <dd>Creatures were getting stuck, taking tiny repeated steps, or dragging legs toward unreachable targets.</dd>
-              </div>
-              <div>
-                <dt>How Codex diagnosed it</dt>
-                <dd>Runtime traces showed repeated leg-support failures and bad foothold fallback events. That narrowed the issue to gait scheduling and foot target selection.</dd>
-              </div>
-              <div>
-                <dt>What Codex changed</dt>
-                <dd>Codex updated the procedural leg controller and animator so legs preserve support, avoid unreachable targets, and keep foot placement inside each leg's real movement range.</dd>
-              </div>
-              <div>
-                <dt>How the work was checked</dt>
-                <dd>Codex ran build checks, unused-code scans, input-system checks, data-file checks, and updated the architecture notes that describe the movement system.</dd>
-              </div>
-              <div>
-                <dt>Why it matters</dt>
-                <dd>The workflow used logs to target the responsible movement code instead of rewriting the whole creature system from a guess.</dd>
-              </div>
-            </dl>
-          </article>
-
-          <article class="case-study">
-            <h3>Protecting generated assets</h3>
-            <dl>
-              <div>
-                <dt>Context</dt>
-                <dd>Some objects are produced from source data and generator code. That is useful, but it means generated output should not be manually patched as if it were the real source.</dd>
-              </div>
-              <div>
-                <dt>Problem</dt>
-                <dd>Reusable equipment art was being created only as scene output, which made future generation runs risky because edits could be overwritten.</dd>
-              </div>
-              <div>
-                <dt>How Codex diagnosed it</dt>
-                <dd>The rules showed the boundary was wrong: reusable art needed to be produced as project assets before scene placement, not treated as one-off scene objects.</dd>
-              </div>
-              <div>
-                <dt>What Codex changed</dt>
-                <dd>Codex moved responsibility into the generator and sync source so meshes, materials, textures, and prefabs are produced from authored factory code before scenes use them.</dd>
-              </div>
-              <div>
-                <dt>How the work was checked</dt>
-                <dd>The generated-file rule was documented, architecture notes were updated, and blocked editor work was recorded instead of being hidden or marked done.</dd>
-              </div>
-              <div>
-                <dt>Why it matters</dt>
-                <dd>The workflow protected the production pipeline instead of making fragile hand edits that would disappear later.</dd>
-              </div>
-            </dl>
-          </article>
+    <section class="media-proof current-proof" aria-labelledby="latest-proof-title">
+      <div class="section-title">
+        <div>
+          <h2 id="latest-proof-title">Recent AI-assisted Unity workflow results</h2>
         </div>
-      </section>
+        <a class="button quiet" href="./ai-systems.html">Open workflow details</a>
+      </div>
+      <div class="media-grid">
+        <article class="media-card wide">
+          <img src="./assets/runtime-operator-route-progress.png" alt="Runtime operator advancing a first-arc route in the Unity prototype">
+          <div>
+            <span>Unity / C#, JSON, Python</span>
+            <h3>Runtime operator evidence from the current prototype</h3>
+            <p>The in-engine runner plays through route stages, invokes player-equivalent actions, records screenshots and logs, and exposes where the build actually progresses or blocks.</p>
+          </div>
+        </article>
+        <article class="media-card">
+          <img src="./assets/judge-concept-to-prototype.png" alt="Hand-drawn Judge courtroom concept compared to current Unity prototype">
+          <div>
+            <span>Unity / C#, JSON, Python</span>
+            <h3>Hand-drawn concept to playable courtroom prototype</h3>
+            <p>A rough layout became a functioning judge-console scene with case surfaces, status readouts, verdict controls, and runtime systems wired into the prototype.</p>
+          </div>
+        </article>
+        <article class="media-card">
+          <iframe class="video-embed" src="https://www.youtube.com/embed/Be6fmAvuETA" title="AI-assisted Unity runtime validation demo" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+          <div>
+            <span>Runtime validation</span>
+            <h3>Live-scene evidence, not just compile success</h3>
+            <p>Automated runners move, interact, capture screenshots, JSON reports, logs, intent, failed progress, and observed outcomes.</p>
+          </div>
+        </article>
+      </div>
+    </section>
 
-      <section aria-labelledby="difference-title">
-        <h2 id="difference-title">How my workflow differs from ordinary AI coding</h2>
-        <table class="article-table">
-          <tbody>
-            <tr>
-              <th>Ordinary AI coding</th>
-              <td>The prompt is treated as the work order, the memory, and the success criteria.</td>
-            </tr>
-            <tr>
-              <th>My workflow</th>
-              <td>The repo supplies the work order, memory, rules, and success criteria. The prompt starts the process; it does not control the whole process.</td>
-            </tr>
-            <tr>
-              <th>Ordinary AI coding</th>
-              <td>Instructions are either missing, trapped in chat history, or overloaded into one huge instruction file.</td>
-            </tr>
-            <tr>
-              <th>My workflow</th>
-              <td>Instructions are split by purpose: startup file, project rules, architecture notes, task list, decisions, logs, and archives.</td>
-            </tr>
-          </tbody>
-        </table>
-      </section>
+    <section class="work-preview" aria-labelledby="work-title">
+      <div class="section-title">
+        <h2 id="work-title">Selected Unity systems</h2>
+      </div>
+      <div class="project-grid">
+        <a class="project-card video-card" href="https://www.youtube.com/watch?v=DUI5IytHNBY">
+          <span class="video-thumb">
+            <img src="./assets/1.jpg" alt="Physics-based traversal system">
+          </span>
+          <span>Grapple + glider</span>
+          <h3>Physics-Based Traversal System</h3>
+          <p>Controllable movement transitions, rope behavior, momentum, and player feel.</p>
+        </a>
+        <a class="project-card video-card" href="https://www.youtube.com/watch?v=_LjI2h1WYdo">
+          <span class="video-thumb">
+            <img src="./assets/2.jpg" alt="Modular combat and stat system">
+          </span>
+          <span>Runtime framework</span>
+          <h3>Modular Combat And Stat System</h3>
+          <p>Stats, modifiers, state, conditions, and debugging built as reusable gameplay logic.</p>
+        </a>
+        <a class="project-card video-card" href="https://www.youtube.com/watch?v=HYIwX2J2lcQ">
+          <span class="video-thumb">
+            <img src="./assets/5.jpg" alt="Hybrid 2D and 3D rendering pipeline">
+          </span>
+          <span>Rendering pipeline</span>
+          <h3>2D/3D Hybrid Rendering</h3>
+          <p>Layered character presentation, modular assembly, pathfinding, and runtime structure.</p>
+        </a>
+      </div>
+    </section>
 
-      <section aria-labelledby="skill-title">
-        <h2 id="skill-title">Skills demonstrated by the workflow</h2>
+    <section class="media-proof heman-home" aria-labelledby="heman-proof-title">
+      <div class="section-title">
+        <div>
+          <h2 id="heman-proof-title">Branded UEFN production leadership</h2>
+        </div>
+        <a class="button quiet" href="./unity.html#heman-uefn">View case section</a>
+      </div>
+      <div class="media-grid heman-strip">
+        <article class="media-card wide">
+          <img src="./assets/heman-hero-keyart.jpg" alt="Masters of the Universe He-Man Heroes key art">
+          <div>
+            <span>Loot Foundry / UEFN</span>
+            <h3>He-Man Heroes</h3>
+            <p>Engineering direction and creative leadership on a branded Fortnite/UEFN project for Mattel's Masters of the Universe franchise.</p>
+          </div>
+        </article>
+        <article class="media-card">
+          <img src="./assets/heman-heroes-ui.jpg" alt="He-Man Heroes roster UI">
+          <div>
+            <span>Verse data / roster UI</span>
+            <h3>Roster and synergy surfaces</h3>
+            <p>Character collection, equipped heroes, level/power readouts, and stat/synergy presentation driven by a large hand-authored data set.</p>
+          </div>
+        </article>
+        <article class="media-card">
+          <img src="./assets/heman-character-detail-ui.jpg" alt="He-Man Heroes data-driven character detail UI">
+          <div>
+            <span>Verse + spreadsheet pipeline</span>
+            <h3>Data-driven character systems</h3>
+            <p>Stats, abilities, tiers, unlocks, strengths, rarity, passives, upgrades, and role data managed through spreadsheet export and Verse implementation.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="media-proof" aria-labelledby="art-proof-title">
+      <div class="section-title">
+        <div>
+          <h2 id="art-proof-title">The technical-art side is real too.</h2>
+        </div>
+      </div>
+      <div class="media-grid art-grid">
+        <article class="media-card">
+          <img class="image-focus-top" src="./assets/aoeo-concept-character.jpg" alt="Age of Empires Online concept character">
+          <div>
+            <span>Concept handoff</span>
+            <h3>Readable shape language</h3>
+            <p>Stylized character direction with clear silhouette, costume reads, and production-friendly visual targets.</p>
+          </div>
+        </article>
+        <article class="media-card">
+          <img src="./assets/aoeo-low-poly-topology.jpg" alt="Low-poly character topology and texture layouts">
+          <div>
+            <span>Low-poly constraints</span>
+            <h3>264-460 triangle character budgets</h3>
+            <p>Modeled and textured humanoid units under strict runtime constraints for Age of Empires Online.</p>
+          </div>
+        </article>
+        <article class="media-card">
+          <img src="./assets/aoeo-roster.jpg" alt="Age of Empires Online in-engine character roster">
+          <div>
+            <span>In-engine roster</span>
+            <h3>Production-ready character sets</h3>
+            <p>Full civilization unit rosters built for readability, performance, animation handoff, and final engine presentation.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="personal-section" aria-labelledby="personal-title">
+      <img src="./assets/face.png" alt="Ryan Sharr portrait">
+      <div class="prose">
+        <h2 id="personal-title">Art brain. Engine hands.</h2>
         <p>
-          I am not just prompting Codex for snippets. I am designing the operating environment around the AI so it can
-          contribute to a real codebase without losing context, duplicating systems, editing the wrong files, or skipping
-          verification.
+          I grew up in Alaska, played hockey, and started in games through the art side of production. At some point it became obvious
+          you can't build the games I wanted with art alone, so I taught myself programming and moved deeper into engineering,
+          gameplay systems, and tools.
         </p>
-        <ul class="article-list">
-          <li>I can turn AI-assisted development into a repeatable engineering workflow.</li>
-          <li>I can structure a repo so Codex knows where to start, what to read, and what rules to follow.</li>
-          <li>I can use logs and checks to drive AI-assisted debugging instead of guessing.</li>
-          <li>I can protect generated assets, runtime systems, editor tooling, and project documentation from careless AI edits.</li>
-        </ul>
-      </section>
-
-      <footer class="article-footer">
-        <p><a href="./resume.html">Resume</a> / <a href="mailto:hello@ryansharr.com">hello@ryansharr.com</a></p>
-      </footer>
-    </article>
+        <p>
+          That's how I approach development now: <strong>build the system, test the feel, fix what breaks, and keep pushing until it works.</strong>
+          I am currently living in the middle of the woods, building game systems, prototypes, and AI-assisted workflows.
+        </p>
+        <p class="personal-aside">I'm also probably better than you at any video game...<br>Challenge if you dare.</p>
+      </div>
+    </section>
   </main>
 
-  <div class="ai-system-modal" id="aiSystemModal" hidden>
-    <div class="ai-modal-backdrop" data-ai-modal-close="true"></div>
-    <section class="ai-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="aiSystemModalTitle">
-      <button class="ai-modal-close" type="button" id="aiSystemModalClose" aria-label="Close system details">Close</button>
-      <div class="ai-modal-titlebar">
-        <p class="article-label" id="aiSystemModalLabel">System</p>
-        <div class="ai-modal-title-row">
-          <h2 id="aiSystemModalTitle">System</h2>
-          <span class="ai-modal-badge" id="aiSystemModalBadge">Artifact</span>
-        </div>
-        <p class="ai-modal-takeaway" id="aiSystemModalTakeaway"></p>
-      </div>
-
-      <div class="ai-modal-layout">
-        <section class="ai-modal-proof-panel" aria-labelledby="aiSystemArtifactLabel">
-          <p class="ai-modal-artifact-label" id="aiSystemArtifactLabel">Primary artifact</p>
-          <div class="ai-artifact" id="aiSystemArtifact"></div>
-        </section>
-
-        <div class="ai-modal-content">
-          <section>
-            <h3>Solves</h3>
-            <div id="aiSystemSolves"></div>
-          </section>
-
-          <section>
-            <h3>How it works</h3>
-            <div id="aiSystemWorks"></div>
-          </section>
-
-          <section>
-            <h3>Matters</h3>
-            <div id="aiSystemMatters"></div>
-          </section>
-        </div>
-      </div>
-
-      <section class="ai-modal-files" aria-labelledby="aiSystemFilesLabel">
-        <h3 id="aiSystemFilesLabel">Artifacts involved</h3>
-        <ul id="aiSystemFiles"></ul>
-      </section>
-
-      <nav class="ai-modal-nav" aria-label="Workflow step navigation">
-        <button class="ai-modal-nav-button" type="button" id="aiSystemModalPrev">Previous step</button>
-        <button class="ai-modal-nav-button" type="button" id="aiSystemModalNext">Next step</button>
-      </nav>
-    </section>
-  </div>
-
-  <script src="./ai-systems.js"></script>
+  <footer class="site-footer">
+    <span>Ryan Sharr</span>
+    <a href="mailto:hello@ryansharr.com">hello@ryansharr.com</a>
+    <a href="https://www.linkedin.com/in/ryan-sharr/" target="_blank" rel="noreferrer">LinkedIn</a>
+  </footer>
+  <script src="./image-modal.js"></script>
+  <script src="./video-modal.js"></script>
 </body>
 </html>

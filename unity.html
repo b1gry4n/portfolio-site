@@ -3,630 +3,293 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Unity Portfolio | Ryan Sharr</title>
-  <meta
-    name="description"
-    content="Unity gameplay, simulation, combat, traversal, rendering, and tooling systems by Ryan Sharr."
-  >
-
-  <meta property="og:title" content="Unity Portfolio | Ryan Sharr">
-  <meta property="og:description" content="Unity gameplay, simulation, combat, traversal, rendering, and tooling systems by Ryan Sharr.">
-  <meta property="og:url" content="https://ryansharr.com/unity.html">
-  <meta property="og:type" content="website">
-  <meta property="og:site_name" content="Ryan Sharr">
-  <meta property="og:image" content="https://ryansharr.com/preview.png">
-
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Unity Portfolio | Ryan Sharr">
-  <meta name="twitter:description" content="Unity gameplay, simulation, combat, traversal, rendering, and tooling systems by Ryan Sharr.">
-  <meta name="twitter:image" content="https://ryansharr.com/preview.png">
-
+  <title>Game Work | Ryan Sharr</title>
+  <meta name="description" content="Unity/C#, UEFN/Verse, gameplay systems, technical art tooling, validation, and branded game production work by Ryan Sharr.">
   <link rel="canonical" href="https://ryansharr.com/unity.html">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
-  <div class="page-shell">
-    <main class="container">
-      <header class="topbar" aria-label="Primary">
-        <nav class="nav">
-          <div class="nav-mode">
-            <a class="nav-link" href="./index.html">Workflow System</a>
-            <a class="nav-link" href="./ai-systems.html">AI Systems</a>
-            <a class="nav-link nav-link-active" href="./unity.html" aria-current="page">Unity Portfolio</a>
-          </div>
-          <div class="nav-actions">
-            <a class="nav-link" href="./resume.html">Resume</a>
-            <button class="nav-link nav-link-button modal-trigger" type="button" id="contactToggle" aria-expanded="false" aria-controls="contactPopover" data-modal-target="contactPopover">
-              Contact
-            </button>
-          </div>
-        </nav>
-      </header>
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a class="brand" href="./index.html">Ryan Sharr</a>
+      <nav class="site-nav" aria-label="Primary navigation">
+        <a href="./unity.html" aria-current="page">Game Work</a>
+        <a href="./ai-systems.html">AI Workflow</a>
+        <a href="./resume.html">Resume</a>
+        <a href="mailto:hello@ryansharr.com">Contact</a>
+      </nav>
+    </div>
+  </header>
 
-      <div class="contact-modal" id="contactPopover" hidden>
-        <div class="contact-backdrop" data-modal-close="true"></div>
-        <div class="contact-dialog" role="dialog" aria-modal="true" aria-labelledby="contactTitle">
-          <button class="contact-close" type="button" id="contactClose" data-modal-close-button="contactPopover" aria-label="Close contact dialog">
-            <span aria-hidden="true">&times;</span>
-          </button>
-          <p class="contact-popover-label" id="contactTitle">Email</p>
-          <a class="contact-popover-email" href="mailto:hello@ryansharr.com">hello@ryansharr.com</a>
-        <div class="contact-actions">
-            <button class="contact-copy" type="button" id="contactCopy">Copy</button>
-            <a class="contact-send" href="mailto:hello@ryansharr.com">Open Email</a>
-          </div>
+  <main>
+    <section class="media-proof" aria-labelledby="current-unity-title">
+      <div class="section-title">
+        <div>
+          <p class="eyebrow">Unity / C#, JSON, Python</p>
+          <h2 id="current-unity-title">Gameplay, tooling, and validation now move together.</h2>
         </div>
       </div>
+      <div class="media-grid">
+        <article class="media-card wide">
+          <img src="./assets/runtime-operator-room-route-clean.png" alt="Runtime operator playing through the current Unity prototype">
+          <div>
+            <span>Unity / C#, JSON, Python</span>
+            <h3>Playable prototype with runtime-operator validation</h3>
+            <p>The current Unity project is being exercised by an in-engine runner that follows route stages, invokes player-equivalent actions, captures screenshots, and records where the build progresses or blocks.</p>
+          </div>
+        </article>
+        <article class="media-card">
+          <img src="./assets/judge-concept-to-prototype.png" alt="Judge courtroom concept sketch compared against the working Unity prototype">
+          <div>
+            <span>Unity / C#, JSON, Python</span>
+            <h3>Concept sketch to playable courtroom loop</h3>
+            <p>Hand-drawn layout, generated scene structure, terminal UI, case data, verdict controls, and runtime flow were pushed into a working prototype instead of stopping at a mockup.</p>
+          </div>
+        </article>
+      </div>
+    </section>
 
-      <div class="contact-modal" id="portfolioProjectModal" hidden>
-        <div class="contact-backdrop" data-modal-close="true"></div>
-        <div class="contact-dialog portfolio-dialog" role="dialog" aria-modal="true" aria-labelledby="portfolioProjectTitle">
-          <div class="portfolio-modal-titlebar">
-            <div class="portfolio-modal-heading">
-              <p class="portfolio-modal-label">Unity Portfolio</p>
-              <h2 id="portfolioProjectTitle">Project</h2>
-              <p class="portfolio-modal-subtitle" id="portfolioProjectSubtitle"></p>
-            </div>
-            <button class="contact-close" type="button" data-modal-close-button="portfolioProjectModal" aria-label="Close project dialog">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="portfolio-modal-body">
-            <div class="portfolio-modal-layout">
-              <div class="portfolio-modal-column">
-                <div class="portfolio-video-viewer">
-                  <div class="portfolio-video-frame portfolio-video-frame-large" id="portfolioProjectVideoFrame"></div>
-                  <div class="portfolio-video-nav" id="portfolioProjectVideoNav" hidden>
-                    <button class="portfolio-video-nav-button" type="button" id="portfolioVideoPrev" aria-label="Previous video">&lt;</button>
-                    <div class="portfolio-video-page-list" id="portfolioVideoPageList"></div>
-                    <button class="portfolio-video-nav-button" type="button" id="portfolioVideoNext" aria-label="Next video">&gt;</button>
-                  </div>
-                </div>
-              </div>
-              <div class="portfolio-modal-column">
-                <section class="portfolio-modal-panel">
-                  <h3>My Role</h3>
-                  <div class="portfolio-modal-panel-body" id="portfolioProjectRole"></div>
-                </section>
-                <section class="portfolio-modal-panel">
-                  <h3>Project Description</h3>
-                  <div class="portfolio-modal-panel-body" id="portfolioProjectDescription"></div>
-                </section>
-              </div>
-            </div>
-          </div>
+    <section class="media-proof tooling-section" aria-labelledby="tooling-title">
+      <div class="section-title">
+        <div>
+          <p class="eyebrow">Unity editor tooling</p>
+          <h2 id="tooling-title">Custom tools for keeping a data-heavy game understandable.</h2>
         </div>
       </div>
+      <div class="media-grid">
+        <article class="media-card">
+          <img src="./assets/tooling-project-contents.png" alt="Unity Project Contents editor showing indexed ScriptableObject assets and grouped project data">
+          <div>
+            <span>ScriptableObject browser</span>
+            <h3>Project contents window</h3>
+            <p>Indexes hundreds of project-owned assets by area and type so quests, objectives, bugs, DNA parts, effects, abilities, narrative, and foundation assets stay inspectable.</p>
+          </div>
+        </article>
+        <article class="media-card">
+          <img src="./assets/tooling-database-lookup.png" alt="Unity database lookup tool showing game databases and entries">
+          <div>
+            <span>Database inspection</span>
+            <h3>Runtime data made visible</h3>
+            <p>Central lookup surfaces expose databases, entry counts, ids, descriptions, tags, stat modifiers, and source assets without digging through project folders.</p>
+          </div>
+        </article>
+        <article class="media-card">
+          <img src="./assets/tooling-ability-dropdown.png" alt="Unity Ability Lab editor showing selectable abilities and read-only ability data">
+          <div>
+            <span>Ability lab</span>
+            <h3>Ability simulation and scenario testing</h3>
+            <p>Editor tooling loads ability definitions, previews behavior, switches scenarios, exposes read-only combat data, and captures evidence for balancing and debugging.</p>
+          </div>
+        </article>
+      </div>
+    </section>
 
-      <a class="featured-system-banner" href="https://github.com/b1gry4n/foundation-seed" target="_blank" rel="noreferrer" aria-label="View Foundation Seed on GitHub">
-        <span class="featured-system-label">Featured System</span>
-        <span class="featured-system-title">Foundation Seed</span>
-        <span class="featured-system-cta">View on GitHub &rarr;</span>
-      </a>
+    <section class="media-proof" id="heman-uefn" aria-labelledby="heman-title">
+      <div class="section-title">
+        <div>
+          <p class="eyebrow">UEFN / Unreal Engine, Verse</p>
+          <h2 id="heman-title">He-Man Heroes / UEFN branded production</h2>
+        </div>
+      </div>
+      <div class="heman-feature">
+        <img src="./assets/heman-hero-keyart.jpg" alt="Masters of the Universe He-Man Heroes key art">
+        <div class="prose">
+          <p>
+            I led engineering direction and creative execution for He-Man Heroes, a branded Fortnite/UEFN project built
+            for Mattel's Masters of the Universe franchise through Loot Foundry.
+          </p>
+          <p>
+            The work sat at the intersection of client expectations, IP style-guide constraints, UEFN/Verse implementation,
+            runtime systems, optimization budgets, UI structure, and production delivery.
+          </p>
+          <p>
+            A major part of the implementation was the character data layer: roster values, power curves, skills, passives,
+            synergies, upgrade state, and UI-facing data hand-authored through spreadsheet export and Verse code.
+          </p>
+        </div>
+      </div>
+      <div class="media-grid heman-gallery">
+        <article class="media-card">
+          <img src="./assets/heman-villain-keyart.jpg" alt="He-Man Heroes key art with villain and hero roster">
+          <div>
+            <span>UEFN / Unreal Engine, Verse</span>
+            <h3>Campaign-scale visual target</h3>
+            <p>Marketing/key-art level presentation for the playable branded world.</p>
+          </div>
+        </article>
+        <article class="media-card">
+          <img src="./assets/heman-clean-lineup.jpg" alt="He-Man Heroes character lineup without title overlay">
+          <div>
+            <span>UEFN / Unreal Engine, Verse</span>
+            <h3>Playable cast presentation</h3>
+            <p>Character lineup, environment staging, and readable franchise-specific visual direction.</p>
+          </div>
+        </article>
+        <article class="media-card">
+          <img src="./assets/heman-heroes-ui.jpg" alt="He-Man Heroes roster UI">
+          <div>
+            <span>UEFN / Unreal Engine, Verse</span>
+            <h3>Roster, equipment, and synergies</h3>
+            <p>Collection surfaces, equipped hero slots, progression, resource readouts, and synergy presentation backed by the character data pipeline.</p>
+          </div>
+        </article>
+        <article class="media-card">
+          <img src="./assets/heman-character-detail-ui.jpg" alt="He-Man Heroes character detail UI">
+          <div>
+            <span>UEFN / Unreal Engine, Verse</span>
+            <h3>Data-driven stats, skills, and progression</h3>
+            <p>Character detail screen communicating role, power, rarity, armor state, stats, skills, passives, tiers, unlocks, XP, and party controls from the Verse-backed data set.</p>
+          </div>
+        </article>
+      </div>
+    </section>
 
-      <section class="section" id="unity-projects" aria-labelledby="unity-projects-title">
-        <div class="portfolio-grid" id="portfolioGrid" aria-live="polite"></div>
-      </section>
-
-      <section class="section about-section" id="about" aria-labelledby="about-title">
-        <div class="about-copy">
-
-          <div class="about-body">
-            <div class="about-avatar-wrap">
-              <img class="about-avatar" src="./assets/face.png" alt="Ryan Sharr profile photo">
-            </div>
-            <p>I grew up in Alaska, played hockey, and started in games through the art side of production.</p>
-            <p>At some point it became obvious you can’t build the games I wanted with art alone, so I taught myself programming and moved deeper into engineering, gameplay systems, and tools.</p>	
-			<p>That’s how I approach development now: </p>	
-			<p class="about-process-line">build the system, test the feel, fix what breaks, and keep pushing until it works.</p>			
-            <p>I’m currently living in the middle of the woods, building game systems, prototypes, and AI-assisted workflows.</p>
-            <p class="about-body-accent">I’m also probably better than you at any video game...</p>
-            <p class="about-body-challenge">Challenge if you dare 😎🎮</p>
+    <section class="case-list" aria-label="Unity case studies">
+      <article class="case-study" id="physics-traversal">
+        <div class="case-media">
+          <img src="./assets/1.jpg" alt="Physics-based traversal system thumbnail">
+        </div>
+        <div class="case-copy">
+          <p class="eyebrow">Unity / C#</p>
+          <h2>Physics-Based Traversal System</h2>
+          <p>
+            A traversal prototype built around momentum, controlled transitions, rope behavior, glide state, and player feel.
+            The player is kinematic, with motion calculated directly for stability while still preserving dynamic swing paths.
+          </p>
+          <ul>
+            <li>Grapple, glide, and base movement as separate but connected states.</li>
+            <li>Rope wrapping behavior that changes the swing path based on world geometry.</li>
+            <li>Built for feel: predictable control first, spectacle second.</li>
+          </ul>
+          <div class="video-links">
+            <a href="https://www.youtube.com/watch?v=DUI5IytHNBY">Watch demo 1</a>
+            <a href="https://www.youtube.com/watch?v=Hs0fOGxB4Ts">Watch demo 2</a>
           </div>
         </div>
-      </section>
+      </article>
 
-    </main>
-    <footer class="site-footer" aria-label="External profiles">
-      <a class="site-footer-link" href="https://www.linkedin.com/in/ryan-sharr/" target="_blank" rel="noreferrer">LinkedIn</a>
-      <a class="site-footer-link" href="https://www.upwork.com/freelancers/~01fe3fde0c8504cf2c?mp_source=share" target="_blank" rel="noreferrer">Upwork</a>
-    </footer>
-  </div>
+      <article class="case-study" id="modular-combat">
+        <div class="case-media">
+          <img src="./assets/2.jpg" alt="Modular combat and stat system thumbnail">
+        </div>
+        <div class="case-copy">
+          <p class="eyebrow">Unity / C#</p>
+          <h2>Modular Combat And Stat System</h2>
+          <p>
+            A reusable gameplay framework for stats, modifiers, buffs, debuffs, damage rules, state changes, logging, and
+            debugging. The point was to avoid hardcoded one-off behavior and keep the combat layer extensible.
+          </p>
+          <ul>
+            <li>Centralized stats and condition handling.</li>
+            <li>Reusable runtime rules instead of bespoke enemy scripts.</li>
+            <li>Debugging and logging built into the workflow.</li>
+          </ul>
+          <div class="video-links">
+            <a href="https://www.youtube.com/watch?v=_LjI2h1WYdo">Watch demo</a>
+          </div>
+        </div>
+      </article>
 
-  <button class="back-to-top" type="button" id="backToTopButton" aria-label="Back to top">
-    <span class="back-to-top-icon" aria-hidden="true">↑</span>
-    Back to top
-  </button>
+      <article class="case-study" id="physics-combat">
+        <div class="case-media">
+          <img src="./assets/3.jpg" alt="Physics-driven active ragdoll combat thumbnail">
+        </div>
+        <div class="case-copy">
+          <p class="eyebrow">Unity / C#</p>
+          <h2>Physics-Driven Combat System</h2>
+          <p>
+            A physical combat prototype where the player and enemies share an underlying controller. The player uses direct input;
+            enemies use AI to drive the same movement and response layer.
+          </p>
+          <ul>
+            <li>Shared player/enemy controller architecture.</li>
+            <li>Runtime physical response and feedback loops.</li>
+            <li>Combat feel explored through body motion rather than canned-only animation.</li>
+          </ul>
+          <div class="video-links">
+            <a href="https://www.youtube.com/watch?v=Da3oMZn-lp4">Watch demo</a>
+          </div>
+        </div>
+      </article>
 
-  <script>
-    (function () {
-      const modalTriggers = document.querySelectorAll(".modal-trigger");
-      const modals = document.querySelectorAll(".contact-modal");
-      const copyButton = document.getElementById("contactCopy");
-      const email = "hello@ryansharr.com";
-      const portfolioGrid = document.getElementById("portfolioGrid");
-      const projectModalId = "portfolioProjectModal";
-      const projectTitle = document.getElementById("portfolioProjectTitle");
-      const projectSubtitle = document.getElementById("portfolioProjectSubtitle");
-      const projectRole = document.getElementById("portfolioProjectRole");
-      const projectDescription = document.getElementById("portfolioProjectDescription");
-      const projectVideoFrame = document.getElementById("portfolioProjectVideoFrame");
-      const projectVideoNav = document.getElementById("portfolioProjectVideoNav");
-      const portfolioVideoPrev = document.getElementById("portfolioVideoPrev");
-      const portfolioVideoNext = document.getElementById("portfolioVideoNext");
-      const portfolioVideoPageList = document.getElementById("portfolioVideoPageList");
-      const backToTopButton = document.getElementById("backToTopButton");
-      let lockedScrollY = 0;
+      <article class="case-study" id="procedural-growth">
+        <div class="case-media">
+          <img src="./assets/4.jpg" alt="Screen-space procedural growth system thumbnail">
+        </div>
+        <div class="case-copy">
+          <p class="eyebrow">Unity / C#</p>
+          <h2>Screen-Space Procedural Growth System</h2>
+          <p>
+            A real-time growth effect built as an interactive mechanic rather than a one-shot VFX pass. The work combines shader
+            behavior, render pass thinking, and runtime control over spread and presentation.
+          </p>
+          <ul>
+            <li>Screen-space growth driven by gameplay state.</li>
+            <li>Reusable visual system instead of a baked animation.</li>
+            <li>Authoring controls for tuning the look and timing.</li>
+          </ul>
+          <div class="video-links">
+            <a href="https://www.youtube.com/watch?v=Dpm3-aXqO_U">Watch demo 1</a>
+            <a href="https://www.youtube.com/watch?v=EKQ_Pp8lIHw">Watch demo 2</a>
+          </div>
+        </div>
+      </article>
 
-      const placeholderVideoId = "_LjI2h1WYdo";
-      const placeholderEmbed = "https://www.youtube.com/embed/_LjI2h1WYdo?playsinline=1&rel=0&modestbranding=1";
-      let activeProjectVideos = [];
-      let activeProjectVideoIndex = 0;
+      <article class="case-study" id="hybrid-rendering">
+        <div class="case-media">
+          <img src="./assets/5.jpg" alt="2D and 3D hybrid rendering pipeline thumbnail">
+        </div>
+        <div class="case-copy">
+          <p class="eyebrow">Unity / C#</p>
+          <h2>2D/3D Hybrid Rendering Pipeline</h2>
+          <p>
+            An isometric-style project built on a 3D foundation. The system explores layered character presentation, modular assembly,
+            pathfinding, and runtime data driving a 2D-looking result.
+          </p>
+          <ul>
+            <li>2D presentation on top of 3D spatial logic.</li>
+            <li>Modular character parts and reusable runtime structure.</li>
+            <li>Rendering pipeline shaped by gameplay needs, not just visual preference.</li>
+          </ul>
+          <div class="video-links">
+            <a href="https://www.youtube.com/watch?v=HYIwX2J2lcQ">Watch demo 1</a>
+            <a href="https://www.youtube.com/watch?v=3IzJObUGXYQ">Watch demo 2</a>
+            <a href="https://www.youtube.com/watch?v=0nWsofLiATQ">Watch demo 3</a>
+          </div>
+        </div>
+      </article>
 
-      const portfolioProjects = [
-        {
-          id: "physics-traversal",
-          title: "Physics-Based Traversal System",
-          subtitle: "Grapple + Glider",
-          role: "I built the traversal system from scratch, including the grappling hook, glider, and how movement flows between them. The focus was making the system feel smooth, predictable, and responsive.",
-          description: [
-            "A traversal prototype inspired by Worlds Adrift, built around momentum and player control.",
-            "The grappling hook uses a rope that can wrap around objects in the world, creating real swing paths instead of fixed arcs. Movement changes depending on the environment, so each swing can play out differently.",
-            "The player is fully kinematic. There is no rigidbody driving the character. All motion is calculated and controlled directly, which keeps the system stable and consistent while still feeling dynamic.",
-            "Grapple, glide, and base movement are separate systems that switch based on player input and game state. This keeps transitions clean, readable, and controllable."
-          ],
-          preview: "Physics-driven traversal states with controllable movement transitions and reusable traversal logic.",
-          thumbnail: "./assets/1.jpg",
-          videos: [
-            "https://www.youtube.com/embed/DUI5IytHNBY?playsinline=1&rel=0&modestbranding=1",
-            "https://www.youtube.com/embed/Hs0fOGxB4Ts?playsinline=1&rel=0&modestbranding=1"
-          ]
-        },
-        {
-          id: "modular-combat-stats",
-          title: "Modular Combat & Stat System",
-          subtitle: "Scalable Gameplay Framework",
-          role: "I built a modular combat and stat system that drives gameplay, including combat logic, stats, modifiers, and how everything connects at runtime.",
-          description: [
-            "A full 3D FPS built around a reusable gameplay framework.",
-            "Enemies, weapons, and hands are 2D sprites placed in 3D space. The focus is on the systems driving gameplay, not rendering.",
-            "The project is structured around separate domains for combat and stats instead of hardcoded character behavior. Systems handle damage, modifiers, buffs and debuffs, and state changes in a consistent way.",
-            "Everything runs through shared runtime systems. Stats are extensible, conditions are handled centrally, and behavior is data-driven."
-          ],
-          descriptionBullets: [
-            "State machines and gameplay flow",
-            "Complex stat calculations and modifiers",
-            "Buff and debuff handling",
-            "Logging and debugging tools",
-            "Data-driven configuration",
-            "Editor tooling"
-          ],
-          preview: "Composable runtime stats, conditions, and combat rules built as extendable gameplay systems.",
-          thumbnail: "./assets/2.jpg",
-          videos: [
-            "https://www.youtube.com/embed/_LjI2h1WYdo?playsinline=1&rel=0&modestbranding=1"
-          ]
-        },
-        {
-          id: "physics-combat",
-          title: "Physics-Driven Combat System",
-          subtitle: "Active Ragdoll",
-          role: "I built a physics-driven combat prototype using active ragdolls, including the player controller, enemy behavior, and move system.",
-          description: [
-            "A combat prototype focused on active ragdoll movement and physical response.",
-            "The player and enemies use the same underlying controller. The only difference is input. The player drives it directly, while enemies use a simple AI that detects the player and moves toward them.",
-            "Combat is driven by a small set of moves mapped to input. Light and heavy punches and kicks are triggered based on clicks and holds, creating a simple but responsive control scheme.",
-            "Because everything runs through the same system, interactions stay consistent. Hits, movement, and reactions all come from shared physical logic rather than separate scripted behaviors.",
-            "The goal was to explore how far a shared, physics-driven controller could go while still feeling controllable."
-          ],
-          preview: "Active ragdoll combat with physical response, runtime state interaction, and controllable feedback loops.",
-          thumbnail: "./assets/3.jpg",
-          videos: [
-            "https://www.youtube.com/embed/Da3oMZn-lp4?playsinline=1&rel=0&modestbranding=1"
-          ]
-        },
-        {
-          id: "procedural-growth",
-          title: "Screen-Space Procedural Growth System",
-          subtitle: "Realtime VFX Mechanic",
-          role: "I built a screen-space growth system, including the shader, rendering pass, and the logic that controls how it spreads and evolves over time.",
-          description: [
-            "A real-time growth effect inspired by Natural Selection 2 and StarCraft.",
-            "The effect is rendered as a full-screen pass using a custom shader, allowing it to spread across surfaces without relying on geometry or decals.",
-            "Cyst placement is procedural. Growth is driven by controllable areas that expand and contract over time, creating a dynamic system rather than a fixed effect.",
-            "The infestation pulses, spreads, and evolves with visible feedback. Because it is driven by radius-based growth zones, it can be shaped and controlled instead of manually placed.",
-            "The goal was to build something reusable and reactive that could be driven by gameplay or timing."
-          ],
-          preview: "Procedural screen-space growth used as an interactive runtime effect instead of a one-shot VFX pass.",
-          thumbnail: "./assets/4.jpg",
-          videos: [
-            "https://www.youtube.com/embed/Dpm3-aXqO_U?playsinline=1&rel=0&modestbranding=1",
-            "https://www.youtube.com/embed/EKQ_Pp8lIHw?playsinline=1&rel=0&modestbranding=1"
-          ]
-        },
-        {
-          id: "hybrid-rendering",
-          title: "2D/3D Hybrid Rendering Pipeline",
-          subtitle: "Modular Characters",
-          role: "I built a hybrid 2D and 3D pipeline, including rendering, movement, pathfinding, and the systems that drive characters and their data.",
-          description: [
-            "An isometric 2D-style game built on a 3D foundation.",
-            "The camera is orthographic, so the game presents like a traditional 2D isometric title, while still using full 3D systems underneath. This allows real collision, projectiles, and spatial interaction.",
-            "Movement is grid-based using Unity tilemaps, with A* pathfinding. Units use local avoidance and dynamic obstacle handling so groups can move naturally.",
-            "Each character has its own inventory and can equip any combination of gear. Visuals update based on equipped items, allowing fully modular characters.",
-            "Sprites are generated from 3D models using custom editor tooling, allowing consistent output and scalable content creation.",
-            "Rendering uses a custom shader with a splatmap and tilemap setup to reduce visible tiling and improve terrain visuals.",
-            "Includes a fog of war system that masks enemies based on visibility.",
-            "The goal was to combine the readability of 2D with the flexibility of 3D systems, while supporting modular characters and scalable content."
-          ],
-          preview: "Hybrid character rendering for modular assembly, layered presentation, and reusable art/runtime structure.",
-          thumbnail: "./assets/5.jpg",
-          videos: [
-            "https://www.youtube.com/embed/HYIwX2J2lcQ?playsinline=1&rel=0&modestbranding=1",
-            "https://www.youtube.com/embed/3IzJObUGXYQ?playsinline=1&rel=0&modestbranding=1",
-            "https://www.youtube.com/embed/0nWsofLiATQ?playsinline=1&rel=0&modestbranding=1",
-            "https://www.youtube.com/embed/LNuzSev2md0?playsinline=1&rel=0&modestbranding=1",
-            "https://www.youtube.com/embed/7625_3fR9X0?playsinline=1&rel=0&modestbranding=1"
-          ]
-        },
-        {
-          id: "volumetric-rendering",
-          title: "Real-Time Volumetric Rendering Tool",
-          subtitle: "SDF Raymarching",
-          role: "I built a real-time volumetric rendering tool, including the raymarching shader, shaping controls, and custom editor tooling.",
-          description: [
-            "A real-time cloud rendering tool using SDF raymarching, inspired by Sky: Children of the Light.",
-            "Clouds are generated from signed distance fields, allowing shapes to be created, combined, and adjusted in real time.",
-            "The system supports building complex volumetric forms through layered shapes instead of relying on textures or billboards.",
-            "Includes custom editor tooling that allows shader code to be written and compiled directly in the inspector, enabling fast iteration on rendering behavior.",
-            "The goal was to turn a complex rendering technique into something usable and interactive."
-          ],
-          preview: "Realtime volumetric rendering and SDF raymarching exposed as an authorable tool workflow.",
-          thumbnail: "./assets/6.jpg",
-          videos: [
-            "https://www.youtube.com/embed/luA8LoUxVso?playsinline=1&rel=0&modestbranding=1",
-            "https://www.youtube.com/embed/D95mqTjHRY0?playsinline=1&rel=0&modestbranding=1"
-          ]
-        }
-      ];
+      <article class="case-study" id="volumetric-rendering">
+        <div class="case-media">
+          <img src="./assets/6.jpg" alt="Real-time volumetric rendering tool thumbnail">
+        </div>
+        <div class="case-copy">
+          <p class="eyebrow">Unity / C#</p>
+          <h2>Real-Time Volumetric Rendering Tool</h2>
+          <p>
+            A realtime cloud and volume rendering tool using SDF raymarching, shaping controls, and custom editor-facing tuning.
+            The goal was an authorable workflow, not a single hardcoded effect.
+          </p>
+          <ul>
+            <li>Raymarched volume rendering in Unity.</li>
+            <li>Authoring controls for shape and presentation.</li>
+            <li>Technical art tool built around iteration speed.</li>
+          </ul>
+          <div class="video-links">
+            <a href="https://www.youtube.com/watch?v=luA8LoUxVso">Watch demo 1</a>
+            <a href="https://www.youtube.com/watch?v=D95mqTjHRY0">Watch demo 2</a>
+          </div>
+        </div>
+      </article>
+    </section>
+  </main>
 
-      function setTriggerExpanded(modalId, expanded) {
-        modalTriggers.forEach(function (trigger) {
-          if (trigger.getAttribute("data-modal-target") === modalId) {
-            trigger.setAttribute("aria-expanded", expanded ? "true" : "false");
-          }
-        });
-      }
-
-      function syncModalScrollLock() {
-        const hasOpenModal = Array.from(modals).some(function (modal) {
-          return !modal.hidden;
-        });
-
-        document.documentElement.classList.toggle("modal-open", hasOpenModal);
-        document.body.classList.toggle("modal-open", hasOpenModal);
-
-        if (hasOpenModal) {
-          if (document.body.dataset.scrollLocked !== "true") {
-            lockedScrollY = window.scrollY;
-            document.body.style.position = "fixed";
-            document.body.style.top = "-" + lockedScrollY + "px";
-            document.body.style.left = "0";
-            document.body.style.right = "0";
-            document.body.style.width = "100%";
-            document.body.dataset.scrollLocked = "true";
-          }
-        } else if (document.body.dataset.scrollLocked === "true") {
-          document.body.style.position = "";
-          document.body.style.top = "";
-          document.body.style.left = "";
-          document.body.style.right = "";
-          document.body.style.width = "";
-          delete document.body.dataset.scrollLocked;
-          window.scrollTo(0, lockedScrollY);
-        }
-
-        syncBackToTop();
-      }
-
-      function closeModal(modalId) {
-        const modal = document.getElementById(modalId);
-        if (!modal) {
-          return;
-        }
-
-        if (modalId === projectModalId) {
-          projectVideoFrame.innerHTML = "";
-          portfolioVideoPageList.innerHTML = "";
-          projectVideoNav.hidden = true;
-          activeProjectVideos = [];
-          activeProjectVideoIndex = 0;
-        }
-
-        modal.hidden = true;
-        setTriggerExpanded(modalId, false);
-        syncModalScrollLock();
-      }
-
-      function openModal(modalId) {
-        modals.forEach(function (modal) {
-          modal.hidden = modal.id !== modalId;
-          setTriggerExpanded(modal.id, modal.id === modalId);
-          if (modal.id === modalId) {
-            modal.scrollTop = 0;
-          }
-        });
-
-        syncModalScrollLock();
-      }
-
-      function createThumbnail(project, index) {
-        if (project.thumbnail) {
-          return '<img class="portfolio-thumb-media" src="' + project.thumbnail + '" alt="' + project.title + ' thumbnail">';
-        }
-
-        const marks = ["01", "02", "03", "04", "05", "06"];
-        return '<span class="portfolio-thumb-mark" aria-hidden="true">' + marks[index] + '</span>';
-      }
-
-      function renderPortfolioCards() {
-        portfolioGrid.innerHTML = portfolioProjects.map(function (project, index) {
-          const guide = index === 0
-            ? '<span class="portfolio-card-guide" aria-hidden="true">View <span class="portfolio-card-guide-arrow">↓</span></span>'
-            : '';
-          return '' +
-            '<button class="portfolio-card" type="button" data-project-id="' + project.id + '">' +
-              guide +
-              '<div class="portfolio-thumb">' +
-                createThumbnail(project, index) +
-                '<span class="portfolio-thumb-play" aria-hidden="true">▶</span>' +
-              '</div>' +
-              '<div class="portfolio-card-copy">' +
-                '<h3 class="portfolio-card-title">' + project.title + '</h3>' +
-                '<div class="portfolio-card-subtitle">' + project.subtitle + '</div>' +
-                '<p class="portfolio-card-preview">' + project.preview + '</p>' +
-              '</div>' +
-              '<span class="portfolio-card-cta">View Project &rarr;</span>' +
-            '</button>';
-        }).join("");
-      }
-
-      function renderActiveProjectVideo() {
-        if (!activeProjectVideos.length) {
-          projectVideoFrame.innerHTML = "";
-          projectVideoNav.hidden = true;
-          return;
-        }
-
-        const safeIndex = Math.max(0, Math.min(activeProjectVideoIndex, activeProjectVideos.length - 1));
-        activeProjectVideoIndex = safeIndex;
-
-        projectVideoFrame.innerHTML = '' +
-          '<iframe src="' + activeProjectVideos[safeIndex] + '" title="Project proof video ' + (safeIndex + 1) + '" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>';
-
-        if (activeProjectVideos.length <= 1) {
-          projectVideoNav.hidden = true;
-          portfolioVideoPageList.innerHTML = "";
-          return;
-        }
-
-        projectVideoNav.hidden = false;
-        portfolioVideoPageList.innerHTML = activeProjectVideos.map(function (_, index) {
-          const isActive = index === activeProjectVideoIndex;
-          return '' +
-            '<button class="portfolio-video-page' + (isActive ? ' portfolio-video-page-active' : '') + '" type="button" data-video-index="' + index + '" aria-label="Show video ' + (index + 1) + '" aria-pressed="' + (isActive ? 'true' : 'false') + '">' + (index + 1) + '</button>';
-        }).join("");
-
-        portfolioVideoPrev.disabled = activeProjectVideoIndex === 0;
-        portfolioVideoNext.disabled = activeProjectVideoIndex === activeProjectVideos.length - 1;
-      }
-
-      function openProject(projectId) {
-        const project = portfolioProjects.find(function (item) {
-          return item.id === projectId;
-        });
-
-        if (!project) {
-          return;
-        }
-
-        const roleParagraphs = Array.isArray(project.role) ? project.role : [project.role];
-        const descriptionParagraphs = Array.isArray(project.description) ? project.description : [project.description];
-
-        projectTitle.textContent = project.title;
-        projectSubtitle.textContent = project.subtitle;
-        projectRole.innerHTML = roleParagraphs.map(function (paragraph) {
-          return "<p>" + paragraph + "</p>";
-        }).join("");
-        projectDescription.innerHTML = descriptionParagraphs.map(function (paragraph) {
-          return "<p>" + paragraph + "</p>";
-        }).join("") + (
-          Array.isArray(project.descriptionBullets) && project.descriptionBullets.length
-            ? '<ul class="portfolio-modal-list">' + project.descriptionBullets.map(function (item) {
-                return "<li>" + item + "</li>";
-              }).join("") + "</ul>"
-            : ""
-        );
-        activeProjectVideos = project.videos.slice(0, 6);
-        activeProjectVideoIndex = 0;
-        renderActiveProjectVideo();
-        openModal(projectModalId);
-      }
-
-      renderPortfolioCards();
-
-      portfolioGrid.addEventListener("click", function (event) {
-        const trigger = event.target instanceof Element ? event.target.closest("[data-project-id]") : null;
-        if (!trigger) {
-          return;
-        }
-
-        openProject(trigger.getAttribute("data-project-id"));
-      });
-
-      portfolioVideoPageList.addEventListener("click", function (event) {
-        const button = event.target instanceof Element ? event.target.closest("[data-video-index]") : null;
-        if (!button) {
-          return;
-        }
-
-        activeProjectVideoIndex = Number(button.getAttribute("data-video-index")) || 0;
-        renderActiveProjectVideo();
-      });
-
-      portfolioVideoPrev.addEventListener("click", function () {
-        if (activeProjectVideoIndex > 0) {
-          activeProjectVideoIndex -= 1;
-          renderActiveProjectVideo();
-        }
-      });
-
-      portfolioVideoNext.addEventListener("click", function () {
-        if (activeProjectVideoIndex < activeProjectVideos.length - 1) {
-          activeProjectVideoIndex += 1;
-          renderActiveProjectVideo();
-        }
-      });
-
-      modalTriggers.forEach(function (trigger) {
-        trigger.addEventListener("click", function () {
-          const modalId = trigger.getAttribute("data-modal-target");
-          const modal = modalId ? document.getElementById(modalId) : null;
-          if (!modal || !modalId) {
-            return;
-          }
-
-          if (modal.hidden) {
-            openModal(modalId);
-          } else {
-            closeModal(modalId);
-          }
-        });
-      });
-
-      document.querySelectorAll("[data-modal-close-button]").forEach(function (button) {
-        button.addEventListener("click", function () {
-          const modalId = button.getAttribute("data-modal-close-button");
-          if (modalId) {
-            closeModal(modalId);
-          }
-        });
-      });
-
-      modals.forEach(function (modal) {
-        modal.addEventListener("click", function (event) {
-          if (event.target === modal && modal.id) {
-            closeModal(modal.id);
-          }
-        });
-
-        modal.addEventListener(
-          "wheel",
-          function (event) {
-            if (modal.hidden) {
-              return;
-            }
-
-            event.preventDefault();
-            modal.scrollTop += event.deltaY;
-          },
-          { passive: false, capture: true }
-        );
-      });
-
-      if (copyButton) {
-        copyButton.addEventListener("click", async function () {
-          try {
-            await navigator.clipboard.writeText(email);
-            copyButton.textContent = "Copied";
-            window.setTimeout(function () {
-              copyButton.textContent = "Copy";
-            }, 1200);
-          } catch (error) {
-            copyButton.textContent = "Copy failed";
-            window.setTimeout(function () {
-              copyButton.textContent = "Copy";
-            }, 1400);
-          }
-        });
-      }
-
-      document.addEventListener("click", function (event) {
-        if (!(event.target instanceof Element)) {
-          return;
-        }
-
-        const closeBackdrop = event.target.closest("[data-modal-close='true']");
-        if (closeBackdrop) {
-          const modal = closeBackdrop.closest(".contact-modal");
-          if (modal && modal.id) {
-            closeModal(modal.id);
-          }
-        }
-      });
-
-      document.addEventListener("keydown", function (event) {
-        if (event.key === "Escape") {
-          modals.forEach(function (modal) {
-            if (!modal.hidden) {
-              closeModal(modal.id);
-            }
-          });
-        }
-      });
-
-      function syncBackToTop() {
-        if (!backToTopButton) {
-          return;
-        }
-
-        const hasOpenModal = Array.from(modals).some(function (modal) {
-          return !modal.hidden;
-        });
-
-        if (hasOpenModal) {
-          backToTopButton.classList.remove("is-visible");
-          return;
-        }
-
-        backToTopButton.classList.toggle("is-visible", window.scrollY > 420);
-
-        if (window.matchMedia("(max-width: 640px)").matches) {
-          const viewportOffsetTop = window.visualViewport ? window.visualViewport.offsetTop : 0;
-          backToTopButton.style.top = Math.max(12, viewportOffsetTop + 12) + "px";
-          backToTopButton.style.bottom = "auto";
-          backToTopButton.style.right = "0.7rem";
-          return;
-        }
-
-        backToTopButton.style.top = "";
-        backToTopButton.style.bottom = "";
-        backToTopButton.style.right = "";
-      }
-
-      function syncScrollbarWidth() {
-        const scrollbarWidth = Math.max(0, window.innerWidth - document.documentElement.clientWidth);
-        document.documentElement.style.setProperty("--scrollbar-width", scrollbarWidth + "px");
-      }
-
-      if (backToTopButton) {
-        backToTopButton.addEventListener("click", function () {
-          window.scrollTo({ top: 0, behavior: "smooth" });
-        });
-        window.addEventListener("scroll", syncBackToTop, { passive: true });
-        window.addEventListener("resize", syncBackToTop, { passive: true });
-        window.addEventListener("resize", syncScrollbarWidth, { passive: true });
-        if (window.visualViewport) {
-          window.visualViewport.addEventListener("resize", syncBackToTop, { passive: true });
-          window.visualViewport.addEventListener("scroll", syncBackToTop, { passive: true });
-        }
-        syncScrollbarWidth();
-        syncBackToTop();
-      }
-    })();
-  </script>
+  <footer class="site-footer">
+    <span>Ryan Sharr</span>
+    <a href="mailto:hello@ryansharr.com">hello@ryansharr.com</a>
+    <a href="./resume.html">Resume</a>
+  </footer>
+  <script src="./image-modal.js"></script>
+  <script src="./video-modal.js"></script>
 </body>
 </html>

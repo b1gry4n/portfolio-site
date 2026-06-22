@@ -3,59 +3,242 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AI Workflow Systems Archive | Ryan Sharr</title>
-  <meta
-    name="description"
-    content="A portfolio archive showing how Ryan Sharr structures AI-assisted development through queues, doctrine, system maps, validation, logs, and reusable architecture."
-  >
-  <meta property="og:title" content="AI Workflow Systems Archive | Ryan Sharr">
-  <meta property="og:description" content="Examples of controlled AI-assisted development systems: queues, doctrine, validation, generated asset boundaries, logs, and architecture maps.">
-  <meta property="og:url" content="https://ryansharr.com/ai-systems.html">
-  <meta property="og:type" content="article">
-  <meta property="og:site_name" content="Ryan Sharr">
-  <meta property="og:image" content="https://ryansharr.com/preview.png">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="AI Workflow Systems Archive | Ryan Sharr">
-  <meta name="twitter:description" content="A clean archive of AI workflow systems built around Codex, scoped tasks, validation, and repo memory.">
-  <meta name="twitter:image" content="https://ryansharr.com/preview.png">
+  <title>AI Workflow | Ryan Sharr</title>
+  <meta name="description" content="Ryan Sharr's controlled AI-assisted game development workflow: Foundation Seed, Plant layer, prompt queues, system maps, validation, runtime evidence, and reusable production patterns.">
   <link rel="canonical" href="https://ryansharr.com/ai-systems.html">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Literata:opsz,wght@7..72,400;7..72,600;7..72,700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./styles.css">
 </head>
-<body class="article-page ai-archive-page">
-  <header class="article-nav" aria-label="Primary">
-    <a href="./index.html">Ryan Sharr</a>
-    <nav>
-      <a href="./index.html">Workflow System</a>
-      <a href="./ai-systems.html" aria-current="page">AI Systems Archive</a>
-      <a href="./unity.html">Unity Portfolio</a>
-      <a href="./resume.html">Resume</a>
-      <a href="mailto:hello@ryansharr.com">Contact</a>
-    </nav>
+<body>
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a class="brand" href="./index.html">Ryan Sharr</a>
+      <nav class="site-nav" aria-label="Primary navigation">
+        <a href="./unity.html">Game Work</a>
+        <a href="./ai-systems.html" aria-current="page">AI Workflow</a>
+        <a href="./resume.html">Resume</a>
+        <a href="mailto:hello@ryansharr.com">Contact</a>
+      </nav>
+    </div>
   </header>
 
-  <main class="article-shell ai-archive-shell">
-    <article class="article ai-archive">
-      <section class="ai-workflow-stage" aria-labelledby="workflow-map-title">
-        <div class="ai-workflow-titlebar">
-          <p class="article-label">Interactive workflow map</p>
-          <h1 id="workflow-map-title">Controlled AI Development Workflow</h1>
-          <p class="ai-workflow-deck">
-            This archive shows how I structure AI-assisted development so Codex operates through scoped tasks, project rules,
-            system maps, validation, logs, and reusable architecture instead of loose prompt-to-code guessing.
-          </p>
-          <p class="ai-workflow-hint">Select any stage to see the system behind that step.</p>
+  <main class="ai-system-page">
+    <section class="meta-layer-intro" aria-labelledby="meta-layer-title">
+      <div class="meta-layer-copy">
+        <p class="eyebrow">Meta layer</p>
+        <h1 id="meta-layer-title">Foundation -> Plant concept</h1>
+        <p>
+          I use Codex inside a Unity workspace that already knows its rules, owners, validation paths,
+          queue state, and evidence requirements. The AI is not the workspace. The workspace is the system
+          that lets AI contribute without turning the project into loose prompt output.
+        </p>
+      </div>
+
+      <div class="meta-layer-visual" aria-label="Foundation Seed to Plant mental model">
+        <div class="meta-plant">
+          <div class="meta-plant-canopy">
+            <span>Project growth</span>
+            <small>systems · tools · reports · outputs</small>
+          </div>
+
+          <div class="meta-plant-feedback" aria-hidden="true">
+            <span></span>
+            <small>reusable patterns return to foundation</small>
+          </div>
+
+          <div class="meta-plant-water">
+            <span>Water</span>
+            <small>human interaction</small>
+            <b>intent</b>
+            <b>review</b>
+          </div>
+
+          <div class="meta-plant-growth" aria-hidden="true">
+            <span class="meta-plant-leaf meta-plant-leaf-left"></span>
+            <span class="meta-plant-stem"></span>
+            <span class="meta-plant-leaf meta-plant-leaf-right"></span>
+            <span class="meta-plant-arrow"></span>
+            <ol class="meta-plant-build-steps">
+              <li>map</li>
+              <li>plan</li>
+              <li>build</li>
+              <li>verify</li>
+              <li>remember</li>
+            </ol>
+          </div>
+
+          <div class="meta-plant-drops" aria-hidden="true">
+            <span></span>
+            <span></span>
+          </div>
+
+          <div class="meta-plant-foundation">
+            <div class="meta-plant-seed-bed" aria-hidden="true">
+              <i class="meta-plant-seed"></i>
+              <span class="meta-plant-seed-label">Seed</span>
+            </div>
+            <span>Foundation Seed</span>
+            <small>reusable operating layer</small>
+            <ul class="meta-plant-foundation-parts" aria-label="Foundation Seed components">
+              <li>rules</li>
+              <li>maps</li>
+              <li>validation</li>
+              <li>queue doctrine</li>
+              <li>script contracts</li>
+            </ul>
+          </div>
         </div>
+      </div>
+    </section>
 
-        <div class="ai-workflow-map" id="aiWorkflowMap" aria-label="Controlled AI development workflow"></div>
-      </section>
+    <div class="index-ai-separator index-ai-separator-before-workflow" aria-hidden="true"></div>
 
-      <footer class="article-footer">
-        <p><a href="./resume.html">Resume</a> / <a href="mailto:hello@ryansharr.com">hello@ryansharr.com</a></p>
-      </footer>
-    </article>
+    <section class="ai-workflow-stage" id="ai-systems" aria-labelledby="workflow-map-title">
+      <div class="ai-workflow-titlebar">
+        <p class="eyebrow">Interactive workflow map</p>
+        <h2 id="workflow-map-title">Controlled AI Development Workflow</h2>
+        <p class="ai-workflow-deck">
+          Select a stage to see how a rough request becomes bounded work inside the project:
+          queue state, doctrine, system maps, scoped implementation, validation, evidence,
+          repo memory, and controlled handoff.
+        </p>
+        <p class="ai-workflow-hint">Select any stage to see the system behind that step.</p>
+      </div>
+      <div class="ai-workflow-map" id="aiWorkflowMap" aria-label="Controlled AI development workflow"></div>
+    </section>
+
+    <div class="index-ai-separator index-ai-separator-after-workflow" aria-hidden="true"></div>
+
+    <section class="ai-explain-section" aria-labelledby="workspace-title">
+      <div>
+        <p class="eyebrow">Workspace reality</p>
+        <h2 id="workspace-title">This is not a theory page. It is how I make Codex work inside a game project.</h2>
+      </div>
+      <div class="ai-explain-copy">
+        <p>
+          The project is split into a reusable Foundation layer and a project-specific Plant layer. Foundation holds
+          portable rules, system-map expectations, queue doctrine, validation structure, schemas, and templates. Plant
+          holds the actual game work: runtime systems, editor tools, design doctrine, generated evidence, active queues,
+          sync commands, and implementation history.
+        </p>
+        <p>
+          Codex works because it enters that structure instead of inventing structure from the prompt. It reads the
+          current queue item, loads the relevant doctrine and maps, changes the owned files, runs or records validation,
+          writes evidence, updates memory when project truth changed, and stops.
+        </p>
+      </div>
+    </section>
+
+    <section class="ai-spine-section" aria-labelledby="spine-title">
+      <div class="ai-spine-title">
+        <p class="eyebrow">Operating layers</p>
+        <h2 id="spine-title">The pieces that make the workflow usable in production</h2>
+        <p>
+          The important part is not one clever prompt. The project has to give the agent a place to stand:
+          doctrine, ownership, queue state, validation rules, and evidence.
+        </p>
+        <p>
+          Each layer reduces drift. The agent can make a smaller change, prove what happened, and leave the
+          next pass with enough context to continue without guessing.
+        </p>
+      </div>
+      <div class="ai-spine-list">
+        <article>
+          <span>01</span>
+          <div>
+            <h3>Startup doctrine</h3>
+            <p>Agents enter through a fixed read order: core doctrine, observability, package boundaries, queue rules, definition of done, failure recovery, patch safety, and project-specific Plant rules.</p>
+          </div>
+        </article>
+        <article>
+          <span>02</span>
+          <div>
+            <h3>System maps and ownership</h3>
+            <p>Runtime, editor, input, save, console, observability, validation, sync, prompt memory, impact mapping, generated artifacts, and promotion systems are discoverable before code changes start.</p>
+          </div>
+        </article>
+        <article>
+          <span>03</span>
+          <div>
+            <h3>Queue-controlled execution</h3>
+            <p>Prompt work is not freeform. Queue state records intent, planned paths, non-overlap judgments, acceptance criteria, evidence requirements, lifecycle state, failure reason, and completion proof.</p>
+          </div>
+        </article>
+        <article>
+          <span>04</span>
+          <div>
+            <h3>Unity bridge and sync commands</h3>
+            <p>Codex can inspect Unity-facing evidence through structured reports: scene hierarchy, selection context, asset samples, runner-operable UI, world action contracts, generated content audits, and command archives.</p>
+          </div>
+        </article>
+        <article>
+          <span>05</span>
+          <div>
+            <h3>Runtime operator evidence</h3>
+            <p>An in-engine runner performs player-like actions, records intent versus outcome, captures screenshots, writes action traces and blocker records, and feeds the next Codex pass with concrete runtime facts.</p>
+          </div>
+        </article>
+        <article>
+          <span>06</span>
+          <div>
+            <h3>Promotion back into Foundation</h3>
+            <p>When a Plant rule becomes reusable, it is triaged as a promotion candidate. When it belongs only to the current game, it stays project-specific so the reusable seed stays clean.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="media-proof current-proof ai-proof" aria-labelledby="proof-title">
+      <div class="section-title">
+        <div>
+          <p class="eyebrow">Current proof</p>
+          <h2 id="proof-title">Runtime operator evidence from the current Unity prototype</h2>
+        </div>
+      </div>
+      <div class="media-grid">
+        <article class="media-card wide">
+          <img class="runner-log-focus" src="./assets/runtime-operator-room-route-clean.png" alt="Runtime operator route evidence with runner log overlay">
+          <div>
+            <span>Unity / C#, JSON, Python</span>
+            <h3>The runner plays the route and records what happened</h3>
+            <p>The Runtime Operator drives the live build through player-equivalent actions, tracks route stage, captures screenshots, writes action traces, and turns runtime behavior into evidence the next Codex pass can inspect.</p>
+          </div>
+        </article>
+        <article class="media-card">
+          <img src="./assets/runtime-operator-field-note.png" alt="Runtime operator capturing field-note UI and research evidence">
+          <div>
+            <span>UI contract handling</span>
+            <h3>Player-facing UI is validated through contracts</h3>
+            <p>The runner does not blindly click buttons. It uses registered UI surfaces, safe close rules, explicit route actions, and visible screenshot evidence.</p>
+          </div>
+        </article>
+        <article class="media-card">
+          <a class="video-card" href="https://www.youtube.com/watch?v=Be6fmAvuETA" aria-label="Watch AI-assisted Unity runtime validation demo">
+            <img src="./assets/ai-runtime-runner-thumbnail.png" alt="Player and AI runner using shared interfaces to exercise game systems">
+          </a>
+          <div>
+            <span>Runtime validation</span>
+            <h3>Compile success is not proof the game works.</h3>
+            <p>The demo explains the broader validation loop: automated runner intent, screenshots, JSON reports, logs, failed progress, and observed outcomes.</p>
+          </div>
+        </article>
+        <article class="media-card evidence-log-card">
+          <img src="./assets/runtime-log-blocker-json.png" alt="Runtime Operator blocker JSON showing expected stage, observed stage, reason, and recommended write paths">
+          <div>
+            <span>Generated evidence</span>
+            <h3>Blockers become scoped follow-up work</h3>
+            <p>When the runner cannot complete a route, it records the expected state, observed state, failure reason, and likely files for the next fix pass.</p>
+          </div>
+        </article>
+        <article class="media-card evidence-log-card">
+          <img src="./assets/runtime-log-milestone-json.png" alt="Runtime Operator milestone JSON showing a passed Mom note world action and screenshot evidence">
+          <div>
+            <span>Milestone evidence</span>
+            <h3>Passed steps keep their proof trail</h3>
+            <p>Milestone records preserve the action path, observed quest stage, before/after evidence, and screenshot references instead of relying on memory.</p>
+          </div>
+        </article>
+      </div>
+    </section>
   </main>
 
   <div class="ai-system-modal" id="aiSystemModal" hidden>
@@ -63,7 +246,7 @@
     <section class="ai-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="aiSystemModalTitle">
       <button class="ai-modal-close" type="button" id="aiSystemModalClose" aria-label="Close system details">Close</button>
       <div class="ai-modal-titlebar">
-        <p class="article-label" id="aiSystemModalLabel">System</p>
+        <p class="eyebrow" id="aiSystemModalLabel">System</p>
         <div class="ai-modal-title-row">
           <h2 id="aiSystemModalTitle">System</h2>
           <span class="ai-modal-badge" id="aiSystemModalBadge">Artifact</span>
@@ -82,12 +265,10 @@
             <h3>Solves</h3>
             <div id="aiSystemSolves"></div>
           </section>
-
           <section>
             <h3>How it works</h3>
             <div id="aiSystemWorks"></div>
           </section>
-
           <section>
             <h3>Matters</h3>
             <div id="aiSystemMatters"></div>
@@ -107,6 +288,13 @@
     </section>
   </div>
 
+  <footer class="site-footer">
+    <span>Ryan Sharr</span>
+    <a href="mailto:hello@ryansharr.com">hello@ryansharr.com</a>
+    <a href="./unity.html">Game Work</a>
+  </footer>
   <script src="./ai-systems.js"></script>
+  <script src="./image-modal.js"></script>
+  <script src="./video-modal.js"></script>
 </body>
 </html>

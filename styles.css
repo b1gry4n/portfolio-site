@@ -1324,11 +1324,31 @@ p {
   border-radius: 5px;
 }
 
-.ai-prototype-row img {
+.ai-prototype-media {
+  overflow: hidden;
+  border-radius: 5px;
+  background: #050607;
+}
+
+.ai-prototype-row img,
+.ai-prototype-media img {
+  display: block;
   width: 100%;
   aspect-ratio: 16 / 9;
   object-fit: cover;
   object-position: center;
+}
+
+.ai-prototype-row.code-doctrine-row img {
+  object-position: 8% 6%;
+  transform: scale(1.18);
+  transform-origin: left top;
+}
+
+.ai-prototype-row.contract-code-row img {
+  object-position: 12% 27%;
+  transform: scale(1.24);
+  transform-origin: left center;
 }
 
 .ai-prototype-row > div {

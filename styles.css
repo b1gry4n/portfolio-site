@@ -752,9 +752,22 @@ p {
 }
 
 .tooling-section .media-card img {
-  object-fit: contain;
-  object-position: left top;
+  aspect-ratio: 16 / 7.6;
+  object-fit: cover;
+  object-position: 48% 18%;
   background: #232323;
+}
+
+.tooling-section .media-card:nth-child(1) img {
+  object-position: 34% 12%;
+}
+
+.tooling-section .media-card:nth-child(2) img {
+  object-position: 50% 18%;
+}
+
+.tooling-section .media-card:nth-child(3) img {
+  object-position: 46% 10%;
 }
 
 .media-card a {
@@ -1369,12 +1382,14 @@ p {
   max-width: 540px;
 }
 
+.current-proof .media-card > .video-card,
 .ai-proof .media-card > .video-card,
 .ai-prototype-row > .video-card {
   position: relative;
   display: block;
 }
 
+.current-proof .media-card > .video-card::before,
 .ai-proof .media-card > .video-card::before,
 .ai-prototype-row > .video-card::before {
   content: "";
@@ -1386,6 +1401,7 @@ p {
   pointer-events: none;
 }
 
+.current-proof .media-card > .video-card::after,
 .ai-proof .media-card > .video-card::after,
 .ai-prototype-row > .video-card::after {
   content: "▶";
@@ -1408,6 +1424,7 @@ p {
   pointer-events: none;
 }
 
+.current-proof .media-card > .video-card:hover::after,
 .ai-proof .media-card > .video-card:hover::after,
 .ai-prototype-row > .video-card:hover::after {
   border-color: var(--accent);

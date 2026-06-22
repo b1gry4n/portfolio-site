@@ -348,7 +348,7 @@ p {
   display: none;
   align-items: center;
   justify-content: center;
-  padding: 24px;
+  padding: 18px 18px 64px;
 }
 
 .image-modal.is-open {
@@ -365,46 +365,68 @@ p {
 .image-modal__dialog {
   position: relative;
   display: grid;
-  gap: 10px;
-  width: min(1280px, 100%);
-  max-height: calc(100vh - 48px);
+  width: max-content;
+  min-width: min(960px, calc(100vw - 36px));
+  max-width: calc(100vw - 36px);
+  max-height: calc(100vh - 100px);
+  overflow-x: hidden;
+  overflow-y: auto;
   border: 1px solid var(--line);
   border-radius: 8px;
   background: #050607;
   box-shadow: 0 24px 80px rgba(0, 0, 0, 0.6);
-  padding: 10px;
+  padding: 12px;
 }
 
 .image-modal__dialog img {
-  width: 100%;
-  max-height: calc(100vh - 138px);
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: none;
+  justify-self: center;
+  align-self: start;
   border-radius: 5px;
-  object-fit: contain;
   background: #050607;
 }
 
 .image-modal__caption {
+  position: fixed;
+  left: 50%;
+  bottom: 18px;
+  z-index: 3;
+  width: min(960px, calc(100vw - 36px));
   margin: 0;
+  border: 1px solid var(--line-soft);
+  border-radius: 7px;
+  background: rgba(13, 17, 20, 0.94);
   color: var(--muted);
   font-size: 0.9rem;
   line-height: 1.4;
   text-align: center;
+  padding: 9px 12px;
+  transform: translateX(-50%);
 }
 
 .image-modal__close {
-  position: absolute;
-  right: 10px;
-  top: -44px;
-  min-height: 34px;
+  position: sticky;
+  top: 0;
+  justify-self: end;
+  margin: 0 0 -34px 0;
+  z-index: 4;
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
   border: 1px solid var(--line);
   border-radius: 7px;
   background: var(--panel-2);
   color: var(--text);
   cursor: pointer;
   font: inherit;
-  font-size: 0.84rem;
+  font-size: 1.25rem;
   font-weight: 800;
-  padding: 7px 11px;
+  line-height: 1;
+  padding: 0;
 }
 
 .image-modal__close:hover {

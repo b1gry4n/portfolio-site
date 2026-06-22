@@ -13,10 +13,10 @@
     modal.innerHTML = [
       '<div class="image-modal__backdrop" data-image-close></div>',
       '<div class="image-modal__dialog" role="dialog" aria-modal="true" aria-label="Image viewer">',
-      '  <button class="image-modal__close" type="button" data-image-close aria-label="Close image">Close</button>',
+      '  <button class="image-modal__close" type="button" data-image-close aria-label="Close image">X</button>',
       '  <img alt="">',
-      '  <p class="image-modal__caption"></p>',
-      "</div>"
+      "</div>",
+      '<p class="image-modal__caption"></p>'
     ].join("");
     document.body.appendChild(modal);
     return modal;
@@ -59,6 +59,7 @@
     modal.classList.add("is-open");
     modal.setAttribute("aria-hidden", "false");
     document.body.classList.add("image-modal-open");
+    modal.querySelector(".image-modal__dialog").scrollTo(0, 0);
     modal.querySelector("[data-image-close]").focus();
   }
 

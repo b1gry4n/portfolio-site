@@ -673,6 +673,50 @@ p {
   aspect-ratio: 4 / 3;
 }
 
+.aoeo-gallery {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.aoeo-gallery article {
+  overflow: hidden;
+  border: 1px solid var(--line-soft);
+  border-radius: 7px;
+  background: var(--panel);
+}
+
+.aoeo-gallery img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 7;
+  object-fit: cover;
+  object-position: center;
+  background: #050607;
+}
+
+.aoeo-gallery div {
+  padding: 13px 14px 15px;
+}
+
+.aoeo-gallery span {
+  display: block;
+  margin-bottom: 7px;
+  color: var(--accent-2);
+  font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.aoeo-gallery h3 {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.25;
+}
+
 .heman-strip .media-card img,
 .heman-gallery .media-card img {
   object-position: center top;
@@ -1581,6 +1625,10 @@ p {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
+  .aoeo-gallery {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .ai-hero,
   .ai-artifact-section {
     grid-template-columns: 1fr;
@@ -1626,6 +1674,7 @@ p {
   .project-grid,
   .media-grid,
   .evidence-grid,
+  .aoeo-gallery,
   .workflow-strip,
   .ai-foundation-grid,
   .ai-loop,

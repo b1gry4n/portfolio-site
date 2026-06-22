@@ -663,22 +663,7 @@
   function setScrollLock(locked) {
     document.documentElement.classList.toggle("modal-open", locked);
     document.body.classList.toggle("modal-open", locked);
-
-    if (locked) {
-      lockedScrollY = window.scrollY;
-      document.body.style.position = "fixed";
-      document.body.style.top = "-" + lockedScrollY + "px";
-      document.body.style.left = "0";
-      document.body.style.right = "0";
-      document.body.style.width = "100%";
-    } else {
-      document.body.style.position = "";
-      document.body.style.top = "";
-      document.body.style.left = "";
-      document.body.style.right = "";
-      document.body.style.width = "";
-      window.scrollTo(0, lockedScrollY);
-    }
+    if (locked) lockedScrollY = window.scrollY;
   }
 
   function openSystem(systemId) {
@@ -726,9 +711,14 @@
   }
 
   function closeModal() {
+    const restoreY = lockedScrollY;
+    const previousScrollBehavior = document.documentElement.style.scrollBehavior;
+    document.documentElement.style.scrollBehavior = "auto";
     modal.hidden = true;
     activeSystem = null;
     setScrollLock(false);
+    window.scrollTo({ left: 0, top: restoreY, behavior: "auto" });
+    document.documentElement.style.scrollBehavior = previousScrollBehavior;
   }
 
   function iconMarkup(index) {

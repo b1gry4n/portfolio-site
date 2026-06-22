@@ -853,9 +853,8 @@ p {
 }
 
 .personal-section h2 {
-  max-width: 620px;
   margin-bottom: 10px;
-  font-size: clamp(1.55rem, 2.4vw, 2.25rem);
+  font-size: clamp(1.55rem, 2.15vw, 2.08rem);
   line-height: 1.08;
 }
 
@@ -2121,6 +2120,12 @@ p {
 
 .ai-system-modal[hidden] {
   display: none;
+}
+
+html.modal-open,
+body.modal-open {
+  overflow: hidden;
+  scrollbar-gutter: stable;
 }
 
 .ai-modal-backdrop {

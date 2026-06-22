@@ -376,17 +376,57 @@ p {
   gap: 12px;
 }
 
-.hero-proof img {
+.hero-proof img,
+.hero-video-card {
   width: 100%;
   aspect-ratio: 4 / 3;
   border: 1px solid var(--line);
   border-radius: 7px;
+}
+
+.hero-proof img {
   object-fit: cover;
 }
 
 .hero-proof img:first-child {
   grid-row: span 2;
   height: 100%;
+}
+
+.hero-video-card {
+  position: relative;
+  display: block;
+  overflow: hidden;
+}
+
+.hero-video-card img {
+  display: block;
+  height: 100%;
+  border: 0;
+  border-radius: 0;
+}
+
+.hero-video-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 35%, rgba(0, 0, 0, 0.45));
+  pointer-events: none;
+}
+
+.hero-video-card::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 0;
+  height: 0;
+  border-top: 13px solid transparent;
+  border-bottom: 13px solid transparent;
+  border-left: 20px solid rgba(255, 255, 255, 0.95);
+  filter: drop-shadow(0 0 16px rgba(0, 0, 0, 0.8));
+  transform: translate(-45%, -50%);
+  pointer-events: none;
 }
 
 .signal-grid,
@@ -1005,6 +1045,35 @@ p {
   padding: 16px;
 }
 
+.ai-proof.current-proof .media-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-auto-rows: 1fr;
+  align-items: stretch;
+}
+
+.ai-proof.current-proof .media-card,
+.ai-proof.current-proof .media-card:not(.wide),
+.ai-proof.current-proof .media-card.evidence-log-card {
+  grid-column: auto;
+  grid-row: auto;
+  min-height: 0;
+}
+
+.ai-proof.current-proof .media-card img,
+.ai-proof.current-proof .media-card:not(.wide) img,
+.ai-proof.current-proof .media-card .video-card img,
+.ai-proof.current-proof .media-card.evidence-log-card img {
+  width: 100%;
+  height: auto;
+  min-height: 0;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+.ai-proof.current-proof .media-card.evidence-log-card img {
+  object-position: left top;
+}
+
 .ai-proof .media-card > .video-card {
   position: relative;
   display: block;
@@ -1105,6 +1174,10 @@ p {
     aspect-ratio: 16 / 9;
   }
 
+  .ai-proof.current-proof .media-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .workflow-strip {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
@@ -1201,6 +1274,10 @@ p {
   .current-proof .media-card.wide,
   .current-proof .media-card.wide img {
     min-height: 350px;
+  }
+
+  .ai-proof.current-proof .media-grid {
+    grid-template-columns: 1fr;
   }
 
   .heman-home .media-card.wide,

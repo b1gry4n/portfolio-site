@@ -131,12 +131,12 @@
     <section class="ai-spine-section" aria-labelledby="spine-title">
       <div class="ai-spine-title">
         <p class="eyebrow">Operating layers</p>
-        <h2 id="spine-title">The pieces that make the workflow usable in production</h2>
-        <p>
+        <h2 id="spine-title" class="ai-spine-focus is-active" data-spine-focus="0">The pieces that make the workflow usable in production</h2>
+        <p class="ai-spine-focus" data-spine-focus="1">
           The important part is not one clever prompt. The project has to give the agent a place to stand:
           doctrine, ownership, queue state, validation rules, and evidence.
         </p>
-        <p>
+        <p class="ai-spine-focus" data-spine-focus="2">
           Each layer reduces drift. The agent can make a smaller change, prove what happened, and leave the
           next pass with enough context to continue without guessing.
         </p>
@@ -191,45 +191,38 @@
       <div class="section-title">
         <div>
           <p class="eyebrow">Workflow examples</p>
-          <h2 id="proof-title">AI-orchestrated examples from live production work</h2>
+          <h2 id="proof-title">How the AI work gets checked inside the game</h2>
         </div>
       </div>
-      <div class="media-grid">
-        <article class="media-card">
-          <img class="runner-log-focus" src="./assets/runtime-operator-room-route-clean.png" alt="Runtime operator route evidence with runner log overlay">
-          <div>
-            <span>Unity / C#, JSON, Python</span>
-            <h3>The runner plays the route and records what happened</h3>            
-            <p>The demo shows runtime systems organized, exercised, and recorded through screenshots, JSON reports, logs, runner intent, failed progress, and observed outcomes the next Codex pass can use.</p>
-          </div>
-        </article>
-        <article class="media-card">
-          <a class="video-card" href="https://www.youtube.com/watch?v=fSTmXx59psc" aria-label="Watch courtroom prototype gameplay loop">
-            <img src="./assets/judge-concept-to-prototype.png" alt="Courtroom concept sketch compared against the working Unity prototype">
-          </a>
-          <div>
-            <span>Unity / C#, JSON, Python</span>
-            <h3>Concept sketch to playable courtroom loop</h3>
-            <p>Hand-drawn layout, generated scene structure, terminal UI, case data, verdict controls, and runtime flow were pushed into a working prototype instead of stopping at a mockup.</p>
-          </div>
-        </article>
-        <article class="media-card">
+      <div class="ai-proof-subsection">
+        <div class="ai-proof-subhead">
+          <h3>An AI-authored runner plays the build through the same command paths a player uses.</h3>
+        </div>
+        <div class="ai-runner-grid">
+        <div class="ai-runner-left">
+          <article class="media-card ai-runner-feature">
+            <a class="video-card" href="https://www.youtube.com/watch?v=fSTmXx59psc" aria-label="Watch runtime operator route demo">
+              <img class="runner-log-focus" src="./assets/runtime-operator-room-route-clean.png" alt="Runtime operator route evidence with runner log overlay">
+            </a>
+            <div>
+              <span>Unity / C#, JSON, Python</span>
+              <h3>The runner plays the route and records what happened</h3>            
+              <p>The runner follows a route through the live scene, asks the game for available world and UI actions, invokes the same command seams the player uses, and records what actually happened.</p>
+            </div>
+          </article>
+          <aside class="ai-runner-note">
+            <h3>The point is not auto-clicking. The point is a repeatable playability check.</h3>
+            <p>When the route works, the run leaves screenshots, action traces, UI observations, and milestone records. When it fails, the failure becomes a blocker with the expected state, observed state, reason, and likely files for the next Codex pass.</p>
+          </aside>
+        </div>
+        <div class="ai-runner-support-grid">
+        <article class="media-card ai-runner-combined">
           <img src="./assets/runtime-operator-field-note.png" alt="Runtime operator capturing field-note UI and research evidence">
           <div>
-            <span>UI contract handling</span>
-            <h3>Player-facing UI is validated through contracts</h3>
-            <p>The runner does not blindly click buttons. It uses registered UI surfaces, safe close rules, explicit route actions, and visible screenshot evidence.</p>
+            <span>Player and runner use the same seams</span>
+            <h3>UI and world actions are exposed as contracts</h3>
+            <p>The runner does not blindly click labels. Blocking UI surfaces expose visible text, safe close or continue actions, and screenshots. Gameplay-changing actions require explicit route steps. Missing command coverage becomes evidence to fix the owner instead of adding another runner hack.</p>
           
-          </div>
-        </article>
-        <article class="media-card">
-          <a class="video-card" href="https://www.youtube.com/watch?v=Be6fmAvuETA" aria-label="Watch AI-assisted Unity runtime validation demo">
-            <img src="./assets/ai-runtime-runner-thumbnail.png" alt="Player and AI runner using shared interfaces to exercise game systems">
-          </a>
-          <div>
-            <span>Live-scene validation</span>
-            <h3>AI changes are tested inside the running scene</h3>
-            <p>The Runtime Operator drives the live build through player-equivalent actions, tracks route stage, captures screenshots, writes action traces, and turns runtime behavior into evidence the next Codex pass can inspect.</p>
           </div>
         </article>
         <article class="media-card evidence-log-card">
@@ -248,6 +241,51 @@
             <p>Milestone records preserve the action path, observed quest stage, before/after evidence, and screenshot references instead of relying on memory.</p>
           </div>
         </article>
+        </div>
+        </div>
+      </div>
+
+      <div class="ai-proof-subsection">
+        <div class="ai-proof-subhead">
+          <p class="eyebrow">Prototype assembly</p>
+          <h3>A separate example of AI-assisted scene construction from a rough concept.</h3>
+        </div>
+        <div class="ai-prototype-grid">
+          <article class="ai-prototype-row">
+            <a class="video-card" href="https://www.youtube.com/watch?v=fSTmXx59psc" aria-label="Watch courtroom prototype gameplay loop">
+              <img src="./assets/judge-concept-to-prototype.png" alt="Courtroom concept sketch compared against the working Unity prototype">
+            </a>
+            <div>
+              <span>Unity / C#, JSON, Python</span>
+              <h3>Concept sketch to playable courtroom loop</h3>
+              <p>Hand-drawn layout, generated scene structure, terminal UI, case data, verdict controls, and runtime flow were pushed into a working prototype instead of stopping at a mockup.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <div class="ai-proof-subsection">
+        <div class="ai-proof-subhead">
+          <h3>The queue turns a small prompt into a bounded task with proof.</h3>
+        </div>
+        <div class="ai-review-grid">
+          <article class="ai-review-row">
+            <img src="./assets/ai-queue-chat-window.png" alt="Codex chat window showing a specific queue item being implemented and later queue items listed for review">
+            <div>
+              <span>Production queue</span>
+              <h3>One prompt means one assigned piece of work</h3>
+              <p>The project records the queue item before execution, so Codex works inside a known scope instead of wandering through a chat request. The surrounding queue also shows how deep the system plan is: held objects, scanning, discovery, lifecycle, mating, genetics, containers, and material swaps.</p>
+            </div>
+          </article>
+          <article class="ai-review-row">
+            <img src="./assets/ai-implementation-report-cropped.png" alt="Implementation report documenting changed files, runtime rules, validation, and remaining scope">
+            <div>
+              <span>Reviewable report</span>
+              <h3>The pass leaves a handoff, not just changed files</h3>
+              <p>The report explains what changed, which runtime rules now exist, what validation passed, and what still needs work. That makes the next pass easier to review and easier to continue.</p>
+            </div>
+          </article>
+        </div>
       </div>
     </section>
   </main>

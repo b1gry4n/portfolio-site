@@ -767,6 +767,48 @@
 
   renderWorkflowMap();
 
+  const spineSection = document.querySelector(".ai-spine-section");
+  const spineList = document.querySelector(".ai-spine-list");
+  const spineFocusItems = Array.prototype.slice.call(document.querySelectorAll("[data-spine-focus]"));
+
+  function setSpineFocus(activeIndex) {
+    spineFocusItems.forEach(function (item, index) {
+      item.classList.toggle("is-active", index === activeIndex);
+    });
+  }
+
+  function updateSpineFocus() {
+    if (!spineSection || spineFocusItems.length < 3) return;
+
+    const rect = (spineList || spineSection).getBoundingClientRect();
+    const viewportAnchor = window.innerHeight * 0.46;
+    const progress = Math.min(1, Math.max(0, (viewportAnchor - rect.top) / Math.max(1, rect.height)));
+
+    if (progress < 0.4) {
+      setSpineFocus(0);
+    } else if (progress < 0.78) {
+      setSpineFocus(1);
+    } else {
+      setSpineFocus(2);
+    }
+  }
+
+  if (spineSection && spineFocusItems.length) {
+    let spineTicking = false;
+    const requestSpineUpdate = function () {
+      if (spineTicking) return;
+      spineTicking = true;
+      window.requestAnimationFrame(function () {
+        spineTicking = false;
+        updateSpineFocus();
+      });
+    };
+
+    updateSpineFocus();
+    window.addEventListener("scroll", requestSpineUpdate, { passive: true });
+    window.addEventListener("resize", requestSpineUpdate);
+  }
+
   workflowMap.addEventListener("click", function (event) {
     const trigger = event.target instanceof Element ? event.target.closest("[data-system-id]") : null;
     if (trigger) {

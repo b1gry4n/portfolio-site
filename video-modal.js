@@ -31,6 +31,11 @@
       '<div class="video-modal__dialog" role="dialog" aria-modal="true" aria-label="Video player">',
       '  <button class="video-modal__close" type="button" data-video-close aria-label="Close video">Close</button>',
       '  <iframe title="Video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>',
+      '  <div class="video-modal__controls" hidden>',
+      '    <button class="video-modal__cycle" type="button" data-video-prev aria-label="Previous video">‹</button>',
+      '    <span class="video-modal__count" aria-live="polite"></span>',
+      '    <button class="video-modal__cycle" type="button" data-video-next aria-label="Next video">›</button>',
+      "  </div>",
       "</div>"
     ].join("");
     document.body.appendChild(modal);
@@ -39,7 +44,44 @@
 
   var modal;
   var iframe;
+  var controls;
+  var counter;
   var lastTrigger;
+  var playlist = [];
+  var playlistIndex = 0;
+
+  function videoLinksFor(trigger) {
+    var scope = trigger.closest(".case-study");
+    if (!scope) return [trigger.href];
+
+    var links = Array.prototype.slice.call(scope.querySelectorAll('a[href*="youtube.com/watch"], a[href*="youtu.be/"]'));
+    var urls = [];
+    links.forEach(function (link) {
+      if (!toEmbedUrl(link.href)) return;
+      if (urls.indexOf(link.href) === -1) urls.push(link.href);
+    });
+    return urls.length ? urls : [trigger.href];
+  }
+
+  function renderCurrentVideo() {
+    var embedUrl = toEmbedUrl(playlist[playlistIndex] || "");
+    if (!embedUrl) return;
+
+    iframe.src = embedUrl;
+    if (playlist.length > 1) {
+      controls.hidden = false;
+      counter.textContent = "Video " + (playlistIndex + 1) + " / " + playlist.length;
+    } else {
+      controls.hidden = true;
+      counter.textContent = "";
+    }
+  }
+
+  function cycleVideo(direction) {
+    if (playlist.length < 2) return;
+    playlistIndex = (playlistIndex + direction + playlist.length) % playlist.length;
+    renderCurrentVideo();
+  }
 
   function openVideo(trigger) {
     var embedUrl = toEmbedUrl(trigger.href);
@@ -48,13 +90,19 @@
     if (!modal) {
       modal = buildModal();
       iframe = modal.querySelector("iframe");
+      controls = modal.querySelector(".video-modal__controls");
+      counter = modal.querySelector(".video-modal__count");
       modal.addEventListener("click", function (event) {
         if (event.target.matches("[data-video-close]")) closeVideo();
+        if (event.target.matches("[data-video-prev]")) cycleVideo(-1);
+        if (event.target.matches("[data-video-next]")) cycleVideo(1);
       });
     }
 
     lastTrigger = trigger;
-    iframe.src = embedUrl;
+    playlist = videoLinksFor(trigger);
+    playlistIndex = Math.max(0, playlist.indexOf(trigger.href));
+    renderCurrentVideo();
     modal.classList.add("is-open");
     modal.setAttribute("aria-hidden", "false");
     document.body.classList.add("video-modal-open");
@@ -64,6 +112,10 @@
   function closeVideo() {
     if (!modal) return;
     iframe.src = "";
+    playlist = [];
+    playlistIndex = 0;
+    if (controls) controls.hidden = true;
+    if (counter) counter.textContent = "";
     modal.classList.remove("is-open");
     modal.setAttribute("aria-hidden", "true");
     document.body.classList.remove("video-modal-open");
@@ -81,5 +133,8 @@
 
   document.addEventListener("keydown", function (event) {
     if (event.key === "Escape") closeVideo();
+    if (!modal || !modal.classList.contains("is-open")) return;
+    if (event.key === "ArrowLeft") cycleVideo(-1);
+    if (event.key === "ArrowRight") cycleVideo(1);
   });
 })();

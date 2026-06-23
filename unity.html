@@ -218,21 +218,40 @@
         </div>
       </article>
 
+      <article class="case-study" id="godot-room-detection">
+        <div class="case-media">
+          <img src="./assets/godot-grid-room-detection.gif" alt="Godot grid prototype showing room detection and flood-fill region visualization">
+        </div>
+        <div class="case-copy">
+          <p class="eyebrow">Godot / grid systems</p>
+          <h2>Room Detection and Flood-Fill Grid Tool</h2>
+          <p>
+            A RimWorld-inspired dynamic room creation prototype. As the grid changes, the system flood fills connected cells,
+            rebuilds room regions, and visualizes the classification rules behind the result.
+          </p>
+          <ul>
+            <li>Flood-fill room creation across editable grid cells.</li>
+            <li>Neighbor, border, area, and room overlays for debugging spatial logic.</li>
+            <li>Tool-style controls for inspecting how rooms split, merge, and update when the layout changes.</li>
+          </ul>
+        </div>
+      </article>
+
       <article class="case-study" id="godot-grid-pathfinding">
         <div class="case-media">
           <img src="./assets/godot-grid-pathfinding.gif" alt="Godot grid prototype showing rooms, doors, and A-star pathfinding">
         </div>
         <div class="case-copy">
           <p class="eyebrow">Godot / grid systems</p>
-          <h2>Room Grid and A* Pathfinding Prototype</h2>
+          <h2>Door-Aware A* Pathfinding Prototype</h2>
           <p>
-            An older systems prototype built around RimWorld-style grid authoring: room shapes, door placement,
-            spatial overlays, and pathfinding debug visualization.
+            A companion pathfinding prototype built on the same RimWorld-style grid foundation: connected spaces,
+            door placement, start/end selection, and route visualization.
           </p>
           <ul>
             <li>Interactive add, remove, and door editing on a generated grid.</li>
-            <li>Room and area detection with visible debug states for checking the logic.</li>
-            <li>A* route drawing between selected points across connected spaces.</li>
+            <li>A* route drawing between selected points across connected rooms.</li>
+            <li>Path debug output that makes route cost and traversal choices visible.</li>
           </ul>
         </div>
       </article>

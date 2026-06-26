@@ -15,28 +15,24 @@
   var guidanceCommands = ["help", "?", "-h", "--help", "man", "info", "commands", "command", "usage", "what", "how", "ls", "dir", "where", "why"];
   var riddles = [
     {
-      prompt: "Riddle 1/6: I think in rules, states, inputs, edge cases, and what happens after the player presses a button. What do I build?",
-      answers: ["systems", "gameplay systems", "game systems", "runtime systems"]
+      prompt: "Riddle 1/5: I am the name at the top of the site and the name in the footer. Who am I?",
+      answers: ["ryan", "ryan sharr", "sharr"]
     },
     {
-      prompt: "Riddle 2/6: I can talk shape and deformation with artists, then turn around and talk ownership and state with engineers. What bridge am I?",
-      answers: ["technical artist", "tech artist", "technical art", "artist engineer", "artist-engineer", "bridge"]
+      prompt: "Riddle 2/5: I build in this engine a lot. It is named all over the site. What engine is it?",
+      answers: ["unity", "unity3d", "unity 3d"]
     },
     {
-      prompt: "Riddle 3/6: I do not just make the thing once. I build the path that helps people make it again without friction. What do I make?",
-      answers: ["tools", "tooling", "editor tools", "pipelines", "pipeline", "workflow tools"]
+      prompt: "Riddle 3/5: This whole site is about making playable things. What do I make?",
+      answers: ["games", "game", "video games"]
     },
     {
-      prompt: "Riddle 4/6: I do not trust vibes alone. I leave logs, traces, screenshots, and checks so decisions can be reviewed. What do I care about?",
-      answers: ["evidence", "proof", "validation", "runtime evidence", "logs", "checks"]
+      prompt: "Riddle 4/5: One page is all about assisted workflows and guardrails. What two-letter technology is it about?",
+      answers: ["ai", "a.i.", "artificial intelligence"]
     },
     {
-      prompt: "Riddle 5/6: I use AI, but I do not let it wander loose. I give it maps, queues, boundaries, and review points. What keeps it useful?",
-      answers: ["guardrails", "ai guardrails", "workflow", "ai workflow", "constraints", "boundaries"]
-    },
-    {
-      prompt: "Riddle 6/6: My favorite result is not a slide, pitch, or promise. It is something you can control, test, and feel. What do I aim for?",
-      answers: ["playable results", "playable", "prototype", "prototypes", "playable prototype", "playable prototypes"]
+      prompt: "Riddle 5/5: One card says Tools and Validation. What do I build to make work faster?",
+      answers: ["tools", "tooling", "editor tools"]
     }
   ];
 

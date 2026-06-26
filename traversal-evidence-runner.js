@@ -56,6 +56,27 @@
     return "Hint: " + pattern;
   }
 
+  function escapeHtml(value) {
+    return String(value).replace(/[&<>"']/g, function (character) {
+      return {
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        "\"": "&quot;",
+        "'": "&#39;"
+      }[character];
+    });
+  }
+
+  function setTerminalOutput(output, prompt, hint, prefix) {
+    if (!output) return;
+    var html = "";
+    if (prefix) html += '<span class="evidence-terminal__response">' + escapeHtml(prefix) + "</span>";
+    if (prompt) html += '<span class="evidence-terminal__prompt-text">' + escapeHtml(prompt) + "</span>";
+    if (hint) html += '<span class="evidence-terminal__hint">' + escapeHtml(hint) + "</span>";
+    output.innerHTML = html;
+  }
+
   function targetImages() {
     var explicit = Array.prototype.slice.call(document.querySelectorAll("[data-traversal-evidence-trigger]"));
     var inferred = Array.prototype.slice.call(document.querySelectorAll('img[src*="judge-concept-to-prototype"], img[alt*="prototype"]')).filter(function (image) {
@@ -542,6 +563,8 @@
       "  <span class=\"sneaky-evidence-bug__ascii-line sneaky-evidence-bug__ascii-body\">" + variant.body + "</span>",
       "  <span class=\"sneaky-evidence-bug__ascii-line sneaky-evidence-bug__ascii-legs\">" + variant.legs + "</span>",
       "  <span class=\"sneaky-evidence-bug__code\">" + variant.code + "</span>",
+      "  <span class=\"sneaky-evidence-bug__particle\">01</span>",
+      "  <span class=\"sneaky-evidence-bug__particle sneaky-evidence-bug__particle--late\">10</span>",
       "</span>"
     ].join("");
     activeBug = bug;
@@ -1514,7 +1537,7 @@
           input.dataset.activeRiddleIndex = String(nextIndexAfterCorrect);
           input.dataset.riddleIndex = String(nextIndexAfterCorrect + 1);
           input.dataset.riddleMisses = "0";
-          if (output) output.textContent = "Correct\n\n" + riddles[nextIndexAfterCorrect].prompt;
+          setTerminalOutput(output, riddles[nextIndexAfterCorrect].prompt, "", "Correct");
           createTerminalCelebration(terminal);
           return;
         }
@@ -1522,7 +1545,7 @@
         if (activeRiddle) {
           var misses = Number(input.dataset.riddleMisses || 0) + 1;
           input.dataset.riddleMisses = String(misses);
-          if (output) output.textContent = "Nope.\n\n" + activeRiddle.prompt + "\n" + riddleHint(activeRiddle, misses);
+          setTerminalOutput(output, activeRiddle.prompt, riddleHint(activeRiddle, misses), "Nope.");
           input.value = "";
           return;
         }
@@ -1533,9 +1556,7 @@
           input.dataset.riddleIndex = String((nextRiddle + 1) % riddles.length);
           input.dataset.activeRiddleIndex = String(riddles.indexOf(riddle));
           input.dataset.riddleMisses = "0";
-          if (output) {
-            output.textContent = riddle.prompt;
-          }
+          setTerminalOutput(output, riddle.prompt);
           input.value = "";
           return;
         }

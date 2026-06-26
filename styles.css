@@ -1080,6 +1080,12 @@ p {
   margin-bottom: 32px;
 }
 
+.resume-summary-grid,
+.ai-employer-grid {
+  margin-top: 20px;
+  margin-bottom: 36px;
+}
+
 .signal-grid article,
 .project-card,
 .evidence-grid article,
@@ -2024,6 +2030,7 @@ p {
   border-radius: 7px;
   background: rgba(5, 9, 14, 0.36);
   padding: 10px 12px;
+  animation: evidence-terminal-gold-shimmer 14s ease-in-out infinite;
 }
 
 .evidence-terminal label {
@@ -2086,6 +2093,47 @@ p {
   color: var(--faint);
   font-size: 0.76rem;
   line-height: 1.35;
+}
+
+.evidence-terminal__response,
+.evidence-terminal__prompt-text,
+.evidence-terminal__hint {
+  display: block;
+}
+
+.evidence-terminal__response {
+  margin-bottom: 4px;
+}
+
+.evidence-terminal__hint {
+  margin-top: 6px;
+  color: #ffd08a;
+  font-weight: 900;
+  text-shadow: 0 0 11px rgba(255, 143, 45, 0.28);
+}
+
+@keyframes evidence-terminal-gold-shimmer {
+  0%,
+  82%,
+  100% {
+    border-color: rgba(123, 215, 195, 0.2);
+    box-shadow: none;
+  }
+
+  86% {
+    border-color: rgba(255, 177, 83, 0.38);
+    box-shadow: 0 0 16px rgba(255, 143, 45, 0.12);
+  }
+
+  89% {
+    border-color: rgba(255, 208, 138, 0.76);
+    box-shadow: 0 0 24px rgba(255, 143, 45, 0.22);
+  }
+
+  92% {
+    border-color: rgba(255, 177, 83, 0.28);
+    box-shadow: 0 0 10px rgba(255, 143, 45, 0.1);
+  }
 }
 
 @keyframes evidence-terminal-blink {
@@ -2231,6 +2279,26 @@ p {
   letter-spacing: 0;
   transform: translateX(-50%);
   text-shadow: none;
+}
+
+.sneaky-evidence-bug__particle {
+  position: absolute;
+  left: 16px;
+  top: 18px;
+  color: rgba(216, 181, 111, 0.62);
+  font-size: 6px;
+  line-height: 1;
+  opacity: 0;
+  pointer-events: none;
+  text-shadow: 0 0 7px rgba(255, 143, 45, 0.32);
+  animation: sneaky-bug-particle 1250ms ease-out infinite;
+}
+
+.sneaky-evidence-bug__particle--late {
+  left: 30px;
+  top: 24px;
+  color: rgba(123, 215, 195, 0.48);
+  animation-delay: 620ms;
 }
 
 .sneaky-evidence-bug.is-biting .sneaky-evidence-bug__ascii {
@@ -2397,6 +2465,22 @@ p {
 
   100% {
     transform: translateX(1px);
+  }
+}
+
+@keyframes sneaky-bug-particle {
+  0% {
+    opacity: 0;
+    transform: translate(0, 0) scale(0.7);
+  }
+
+  18% {
+    opacity: 0.58;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(-9px, -13px) scale(0.35);
   }
 }
 

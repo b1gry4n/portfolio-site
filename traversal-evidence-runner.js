@@ -78,11 +78,10 @@
   }
 
   function targetImages() {
-    var explicit = Array.prototype.slice.call(document.querySelectorAll("[data-traversal-evidence-trigger]"));
-    var inferred = Array.prototype.slice.call(document.querySelectorAll('img[src*="judge-concept-to-prototype"], img[alt*="prototype"]')).filter(function (image) {
-      return /ai|unity|prototype|workflow|judge/i.test(image.alt + " " + image.src);
+    var explicit = Array.prototype.slice.call(document.querySelectorAll("[data-traversal-evidence-trigger]")).filter(function (image) {
+      return !image.closest("a.video-card, a.case-video-card, a.hero-video-card");
     });
-    return explicit.concat(inferred).filter(function (image, index, all) {
+    return explicit.filter(function (image, index, all) {
       return all.indexOf(image) === index;
     });
   }

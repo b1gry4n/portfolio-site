@@ -365,6 +365,11 @@
     overlay.classList.remove("is-open");
     overlay.setAttribute("aria-hidden", "true");
     document.body.classList.remove("traversal-runner-open");
+    pendingHighScore = null;
+    Array.prototype.forEach.call(overlay.querySelectorAll(".traversal-runner-modal__highscore, .traversal-runner-modal__scoreboard, .traversal-runner-modal__instructions"), function (panel) {
+      panel.classList.remove("is-visible");
+      if (panel.hasAttribute("aria-hidden")) panel.setAttribute("aria-hidden", "true");
+    });
     if (game) {
       game.destroy(true);
       game = null;
@@ -714,6 +719,7 @@
       state.best = topHighScore(state.highScores).score;
       state.bestInitials = topHighScore(state.highScores).initials;
       state.submittingHighScore = false;
+      state.runHadInput = false;
       state.nextPlatformX = 0;
       state.platforms = [];
       state.rings = [];
@@ -900,6 +906,7 @@
     function primaryPress() {
       if (state.primaryHeld) return;
       state.primaryHeld = true;
+      state.runHadInput = true;
       var p = state.player;
       if (p.grounded) {
         state.glideHeld = false;
@@ -954,6 +961,7 @@
     function glidePress() {
       var p = state.player;
       if (p.grounded || state.glideHeld) return;
+      state.runHadInput = true;
       state.glideHeld = true;
       state.primaryHeld = false;
       detachGrapple();
@@ -1168,7 +1176,7 @@
 
     function resetPlayer() {
       var score = Math.floor(state.distance);
-      if (!state.submittingHighScore && qualifiesForHighScore(score, state.highScores)) {
+      if (state.runHadInput && !state.submittingHighScore && score >= 25 && qualifiesForHighScore(score, state.highScores)) {
         state.submittingHighScore = true;
         showHighScoreEntry(score, function (scores) {
           state.highScores = scores;
@@ -1195,6 +1203,7 @@
       detachGrapple();
       state.releaseCoast = 0;
       state.distance = 0;
+      state.runHadInput = false;
       maybeLog("Recovery route reacquired", p.x + 24, p.y - 20, 1);
     }
 
@@ -1301,9 +1310,30 @@
       g.fillStyle(0xd8b56f, 1);
       g.fillCircle(head.x, head.y, 6);
       g.fillStyle(0x071018, 1);
-      g.fillRect(head.x + 1, head.y - 2, 7, 3);
+      g.fillCircle(head.x - 7, head.y + 1, 2);
+      g.fillCircle(head.x + 7, head.y + 1, 2);
+      g.lineStyle(2, 0x030506, 1);
+      g.strokeCircle(head.x - 8, head.y + 2, 2.2);
+      g.strokeCircle(head.x + 8, head.y + 2, 2.2);
+      g.fillStyle(0x071018, 1);
+      g.fillRoundedRect(head.x - 7, head.y - 4, 14, 5, 2);
+      g.fillStyle(0x111923, 1);
+      g.fillRect(head.x - 6, head.y - 3, 5, 3);
+      g.fillRect(head.x + 2, head.y - 3, 5, 3);
+      g.fillStyle(0x8ec7ff, 0.68);
+      g.fillRect(head.x - 5, head.y - 2, 3, 1);
+      g.fillRect(head.x + 3, head.y - 2, 3, 1);
+      g.fillStyle(0x191f27, 1);
+      g.fillCircle(head.x - 1, head.y - 8, 6);
+      g.fillStyle(0x071018, 1);
+      g.fillRect(head.x - 7, head.y - 11, 12, 4);
+      g.fillRect(head.x - 10, head.y - 9, 5, 3);
       g.fillStyle(0x8ec7ff, 0.92);
-      g.fillRect(head.x + 3, head.y - 1, 4, 1);
+      g.fillRect(head.x - 9, head.y - 8, 3, 1);
+      g.fillStyle(0x3b2115, 1);
+      g.fillRoundedRect(head.x - 4, head.y + 4, 8, 5, 2);
+      g.fillStyle(0x1b100b, 1);
+      g.fillRect(head.x - 2, head.y + 6, 4, 2);
 
       g.fillStyle(glow, airborne ? 0.72 : 0.48);
       g.fillCircle(leftFoot.x, leftFoot.y, 3);

@@ -213,6 +213,12 @@ main {
   }
 }
 
+@media (max-width: 980px) {
+  .section-flow-lines {
+    display: none;
+  }
+}
+
 .hero,
 .page-hero,
 .split-section,
@@ -424,8 +430,10 @@ p {
 
 .availability-note {
   margin-top: 12px;
-  color: var(--muted);
+  color: #ffd08a;
   font-size: 0.92rem;
+  font-weight: 800;
+  text-shadow: 0 0 12px rgba(255, 143, 45, 0.18);
 }
 
 .button,
@@ -774,6 +782,10 @@ p {
   align-items: center;
   justify-content: center;
   padding: 16px;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+  touch-action: none;
 }
 
 .traversal-runner-modal.is-open {
@@ -796,16 +808,28 @@ p {
   border-radius: 8px;
   background: #05070b;
   box-shadow: 0 28px 90px rgba(0, 0, 0, 0.72), 0 0 46px rgba(123, 215, 195, 0.08);
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+  touch-action: none;
 }
 
 .traversal-runner-modal__game {
   position: absolute;
   inset: 0;
   background: #05070b;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+  touch-action: none;
 }
 
 .traversal-runner-modal__game canvas {
   display: block;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+  touch-action: none;
 }
 
 .traversal-runner-modal__controls {
@@ -857,6 +881,8 @@ p {
   box-shadow: 0 0 0 1px rgba(6, 8, 11, 0.86), 0 0 22px rgba(255, 143, 45, 0.2);
   cursor: pointer;
   touch-action: none;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
   user-select: none;
 }
 
@@ -2326,7 +2352,7 @@ p {
   width: 1px;
   height: 1px;
   pointer-events: none;
-  transform: translate(-50%, -50%) scaleX(var(--bite-face));
+  transform: translate(-50%, -50%) rotate(var(--bite-rot));
 }
 
 .sneaky-bug-bite__sore {
@@ -2343,21 +2369,22 @@ p {
 
 .sneaky-bug-bite__wave {
   position: absolute;
-  top: -13px;
+  top: -7px;
   color: #ff7585;
   font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
   font-size: 13px;
   font-weight: 900;
   text-shadow: 0 0 10px rgba(255, 91, 115, 0.76);
-  animation: sneaky-bug-bite-wave 420ms ease-out forwards;
 }
 
 .sneaky-bug-bite__wave:nth-child(2) {
-  left: -27px;
+  left: -29px;
+  animation: sneaky-bug-bite-wave-left 420ms ease-out forwards;
 }
 
 .sneaky-bug-bite__wave:nth-child(3) {
-  right: -27px;
+  right: -29px;
+  animation: sneaky-bug-bite-wave-right 420ms ease-out forwards;
 }
 
 .sneaky-evidence-bug.is-squished {
@@ -2511,7 +2538,23 @@ p {
   }
 }
 
-@keyframes sneaky-bug-bite-wave {
+@keyframes sneaky-bug-bite-wave-left {
+  0% {
+    opacity: 0;
+    transform: translateX(0) scale(0.78);
+  }
+
+  20% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateX(-10px) scale(1.35);
+  }
+}
+
+@keyframes sneaky-bug-bite-wave-right {
   0% {
     opacity: 0;
     transform: translateX(0) scale(0.78);
@@ -2812,8 +2855,6 @@ p {
   }
 
   .signal-grid,
-  .project-grid,
-  .media-grid,
   .evidence-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -2901,6 +2942,34 @@ p {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
+}
+
+@media (min-width: 681px) and (max-width: 980px) {
+  .work-preview .project-grid,
+  .tooling-section .media-grid,
+  .aoeo-section .art-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .work-preview .project-card,
+  .tooling-section .media-card div,
+  .aoeo-section .media-card div {
+    padding: 14px;
+  }
+
+  .work-preview .project-card h3,
+  .tooling-section .media-card h3,
+  .aoeo-section .media-card h3 {
+    font-size: clamp(1rem, 2.1vw, 1.2rem);
+    line-height: 1.15;
+  }
+
+  .work-preview .project-card p,
+  .tooling-section .media-card p,
+  .aoeo-section .media-card p {
+    font-size: 0.88rem;
+  }
 }
 
 @media (max-width: 680px) {

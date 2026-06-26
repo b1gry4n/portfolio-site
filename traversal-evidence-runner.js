@@ -145,6 +145,17 @@
     element.addEventListener("contextmenu", function (event) {
       event.preventDefault();
     });
+    ["selectstart", "dragstart", "gesturestart", "gesturechange", "gestureend"].forEach(function (type) {
+      element.addEventListener(type, function (event) {
+        event.preventDefault();
+      });
+    });
+    ["touchstart", "touchmove", "touchend"].forEach(function (type) {
+      element.addEventListener(type, function (event) {
+        if (event.target.closest("[data-traversal-close], [data-traversal-instructions-ok]")) return;
+        event.preventDefault();
+      }, { passive: false });
+    });
     return element;
   }
 
@@ -270,6 +281,9 @@
 
       button.addEventListener("click", stopControlEvent);
       button.addEventListener("contextmenu", stopControlEvent);
+      ["touchstart", "touchmove", "touchend", "touchcancel"].forEach(function (type) {
+        button.addEventListener(type, stopControlEvent, { passive: false });
+      });
     });
   }
 
@@ -435,12 +449,12 @@
     });
   }
 
-  function createBugBite(x, y, face) {
+  function createBugBite(x, y, rotation) {
     var bite = document.createElement("div");
     bite.className = "sneaky-bug-bite";
     bite.style.left = x + "px";
     bite.style.top = y + "px";
-    bite.style.setProperty("--bite-face", String(face));
+    bite.style.setProperty("--bite-rot", rotation + "deg");
     bite.innerHTML = [
       "<span class=\"sneaky-bug-bite__sore\"></span>",
       "<span class=\"sneaky-bug-bite__wave\">((</span>",
@@ -458,6 +472,15 @@
     return {
       x: rect.left + rect.width / 2 + (window.scrollX || window.pageXOffset || 0),
       y: rect.top + rect.height / 2 + (window.scrollY || window.pageYOffset || 0)
+    };
+  }
+
+  function bugMouthPoint(bug, rotation) {
+    var head = bugHeadPoint(bug);
+    var radians = (rotation - 90) * Math.PI / 180;
+    return {
+      x: head.x + Math.cos(radians) * 12,
+      y: head.y + Math.sin(radians) * 12
     };
   }
 
@@ -573,8 +596,8 @@
         if (activeBug !== bug || bug.classList.contains("is-squished")) return;
         bug.classList.add("is-biting");
         bug.style.setProperty("--bug-start-rot", biteAngle + "deg");
-        var head = bugHeadPoint(bug);
-        createBugBite(head.x, head.y, lane.side === "left" ? -1 : 1);
+        var mouth = bugMouthPoint(bug, biteAngle);
+        createBugBite(mouth.x, mouth.y, biteAngle);
         window.setTimeout(function () {
           bug.classList.remove("is-biting");
           bug.style.setProperty("--bug-start-rot", startAngle + "deg");
@@ -643,6 +666,7 @@
       state.baseSpeed = 275;
       state.distance = 0;
       state.visualTime = 0;
+      state.backgroundScroll = 0;
       state.best = loadBestScore();
       state.runHadInput = false;
       state.nextPlatformX = 0;
@@ -944,6 +968,7 @@
       var oldX = p.x;
       var oldY = p.y;
       state.visualTime += dt;
+      state.backgroundScroll += speed * dt;
       state.distance += speed * dt * 0.12;
 
       state.nodes.forEach(function (node) {
@@ -1094,6 +1119,7 @@
 
       var catchAmount = Math.min(p.x - leadX, (p.x - leadX) * 5.5 * dt);
       p.x -= catchAmount;
+      state.backgroundScroll += catchAmount;
       scrollWorld(catchAmount);
       scrollParallax(catchAmount);
       state.distance += catchAmount * 0.12;
@@ -1158,9 +1184,12 @@
       var runCycleBack = Math.sin(state.distance * 0.28 + Math.PI);
       var airborne = !p.grounded;
       var grappling = !!state.hookTarget;
-      var bodyColor = grappling ? 0x8ec7ff : p.glide ? 0x9b6dff : 0x7bd7c3;
       var suitDark = 0x071018;
       var glow = grappling ? 0x9be8ff : p.glide ? 0x9b6dff : 0x7bd7c3;
+      var skin = 0xd8b56f;
+      var jeans = 0x079fdf;
+      var tank = 0xf2f5f7;
+      var shoe = 0xf7f8f2;
       var hip = { x: p.x - 1, y: p.y + 7 };
       var chest = { x: p.x + 1, y: p.y - 8 };
       var head = { x: p.x + 3, y: p.y - 21 };
@@ -1203,26 +1232,31 @@
         g.lineBetween(p.x + 36, p.y + 8, p.x + 5, p.y + 12);
       }
 
-      g.lineStyle(5, suitDark, 1);
-      g.lineBetween(hip.x, hip.y, leftFoot.x, leftFoot.y);
-      g.lineBetween(hip.x, hip.y, rightFoot.x, rightFoot.y);
-      g.lineBetween(leftShoulder.x, leftShoulder.y, leftHand.x, leftHand.y);
-      g.lineBetween(rightShoulder.x, rightShoulder.y, rightHand.x, rightHand.y);
+      g.lineStyle(7, suitDark, 1);
+      g.lineBetween(hip.x, hip.y + 3, leftFoot.x, leftFoot.y);
+      g.lineBetween(hip.x + 3, hip.y + 3, rightFoot.x, rightFoot.y);
+      g.lineBetween(leftShoulder.x, leftShoulder.y + 2, leftHand.x, leftHand.y);
+      g.lineBetween(rightShoulder.x, rightShoulder.y + 2, rightHand.x, rightHand.y);
 
-      g.lineStyle(2, glow, 0.88);
-      g.lineBetween(hip.x, hip.y, leftFoot.x, leftFoot.y);
-      g.lineBetween(hip.x, hip.y, rightFoot.x, rightFoot.y);
-      g.lineBetween(leftShoulder.x, leftShoulder.y, leftHand.x, leftHand.y);
-      g.lineBetween(rightShoulder.x, rightShoulder.y, rightHand.x, rightHand.y);
+      g.lineStyle(4, jeans, 1);
+      g.lineBetween(hip.x, hip.y + 3, leftFoot.x, leftFoot.y - 1);
+      g.lineBetween(hip.x + 3, hip.y + 3, rightFoot.x, rightFoot.y - 1);
+      g.lineStyle(4, skin, 1);
+      g.lineBetween(leftShoulder.x, leftShoulder.y + 2, leftHand.x, leftHand.y);
+      g.lineBetween(rightShoulder.x, rightShoulder.y + 2, rightHand.x, rightHand.y);
 
       g.fillStyle(suitDark, 1);
-      g.fillRoundedRect(p.x - 9, p.y - 14, 19, 25, 5);
-      g.fillStyle(bodyColor, 1);
-      g.fillRoundedRect(p.x - 7, p.y - 13, 15, 22, 4);
-      g.lineStyle(2, 0xe9fcff, 0.88);
-      g.lineBetween(chest.x - 5, chest.y + 3, chest.x + 7, chest.y + 3);
-      g.lineStyle(1, 0x071018, 0.9);
-      g.lineBetween(chest.x + 3, chest.y + 6, chest.x + 3, chest.y + 14);
+      g.fillRoundedRect(p.x - 10, p.y - 14, 21, 25, 4);
+      g.fillStyle(tank, 1);
+      g.fillRoundedRect(p.x - 7, p.y - 14, 15, 20, 2);
+      g.fillStyle(skin, 1);
+      g.fillRect(p.x - 2, p.y - 14, 5, 11);
+      g.fillStyle(tank, 1);
+      g.fillRect(p.x - 7, p.y - 4, 15, 10);
+      g.fillStyle(jeans, 1);
+      g.fillRect(p.x - 8, p.y + 6, 17, 7);
+      g.fillStyle(0x056f9e, 1);
+      g.fillRect(p.x, p.y + 7, 2, 6);
 
       g.fillStyle(0x071018, 1);
       g.fillCircle(head.x - 1, head.y, 8);
@@ -1250,11 +1284,15 @@
       g.fillCircle(head.x + 3, head.y + 4, 1);
       g.fillCircle(head.x + 6, head.y + 4, 1);
 
-      g.fillStyle(glow, airborne ? 0.72 : 0.48);
-      g.fillCircle(leftFoot.x, leftFoot.y, 3);
-      g.fillCircle(rightFoot.x, rightFoot.y, 3);
-      g.fillCircle(leftHand.x, leftHand.y, 3);
-      g.fillCircle(rightHand.x, rightHand.y, grappling ? 4 : 3);
+      g.fillStyle(0x061018, 1);
+      g.fillCircle(leftFoot.x, leftFoot.y, 4);
+      g.fillCircle(rightFoot.x, rightFoot.y, 4);
+      g.fillStyle(shoe, 1);
+      g.fillRoundedRect(leftFoot.x - 4, leftFoot.y - 2, 8, 5, 1);
+      g.fillRoundedRect(rightFoot.x - 4, rightFoot.y - 2, 8, 5, 1);
+      g.fillStyle(skin, 1);
+      g.fillCircle(leftHand.x, leftHand.y, 3.4);
+      g.fillCircle(rightHand.x, rightHand.y, grappling ? 4 : 3.4);
 
       if (grappling) {
         g.lineStyle(1, 0x9be8ff, 0.9);
@@ -1281,7 +1319,7 @@
 
       g.lineStyle(1, 0x19313c, 0.2);
       var gridBottom = horizon + 8;
-      var offset = (state.distance * 3) % 42;
+      var offset = (state.backgroundScroll * 0.18) % 42;
       for (var x = -offset; x < w + 42; x += 42) g.lineBetween(x, 0, x, gridBottom);
       for (var y = -offset; y < gridBottom + 42; y += 42) g.lineBetween(0, y, w, y);
       state.nodes.forEach(function (node) {
@@ -1335,7 +1373,7 @@
       g.fillRect(0, waterTop - 8, w, 28);
       for (var wave = 0; wave < 10; wave += 1) {
         var waveY = waterTop + 18 + wave * 22;
-        var waveOffset = (state.distance * (0.4 + wave * 0.035)) % 92;
+        var waveOffset = (state.backgroundScroll * (0.06 + wave * 0.005)) % 92;
         g.lineStyle(1, wave % 2 ? 0x8ec7ff : 0x7bd7c3, 0.09);
         for (var wx = -waveOffset; wx < w + 100; wx += 92) {
           g.lineBetween(wx, waveY, wx + 46, waveY - 3);

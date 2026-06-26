@@ -11,6 +11,7 @@
   var activeBug;
   var clickResetTimer;
   var clickCounter;
+  var jarClubDelegatedTriggerReady = false;
   var directCommands = ["run"];
   var guidanceCommands = ["help", "?", "-h", "--help", "man", "info", "commands", "command", "usage", "what", "how", "ls", "dir", "where", "why"];
   var riddles = [
@@ -1600,7 +1601,42 @@
     jarClubImages().forEach(function (image) {
       image.classList.add("jar-club-easter-egg", "is-jar-club-shimmering");
       image.setAttribute("title", image.getAttribute("title") || "Jar Club poster");
-      image.addEventListener("click", function (event) {
+      image.setAttribute("role", "button");
+      image.setAttribute("tabindex", "0");
+      image.setAttribute("aria-label", image.getAttribute("aria-label") || "Jar Club poster easter egg");
+    });
+
+    if (jarClubDelegatedTriggerReady) return;
+    jarClubDelegatedTriggerReady = true;
+
+    document.addEventListener("click", function (event) {
+      var image = event.target instanceof Element ? event.target.closest("[data-jar-club-trigger]") : null;
+      if (!image || image.closest("a.video-card, a.case-video-card, a.hero-video-card")) return;
+      event.preventDefault();
+      event.stopPropagation();
+
+      var now = Date.now();
+      clickTimes = clickTimes.filter(function (time) { return now - time < CLICK_WINDOW; });
+      clickTimes.push(now);
+      image.classList.remove("is-jar-club-pulsing");
+      void image.offsetWidth;
+      image.classList.add("is-jar-club-pulsing");
+      window.setTimeout(function () {
+        image.classList.remove("is-jar-club-pulsing");
+      }, 280);
+      updateTriggerCounter(image, clickTimes.length);
+
+      if (clickTimes.length >= REQUIRED_CLICKS) {
+        clickTimes = [];
+        hideTriggerCounter();
+        openGame();
+      }
+    }, true);
+
+    document.addEventListener("keydown", function (event) {
+      if (event.key !== "Enter" && event.key !== " ") return;
+      var image = event.target instanceof Element ? event.target.closest("[data-jar-club-trigger]") : null;
+      if (!image || image.closest("a.video-card, a.case-video-card, a.hero-video-card")) return;
         event.preventDefault();
         event.stopPropagation();
 
@@ -1620,8 +1656,7 @@
           hideTriggerCounter();
           openGame();
         }
-      }, true);
-    });
+    }, true);
   }
 
   function registerTerminal() {

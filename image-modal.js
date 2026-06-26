@@ -1,6 +1,7 @@
 (function () {
   function isEligibleImage(image) {
     if (!image || !image.currentSrc && !image.src) return false;
+    if (image.matches("[data-no-lightbox], [data-jar-club-trigger]")) return false;
     if (image.closest("a")) return false;
     if (image.closest(".video-modal, .image-modal")) return false;
     return true;

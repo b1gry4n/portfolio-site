@@ -941,7 +941,7 @@
 
       if (state.hookTarget) {
         if (p.grounded) {
-          syncGroundedRopeLength();
+          shortenGroundedRopeLength();
         } else {
           constrainRope(dt, oldX, oldY);
         }
@@ -976,11 +976,11 @@
       p.vy = (p.y - oldY) / dt;
     }
 
-    function syncGroundedRopeLength() {
+    function shortenGroundedRopeLength() {
       var p = state.player;
       var dx = p.x - state.hookTarget.x;
       var dy = p.y - state.hookTarget.y;
-      state.ropeLength = Math.max(1, Math.hypot(dx, dy));
+      state.ropeLength = Math.max(1, Math.min(state.ropeLength, Math.hypot(dx, dy)));
     }
 
     function scrollWorld(amount) {

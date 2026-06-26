@@ -16,25 +16,45 @@
   var riddles = [
     {
       prompt: "Riddle 1/5: I am the name at the top of the site and the name in the footer. Who am I?",
+      hint: "RYAN",
       answers: ["ryan", "ryan sharr", "sharr"]
     },
     {
       prompt: "Riddle 2/5: I build in this engine a lot. It is named all over the site. What engine is it?",
+      hint: "UNITY",
       answers: ["unity", "unity3d", "unity 3d"]
     },
     {
       prompt: "Riddle 3/5: This whole site is about making playable things. What do I make?",
+      hint: "GAMES",
       answers: ["games", "game", "video games"]
     },
     {
       prompt: "Riddle 4/5: One page is all about assisted workflows and guardrails. What two-letter technology is it about?",
+      hint: "AI",
       answers: ["ai", "a.i.", "artificial intelligence"]
     },
     {
-      prompt: "Riddle 5/5: One card says Tools and Validation. What do I build to make work faster?",
-      answers: ["tools", "tooling", "editor tools"]
+      prompt: "Riddle 5/5: Pretend you are a recruiter and I passed the terminal vibe check. What are you going to give me?",
+      hint: "JOB",
+      answers: ["job", "a job", "the job", "offer", "job offer"]
     }
   ];
+
+  function riddleHint(riddle, misses) {
+    var answer = riddle.hint || String(riddle.answers[0] || "").toUpperCase();
+    var letters = answer.replace(/[^A-Z0-9]/g, "").length;
+    var revealCount = Math.min(letters, Math.max(0, misses));
+    var seen = 0;
+    var pattern = answer.split("").map(function (character) {
+      if (!/[A-Z0-9]/.test(character)) return character;
+      seen += 1;
+      return seen <= revealCount ? character : "_";
+    }).join(" ");
+
+    if (revealCount >= letters) return "Answer: " + answer;
+    return "Hint: " + pattern;
+  }
 
   function targetImages() {
     var explicit = Array.prototype.slice.call(document.querySelectorAll("[data-traversal-evidence-trigger]"));
@@ -1480,6 +1500,7 @@
         var activeRiddle = riddles[activeIndex];
         if (activeRiddle && activeRiddle.answers.indexOf(command) !== -1) {
           input.value = "";
+          input.dataset.riddleMisses = "0";
           if (activeIndex >= riddles.length - 1) {
             if (output) output.textContent = "Correct";
             input.dataset.activeRiddleIndex = "-1";
@@ -1492,13 +1513,16 @@
           var nextIndexAfterCorrect = activeIndex + 1;
           input.dataset.activeRiddleIndex = String(nextIndexAfterCorrect);
           input.dataset.riddleIndex = String(nextIndexAfterCorrect + 1);
+          input.dataset.riddleMisses = "0";
           if (output) output.textContent = "Correct\n\n" + riddles[nextIndexAfterCorrect].prompt;
           createTerminalCelebration(terminal);
           return;
         }
 
         if (activeRiddle) {
-          if (output) output.textContent = activeRiddle.prompt;
+          var misses = Number(input.dataset.riddleMisses || 0) + 1;
+          input.dataset.riddleMisses = String(misses);
+          if (output) output.textContent = "Nope.\n\n" + activeRiddle.prompt + "\n" + riddleHint(activeRiddle, misses);
           input.value = "";
           return;
         }
@@ -1508,6 +1532,7 @@
           var riddle = riddles[nextRiddle % riddles.length];
           input.dataset.riddleIndex = String((nextRiddle + 1) % riddles.length);
           input.dataset.activeRiddleIndex = String(riddles.indexOf(riddle));
+          input.dataset.riddleMisses = "0";
           if (output) {
             output.textContent = riddle.prompt;
           }

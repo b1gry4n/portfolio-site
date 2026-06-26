@@ -213,6 +213,14 @@
           <aside class="ai-runner-note">
             <h3>The point is not auto-clicking. The point is a repeatable playability check.</h3>
             <p>When the route works, the run leaves screenshots, action traces, UI observations, and milestone records. When it fails, the failure becomes a blocker with the expected state, observed state, reason, and likely files for the next Codex pass.</p>
+            <form class="evidence-terminal" data-traversal-terminal aria-label="Evidence terminal">
+              <label for="evidenceTerminalInput">Terminal</label>
+              <div class="evidence-terminal__line">
+                <span class="evidence-terminal__cursor" aria-hidden="true">_</span>
+                <input id="evidenceTerminalInput" name="evidence-command" type="text" autocomplete="off" spellcheck="false" placeholder="">
+              </div>
+              <p class="evidence-terminal__output" data-traversal-terminal-output aria-live="polite"></p>
+            </form>
           </aside>
         </div>
         <div class="ai-runner-support-grid">
@@ -253,7 +261,7 @@
         <div class="ai-prototype-grid">
           <article class="ai-prototype-row">
             <a class="video-card" href="https://www.youtube.com/watch?v=fSTmXx59psc" aria-label="Watch courtroom prototype gameplay loop">
-              <img src="assets/judge-concept-to-prototype.png" alt="Courtroom concept sketch compared against the working Unity prototype">
+              <img src="assets/judge-concept-to-prototype.png" alt="Courtroom concept sketch compared against the working Unity prototype" data-traversal-evidence-trigger>
             </a>
             <div>
               <span>Unity / C#, JSON, Python</span>
@@ -385,5 +393,6 @@
   <script src="./ai-systems.js"></script>
   <script src="./image-modal.js"></script>
   <script src="./video-modal.js"></script>
+  <script src="./traversal-evidence-runner.js"></script>
 </body>
 </html>

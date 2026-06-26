@@ -16,7 +16,15 @@
 
       if (!videoId) return "";
       videoId = videoId.split(/[?&#/]/)[0];
-      return "https://www.youtube.com/embed/" + videoId + "?autoplay=1&rel=0";
+      var start = parsed.searchParams.get("start") || parsed.searchParams.get("t") || "";
+      var seconds = 0;
+      var timeMatch = String(start).match(/^(?:(\d+)h)?(?:(\d+)m)?(\d+)s?$/i);
+      if (timeMatch) {
+        seconds = (Number(timeMatch[1]) || 0) * 3600 + (Number(timeMatch[2]) || 0) * 60 + (Number(timeMatch[3]) || 0);
+      } else {
+        seconds = Math.max(0, Math.floor(Number(start) || 0));
+      }
+      return "https://www.youtube.com/embed/" + videoId + "?autoplay=1&rel=0" + (seconds ? "&start=" + seconds : "");
     } catch (error) {
       return "";
     }

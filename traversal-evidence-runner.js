@@ -124,7 +124,7 @@
       '      <h2 id="traversalRunnerInstructionsTitle">How to Play</h2>',
       '      <p><b>Jump</b> from the ground with Up, W, left click, or the up button.</p>',
       '      <p><b>Double jump</b> once while airborne if no grapple connects.</p>',
-      '      <p><b>Grapple</b> while airborne by pressing jump toward a target ring. Hold to stay attached, release to let go.</p>',
+      '      <p><b>Grapple</b> while airborne by pressing jump toward a target bird. Hold to stay attached, release to let go.</p>',
       '      <p><b>Glide</b> in the air with Down, S, right click, right tap, or the down button. It cancels grapple and slows your fall.</p>',
       '      <button class="traversal-runner-modal__instructions-ok" type="button" data-traversal-instructions-ok>OK</button>',
       '    </div>',
@@ -844,7 +844,12 @@
           x: ringX,
           y: Math.max(58, lowerRoof - 185 - Math.random() * 105),
           used: false,
-          pulse: Math.random() * Math.PI * 2
+          flyAway: false,
+          flyVx: 0,
+          flyVy: 0,
+          pulse: Math.random() * Math.PI * 2,
+          birdTilt: (Math.random() - 0.5) * 0.18,
+          birdScale: 0.88 + Math.random() * 0.22
         });
       }
 
@@ -892,6 +897,9 @@
       state.hookTarget = target;
       state.ropeLength = distance;
       target.used = true;
+      target.flyAway = false;
+      target.flyVx = 0;
+      target.flyVy = 0;
       state.glideHeld = false;
       p.glide = false;
       p.doubleJumpReady = true;
@@ -899,9 +907,15 @@
       return true;
     }
 
-    function detachGrapple() {
+    function detachGrapple(sendBirdAway) {
       if (state.hookTarget) {
         state.releaseCoast = 0.55;
+        if (sendBirdAway !== false) {
+          state.hookTarget.flyAway = true;
+          state.hookTarget.flyVx = 125 + Math.random() * 80;
+          state.hookTarget.flyVy = -120 - Math.random() * 80;
+          state.hookTarget.pulse += Math.PI * 0.35;
+        }
       }
       state.hookTarget = null;
       state.ropeLength = 0;
@@ -1010,10 +1024,20 @@
 
       scrollWorld(speed * dt);
       state.rings.forEach(function (ring) {
-        ring.pulse += dt * 4;
+        var isHooked = ring === state.hookTarget;
+        ring.pulse += dt * (ring.flyAway ? 13 : isHooked ? 11 : 4);
+        if (ring.flyAway) {
+          ring.x += ring.flyVx * dt;
+          ring.y += ring.flyVy * dt;
+          ring.flyVy -= 18 * dt;
+        }
       });
       state.platforms = state.platforms.filter(function (platform) { return platform.x + platform.w > -80; });
-      state.rings = state.rings.filter(function (ring) { return ring === state.hookTarget || ring.x > -80; });
+      state.rings = state.rings.filter(function (ring) {
+        if (ring === state.hookTarget) return true;
+        if (ring.flyAway) return ring.x > -140 && ring.x < state.width + 260 && ring.y > -180;
+        return ring.x > -80;
+      });
       while (state.nextPlatformX < state.width + 900) spawnPlatform();
 
       p.glide = state.glideHeld && !state.hookTarget && !p.grounded;
@@ -1145,7 +1169,7 @@
       p.doubleJumpReady = true;
       state.primaryHeld = false;
       state.glideHeld = false;
-      detachGrapple();
+      detachGrapple(false);
       state.releaseCoast = 0;
       state.distance = 0;
       state.runHadInput = false;
@@ -1415,6 +1439,77 @@
       g.fillRect(0, horizon - 62, w, 34);
     }
 
+    function drawGrappleBird(g, bird, canGrapple, isTarget, isUpcoming) {
+      var hooked = bird === state.hookTarget;
+      var scale = bird.birdScale || 1;
+      var flap = Math.sin(bird.pulse * (hooked ? 1.35 : bird.flyAway ? 1.15 : 1));
+      var bodyColor = bird.flyAway ? 0x1c3141 : canGrapple ? 0x102838 : isUpcoming ? 0x07111a : 0x17212a;
+      var wingColor = canGrapple || hooked ? 0x5ed7d1 : isUpcoming ? 0x234650 : 0x263642;
+      var trimColor = canGrapple || hooked ? 0xb991ff : isUpcoming ? 0x0d202b : 0x314454;
+      var alpha = bird.flyAway ? 0.72 : bird.used && !hooked ? 0.24 : canGrapple ? 0.98 : isUpcoming ? 0.9 : 0.22;
+      var x = bird.x;
+      var y = bird.y;
+      var tilt = (bird.birdTilt || 0) + (bird.flyAway ? -0.16 : 0);
+      var wingLift = flap * 8 * scale;
+
+      if (isUpcoming && !canGrapple && !bird.used) {
+        g.fillStyle(0x061019, 0.6);
+        g.fillEllipse(x, y + 3, 54 * scale, 34 * scale);
+      }
+
+      g.lineStyle(isTarget ? 2 : 1, trimColor, alpha * 0.85);
+      g.strokeCircle(x, y, (hooked ? 24 : 21) * scale);
+
+      if (isTarget) {
+        var lock = 30 + Math.sin(bird.pulse * 1.2) * 2;
+        g.lineStyle(2, 0x8ec7ff, 0.95);
+        g.strokeCircle(x, y, lock * scale);
+        g.lineBetween(x - (lock + 8) * scale, y, x - (lock - 3) * scale, y);
+        g.lineBetween(x + (lock - 3) * scale, y, x + (lock + 8) * scale, y);
+        g.lineBetween(x, y - (lock + 8) * scale, x, y - (lock - 3) * scale);
+        g.lineBetween(x, y + (lock - 3) * scale, x, y + (lock + 8) * scale);
+      }
+
+      g.lineStyle(2, 0x031019, alpha);
+      g.fillStyle(wingColor, alpha * 0.86);
+      g.beginPath();
+      g.moveTo(x - 4 * scale, y - 3 * scale);
+      g.lineTo(x - 28 * scale, y - (8 + wingLift) * scale);
+      g.lineTo(x - 10 * scale, y + 8 * scale);
+      g.closePath();
+      g.fillPath();
+      g.strokePath();
+
+      g.beginPath();
+      g.moveTo(x + 4 * scale, y - 3 * scale);
+      g.lineTo(x + 28 * scale, y - (8 + wingLift) * scale);
+      g.lineTo(x + 10 * scale, y + 8 * scale);
+      g.closePath();
+      g.fillPath();
+      g.strokePath();
+
+      g.fillStyle(bodyColor, alpha);
+      g.fillEllipse(x, y + tilt * 8, 27 * scale, 18 * scale);
+      g.lineStyle(2, trimColor, alpha * 0.8);
+      g.strokeEllipse(x, y + tilt * 8, 27 * scale, 18 * scale);
+
+      g.fillStyle(canGrapple || hooked ? 0x9bfff0 : 0x2a4654, alpha);
+      g.fillCircle(x - 12 * scale, y - 4 * scale, 7 * scale);
+      g.fillStyle(0xd8b56f, alpha * 0.95);
+      g.fillTriangle(x - 19 * scale, y - 4 * scale, x - 29 * scale, y - 8 * scale, x - 29 * scale, y);
+
+      g.lineStyle(1, 0xe9fcff, alpha * 0.9);
+      g.lineBetween(x - 10 * scale, y - 7 * scale, x - 7 * scale, y - 7 * scale);
+      g.lineStyle(1, trimColor, alpha * 0.78);
+      g.lineBetween(x + 13 * scale, y - 1 * scale, x + 23 * scale, y - 5 * scale);
+      g.lineBetween(x + 13 * scale, y + 2 * scale, x + 23 * scale, y + 7 * scale);
+
+      if (hooked) {
+        g.lineStyle(1, 0x9bfff0, 0.78);
+        g.strokeCircle(x, y, (16 + Math.abs(flap) * 4) * scale);
+      }
+    }
+
     function draw() {
       var g = state.bg;
       var w = state.width;
@@ -1455,30 +1550,7 @@
         var canGrapple = !ring.used && ring.x > p.x + 35 && ringDistance <= state.maxGrappleRange;
         var isTarget = ring === targetRing;
         var isUpcoming = !ring.used && ring.x > p.x + 35;
-        var alpha = ring.used ? 0.08 : canGrapple ? 0.94 : isUpcoming ? 0.82 : 0.12;
-        var radius = 13 + Math.sin(ring.pulse) * 2;
-        if (isUpcoming && !canGrapple) {
-          g.fillStyle(0x061019, 0.64);
-          g.fillCircle(ring.x, ring.y, radius + 5);
-          g.lineStyle(3, 0x0b1822, 0.94);
-          g.strokeCircle(ring.x, ring.y, radius + 8);
-        }
-        g.lineStyle(isTarget ? 4 : 3, ring.used ? 0x202833 : canGrapple ? 0x9bfff0 : isUpcoming ? 0x102838 : 0x243542, alpha);
-        g.strokeCircle(ring.x, ring.y, radius);
-        g.lineStyle(1, canGrapple ? 0xb991ff : isUpcoming ? 0x07111a : 0x1c2a34, alpha * 0.78);
-        g.lineBetween(ring.x - 18, ring.y, ring.x + 18, ring.y);
-        if (isTarget) {
-          var lock = 23 + Math.sin(ring.pulse * 1.4) * 3;
-          g.lineStyle(2, 0x8ec7ff, 0.96);
-          g.strokeCircle(ring.x, ring.y, lock);
-          g.lineBetween(ring.x - lock - 7, ring.y, ring.x - lock + 3, ring.y);
-          g.lineBetween(ring.x + lock - 3, ring.y, ring.x + lock + 7, ring.y);
-          g.lineBetween(ring.x, ring.y - lock - 7, ring.x, ring.y - lock + 3);
-          g.lineBetween(ring.x, ring.y + lock - 3, ring.x, ring.y + lock + 7);
-        } else if (!ring.used && !isUpcoming) {
-          g.lineStyle(1, 0x1d2a34, 0.1);
-          g.strokeCircle(ring.x, ring.y, radius + 7);
-        }
+        drawGrappleBird(g, ring, canGrapple, isTarget, isUpcoming);
       });
 
       g = state.hookLine;

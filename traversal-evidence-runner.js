@@ -1025,6 +1025,12 @@
       scrollWorld(speed * dt);
       state.rings.forEach(function (ring) {
         var isHooked = ring === state.hookTarget;
+        if (!ring.used && !ring.flyAway && ring.x < state.player.x - 42) {
+          ring.used = true;
+          ring.flyAway = true;
+          ring.flyVx = 120 + Math.random() * 70;
+          ring.flyVy = -115 - Math.random() * 70;
+        }
         ring.pulse += dt * (ring.flyAway ? 13 : isHooked ? 11 : 4);
         if (ring.flyAway) {
           ring.x += ring.flyVx * dt;
@@ -1248,12 +1254,9 @@
       }
 
       if (p.glide) {
-        g.fillStyle(0x4c2ea3, 0.38);
-        g.fillTriangle(p.x - 6, p.y - 7, p.x - 36, p.y + 9, p.x - 4, p.y + 12);
-        g.fillTriangle(p.x + 5, p.y - 7, p.x + 38, p.y + 8, p.x + 5, p.y + 12);
-        g.lineStyle(2, 0x9b6dff, 0.82);
-        g.lineBetween(p.x - 34, p.y + 9, p.x - 4, p.y + 12);
-        g.lineBetween(p.x + 36, p.y + 8, p.x + 5, p.y + 12);
+        g.lineStyle(2, 0x9bfff0, 0.68);
+        g.lineBetween(leftHand.x - 8, leftHand.y + 3, leftHand.x + 2, leftHand.y + 1);
+        g.lineBetween(rightHand.x - 2, rightHand.y + 1, rightHand.x + 8, rightHand.y + 3);
       }
 
       g.lineStyle(7, suitDark, 1);
@@ -1446,19 +1449,12 @@
       var bodyColor = bird.flyAway ? 0x1c3141 : canGrapple ? 0x102838 : isUpcoming ? 0x07111a : 0x17212a;
       var wingColor = canGrapple || hooked ? 0x5ed7d1 : isUpcoming ? 0x234650 : 0x263642;
       var trimColor = canGrapple || hooked ? 0xb991ff : isUpcoming ? 0x0d202b : 0x314454;
-      var alpha = bird.flyAway ? 0.72 : bird.used && !hooked ? 0.24 : canGrapple ? 0.98 : isUpcoming ? 0.9 : 0.22;
+      var alpha = bird.flyAway ? 0.82 : bird.used && !hooked ? 0 : canGrapple ? 0.98 : isUpcoming ? 0.9 : 0.22;
       var x = bird.x;
       var y = bird.y;
       var tilt = (bird.birdTilt || 0) + (bird.flyAway ? -0.16 : 0);
       var wingLift = flap * 8 * scale;
-
-      if (isUpcoming && !canGrapple && !bird.used) {
-        g.fillStyle(0x061019, 0.6);
-        g.fillEllipse(x, y + 3, 54 * scale, 34 * scale);
-      }
-
-      g.lineStyle(isTarget ? 2 : 1, trimColor, alpha * 0.85);
-      g.strokeCircle(x, y, (hooked ? 24 : 21) * scale);
+      if (alpha <= 0) return;
 
       if (isTarget) {
         var lock = 30 + Math.sin(bird.pulse * 1.2) * 2;

@@ -65,6 +65,12 @@
   var playlist = [];
   var playlistIndex = 0;
 
+  function triggerTitle(trigger) {
+    var scope = trigger.closest("article") || trigger.closest("section") || trigger;
+    var heading = scope.querySelector("h2, h3");
+    return heading ? heading.textContent.trim() : "video";
+  }
+
   function videoLinksFor(trigger) {
     var scope = trigger.closest(".case-study");
     if (!scope) return [trigger.href];
@@ -76,6 +82,35 @@
       if (urls.indexOf(link.href) === -1) urls.push(link.href);
     });
     return urls.length ? urls : [trigger.href];
+  }
+
+  function prepareVideoCards() {
+    var cards = Array.prototype.slice.call(document.querySelectorAll("a.video-card, a.case-video-card, a.hero-video-card"));
+    cards.forEach(function (card) {
+      if (!isPlayableUrl(card.href)) return;
+      var count = videoLinksFor(card).length;
+
+      card.classList.add("video-modal-trigger");
+      card.setAttribute("title", count > 1 ? count + " clips" : "Open demo");
+      card.setAttribute("aria-label", "Open video modal: " + triggerTitle(card));
+      card.dataset.videoCount = String(count);
+
+      var existingCue = card.querySelector(".video-card__cue");
+      if (count < 2) {
+        if (existingCue) existingCue.remove();
+        return;
+      }
+
+      var label = count + " clips";
+      if (!existingCue) {
+        var cue = document.createElement("span");
+        cue.className = "video-card__cue";
+        cue.textContent = label;
+        card.appendChild(cue);
+      } else {
+        existingCue.textContent = label;
+      }
+    });
   }
 
   function renderCurrentVideo() {
@@ -171,4 +206,10 @@
     if (event.key === "ArrowLeft") cycleVideo(-1);
     if (event.key === "ArrowRight") cycleVideo(1);
   });
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", prepareVideoCards);
+  } else {
+    prepareVideoCards();
+  }
 })();

@@ -473,6 +473,7 @@ p {
   position: relative;
   display: block;
   overflow: hidden;
+  transition: border-color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
 }
 
 .hero-video-card img {
@@ -513,9 +514,12 @@ p {
   pointer-events: none;
 }
 
-.hero-video-card:hover::after {
+.hero-video-card:hover::after,
+.hero-video-card:focus-visible::after {
   border-color: var(--accent);
   color: var(--accent);
+  background: rgba(5, 6, 7, 0.86);
+  box-shadow: 0 0 0 7px rgba(123, 215, 195, 0.18), 0 16px 38px rgba(0, 0, 0, 0.6);
 }
 
 .signal-grid,
@@ -995,6 +999,7 @@ p {
   min-height: 250px;
   overflow: hidden;
   border-radius: 5px;
+  transition: border-color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
 }
 
 .case-media img,
@@ -1039,9 +1044,43 @@ p {
   pointer-events: none;
 }
 
-.case-video-card:hover::after {
+.case-video-card:hover::after,
+.case-video-card:focus-visible::after {
   border-color: var(--accent);
   color: var(--accent);
+  background: rgba(5, 6, 7, 0.86);
+  box-shadow: 0 0 0 7px rgba(123, 215, 195, 0.18), 0 16px 38px rgba(0, 0, 0, 0.6);
+}
+
+.video-modal-trigger {
+  outline: none;
+}
+
+.video-modal-trigger:hover,
+.video-modal-trigger:focus-visible {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px rgba(123, 215, 195, 0.3), 0 18px 42px rgba(0, 0, 0, 0.32);
+  transform: translateY(-1px);
+}
+
+.video-card__cue {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  padding: 5px 9px;
+  border: 1px solid rgba(123, 215, 195, 0.5);
+  border-radius: 999px;
+  background: rgba(5, 7, 8, 0.78);
+  color: var(--text);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  pointer-events: none;
 }
 
 .case-copy {
@@ -1484,6 +1523,7 @@ p {
 .ai-prototype-row > .video-card {
   position: relative;
   display: block;
+  transition: border-color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
 }
 
 .current-proof .media-card > .video-card::before,
@@ -1523,9 +1563,14 @@ p {
 
 .current-proof .media-card > .video-card:hover::after,
 .ai-proof .media-card > .video-card:hover::after,
-.ai-prototype-row > .video-card:hover::after {
+.ai-prototype-row > .video-card:hover::after,
+.current-proof .media-card > .video-card:focus-visible::after,
+.ai-proof .media-card > .video-card:focus-visible::after,
+.ai-prototype-row > .video-card:focus-visible::after {
   border-color: var(--accent);
   color: var(--accent);
+  background: rgba(5, 6, 7, 0.86);
+  box-shadow: 0 0 0 7px rgba(123, 215, 195, 0.18), 0 16px 38px rgba(0, 0, 0, 0.6);
 }
 
 .ai-artifact-section {

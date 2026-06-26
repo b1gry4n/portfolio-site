@@ -2,6 +2,8 @@
   var PHASER_URL = "https://cdn.jsdelivr.net/npm/phaser@3.90.0/dist/phaser.min.js";
   var CLICK_WINDOW = 1500;
   var REQUIRED_CLICKS = 5;
+  var HIGH_SCORE_KEY = "traversalEvidenceRunnerHighScores";
+  var HIGH_SCORE_LIMIT = 5;
   var clickTimes = [];
   var overlay;
   var game;
@@ -10,32 +12,33 @@
   var activeBug;
   var clickResetTimer;
   var clickCounter;
+  var pendingHighScore;
   var directCommands = ["run"];
   var guidanceCommands = ["help", "?", "-h", "--help", "man", "info", "commands", "command", "usage", "what", "how", "ls", "dir", "where", "why"];
   var riddles = [
     {
-      prompt: "Riddle 1/6: I am the name at the top and the signature at the bottom. Who owns this trail?",
-      answers: ["ryan", "ryan sharr", "sharr"]
+      prompt: "Riddle 1/6: I think in rules, states, inputs, edge cases, and what happens after the player presses a button. What do I build?",
+      answers: ["systems", "gameplay systems", "game systems", "runtime systems"]
     },
     {
-      prompt: "Riddle 2/6: I am the engine named in the first line, where systems, tools, and prototypes keep showing up. What am I?",
-      answers: ["unity", "unity3d", "unity 3d"]
+      prompt: "Riddle 2/6: I can talk shape and deformation with artists, then turn around and talk ownership and state with engineers. What bridge am I?",
+      answers: ["technical artist", "tech artist", "technical art", "artist engineer", "artist-engineer", "bridge"]
     },
     {
-      prompt: "Riddle 3/6: I carry Masters of the Universe into Fortnite production work. Which hero name is on the panel?",
-      answers: ["he-man", "he man", "he-man heroes", "he man heroes"]
+      prompt: "Riddle 3/6: I do not just make the thing once. I build the path that helps people make it again without friction. What do I make?",
+      answers: ["tools", "tooling", "editor tools", "pipelines", "pipeline", "workflow tools"]
     },
     {
-      prompt: "Riddle 4/6: I turn routes, screenshots, action traces, and failures into proof. What word keeps appearing?",
-      answers: ["evidence", "proof", "runtime evidence", "evidence log", "log"]
+      prompt: "Riddle 4/6: I do not trust vibes alone. I leave logs, traces, screenshots, and checks so decisions can be reviewed. What do I care about?",
+      answers: ["evidence", "proof", "validation", "runtime evidence", "logs", "checks"]
     },
     {
-      prompt: "Riddle 5/6: I am the strange poster that opens secrets after five fast clicks. What club am I?",
-      answers: ["jar club", "jar", "the jar club"]
+      prompt: "Riddle 5/6: I use AI, but I do not let it wander loose. I give it maps, queues, boundaries, and review points. What keeps it useful?",
+      answers: ["guardrails", "ai guardrails", "workflow", "ai workflow", "constraints", "boundaries"]
     },
     {
-      prompt: "Riddle 6/6: I am not the AI. I am the boundary, map, queue, and check that keeps it useful. What am I?",
-      answers: ["workflow", "ai workflow", "guardrail", "guardrails", "system map", "prompt queue"]
+      prompt: "Riddle 6/6: My favorite result is not a slide, pitch, or promise. It is something you can control, test, and feel. What do I aim for?",
+      answers: ["playable results", "playable", "prototype", "prototypes", "playable prototype", "playable prototypes"]
     }
   ];
 
@@ -73,6 +76,7 @@
       '<div class="traversal-runner-modal__backdrop" data-traversal-close></div>',
       '<section class="traversal-runner-modal__dialog" role="dialog" aria-modal="true" aria-label="Traversal Evidence Runner">',
       '  <button class="traversal-runner-modal__close" type="button" data-traversal-close aria-label="Close Traversal Evidence Runner">Close</button>',
+      '  <button class="traversal-runner-modal__scores-button" type="button" data-runner-scores-open>Scores</button>',
       '  <div class="traversal-runner-modal__controls">',
       '    <b>W / Up / left tap: jump or grapple</b>',
       '    <b>S / Down / right tap: glide</b>',
@@ -91,6 +95,22 @@
       '      <button class="traversal-runner-modal__instructions-ok" type="button" data-traversal-instructions-ok>OK</button>',
       '    </div>',
       '  </div>',
+      '  <form class="traversal-runner-modal__highscore" data-runner-highscore-form aria-label="High score entry">',
+      '    <div class="traversal-runner-modal__highscore-panel">',
+      '      <h2>New High Score</h2>',
+      '      <p class="traversal-runner-modal__highscore-score" data-runner-highscore-score>0000</p>',
+      '      <label for="traversalRunnerInitials">Initials</label>',
+      '      <input id="traversalRunnerInitials" name="initials" type="text" maxlength="3" autocomplete="off" spellcheck="false" inputmode="latin" data-runner-highscore-input>',
+      '      <button type="submit">Save</button>',
+      '    </div>',
+      '  </form>',
+      '  <div class="traversal-runner-modal__scoreboard" data-runner-scoreboard aria-hidden="true">',
+      '    <div class="traversal-runner-modal__scoreboard-panel">',
+      '      <h2>High Scores</h2>',
+      '      <ol data-runner-scoreboard-list></ol>',
+      '      <button type="button" data-runner-scores-close>OK</button>',
+      '    </div>',
+      '  </div>',
       '  <div class="traversal-runner-modal__game" id="traversalEvidenceGame"></div>',
       '</section>'
     ].join("");
@@ -100,6 +120,24 @@
       event.preventDefault();
       event.stopPropagation();
       dismissInstructions();
+    });
+    element.querySelector("[data-runner-highscore-form]").addEventListener("submit", function (event) {
+      event.preventDefault();
+      event.stopPropagation();
+      submitHighScore();
+    });
+    element.querySelector("[data-runner-highscore-input]").addEventListener("input", function (event) {
+      event.target.value = event.target.value.toUpperCase().replace(/[^A-Z0-9]/g, "").slice(0, 3);
+    });
+    element.querySelector("[data-runner-scores-open]").addEventListener("click", function (event) {
+      event.preventDefault();
+      event.stopPropagation();
+      showScoreboard();
+    });
+    element.querySelector("[data-runner-scores-close]").addEventListener("click", function (event) {
+      event.preventDefault();
+      event.stopPropagation();
+      hideScoreboard();
     });
     element.addEventListener("click", function (event) {
       if (event.target.matches("[data-traversal-close]")) closeGame();
@@ -151,6 +189,126 @@
   function hideTriggerCounter() {
     window.clearTimeout(clickResetTimer);
     if (clickCounter) clickCounter.classList.remove("is-visible");
+  }
+
+  function loadHighScores() {
+    try {
+      var parsed = JSON.parse(window.localStorage.getItem(HIGH_SCORE_KEY) || "[]");
+      if (!Array.isArray(parsed)) return [];
+      return parsed.map(function (entry) {
+        return {
+          initials: String(entry.initials || "AAA").toUpperCase().replace(/[^A-Z0-9]/g, "").slice(0, 3) || "AAA",
+          score: Math.max(0, Math.floor(Number(entry.score) || 0)),
+          date: Number(entry.date) || Date.now()
+        };
+      }).filter(function (entry) {
+        return entry.score > 0;
+      }).sort(function (a, b) {
+        return b.score - a.score || a.date - b.date;
+      }).slice(0, HIGH_SCORE_LIMIT);
+    } catch (error) {
+      return [];
+    }
+  }
+
+  function saveHighScores(scores) {
+    try {
+      window.localStorage.setItem(HIGH_SCORE_KEY, JSON.stringify(scores.slice(0, HIGH_SCORE_LIMIT)));
+    } catch (error) {
+      return;
+    }
+  }
+
+  function qualifiesForHighScore(score, scores) {
+    if (score <= 0) return false;
+    if (scores.length < HIGH_SCORE_LIMIT) return true;
+    return score > scores[scores.length - 1].score;
+  }
+
+  function topHighScore(scores) {
+    return scores.length ? scores[0] : { initials: "---", score: 0 };
+  }
+
+  function showHighScoreEntry(score, onDone) {
+    if (!overlay) return;
+    var form = overlay.querySelector("[data-runner-highscore-form]");
+    var scoreLabel = overlay.querySelector("[data-runner-highscore-score]");
+    var input = overlay.querySelector("[data-runner-highscore-input]");
+    pendingHighScore = { score: score, onDone: onDone };
+    if (scoreLabel) scoreLabel.textContent = String(score).padStart(4, "0");
+    if (input) input.value = "";
+    if (form) form.classList.add("is-visible");
+    if (game && game.scene) game.scene.pause("TraversalEvidenceRunner");
+    if (input) input.focus();
+  }
+
+  function submitHighScore() {
+    if (!pendingHighScore) return;
+    var form = overlay && overlay.querySelector("[data-runner-highscore-form]");
+    var input = overlay && overlay.querySelector("[data-runner-highscore-input]");
+    var initials = input ? input.value.toUpperCase().replace(/[^A-Z0-9]/g, "").slice(0, 3) : "";
+    var scores = loadHighScores();
+    var entry = {
+      initials: initials || "AAA",
+      score: pendingHighScore.score,
+      date: Date.now()
+    };
+    scores.push(entry);
+    scores.sort(function (a, b) {
+      return b.score - a.score || a.date - b.date;
+    });
+    saveHighScores(scores);
+
+    var onDone = pendingHighScore.onDone;
+    pendingHighScore = null;
+    if (form) form.classList.remove("is-visible");
+    if (typeof onDone === "function") onDone(loadHighScores());
+    if (game && game.scene) game.scene.resume("TraversalEvidenceRunner");
+  }
+
+  function showScoreboard() {
+    if (!overlay) return;
+    var board = overlay.querySelector("[data-runner-scoreboard]");
+    var list = overlay.querySelector("[data-runner-scoreboard-list]");
+    var scores = loadHighScores();
+    if (list) {
+      list.innerHTML = "";
+      if (!scores.length) {
+        var empty = document.createElement("li");
+        empty.innerHTML = "<span>---</span><b>0000</b>";
+        list.appendChild(empty);
+      } else {
+        scores.forEach(function (entry) {
+          var item = document.createElement("li");
+          var name = document.createElement("span");
+          var score = document.createElement("b");
+          name.textContent = entry.initials;
+          score.textContent = String(entry.score).padStart(4, "0");
+          item.appendChild(name);
+          item.appendChild(score);
+          list.appendChild(item);
+        });
+      }
+    }
+    if (board) {
+      board.classList.add("is-visible");
+      board.setAttribute("aria-hidden", "false");
+    }
+    if (game && game.scene) game.scene.pause("TraversalEvidenceRunner");
+    var closeButton = overlay.querySelector("[data-runner-scores-close]");
+    if (closeButton) closeButton.focus();
+  }
+
+  function hideScoreboard() {
+    if (!overlay) return;
+    var board = overlay.querySelector("[data-runner-scoreboard]");
+    if (board) {
+      board.classList.remove("is-visible");
+      board.setAttribute("aria-hidden", "true");
+    }
+    if (game && game.scene && !(overlay.querySelector(".traversal-runner-modal__instructions") || {}).classList.contains("is-visible") && !pendingHighScore) {
+      game.scene.resume("TraversalEvidenceRunner");
+    }
   }
 
   function bindRunnerPad(element) {
@@ -496,12 +654,9 @@
       event.stopPropagation();
       var rect = bug.getBoundingClientRect();
       createBugSplat(rect.left + rect.width / 2, rect.top + rect.height / 2);
-      bug.style.setProperty("--bug-mid-x", (rect.left + (window.scrollX || window.pageXOffset || 0)) + "px");
-      bug.style.setProperty("--bug-mid-y", (rect.top + (window.scrollY || window.pageYOffset || 0)) + "px");
-      bug.classList.add("is-squished");
+      if (bug.parentNode) bug.remove();
+      activeBug = null;
       window.setTimeout(function () {
-        if (bug.parentNode) bug.remove();
-        activeBug = null;
         openGame();
       }, 540);
     });
@@ -555,7 +710,10 @@
       state.baseSpeed = 275;
       state.distance = 0;
       state.visualTime = 0;
-      state.best = 0;
+      state.highScores = loadHighScores();
+      state.best = topHighScore(state.highScores).score;
+      state.bestInitials = topHighScore(state.highScores).initials;
+      state.submittingHighScore = false;
       state.nextPlatformX = 0;
       state.platforms = [];
       state.rings = [];
@@ -854,7 +1012,6 @@
       var oldY = p.y;
       state.visualTime += dt;
       state.distance += speed * dt * 0.12;
-      state.best = Math.max(state.best, state.distance);
 
       state.nodes.forEach(function (node) {
         node.x -= node.s * dt;
@@ -1010,6 +1167,22 @@
     }
 
     function resetPlayer() {
+      var score = Math.floor(state.distance);
+      if (!state.submittingHighScore && qualifiesForHighScore(score, state.highScores)) {
+        state.submittingHighScore = true;
+        showHighScoreEntry(score, function (scores) {
+          state.highScores = scores;
+          state.best = topHighScore(scores).score;
+          state.bestInitials = topHighScore(scores).initials;
+          state.submittingHighScore = false;
+          resetPlayerNow();
+        });
+        return;
+      }
+      resetPlayerNow();
+    }
+
+    function resetPlayerNow() {
       var p = state.player;
       p.x = Math.min(170, state.width * 0.25);
       p.y = state.height * 0.45;
@@ -1341,7 +1514,7 @@
       g.clear();
       drawPlayerRig(g, p);
 
-      state.hud.setText("DIST " + Math.floor(state.distance) + "  BEST " + Math.floor(state.best));
+      state.hud.setText("DIST " + Math.floor(state.distance) + "  BEST " + state.bestInitials + " " + Math.floor(state.best));
     }
 
     return new Phaser.Game(config);

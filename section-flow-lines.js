@@ -73,16 +73,33 @@
     for (var i = 0; i < count; i += 1) {
       var dot = document.createElementNS("http://www.w3.org/2000/svg", "circle");
       var motion = document.createElementNS("http://www.w3.org/2000/svg", "animateMotion");
+      var radius = document.createElementNS("http://www.w3.org/2000/svg", "animate");
+      var opacity = document.createElementNS("http://www.w3.org/2000/svg", "animate");
       var delay = -(((i / count) * duration) + (flowIndex % 4) * 0.08);
+      var dotRadius = className.indexOf("--split") !== -1 || className.indexOf("--merge") !== -1 ? 2.7 : 2.4;
 
-      dot.setAttribute("r", className.indexOf("--split") !== -1 || className.indexOf("--merge") !== -1 ? "2.7" : "2.4");
+      dot.setAttribute("r", "0.1");
       dot.setAttribute("class", "section-flow-lines__flow-dot");
       motion.setAttribute("path", d);
       motion.setAttribute("dur", duration.toFixed(2) + "s");
       motion.setAttribute("begin", delay.toFixed(2) + "s");
       motion.setAttribute("repeatCount", "indefinite");
+      radius.setAttribute("attributeName", "r");
+      radius.setAttribute("values", "0.1;" + dotRadius.toFixed(1) + ";" + dotRadius.toFixed(1) + ";0.1");
+      radius.setAttribute("keyTimes", "0;0.12;0.88;1");
+      radius.setAttribute("dur", duration.toFixed(2) + "s");
+      radius.setAttribute("begin", delay.toFixed(2) + "s");
+      radius.setAttribute("repeatCount", "indefinite");
+      opacity.setAttribute("attributeName", "opacity");
+      opacity.setAttribute("values", "0;0.88;0.88;0");
+      opacity.setAttribute("keyTimes", "0;0.12;0.88;1");
+      opacity.setAttribute("dur", duration.toFixed(2) + "s");
+      opacity.setAttribute("begin", delay.toFixed(2) + "s");
+      opacity.setAttribute("repeatCount", "indefinite");
 
       dot.appendChild(motion);
+      dot.appendChild(radius);
+      dot.appendChild(opacity);
       flowLayer.appendChild(dot);
     }
 

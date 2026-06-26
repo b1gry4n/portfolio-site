@@ -960,11 +960,195 @@ p {
   outline: none;
 }
 
+.traversal-runner-modal__highscore {
+  position: absolute;
+  inset: 0;
+  z-index: 6;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 18px;
+  background: rgba(2, 5, 9, 0.62);
+}
+
+.traversal-runner-modal__highscore.is-visible {
+  display: flex;
+}
+
+.traversal-runner-modal__highscore-panel {
+  width: min(360px, calc(100vw - 56px));
+  border: 1px solid rgba(255, 177, 83, 0.7);
+  border-radius: 8px;
+  background: rgba(7, 9, 13, 0.96);
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.68), 0 0 34px rgba(255, 143, 45, 0.18);
+  color: var(--text);
+  padding: 18px;
+  text-align: center;
+}
+
+.traversal-runner-modal__highscore-panel h2 {
+  margin: 0 0 8px;
+  color: #ffd08a;
+  font-size: 1.12rem;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.traversal-runner-modal__highscore-score {
+  margin: 0 0 14px;
+  color: #f2f5f7;
+  font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+  font-size: 2rem;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.traversal-runner-modal__highscore-panel label {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.traversal-runner-modal__highscore-panel input {
+  width: 116px;
+  border: 1px solid rgba(123, 215, 195, 0.48);
+  border-radius: 7px;
+  background: rgba(13, 17, 22, 0.92);
+  color: #c9fff4;
+  font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+  font-size: 1.45rem;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  padding: 9px 10px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.traversal-runner-modal__highscore-panel button {
+  display: block;
+  width: 100%;
+  min-height: 40px;
+  margin-top: 14px;
+  border: 1px solid rgba(255, 177, 83, 0.66);
+  border-radius: 7px;
+  background: rgba(42, 25, 9, 0.9);
+  color: #ffd08a;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 900;
+}
+
+.traversal-runner-modal__highscore-panel input:focus,
+.traversal-runner-modal__highscore-panel button:focus-visible,
+.traversal-runner-modal__highscore-panel button:hover {
+  border-color: #ffd08a;
+  outline: none;
+}
+
+.traversal-runner-modal__scores-button {
+  position: absolute;
+  right: 72px;
+  top: 12px;
+  z-index: 8;
+  min-height: 34px;
+  border: 1px solid rgba(255, 177, 83, 0.42);
+  border-radius: 7px;
+  background: rgba(42, 25, 9, 0.84);
+  color: #ffd08a;
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.82rem;
+  font-weight: 850;
+  padding: 7px 10px;
+}
+
+.traversal-runner-modal__scores-button:hover,
+.traversal-runner-modal__scores-button:focus-visible {
+  border-color: #ffd08a;
+  outline: none;
+}
+
+.traversal-runner-modal__scoreboard {
+  position: absolute;
+  inset: 0;
+  z-index: 6;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 18px;
+  background: rgba(2, 5, 9, 0.58);
+}
+
+.traversal-runner-modal__scoreboard.is-visible {
+  display: flex;
+}
+
+.traversal-runner-modal__scoreboard-panel {
+  width: min(340px, calc(100vw - 56px));
+  border: 1px solid rgba(123, 215, 195, 0.52);
+  border-radius: 8px;
+  background: rgba(7, 9, 13, 0.96);
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.68), 0 0 30px rgba(123, 215, 195, 0.14);
+  color: var(--text);
+  padding: 18px;
+}
+
+.traversal-runner-modal__scoreboard-panel h2 {
+  margin: 0 0 14px;
+  color: #c9fff4;
+  font-size: 1.12rem;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.traversal-runner-modal__scoreboard-panel ol {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.traversal-runner-modal__scoreboard-panel li {
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid rgba(123, 215, 195, 0.18);
+  border-radius: 7px;
+  background: rgba(13, 17, 22, 0.78);
+  color: #c9fff4;
+  font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+  font-size: 0.95rem;
+  font-weight: 900;
+  padding: 8px 10px;
+}
+
+.traversal-runner-modal__scoreboard-panel button {
+  width: 100%;
+  min-height: 40px;
+  margin-top: 14px;
+  border: 1px solid rgba(255, 177, 83, 0.66);
+  border-radius: 7px;
+  background: rgba(42, 25, 9, 0.9);
+  color: #ffd08a;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 900;
+}
+
+.traversal-runner-modal__scoreboard-panel button:hover,
+.traversal-runner-modal__scoreboard-panel button:focus-visible {
+  border-color: #ffd08a;
+  outline: none;
+}
+
 .traversal-runner-modal__close {
   position: absolute;
   right: 12px;
   top: 12px;
-  z-index: 3;
+  z-index: 8;
   min-height: 34px;
   border: 1px solid rgba(123, 215, 195, 0.32);
   border-radius: 7px;

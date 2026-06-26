@@ -3,7 +3,6 @@
   var CLICK_WINDOW = 1500;
   var REQUIRED_CLICKS = 5;
   var HIGH_SCORE_KEY = "traversalEvidenceRunnerHighScores";
-  var HIGH_SCORE_LIMIT = 5;
   var clickTimes = [];
   var overlay;
   var game;
@@ -12,7 +11,6 @@
   var activeBug;
   var clickResetTimer;
   var clickCounter;
-  var pendingHighScore;
   var directCommands = ["run"];
   var guidanceCommands = ["help", "?", "-h", "--help", "man", "info", "commands", "command", "usage", "what", "how", "ls", "dir", "where", "why"];
   var riddles = [
@@ -76,7 +74,6 @@
       '<div class="traversal-runner-modal__backdrop" data-traversal-close></div>',
       '<section class="traversal-runner-modal__dialog" role="dialog" aria-modal="true" aria-label="Traversal Evidence Runner">',
       '  <button class="traversal-runner-modal__close" type="button" data-traversal-close aria-label="Close Traversal Evidence Runner">Close</button>',
-      '  <button class="traversal-runner-modal__scores-button" type="button" data-runner-scores-open>Scores</button>',
       '  <div class="traversal-runner-modal__controls">',
       '    <b>W / Up / left tap: jump or grapple</b>',
       '    <b>S / Down / right tap: glide</b>',
@@ -95,22 +92,6 @@
       '      <button class="traversal-runner-modal__instructions-ok" type="button" data-traversal-instructions-ok>OK</button>',
       '    </div>',
       '  </div>',
-      '  <form class="traversal-runner-modal__highscore" data-runner-highscore-form aria-label="High score entry">',
-      '    <div class="traversal-runner-modal__highscore-panel">',
-      '      <h2>New High Score</h2>',
-      '      <p class="traversal-runner-modal__highscore-score" data-runner-highscore-score>0000</p>',
-      '      <label for="traversalRunnerInitials">Initials</label>',
-      '      <input id="traversalRunnerInitials" name="initials" type="text" maxlength="3" autocomplete="off" spellcheck="false" inputmode="latin" data-runner-highscore-input>',
-      '      <button type="submit">Save</button>',
-      '    </div>',
-      '  </form>',
-      '  <div class="traversal-runner-modal__scoreboard" data-runner-scoreboard aria-hidden="true">',
-      '    <div class="traversal-runner-modal__scoreboard-panel">',
-      '      <h2>High Scores</h2>',
-      '      <ol data-runner-scoreboard-list></ol>',
-      '      <button type="button" data-runner-scores-close>OK</button>',
-      '    </div>',
-      '  </div>',
       '  <div class="traversal-runner-modal__game" id="traversalEvidenceGame"></div>',
       '</section>'
     ].join("");
@@ -120,24 +101,6 @@
       event.preventDefault();
       event.stopPropagation();
       dismissInstructions();
-    });
-    element.querySelector("[data-runner-highscore-form]").addEventListener("submit", function (event) {
-      event.preventDefault();
-      event.stopPropagation();
-      submitHighScore();
-    });
-    element.querySelector("[data-runner-highscore-input]").addEventListener("input", function (event) {
-      event.target.value = event.target.value.toUpperCase().replace(/[^A-Z0-9]/g, "").slice(0, 3);
-    });
-    element.querySelector("[data-runner-scores-open]").addEventListener("click", function (event) {
-      event.preventDefault();
-      event.stopPropagation();
-      showScoreboard();
-    });
-    element.querySelector("[data-runner-scores-close]").addEventListener("click", function (event) {
-      event.preventDefault();
-      event.stopPropagation();
-      hideScoreboard();
     });
     element.addEventListener("click", function (event) {
       if (event.target.matches("[data-traversal-close]")) closeGame();
@@ -191,124 +154,51 @@
     if (clickCounter) clickCounter.classList.remove("is-visible");
   }
 
-  function loadHighScores() {
+  function loadBestScore() {
     try {
-      var parsed = JSON.parse(window.localStorage.getItem(HIGH_SCORE_KEY) || "[]");
-      if (!Array.isArray(parsed)) return [];
-      return parsed.map(function (entry) {
-        return {
-          initials: String(entry.initials || "AAA").toUpperCase().replace(/[^A-Z0-9]/g, "").slice(0, 3) || "AAA",
-          score: Math.max(0, Math.floor(Number(entry.score) || 0)),
-          date: Number(entry.date) || Date.now()
-        };
-      }).filter(function (entry) {
-        return entry.score > 0;
-      }).sort(function (a, b) {
-        return b.score - a.score || a.date - b.date;
-      }).slice(0, HIGH_SCORE_LIMIT);
+      var raw = window.localStorage.getItem(HIGH_SCORE_KEY);
+      var parsed = JSON.parse(raw || "0");
+      if (Array.isArray(parsed)) {
+        return parsed.reduce(function (best, entry) {
+          return Math.max(best, Math.floor(Number(entry.score) || 0));
+        }, 0);
+      }
+      return Math.max(0, Math.floor(Number(parsed) || 0));
     } catch (error) {
-      return [];
+      return 0;
     }
   }
 
-  function saveHighScores(scores) {
+  function saveBestScore(score) {
     try {
-      window.localStorage.setItem(HIGH_SCORE_KEY, JSON.stringify(scores.slice(0, HIGH_SCORE_LIMIT)));
+      window.localStorage.setItem(HIGH_SCORE_KEY, JSON.stringify(Math.max(0, Math.floor(score))));
     } catch (error) {
       return;
     }
   }
 
-  function qualifiesForHighScore(score, scores) {
-    if (score <= 0) return false;
-    if (scores.length < HIGH_SCORE_LIMIT) return true;
-    return score > scores[scores.length - 1].score;
-  }
+  function createHighScoreBurst(score, x, y) {
+    var burst = document.createElement("div");
+    var bits = ["NEW", "HIGH", "SCORE", String(score), "++", "01", "RUN"];
+    burst.className = "sneaky-bug-splat runner-high-score-burst";
+    burst.style.setProperty("--splat-x", x + "px");
+    burst.style.setProperty("--splat-y", y + "px");
 
-  function topHighScore(scores) {
-    return scores.length ? scores[0] : { initials: "---", score: 0 };
-  }
-
-  function showHighScoreEntry(score, onDone) {
-    if (!overlay) return;
-    var form = overlay.querySelector("[data-runner-highscore-form]");
-    var scoreLabel = overlay.querySelector("[data-runner-highscore-score]");
-    var input = overlay.querySelector("[data-runner-highscore-input]");
-    pendingHighScore = { score: score, onDone: onDone };
-    if (scoreLabel) scoreLabel.textContent = String(score).padStart(4, "0");
-    if (input) input.value = "";
-    if (form) form.classList.add("is-visible");
-    if (game && game.scene) game.scene.pause("TraversalEvidenceRunner");
-    if (input) input.focus();
-  }
-
-  function submitHighScore() {
-    if (!pendingHighScore) return;
-    var form = overlay && overlay.querySelector("[data-runner-highscore-form]");
-    var input = overlay && overlay.querySelector("[data-runner-highscore-input]");
-    var initials = input ? input.value.toUpperCase().replace(/[^A-Z0-9]/g, "").slice(0, 3) : "";
-    var scores = loadHighScores();
-    var entry = {
-      initials: initials || "AAA",
-      score: pendingHighScore.score,
-      date: Date.now()
-    };
-    scores.push(entry);
-    scores.sort(function (a, b) {
-      return b.score - a.score || a.date - b.date;
-    });
-    saveHighScores(scores);
-
-    var onDone = pendingHighScore.onDone;
-    pendingHighScore = null;
-    if (form) form.classList.remove("is-visible");
-    if (typeof onDone === "function") onDone(loadHighScores());
-    if (game && game.scene) game.scene.resume("TraversalEvidenceRunner");
-  }
-
-  function showScoreboard() {
-    if (!overlay) return;
-    var board = overlay.querySelector("[data-runner-scoreboard]");
-    var list = overlay.querySelector("[data-runner-scoreboard-list]");
-    var scores = loadHighScores();
-    if (list) {
-      list.innerHTML = "";
-      if (!scores.length) {
-        var empty = document.createElement("li");
-        empty.innerHTML = "<span>---</span><b>0000</b>";
-        list.appendChild(empty);
-      } else {
-        scores.forEach(function (entry) {
-          var item = document.createElement("li");
-          var name = document.createElement("span");
-          var score = document.createElement("b");
-          name.textContent = entry.initials;
-          score.textContent = String(entry.score).padStart(4, "0");
-          item.appendChild(name);
-          item.appendChild(score);
-          list.appendChild(item);
-        });
-      }
+    for (var i = 0; i < 38; i += 1) {
+      var bit = document.createElement("span");
+      var angle = Math.random() * Math.PI * 2;
+      var distance = 28 + Math.random() * 104;
+      bit.textContent = bits[Math.floor(Math.random() * bits.length)];
+      bit.style.setProperty("--tx", Math.cos(angle) * distance + "px");
+      bit.style.setProperty("--ty", Math.sin(angle) * distance + "px");
+      bit.style.setProperty("--rot", (Math.random() * 180 - 90) + "deg");
+      burst.appendChild(bit);
     }
-    if (board) {
-      board.classList.add("is-visible");
-      board.setAttribute("aria-hidden", "false");
-    }
-    if (game && game.scene) game.scene.pause("TraversalEvidenceRunner");
-    var closeButton = overlay.querySelector("[data-runner-scores-close]");
-    if (closeButton) closeButton.focus();
-  }
 
-  function hideScoreboard() {
-    if (!overlay) return;
-    var board = overlay.querySelector("[data-runner-scoreboard]");
-    if (board) {
-      board.classList.remove("is-visible");
-      board.setAttribute("aria-hidden", "true");
-    }
-    if (game && game.scene && !(overlay.querySelector(".traversal-runner-modal__instructions") || {}).classList.contains("is-visible") && !pendingHighScore) {
-      game.scene.resume("TraversalEvidenceRunner");
-    }
+    document.body.appendChild(burst);
+    window.setTimeout(function () {
+      if (burst.parentNode) burst.remove();
+    }, 960);
   }
 
   function bindRunnerPad(element) {
@@ -365,8 +255,7 @@
     overlay.classList.remove("is-open");
     overlay.setAttribute("aria-hidden", "true");
     document.body.classList.remove("traversal-runner-open");
-    pendingHighScore = null;
-    Array.prototype.forEach.call(overlay.querySelectorAll(".traversal-runner-modal__highscore, .traversal-runner-modal__scoreboard, .traversal-runner-modal__instructions"), function (panel) {
+    Array.prototype.forEach.call(overlay.querySelectorAll(".traversal-runner-modal__instructions"), function (panel) {
       panel.classList.remove("is-visible");
       if (panel.hasAttribute("aria-hidden")) panel.setAttribute("aria-hidden", "true");
     });
@@ -715,10 +604,7 @@
       state.baseSpeed = 275;
       state.distance = 0;
       state.visualTime = 0;
-      state.highScores = loadHighScores();
-      state.best = topHighScore(state.highScores).score;
-      state.bestInitials = topHighScore(state.highScores).initials;
-      state.submittingHighScore = false;
+      state.best = loadBestScore();
       state.runHadInput = false;
       state.nextPlatformX = 0;
       state.platforms = [];
@@ -1176,16 +1062,10 @@
 
     function resetPlayer() {
       var score = Math.floor(state.distance);
-      if (state.runHadInput && !state.submittingHighScore && score >= 25 && qualifiesForHighScore(score, state.highScores)) {
-        state.submittingHighScore = true;
-        showHighScoreEntry(score, function (scores) {
-          state.highScores = scores;
-          state.best = topHighScore(scores).score;
-          state.bestInitials = topHighScore(scores).initials;
-          state.submittingHighScore = false;
-          resetPlayerNow();
-        });
-        return;
+      if (state.runHadInput && score > state.best) {
+        state.best = score;
+        saveBestScore(score);
+        createHighScoreBurst(score, state.width * 0.5, state.height * 0.36);
       }
       resetPlayerNow();
     }
@@ -1306,34 +1186,33 @@
       g.lineBetween(chest.x + 3, chest.y + 6, chest.x + 3, chest.y + 14);
 
       g.fillStyle(0x071018, 1);
-      g.fillCircle(head.x, head.y, 8);
+      g.fillCircle(head.x - 1, head.y, 8);
       g.fillStyle(0xd8b56f, 1);
-      g.fillCircle(head.x, head.y, 6);
+      g.fillCircle(head.x, head.y + 1, 6);
+      g.fillRect(head.x, head.y - 1, 7, 6);
       g.fillStyle(0x071018, 1);
-      g.fillCircle(head.x - 7, head.y + 1, 2);
-      g.fillCircle(head.x + 7, head.y + 1, 2);
+      g.fillRect(head.x - 17, head.y - 9, 14, 3);
+      g.fillCircle(head.x - 2, head.y - 8, 7);
+      g.fillRect(head.x - 7, head.y - 9, 15, 4);
+      g.lineStyle(1, 0xe9fcff, 0.6);
+      g.lineBetween(head.x - 5, head.y - 7, head.x + 7, head.y - 7);
+      g.fillStyle(0x030506, 1);
+      g.fillRoundedRect(head.x + 1, head.y - 3, 9, 6, 1);
+      g.fillRoundedRect(head.x + 9, head.y - 2, 7, 5, 1);
+      g.fillRect(head.x + 7, head.y - 1, 4, 2);
+      g.fillStyle(0xe9fcff, 0.7);
+      g.fillRect(head.x + 3, head.y - 2, 4, 1);
+      g.fillStyle(0x071018, 1);
+      g.fillCircle(head.x - 5, head.y + 1, 1);
       g.lineStyle(2, 0x030506, 1);
-      g.strokeCircle(head.x - 8, head.y + 2, 2.2);
-      g.strokeCircle(head.x + 8, head.y + 2, 2.2);
-      g.fillStyle(0x071018, 1);
-      g.fillRoundedRect(head.x - 7, head.y - 4, 14, 5, 2);
-      g.fillStyle(0x111923, 1);
-      g.fillRect(head.x - 6, head.y - 3, 5, 3);
-      g.fillRect(head.x + 2, head.y - 3, 5, 3);
-      g.fillStyle(0x8ec7ff, 0.68);
-      g.fillRect(head.x - 5, head.y - 2, 3, 1);
-      g.fillRect(head.x + 3, head.y - 2, 3, 1);
-      g.fillStyle(0x191f27, 1);
-      g.fillCircle(head.x - 1, head.y - 8, 6);
-      g.fillStyle(0x071018, 1);
-      g.fillRect(head.x - 7, head.y - 11, 12, 4);
-      g.fillRect(head.x - 10, head.y - 9, 5, 3);
-      g.fillStyle(0x8ec7ff, 0.92);
-      g.fillRect(head.x - 9, head.y - 8, 3, 1);
-      g.fillStyle(0x3b2115, 1);
-      g.fillRoundedRect(head.x - 4, head.y + 4, 8, 5, 2);
-      g.fillStyle(0x1b100b, 1);
-      g.fillRect(head.x - 2, head.y + 6, 4, 2);
+      g.strokeCircle(head.x - 7, head.y + 3, 2);
+      g.fillStyle(0x2a1710, 1);
+      g.fillCircle(head.x + 1, head.y + 7, 1);
+      g.fillCircle(head.x + 4, head.y + 7, 1);
+      g.fillCircle(head.x + 7, head.y + 6, 1);
+      g.fillCircle(head.x - 1, head.y + 5, 1);
+      g.fillCircle(head.x + 3, head.y + 4, 1);
+      g.fillCircle(head.x + 6, head.y + 4, 1);
 
       g.fillStyle(glow, airborne ? 0.72 : 0.48);
       g.fillCircle(leftFoot.x, leftFoot.y, 3);
@@ -1544,7 +1423,7 @@
       g.clear();
       drawPlayerRig(g, p);
 
-      state.hud.setText("DIST " + Math.floor(state.distance) + "  BEST " + state.bestInitials + " " + Math.floor(state.best));
+      state.hud.setText("DIST " + Math.floor(state.distance) + "  BEST " + Math.floor(state.best));
     }
 
     return new Phaser.Game(config);

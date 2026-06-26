@@ -81,11 +81,26 @@
       '    <button class="traversal-runner-modal__pad-button" type="button" data-runner-control="primary" aria-label="Jump or grapple"><span aria-hidden="true"></span></button>',
       '    <button class="traversal-runner-modal__pad-button is-down" type="button" data-runner-control="glide" aria-label="Glide"><span aria-hidden="true"></span></button>',
       '  </div>',
+      '  <div class="traversal-runner-modal__instructions" role="dialog" aria-modal="false" aria-labelledby="traversalRunnerInstructionsTitle">',
+      '    <div class="traversal-runner-modal__instructions-panel">',
+      '      <h2 id="traversalRunnerInstructionsTitle">How to Play</h2>',
+      '      <p><b>Jump</b> from the ground with Up, W, left click, or the up button.</p>',
+      '      <p><b>Double jump</b> once while airborne if no grapple connects.</p>',
+      '      <p><b>Grapple</b> while airborne by pressing jump toward a target ring. Hold to stay attached, release to let go.</p>',
+      '      <p><b>Glide</b> in the air with Down, S, right click, right tap, or the down button. It cancels grapple and slows your fall.</p>',
+      '      <button class="traversal-runner-modal__instructions-ok" type="button" data-traversal-instructions-ok>OK</button>',
+      '    </div>',
+      '  </div>',
       '  <div class="traversal-runner-modal__game" id="traversalEvidenceGame"></div>',
       '</section>'
     ].join("");
     document.body.appendChild(element);
     bindRunnerPad(element);
+    element.querySelector("[data-traversal-instructions-ok]").addEventListener("click", function (event) {
+      event.preventDefault();
+      event.stopPropagation();
+      dismissInstructions();
+    });
     element.addEventListener("click", function (event) {
       if (event.target.matches("[data-traversal-close]")) closeGame();
     });
@@ -93,6 +108,23 @@
       event.preventDefault();
     });
     return element;
+  }
+
+  function showInstructions() {
+    if (!overlay) return;
+    var instructions = overlay.querySelector(".traversal-runner-modal__instructions");
+    if (instructions) {
+      instructions.classList.add("is-visible");
+      var ok = instructions.querySelector("[data-traversal-instructions-ok]");
+      if (ok) ok.focus();
+    }
+  }
+
+  function dismissInstructions() {
+    if (!overlay) return;
+    var instructions = overlay.querySelector(".traversal-runner-modal__instructions");
+    if (instructions) instructions.classList.remove("is-visible");
+    if (game && game.scene) game.scene.resume("TraversalEvidenceRunner");
   }
 
   function updateTriggerCounter(image, count) {
@@ -453,6 +485,7 @@
     parent.innerHTML = "";
 
     var scene = {
+      key: "TraversalEvidenceRunner",
       preload: function () {},
       create: create,
       update: update
@@ -483,6 +516,7 @@
       state.height = this.scale.height;
       state.baseSpeed = 275;
       state.distance = 0;
+      state.visualTime = 0;
       state.best = 0;
       state.nextPlatformX = 0;
       state.platforms = [];
@@ -628,6 +662,9 @@
         state.width = size.width;
         state.height = size.height;
       });
+      update.call(this, 0, 16);
+      showInstructions();
+      this.scene.pause();
     }
 
     function addPlatform(x, y, w) {
@@ -777,6 +814,7 @@
       var speed = state.baseSpeed + Math.min(90, state.distance * 0.0015);
       var oldX = p.x;
       var oldY = p.y;
+      state.visualTime += dt;
       state.distance += speed * dt * 0.12;
       state.best = Math.max(state.best, state.distance);
 
@@ -1097,7 +1135,7 @@
       g.fillRect(0, horizon + 8, w, h * 0.16);
 
       state.clouds.forEach(function (cloud) {
-        var pulse = Math.sin(state.distance * 0.018 + cloud.phase) * 2.5;
+        var pulse = Math.sin(state.visualTime * 0.75 + cloud.phase) * 2.5;
         var baseY = cloud.y + pulse;
         var step = cloud.w / cloud.density;
         g.fillStyle(0xc8f8ff, 0.16);

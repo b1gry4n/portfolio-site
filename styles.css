@@ -898,6 +898,68 @@ p {
   transform: translateY(2px);
 }
 
+.traversal-runner-modal__instructions {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 18px;
+  background: rgba(2, 5, 9, 0.54);
+}
+
+.traversal-runner-modal__instructions.is-visible {
+  display: flex;
+}
+
+.traversal-runner-modal__instructions-panel {
+  width: min(420px, calc(100vw - 56px));
+  border: 1px solid rgba(123, 215, 195, 0.46);
+  border-radius: 8px;
+  background: rgba(6, 10, 15, 0.94);
+  box-shadow: 0 22px 70px rgba(0, 0, 0, 0.62), 0 0 28px rgba(123, 215, 195, 0.12);
+  color: var(--text);
+  padding: 18px;
+}
+
+.traversal-runner-modal__instructions-panel h2 {
+  margin: 0 0 12px;
+  color: #f2f5f7;
+  font-size: 1.15rem;
+  line-height: 1.1;
+}
+
+.traversal-runner-modal__instructions-panel p {
+  margin: 9px 0;
+  color: var(--muted);
+  font-size: 0.92rem;
+  line-height: 1.45;
+}
+
+.traversal-runner-modal__instructions-panel b {
+  color: #7bd7c3;
+}
+
+.traversal-runner-modal__instructions-ok {
+  width: 100%;
+  min-height: 40px;
+  margin-top: 12px;
+  border: 1px solid rgba(255, 177, 83, 0.66);
+  border-radius: 7px;
+  background: rgba(42, 25, 9, 0.9);
+  color: #ffd08a;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 900;
+}
+
+.traversal-runner-modal__instructions-ok:hover,
+.traversal-runner-modal__instructions-ok:focus-visible {
+  border-color: #ffd08a;
+  outline: none;
+}
+
 .traversal-runner-modal__close {
   position: absolute;
   right: 12px;

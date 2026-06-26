@@ -430,8 +430,13 @@ p {
 
 .availability-note {
   margin-top: 12px;
-  color: #ffd08a;
+  color: var(--muted);
   font-size: 0.92rem;
+  font-weight: 650;
+}
+
+.availability-note span {
+  color: #ffd08a;
   font-weight: 800;
   text-shadow: 0 0 12px rgba(255, 143, 45, 0.18);
 }

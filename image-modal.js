@@ -7,6 +7,27 @@
     return true;
   }
 
+  function isVideoPanel(panel) {
+    return !!(panel && panel.querySelector && panel.querySelector('a[href*="youtube.com/watch"], a[href*="youtu.be/"], a[href$=".mp4"], a[href*=".mp4?"], a[href*=".mp4#"]'));
+  }
+
+  function isInteractiveTarget(target) {
+    return !!(target && target.closest && target.closest("a, button, input, textarea, select, summary, [data-jar-club-trigger]"));
+  }
+
+  function closestImagePanel(image) {
+    return image.closest(".media-card") || image.closest(".case-study") || image.closest(".aoeo-gallery article") || image.closest(".ai-prototype-row");
+  }
+
+  function primaryImage(panel) {
+    if (!panel || isVideoPanel(panel)) return null;
+    var images = Array.prototype.slice.call(panel.querySelectorAll("img"));
+    for (var i = 0; i < images.length; i += 1) {
+      if (isEligibleImage(images[i])) return images[i];
+    }
+    return null;
+  }
+
   function buildModal() {
     var modal = document.createElement("div");
     modal.className = "image-modal";
@@ -36,6 +57,15 @@
       image.setAttribute("tabindex", "0");
       if (!image.getAttribute("aria-label")) {
         image.setAttribute("aria-label", "Open image: " + (image.alt || "Image preview"));
+      }
+
+      var panel = closestImagePanel(image);
+      if (panel && !isVideoPanel(panel) && !panel.dataset.wholeCardImageReady) {
+        panel.dataset.wholeCardImageReady = "true";
+        panel.classList.add("whole-card-image-trigger");
+        if (!panel.hasAttribute("tabindex")) panel.setAttribute("tabindex", "0");
+        if (!panel.hasAttribute("role")) panel.setAttribute("role", "button");
+        if (!panel.getAttribute("aria-label")) panel.setAttribute("aria-label", "Open image: " + (image.alt || "Image preview"));
       }
     });
   }
@@ -75,6 +105,9 @@
 
   document.addEventListener("click", function (event) {
     var image = event.target.closest("img");
+    if ((!image || !isEligibleImage(image)) && !isInteractiveTarget(event.target)) {
+      image = primaryImage(event.target.closest(".whole-card-image-trigger"));
+    }
     if (!image || !isEligibleImage(image)) return;
     event.preventDefault();
     openImage(image);
@@ -88,6 +121,9 @@
 
     if (event.key !== "Enter" && event.key !== " ") return;
     var image = event.target instanceof Element ? event.target.closest("img") : null;
+    if ((!image || !isEligibleImage(image)) && event.target instanceof Element && event.target.classList.contains("whole-card-image-trigger")) {
+      image = primaryImage(event.target);
+    }
     if (!image || !isEligibleImage(image)) return;
     event.preventDefault();
     openImage(image);

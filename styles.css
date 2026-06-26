@@ -1326,6 +1326,17 @@ p {
   transform: translateY(-1px);
 }
 
+.whole-card-video-trigger,
+.whole-card-image-trigger {
+  cursor: pointer;
+}
+
+.whole-card-video-trigger:focus-visible,
+.whole-card-image-trigger:focus-visible {
+  outline: 2px solid rgba(123, 215, 195, 0.72);
+  outline-offset: 3px;
+}
+
 .media-card.wide {
   grid-column: span 2;
 }

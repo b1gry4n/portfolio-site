@@ -43,6 +43,23 @@
     return !!toEmbedUrl(url) || isLocalVideoUrl(url);
   }
 
+  function isInteractiveTarget(target) {
+    return !!(target && target.closest && target.closest("a, button, input, textarea, select, summary, [data-jar-club-trigger]"));
+  }
+
+  function closestVideoPanel(link) {
+    return link.closest(".case-study") || link.closest(".media-card") || link.closest(".ai-prototype-row") || link.closest(".project-card");
+  }
+
+  function primaryVideoLink(panel) {
+    if (!panel) return null;
+    var links = Array.prototype.slice.call(panel.querySelectorAll('a[href*="youtube.com/watch"], a[href*="youtu.be/"], a[href$=".mp4"], a[href*=".mp4?"], a[href*=".mp4#"]'));
+    for (var i = 0; i < links.length; i += 1) {
+      if (isPlayableUrl(links[i].href)) return links[i];
+    }
+    return null;
+  }
+
   function buildModal() {
     var modal = document.createElement("div");
     modal.className = "video-modal";
@@ -102,6 +119,15 @@
       card.setAttribute("title", count > 1 ? count + " clips" : "Open demo");
       card.setAttribute("aria-label", "Open video modal: " + triggerTitle(card));
       card.dataset.videoCount = String(count);
+
+      var panel = closestVideoPanel(card);
+      if (panel && !panel.dataset.wholeCardVideoReady) {
+        panel.dataset.wholeCardVideoReady = "true";
+        panel.classList.add("whole-card-video-trigger");
+        if (!panel.hasAttribute("tabindex")) panel.setAttribute("tabindex", "0");
+        if (!panel.hasAttribute("role")) panel.setAttribute("role", "button");
+        if (!panel.getAttribute("aria-label")) panel.setAttribute("aria-label", "Open video modal: " + triggerTitle(card));
+      }
 
       var existingCue = card.querySelector(".video-card__cue");
       if (count < 2) {
@@ -202,14 +228,25 @@
 
   document.addEventListener("click", function (event) {
     var link = event.target.closest('a[href*="youtube.com/watch"], a[href*="youtu.be/"], a[href$=".mp4"], a[href*=".mp4?"], a[href*=".mp4#"]');
-    if (!link) return;
-    if (!isPlayableUrl(link.href)) return;
+    if (!link && !isInteractiveTarget(event.target)) {
+      var panel = event.target.closest(".whole-card-video-trigger");
+      link = primaryVideoLink(panel);
+    }
+    if (!link || !isPlayableUrl(link.href)) return;
     event.preventDefault();
     openVideo(link);
   });
 
   document.addEventListener("keydown", function (event) {
     if (event.key === "Escape") closeVideo();
+    if ((event.key === "Enter" || event.key === " ") && event.target && event.target.classList && event.target.classList.contains("whole-card-video-trigger")) {
+      var link = primaryVideoLink(event.target);
+      if (link) {
+        event.preventDefault();
+        openVideo(link);
+      }
+      return;
+    }
     if (!modal || !modal.classList.contains("is-open")) return;
     if (event.key === "ArrowLeft") cycleVideo(-1);
     if (event.key === "ArrowRight") cycleVideo(1);

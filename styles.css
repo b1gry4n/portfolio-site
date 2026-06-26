@@ -695,20 +695,20 @@ p {
   overflow: hidden;
 }
 
-.traversal-evidence-trigger {
+.jar-club-easter-egg {
   cursor: pointer;
   transition: filter 140ms ease, transform 140ms ease, box-shadow 140ms ease;
 }
 
-.traversal-evidence-trigger.is-traversal-shimmering {
-  animation: traversal-evidence-shimmer 6.8s ease-in-out infinite;
+.jar-club-easter-egg.is-jar-club-shimmering {
+  animation: jar-club-shimmer 6.8s ease-in-out infinite;
 }
 
-.traversal-evidence-trigger.is-traversal-pulsing {
-  animation: traversal-evidence-pulse 260ms ease-out;
+.jar-club-easter-egg.is-jar-club-pulsing {
+  animation: jar-club-pulse 260ms ease-out;
 }
 
-.traversal-evidence-count {
+.jar-club-click-count {
   position: absolute;
   z-index: 70;
   min-width: 48px;
@@ -729,12 +729,12 @@ p {
   transition: opacity 220ms ease, transform 220ms ease;
 }
 
-.traversal-evidence-count.is-visible {
+.jar-club-click-count.is-visible {
   opacity: 1;
   transform: translate(-50%, 0);
 }
 
-@keyframes traversal-evidence-shimmer {
+@keyframes jar-club-shimmer {
   0%,
   100% {
     box-shadow: 0 0 0 rgba(255, 143, 45, 0);
@@ -762,7 +762,7 @@ p {
   }
 }
 
-@keyframes traversal-evidence-pulse {
+@keyframes jar-club-pulse {
   0% {
     filter: drop-shadow(0 0 0 rgba(255, 143, 45, 0));
     transform: scale(1);

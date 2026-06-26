@@ -77,8 +77,8 @@
     output.innerHTML = html;
   }
 
-  function targetImages() {
-    var explicit = Array.prototype.slice.call(document.querySelectorAll("[data-traversal-evidence-trigger]")).filter(function (image) {
+  function jarClubImages() {
+    var explicit = Array.prototype.slice.call(document.querySelectorAll("[data-jar-club-trigger]")).filter(function (image) {
       return !image.closest("a.video-card, a.case-video-card, a.hero-video-card");
     });
     return explicit.filter(function (image, index, all) {
@@ -179,7 +179,7 @@
     var rect = image.getBoundingClientRect();
     if (!clickCounter) {
       clickCounter = document.createElement("div");
-      clickCounter.className = "traversal-evidence-count";
+      clickCounter.className = "jar-club-click-count";
       clickCounter.setAttribute("aria-hidden", "true");
       document.body.appendChild(clickCounter);
     }
@@ -846,6 +846,7 @@
           flyAway: false,
           flyVx: 0,
           flyVy: 0,
+          visualSink: 0,
           pulse: Math.random() * Math.PI * 2,
           birdTilt: (Math.random() - 0.5) * 0.18,
           birdScale: 0.88 + Math.random() * 0.22
@@ -899,6 +900,7 @@
       target.flyAway = false;
       target.flyVx = 0;
       target.flyVy = 0;
+      target.visualSink = 0;
       state.glideHeld = false;
       p.glide = false;
       p.doubleJumpReady = true;
@@ -910,6 +912,10 @@
       if (state.hookTarget) {
         state.releaseCoast = 0.55;
         if (sendBirdAway !== false) {
+          if (state.hookTarget.visualSink) {
+            state.hookTarget.y += state.hookTarget.visualSink;
+            state.hookTarget.visualSink = 0;
+          }
           state.hookTarget.flyAway = true;
           state.hookTarget.flyVx = 125 + Math.random() * 80;
           state.hookTarget.flyVy = -120 - Math.random() * 80;
@@ -1030,6 +1036,11 @@
           ring.flyVx = 120 + Math.random() * 70;
           ring.flyVy = -115 - Math.random() * 70;
         }
+        if (isHooked) {
+          updateBirdWeightSink(ring, dt);
+        } else if (ring.visualSink) {
+          ring.visualSink += (0 - ring.visualSink) * Math.min(1, dt * 8);
+        }
         ring.pulse += dt * (ring.flyAway ? 13 : isHooked ? 11 : 4);
         if (ring.flyAway) {
           ring.x += ring.flyVx * dt;
@@ -1125,6 +1136,20 @@
       var dx = p.x - state.hookTarget.x;
       var dy = p.y - state.hookTarget.y;
       state.ropeLength = Math.max(1, Math.min(state.ropeLength, Math.hypot(dx, dy)));
+    }
+
+    function updateBirdWeightSink(bird, dt) {
+      var p = state.player;
+      var dx = p.x - bird.x;
+      var dy = p.y - bird.y;
+      var distance = Math.max(1, Math.hypot(dx, dy));
+      var ropeTaut = distance >= state.ropeLength - 3;
+      var playerHangingBelow = dy > 18;
+      var hasWeight = !p.grounded && ropeTaut && playerHangingBelow;
+      var load = hasWeight ? Phaser.Math.Clamp(dy / Math.max(80, state.ropeLength), 0, 1) : 0;
+      var targetSink = load * 13;
+      var ease = hasWeight ? 7 : 10;
+      bird.visualSink += (targetSink - (bird.visualSink || 0)) * Math.min(1, dt * ease);
     }
 
     function scrollWorld(amount) {
@@ -1450,7 +1475,7 @@
       var trimColor = canGrapple || hooked ? 0xb991ff : isUpcoming ? 0x0d202b : 0x314454;
       var alpha = bird.flyAway ? 0.82 : bird.used && !hooked ? 0 : canGrapple ? 0.98 : isUpcoming ? 0.9 : 0.22;
       var x = bird.x;
-      var y = bird.y;
+      var y = bird.y + (bird.visualSink || 0);
       var tilt = (bird.birdTilt || 0) + (bird.flyAway ? -0.16 : 0);
       var wingLift = flap * 8 * scale;
       if (alpha <= 0) return;
@@ -1552,12 +1577,13 @@
       g.clear();
       if (state.hookTarget) {
         var hand = grappleHandPoint(p);
+        var hookVisualY = state.hookTarget.y + (state.hookTarget.visualSink || 0);
         g.lineStyle(6, 0x031019, 0.72);
-        g.lineBetween(hand.x, hand.y, state.hookTarget.x, state.hookTarget.y);
+        g.lineBetween(hand.x, hand.y, state.hookTarget.x, hookVisualY);
         g.lineStyle(3, 0xe9fcff, 0.96);
-        g.lineBetween(hand.x, hand.y, state.hookTarget.x, state.hookTarget.y);
+        g.lineBetween(hand.x, hand.y, state.hookTarget.x, hookVisualY);
         g.lineStyle(1, 0x7bd7c3, 1);
-        g.lineBetween(hand.x, hand.y, state.hookTarget.x, state.hookTarget.y);
+        g.lineBetween(hand.x, hand.y, state.hookTarget.x, hookVisualY);
       }
 
       g = state.playerGfx;
@@ -1570,10 +1596,10 @@
     return new Phaser.Game(config);
   }
 
-  function registerTriggers() {
-    targetImages().forEach(function (image) {
-      image.classList.add("traversal-evidence-trigger", "is-traversal-shimmering");
-      image.setAttribute("title", image.getAttribute("title") || "Evidence image");
+  function registerJarClubTrigger() {
+    jarClubImages().forEach(function (image) {
+      image.classList.add("jar-club-easter-egg", "is-jar-club-shimmering");
+      image.setAttribute("title", image.getAttribute("title") || "Jar Club poster");
       image.addEventListener("click", function (event) {
         event.preventDefault();
         event.stopPropagation();
@@ -1581,11 +1607,11 @@
         var now = Date.now();
         clickTimes = clickTimes.filter(function (time) { return now - time < CLICK_WINDOW; });
         clickTimes.push(now);
-        image.classList.remove("is-traversal-pulsing");
+        image.classList.remove("is-jar-club-pulsing");
         void image.offsetWidth;
-        image.classList.add("is-traversal-pulsing");
+        image.classList.add("is-jar-club-pulsing");
         window.setTimeout(function () {
-          image.classList.remove("is-traversal-pulsing");
+          image.classList.remove("is-jar-club-pulsing");
         }, 280);
         updateTriggerCounter(image, clickTimes.length);
 
@@ -1670,7 +1696,7 @@
   }
 
   function boot() {
-    registerTriggers();
+    registerJarClubTrigger();
     registerTerminal();
     window.setTimeout(spawnSneakyBug, 1400);
     scheduleSneakyBug();

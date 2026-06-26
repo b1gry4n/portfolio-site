@@ -1197,11 +1197,8 @@
       g.lineStyle(1, 0xe9fcff, 0.6);
       g.lineBetween(head.x - 5, head.y - 7, head.x + 7, head.y - 7);
       g.fillStyle(0x030506, 1);
-      g.fillRoundedRect(head.x + 1, head.y - 3, 9, 6, 1);
-      g.fillRoundedRect(head.x + 9, head.y - 2, 7, 5, 1);
-      g.fillRect(head.x + 7, head.y - 1, 4, 2);
-      g.fillStyle(0xe9fcff, 0.7);
-      g.fillRect(head.x + 3, head.y - 2, 4, 1);
+      g.fillCircle(head.x + 6, head.y - 1, 1.4);
+      g.fillRect(head.x + 8, head.y + 2, 4, 1);
       g.fillStyle(0x071018, 1);
       g.fillCircle(head.x - 5, head.y + 1, 1);
       g.lineStyle(2, 0x030506, 1);

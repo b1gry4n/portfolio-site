@@ -2283,6 +2283,10 @@ p {
   animation: sneaky-bug-scurry var(--bug-duration, 6.1s) cubic-bezier(0.36, 0, 0.2, 1) forwards;
 }
 
+.sneaky-evidence-bug.is-mouse-avoid {
+  animation: none;
+}
+
 .sneaky-evidence-bug__ascii {
   position: absolute;
   left: 2px;
@@ -2360,6 +2364,15 @@ p {
 .sneaky-evidence-bug.is-biting .sneaky-evidence-bug__ascii-head,
 .sneaky-evidence-bug.is-biting .sneaky-evidence-bug__ascii-legs {
   color: #ff6f7d;
+}
+
+.sneaky-evidence-bug.is-watching-mouse .sneaky-evidence-bug__ascii-head {
+  color: #ffd08a;
+  text-shadow: 0 0 12px rgba(255, 143, 45, 0.75);
+}
+
+.sneaky-evidence-bug.is-watching-mouse .sneaky-evidence-bug__code {
+  color: #ffd08a;
 }
 
 .sneaky-bug-bite {

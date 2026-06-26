@@ -12,6 +12,7 @@
   var clickResetTimer;
   var clickCounter;
   var jarClubDelegatedTriggerReady = false;
+  var pointerPage = { x: -9999, y: -9999, active: false };
   var directCommands = ["run"];
   var guidanceCommands = ["help", "?", "-h", "--help", "man", "info", "commands", "command", "usage", "what", "how", "ls", "dir", "where", "why"];
   var riddles = [
@@ -484,6 +485,90 @@
     };
   }
 
+  function setBugTransform(bug, x, y, rotation) {
+    bug.style.transform = "translate(" + x + "px, " + y + "px) rotate(" + rotation + "deg) scaleX(var(--bug-face))";
+  }
+
+  function startMouseAvoidBug(bug, lane, startX, startY, scrollX, scrollY, duration) {
+    var x = startX + scrollX;
+    var y = startY + scrollY;
+    var direction = lane.side === "left" ? 1 : -1;
+    var vx = direction * (22 + Math.random() * 20);
+    var vy = (Math.random() - 0.5) * 70;
+    var start = performance.now();
+    var last = start;
+    var raf = 0;
+    var laneMin = lane.min + scrollX;
+    var laneMax = lane.max + scrollX;
+    var minY = 86 + scrollY;
+    var maxY = window.innerHeight - 72 + scrollY;
+    var jitterSeed = Math.random() * 1000;
+
+    function step(now) {
+      if (activeBug !== bug || bug.classList.contains("is-squished")) return;
+      var dt = Math.min(0.04, (now - last) / 1000 || 0.016);
+      last = now;
+      var life = (now - start) / 1000;
+      var mouseX = pointerPage.x;
+      var mouseY = pointerPage.y;
+      var dx = x - mouseX;
+      var dy = y - mouseY;
+      var distance = Math.max(1, Math.hypot(dx, dy));
+      var avoiding = pointerPage.active && distance < 170;
+
+      if (avoiding) {
+        var push = (1 - distance / 170) * 230;
+        vx += (dx / distance) * push * dt;
+        vy += (dy / distance) * push * dt;
+        bug.classList.add("is-watching-mouse");
+      } else {
+        vx += Math.sin(life * 4.7 + jitterSeed) * 34 * dt;
+        vy += Math.cos(life * 5.3 + jitterSeed) * 46 * dt;
+        bug.classList.remove("is-watching-mouse");
+      }
+
+      vx += direction * 8 * dt;
+      vy += Math.sin(life * 11 + jitterSeed) * 22 * dt;
+      vx *= Math.pow(0.9, dt * 8);
+      vy *= Math.pow(0.9, dt * 8);
+
+      x += vx * dt;
+      y += vy * dt;
+
+      if (x < laneMin) {
+        x = laneMin;
+        vx = Math.abs(vx) + 18;
+      } else if (x > laneMax) {
+        x = laneMax;
+        vx = -Math.abs(vx) - 18;
+      }
+
+      if (y < minY) {
+        y = minY;
+        vy = Math.abs(vy) + 18;
+      } else if (y > maxY) {
+        y = maxY;
+        vy = -Math.abs(vy) - 18;
+      }
+
+      var rotation = Math.atan2(vy, vx) * 180 / Math.PI + 90;
+      setBugTransform(bug, x, y, rotation);
+
+      if (life < duration) {
+        raf = window.requestAnimationFrame(step);
+      } else {
+        if (activeBug === bug) activeBug = null;
+        if (bug.parentNode) bug.remove();
+      }
+    }
+
+    setBugTransform(bug, x, y, Math.atan2(vy, vx) * 180 / Math.PI + 90);
+    raf = window.requestAnimationFrame(step);
+    return function () {
+      if (raf) window.cancelAnimationFrame(raf);
+    };
+  }
+
   function closestAngle(from, to) {
     while (to - from > 180) to -= 360;
     while (to - from < -180) to += 360;
@@ -527,7 +612,8 @@
     var endY = PhaserClamp(startY + (Math.random() > 0.5 ? 1 : -1) * (120 + Math.random() * 260), 86, window.innerHeight - 72);
     var midX = PhaserClamp((startX + endX) * 0.5 + (lane.side === "left" ? 18 : -18), lane.min, lane.max);
     var midY = PhaserClamp(startY + (endY - startY) * 0.5 + (Math.random() - 0.5) * 80, 86, window.innerHeight - 72);
-    var bitePanel = panels.length && Math.random() < 0.62 ? panels[Math.floor(Math.random() * panels.length)] : null;
+    var avoidMouse = Math.random() < 0.28;
+    var bitePanel = !avoidMouse && panels.length && Math.random() < 0.62 ? panels[Math.floor(Math.random() * panels.length)] : null;
     if (bitePanel) {
       var biteRect = bitePanel.getBoundingClientRect();
       midX = lane.side === "left" ? biteRect.left - 14 : biteRect.right + 8;
@@ -557,7 +643,7 @@
 
     var bug = document.createElement("button");
     bug.type = "button";
-    bug.className = "sneaky-evidence-bug sneaky-evidence-bug--" + variant.className;
+    bug.className = "sneaky-evidence-bug sneaky-evidence-bug--" + variant.className + (avoidMouse ? " is-mouse-avoid" : "");
     bug.setAttribute("aria-label", "Squish evidence bug");
     bug.style.left = "0";
     bug.style.top = "0";
@@ -591,7 +677,9 @@
       "</span>"
     ].join("");
     activeBug = bug;
-    if (bitePanel) {
+    if (avoidMouse) {
+      bug.setAttribute("aria-label", "Squish mouse-shy evidence bug");
+    } else if (bitePanel) {
       window.setTimeout(function () {
         if (activeBug !== bug || bug.classList.contains("is-squished")) return;
         bug.classList.add("is-biting");
@@ -610,6 +698,7 @@
       event.stopPropagation();
       var rect = bug.getBoundingClientRect();
       createBugSplat(rect.left + rect.width / 2, rect.top + rect.height / 2);
+      if (bug._stopMouseAvoid) bug._stopMouseAvoid();
       if (bug.parentNode) bug.remove();
       activeBug = null;
       window.setTimeout(function () {
@@ -618,10 +707,15 @@
     });
 
     document.body.appendChild(bug);
+    var removalDelay = avoidMouse ? (animationDuration + 1.6) * 1000 + 220 : animationDuration * 1000 + 220;
+    if (avoidMouse) {
+      bug._stopMouseAvoid = startMouseAvoidBug(bug, lane, startX, startY, scrollX, scrollY, animationDuration + 1.6);
+    }
     window.setTimeout(function () {
       if (activeBug === bug) activeBug = null;
+      if (bug._stopMouseAvoid) bug._stopMouseAvoid();
       if (bug.parentNode) bug.remove();
-    }, animationDuration * 1000 + 220);
+    }, removalDelay);
   }
 
   function PhaserClamp(value, min, max) {
@@ -1082,10 +1176,18 @@
         var platform = state.platforms[i];
         var feet = p.y + p.h * 0.5;
         var previousFeet = feet - p.vy * dt;
-        var insideX = p.x + p.w * 0.35 > platform.x && p.x - p.w * 0.35 < platform.x + platform.w;
+        var currentLeft = p.x - p.w * 0.35;
+        var currentRight = p.x + p.w * 0.35;
+        var previousLeft = oldX - p.w * 0.35;
+        var previousRight = oldX + p.w * 0.35;
+        var insideX = currentRight > platform.x && currentLeft < platform.x + platform.w;
+        var wasInsideX = previousRight > platform.x && previousLeft < platform.x + platform.w;
+        var nearRoof = Math.abs(feet - platform.y) <= 10;
         var roofY = platform.y;
-        if (insideX && p.vy >= 0 && previousFeet <= roofY && feet >= roofY) {
-          p.y = platform.y - p.h * 0.5;
+        var landedOnRoof = p.vy >= 0 && (insideX || wasInsideX) && previousFeet <= roofY + 2 && feet >= roofY - 2;
+        var supportedOnRoof = p.vy >= -12 && insideX && nearRoof;
+        if (landedOnRoof || supportedOnRoof) {
+          p.y = roofY - p.h * 0.5;
           p.vy = 0;
           p.grounded = true;
           p.doubleJumpReady = true;
@@ -1740,6 +1842,12 @@
   document.addEventListener("keydown", function (event) {
     if (event.key === "Escape") closeGame();
   });
+
+  document.addEventListener("pointermove", function (event) {
+    pointerPage.x = event.pageX;
+    pointerPage.y = event.pageY;
+    pointerPage.active = true;
+  }, { passive: true });
 
     if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", boot);

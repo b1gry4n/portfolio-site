@@ -308,6 +308,44 @@
     }, 820);
   }
 
+  function createTerminalFinalCelebration(terminal) {
+    var rect = terminal.getBoundingClientRect();
+    var origins = [
+      { x: rect.left + rect.width * 0.5, y: rect.top + rect.height * 0.5 },
+      { x: rect.left + rect.width * 0.2, y: rect.top + rect.height * 0.32 },
+      { x: rect.left + rect.width * 0.8, y: rect.top + rect.height * 0.34 },
+      { x: rect.left + rect.width * 0.32, y: rect.top + rect.height * 0.76 },
+      { x: rect.left + rect.width * 0.68, y: rect.top + rect.height * 0.72 }
+    ];
+    var bits = ["01", "10", "OK", "RUN", "<>", "{}", "++", "YES", "GO"];
+    var colors = ["#7bd7c3", "#8ec7ff", "#d8b56f", "#ffb86b", "#f2f5f7", "#9b6dff"];
+
+    origins.forEach(function (origin, burstIndex) {
+      var burst = document.createElement("div");
+      burst.className = "sneaky-bug-splat terminal-solve-burst terminal-solve-burst--final";
+      burst.style.setProperty("--splat-x", origin.x + "px");
+      burst.style.setProperty("--splat-y", origin.y + "px");
+
+      for (var i = 0; i < 28; i += 1) {
+        var bit = document.createElement("span");
+        var angle = Math.random() * Math.PI * 2;
+        var distance = 42 + Math.random() * 132;
+        bit.textContent = bits[Math.floor(Math.random() * bits.length)];
+        bit.style.setProperty("--tx", Math.cos(angle) * distance + "px");
+        bit.style.setProperty("--ty", Math.sin(angle) * distance + "px");
+        bit.style.setProperty("--rot", (Math.random() * 220 - 110) + "deg");
+        bit.style.color = colors[(i + burstIndex) % colors.length];
+        bit.style.textShadow = "0 0 14px " + colors[(i + burstIndex) % colors.length];
+        burst.appendChild(bit);
+      }
+
+      document.body.appendChild(burst);
+      window.setTimeout(function () {
+        if (burst.parentNode) burst.remove();
+      }, 1180);
+    });
+  }
+
   function createBugBite(x, y, face) {
     var bite = document.createElement("div");
     bite.className = "sneaky-bug-bite";
@@ -865,12 +903,12 @@
 
       p.glide = state.glideHeld && !state.hookTarget && !p.grounded;
 
-      p.vx += (0 - p.vx) * dt * (state.hookTarget ? 0.03 : 1.1);
+      p.vx += (0 - p.vx) * dt * (state.hookTarget && !p.grounded ? 0.03 : 1.1);
       p.x += p.vx * dt;
       if (state.releaseCoast > 0) {
         state.releaseCoast = Math.max(0, state.releaseCoast - dt);
       }
-      if (!state.hookTarget) {
+      if (!state.hookTarget || p.grounded) {
         catchUpForwardCamera(dt);
       }
 
@@ -882,10 +920,6 @@
         p.vy = Math.max(p.vy, -20);
       }
       p.y += p.vy * dt;
-
-      if (state.hookTarget) {
-        constrainRope(dt, oldX, oldY);
-      }
 
       p.grounded = false;
       for (var i = 0; i < state.platforms.length; i += 1) {
@@ -901,8 +935,15 @@
           p.doubleJumpReady = true;
           state.glideHeld = false;
           p.glide = false;
-          detachGrapple();
           break;
+        }
+      }
+
+      if (state.hookTarget) {
+        if (p.grounded) {
+          syncGroundedRopeLength();
+        } else {
+          constrainRope(dt, oldX, oldY);
         }
       }
 
@@ -933,6 +974,13 @@
 
       p.vx = (p.x - oldX) / dt;
       p.vy = (p.y - oldY) / dt;
+    }
+
+    function syncGroundedRopeLength() {
+      var p = state.player;
+      var dx = p.x - state.hookTarget.x;
+      var dy = p.y - state.hookTarget.y;
+      state.ropeLength = Math.max(1, Math.hypot(dx, dy));
     }
 
     function scrollWorld(amount) {
@@ -1356,10 +1404,27 @@
         var activeIndex = Number(input.dataset.activeRiddleIndex || -1);
         var activeRiddle = riddles[activeIndex];
         if (activeRiddle && activeRiddle.answers.indexOf(command) !== -1) {
-          if (output) output.textContent = "Correct";
           input.value = "";
-          input.dataset.activeRiddleIndex = "-1";
+          if (activeIndex >= riddles.length - 1) {
+            if (output) output.textContent = "Correct";
+            input.dataset.activeRiddleIndex = "-1";
+            input.dataset.riddleIndex = "0";
+            createTerminalFinalCelebration(terminal);
+            window.setTimeout(openGame, 900);
+            return;
+          }
+
+          var nextIndexAfterCorrect = activeIndex + 1;
+          input.dataset.activeRiddleIndex = String(nextIndexAfterCorrect);
+          input.dataset.riddleIndex = String(nextIndexAfterCorrect + 1);
+          if (output) output.textContent = "Correct\n\n" + riddles[nextIndexAfterCorrect].prompt;
           createTerminalCelebration(terminal);
+          return;
+        }
+
+        if (activeRiddle) {
+          if (output) output.textContent = activeRiddle.prompt;
+          input.value = "";
           return;
         }
 

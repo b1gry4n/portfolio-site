@@ -253,12 +253,20 @@ p {
   box-shadow: 0 24px 80px rgba(0, 0, 0, 0.55);
 }
 
-.video-modal__dialog iframe {
+.video-modal__dialog iframe,
+.video-modal__dialog video {
   display: block;
   width: 100%;
   aspect-ratio: 16 / 9;
   border: 0;
   border-radius: 8px;
+  background: #050607;
+  object-fit: contain;
+}
+
+.video-modal__dialog iframe[hidden],
+.video-modal__dialog video[hidden] {
+  display: none;
 }
 
 .video-modal__controls {

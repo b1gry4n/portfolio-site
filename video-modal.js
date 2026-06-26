@@ -22,6 +22,19 @@
     }
   }
 
+  function isLocalVideoUrl(url) {
+    try {
+      var parsed = new URL(url, window.location.href);
+      return /\.mp4($|[?#])/i.test(parsed.pathname);
+    } catch (error) {
+      return false;
+    }
+  }
+
+  function isPlayableUrl(url) {
+    return !!toEmbedUrl(url) || isLocalVideoUrl(url);
+  }
+
   function buildModal() {
     var modal = document.createElement("div");
     modal.className = "video-modal";
@@ -31,6 +44,7 @@
       '<div class="video-modal__dialog" role="dialog" aria-modal="true" aria-label="Video player">',
       '  <button class="video-modal__close" type="button" data-video-close aria-label="Close video">Close</button>',
       '  <iframe title="Video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>',
+      '  <video controls autoplay playsinline></video>',
       '  <div class="video-modal__controls" hidden>',
       '    <button class="video-modal__cycle" type="button" data-video-prev aria-label="Previous video">‹</button>',
       '    <span class="video-modal__count" aria-live="polite"></span>',
@@ -44,6 +58,7 @@
 
   var modal;
   var iframe;
+  var localVideo;
   var controls;
   var counter;
   var lastTrigger;
@@ -54,20 +69,36 @@
     var scope = trigger.closest(".case-study");
     if (!scope) return [trigger.href];
 
-    var links = Array.prototype.slice.call(scope.querySelectorAll('a[href*="youtube.com/watch"], a[href*="youtu.be/"]'));
+    var links = Array.prototype.slice.call(scope.querySelectorAll('a[href*="youtube.com/watch"], a[href*="youtu.be/"], a[href$=".mp4"], a[href*=".mp4?"], a[href*=".mp4#"]'));
     var urls = [];
     links.forEach(function (link) {
-      if (!toEmbedUrl(link.href)) return;
+      if (!isPlayableUrl(link.href)) return;
       if (urls.indexOf(link.href) === -1) urls.push(link.href);
     });
     return urls.length ? urls : [trigger.href];
   }
 
   function renderCurrentVideo() {
-    var embedUrl = toEmbedUrl(playlist[playlistIndex] || "");
-    if (!embedUrl) return;
+    var currentUrl = playlist[playlistIndex] || "";
+    var embedUrl = toEmbedUrl(currentUrl);
 
-    iframe.src = embedUrl;
+    iframe.src = "";
+    iframe.hidden = true;
+    localVideo.pause();
+    localVideo.removeAttribute("src");
+    localVideo.hidden = true;
+
+    if (embedUrl) {
+      iframe.src = embedUrl;
+      iframe.hidden = false;
+    } else if (isLocalVideoUrl(currentUrl)) {
+      localVideo.src = currentUrl;
+      localVideo.hidden = false;
+      localVideo.play().catch(function () {});
+    } else {
+      return;
+    }
+
     if (playlist.length > 1) {
       controls.hidden = false;
       counter.textContent = "Video " + (playlistIndex + 1) + " / " + playlist.length;
@@ -84,12 +115,12 @@
   }
 
   function openVideo(trigger) {
-    var embedUrl = toEmbedUrl(trigger.href);
-    if (!embedUrl) return;
+    if (!isPlayableUrl(trigger.href)) return;
 
     if (!modal) {
       modal = buildModal();
       iframe = modal.querySelector("iframe");
+      localVideo = modal.querySelector("video");
       controls = modal.querySelector(".video-modal__controls");
       counter = modal.querySelector(".video-modal__count");
       modal.addEventListener("click", function (event) {
@@ -112,6 +143,10 @@
   function closeVideo() {
     if (!modal) return;
     iframe.src = "";
+    if (localVideo) {
+      localVideo.pause();
+      localVideo.removeAttribute("src");
+    }
     playlist = [];
     playlistIndex = 0;
     if (controls) controls.hidden = true;
@@ -123,10 +158,9 @@
   }
 
   document.addEventListener("click", function (event) {
-    var link = event.target.closest('a[href*="youtube.com/watch"], a[href*="youtu.be/"]');
+    var link = event.target.closest('a[href*="youtube.com/watch"], a[href*="youtu.be/"], a[href$=".mp4"], a[href*=".mp4?"], a[href*=".mp4#"]');
     if (!link) return;
-    var embedUrl = toEmbedUrl(link.href);
-    if (!embedUrl) return;
+    if (!isPlayableUrl(link.href)) return;
     event.preventDefault();
     openVideo(link);
   });
